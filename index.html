@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Centro de Formación | HITSS</title>
-<link rel="icon" type="image/svg+xml" href="marca.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&display=swap" rel="stylesheet">
@@ -347,6 +346,10 @@ dialog::backdrop{background:rgba(14,26,54,.7);backdrop-filter:blur(4px)}
 .chipE.e-desconectado{background:#fff;border:1px solid var(--line);color:var(--muted)}
 .vivo{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
 
+/* ---------- Horario de atención ---------- */
+#aviso-cierre{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:60;background:#14213D;color:#fff;padding:12px 44px 12px 18px;border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,.3);font-size:15px;max-width:calc(100% - 32px)}
+#aviso-cierre button{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:0;color:#fff;font-size:20px;cursor:pointer}
+
 /* ---------- Cambios 04: bloqueo de celulares y alertas de acceso ---------- */
 .bloqueo{min-height:100vh;display:grid;align-content:center;justify-items:center;gap:18px;padding:24px;background:#5C0A12}
 .bcard{background:#fff;border-radius:20px;border-top:8px solid var(--teal);padding:34px 28px;width:min(440px,100%);text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.45)}
@@ -402,6 +405,7 @@ dialog::backdrop{background:rgba(14,26,54,.7);backdrop-filter:blur(4px)}
       <label class="chk"><input type="checkbox" id="gver"> Mostrar contraseña</label>
       <p class="err" id="gerr" hidden></p>
       <button class="btn" type="submit">Ingresar</button>
+      <p class="gfoot" id="ghorario"></p>
       <p class="gfoot">¿No puedes entrar? Comunícate con tu formador.</p>
     </form>
   </div>
@@ -1268,7 +1272,11 @@ function revisarTactil(){
 }
 
 /* ===== Pantalla de ingreso ===== */
-function mostrarGate(){ $('#gcargando').hidden = true; $('#gform').hidden = false; document.body.classList.add('locked'); }
+function mostrarGate(){
+  $('#gcargando').hidden = true; $('#gform').hidden = false; document.body.classList.add('locked');
+  $('#ghorario').textContent = TEXTO_HORARIO;
+  if(motivoSalida){ gerr(motivoSalida); motivoSalida = ''; }
+}
 function gerr(t){ const p = $('#gerr'); p.textContent = t || ''; p.hidden = !t; }
 $('#gform').addEventListener('submit', async e => {
   e.preventDefault();
@@ -2125,10 +2133,14 @@ async function entrar(ses){
   hechasCargar();
   S.vista = location.hash.slice(1) || 'inicio';
   document.body.classList.remove('locked'); dibujar();
-  try{ await cargarPerfil(); revisarTactil(); await iniciarEstado(); await cargar(); }catch(e){ S.error = msg(e); }
+  try{
+    await cargarPerfil();
+    if(conHorario() && !enHorario()){ motivoSalida = `El portal está fuera de horario. ${TEXTO_HORARIO}`; await sb.auth.signOut({scope:'local'}); return; }
+    revisarTactil(); await iniciarEstado(); await cargar();
+  }catch(e){ S.error = msg(e); }
   S.cargando = false;
   if(!abrirDe(S.vista) && S.cats[0]) S.abiertos['cat:'+S.cats[0].id] = true;
-  dibujar(); iniciarTiempoReal();
+  dibujar(); iniciarTiempoReal(); revisarHorario();
 }
 function salir(){
   S.uid = null; S.rol = null; S.codigo = ''; S.nombre = ''; S.vista = 'inicio'; S.cargando = true; S.error = '';
@@ -2143,6 +2155,7 @@ function salir(){
   if(exd.open) exd.close();
   history.replaceState(null,'',location.pathname+location.search);
   $('#gform').reset(); $('#gform').clave.type = 'password'; gerr('');
+  avisoCierre(false);
   mostrarGate();
 }
 function iniciar(){
@@ -2155,9 +2168,6 @@ function iniciar(){
   sb.auth.onAuthStateChange((ev, ses) => { setTimeout(async () => {
     if(ses && (ev==='SIGNED_IN' || ev==='INITIAL_SESSION')){
       if(S.uid !== ses.user.id){
-        // Si la página se abre con una sesión guardada pero pasaron más de 10 min sin actividad, se cierra.
-        if(ev==='INITIAL_SESSION' && sesionCaducada()){ try{ await sb.rpc('cambiar_estado',{p_estado:'desconectado'}); }catch(e){} await sb.auth.signOut({scope:'local'}); return; }
-        if(ev==='SIGNED_IN') marcarActividad(true);
         await entrar(ses);
       }
     }
@@ -2166,34 +2176,49 @@ function iniciar(){
   }, 0); });
 }
 window.addEventListener('hashchange', () => { if(!S.uid) return; const id = location.hash.slice(1) || 'inicio'; if(id!==S.vista && (id==='inicio' || id==='examenes' || temaDe(id) || (id==='panel' && esPanel()))) ir(id); });
-/* ===== Cierre de sesión por inactividad (10 minutos) =====
-   Se guarda la hora de la última actividad (clic, tecla, mouse, scroll, toque). Se revisa cada 30 s,
-   al volver a la pestaña y al abrir la página, así también funciona si la computadora estuvo
-   dormida o la pestaña quedó abierta en segundo plano toda la noche. */
-const MIN_INACTIVIDAD = 10, MIN_INACT_PAUSA = 60, CLAVE_ACT = 'hitss_ultima_actividad';
-/* Con 10 min sin actividad se cierra la sesión. Si la persona está en Baño, Break o Capacitación el límite sube a 60 min; durante un examen no se cierra. */
-let ultimaAct = Date.now(), ultimoGuardado = 0;
-function marcarActividad(forzar){
-  if(!S.uid && forzar !== true) return;
-  const t = Date.now(); ultimaAct = t;
-  if(forzar === true || t - ultimoGuardado > 5000){ ultimoGuardado = t; try{ localStorage.setItem(CLAVE_ACT, String(t)); }catch(e){} }
+/* ===== Horario de atención =====
+   Ya NO se cierra la sesión por inactividad: la persona sigue conectada mientras tenga la página abierta.
+   El portal atiende de 5:55 a. m. a 10:20 p. m. (hora de Perú, sin importar la zona horaria de la PC).
+   A las 10:15 p. m. aparece un aviso; a las 10:20 p. m. se cierra la sesión y queda Desconectado.
+   Si la persona está rindiendo un examen, se le deja terminar y luego se cierra.
+   Para cambiar el horario o quién queda fuera de él, edita estas tres líneas: */
+const HORA_INICIO = '05:55', HORA_FIN = '22:20';
+const SIN_HORARIO = ['formador'];          // roles que pueden entrar a cualquier hora
+const AVISO_MIN = 5;                       // minutos de aviso antes del cierre
+
+const aMin = h => { const [a, b] = h.split(':').map(Number); return a * 60 + b; };
+function minutosPeru(){
+  const p = new Intl.DateTimeFormat('en-GB', {timeZone:'America/Lima', hour:'2-digit', minute:'2-digit', hourCycle:'h23'}).formatToParts(new Date());
+  return Number(p.find(x => x.type === 'hour').value) * 60 + Number(p.find(x => x.type === 'minute').value);
 }
-function actividadReciente(){
-  let t = ultimaAct;
-  try{ const g = Number(localStorage.getItem(CLAVE_ACT)); if(g > t) t = g; }catch(e){}
-  return t;
+const enHorario = () => { const m = minutosPeru(); return m >= aMin(HORA_INICIO) && m < aMin(HORA_FIN); };
+const hora12 = h => { const [a, b] = h.split(':').map(Number); return `${(a % 12) || 12}:${String(b).padStart(2, '0')} ${a < 12 ? 'a. m.' : 'p. m.'}`; };
+const TEXTO_HORARIO = `Horario de atención: de ${hora12(HORA_INICIO)} a ${hora12(HORA_FIN)}`;
+const conHorario = () => !!S.rol && !SIN_HORARIO.includes(S.rol);
+let motivoSalida = '';
+async function cerrarPorHorario(){
+  motivoSalida = `El portal está fuera de horario. ${TEXTO_HORARIO}`;
+  avisoCierre(false);
+  await marcarDesconectado();
+  await sb.auth.signOut({scope:'local'});
 }
-function sesionCaducada(){
-  try{ const g = Number(localStorage.getItem(CLAVE_ACT)); return !!g && Date.now() - g > MIN_INACTIVIDAD * 60 * 1000; }catch(e){ return false; }
+function avisoCierre(ver){
+  let a = $('#aviso-cierre');
+  if(!ver){ if(a) a.remove(); return; }
+  if(a) return;
+  a = document.createElement('div'); a.id = 'aviso-cierre'; a.setAttribute('role', 'alert');
+  a.innerHTML = `⏰ El portal se cerrará a las <b>${hora12(HORA_FIN)}</b> Guarda lo que estés haciendo. <button type="button" aria-label="Cerrar aviso">×</button>`;
+  a.querySelector('button').onclick = () => { a.hidden = true; };
+  document.body.appendChild(a);
 }
-async function revisarInactividad(){
-  if(!S.uid || S.enExamen) return;
-  const lim = (!esF() && S.estadoMio && S.estadoMio.estado !== 'activo') ? MIN_INACT_PAUSA : MIN_INACTIVIDAD;
-  if(Date.now() - actividadReciente() > lim * 60 * 1000){ await marcarDesconectado(); await sb.auth.signOut({scope:'local'}); }
+async function revisarHorario(){
+  if(!S.uid || !conHorario()) return;
+  if(!enHorario()){ if(!S.enExamen) await cerrarPorHorario(); return; }
+  const faltan = aMin(HORA_FIN) - minutosPeru();
+  avisoCierre(faltan <= AVISO_MIN);
 }
-['click','keydown','mousemove','scroll','touchstart'].forEach(ev => window.addEventListener(ev, () => marcarActividad(), {passive:true}));
-setInterval(revisarInactividad, 30 * 1000);
-document.addEventListener('visibilitychange', () => { if(!document.hidden) revisarInactividad(); });
+setInterval(revisarHorario, 30 * 1000);
+document.addEventListener('visibilitychange', () => { if(!document.hidden) revisarHorario(); });
 
 iniciar();
 </script>
