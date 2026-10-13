@@ -1333,8 +1333,9 @@ async function cambiarEstado(k){
 async function marcarDesconectado(){
   if(S.uid && S.rol && !esF()){ try{ await sb.rpc('cambiar_estado', {p_estado:'desconectado'}); }catch(e){} }
 }
-// Latido cada 45 s: mantiene vivo el estado y sirve para no contar tiempo si cierran la pestaña.
-setInterval(() => { if(S.uid && S.rol && !esF()) sb.rpc('latido').then(() => {}, () => {}); }, 45000);
+// Latido cada 90 s (antes 45 s): mantiene vivo el estado y sirve para no contar tiempo si cierran la pestaña.
+// La base de datos corta el tiempo a los 3 min sin latido, así que 90 s deja margen para dos avisos.
+setInterval(() => { if(S.uid && S.rol && !esF()) sb.rpc('latido').then(() => {}, () => {}); }, 90000);
 document.addEventListener('visibilitychange', () => { if(!document.hidden && S.uid && S.rol && !esF()) sb.rpc('latido').then(() => {}, () => {}); });
 
 /* ===== Exámenes: lectura ===== */
@@ -1809,7 +1810,7 @@ function estadosHTML(){
     <section class="card" style="margin-bottom:18px"><h3>Tiempo por día (asesores)</h3>
       <div class="filtros"><select id="peu" aria-label="Asesor" style="flex:1;min-width:240px"><option value="">Todos (promedio por asesor)</option>${ms.slice().sort(porCodigo).map(m => `<option value="${m.id}" ${S.p.eu === m.id ? 'selected' : ''}>${esc(quien(m))}</option>`).join('')}</select></div>
       ${ley}<div class="scroll"><table class="tb"><thead><tr><th>Día</th>${EST_ORD.map(k => `<th class="num">${EST_NOM[k]}</th>`).join('')}<th class="num">Total</th><th></th></tr></thead><tbody>${filasD || '<tr><td colspan="7">Aún no hay tiempos registrados en este periodo.</td></tr>'}</tbody></table></div>
-      <p class="meta" style="margin-top:8px">Se miden Activo, Baño, Break y Capacitación mientras el asesor tiene la página abierta. Los estados de arriba se actualizan solos, sin recargar.</p></section>`;
+      <p class="meta" style="margin-top:8px">Se miden Activo, Baño, Break y Capacitación mientras el asesor tiene la página abierta. Los estados de arriba se actualizan solos, sin recargar; los totales del periodo, con ↻ Actualizar o al cambiar el periodo.</p></section>`;
 }
 /* Dibuja la sección con los datos ya cargados. Si hay un filtro abierto, solo refresca la tabla en vivo. */
 function pintarEstados(soloVivo){
@@ -1853,7 +1854,7 @@ async function cargarEstadosPanel(){
     cont2.innerHTML = `<section class="card"><h3>Conectividad</h3><p class="meta">${/estados_detalle/.test(err.message || '') ? '⚠️ Falta ejecutar el SQL de cambios 03 en Supabase.' : esc(msg(err))}</p></section>`;
     return;
   }
-  S.est = {vivo:a.data || [], det:b.data || [], alertas:c.error ? [] : (c.data || []), sinAlertas:!!c.error, ok:true, hora:new Date()};
+  S.est = {vivo:a.data || [], det:b.data || [], alertas:c.error ? [] : (c.data || []), sinAlertas:!!c.error, ok:true, hora:new Date(), clave:desde + hasta, cargado:Date.now()};
   cont2.innerHTML = estadosHTML();
 }
 const consultaAlertas = desde => sb.from('acceso_alertas').select('*')
@@ -1886,7 +1887,7 @@ function alCambioEstado(){
   if(S.vista !== 'panel' || !esPanel() || estTimer) return;
   estTimer = setTimeout(() => { estTimer = null; refrescarVivo(); }, 800);
 }
-setInterval(() => { if(S.uid && S.vista === 'panel' && esPanel() && !document.hidden) refrescarVivo(); }, 30000);
+setInterval(() => { if(S.uid && S.vista === 'panel' && esPanel() && !document.hidden) refrescarVivo(); }, 180000);
 /* Cada segundo: avanza el "Tiempo" de las tablas en vivo y "Mi estado", sin consultar la base de datos */
 function relojVivo(){
   if(document.hidden) return;
@@ -1895,7 +1896,10 @@ function relojVivo(){
   const t = $('#est-t'); if(t) t.textContent = textoEstado();
 }
 setInterval(relojVivo, 1000);
-document.addEventListener('visibilitychange', () => { if(!document.hidden && S.uid && S.vista === 'panel' && esPanel()) refrescarVivo(); });
+let ultVisible = 0;
+document.addEventListener('visibilitychange', () => {   // al volver a la pestaña, como máximo una vez por minuto
+  if(!document.hidden && S.uid && S.vista === 'panel' && esPanel() && Date.now() - ultVisible > 60000){ ultVisible = Date.now(); refrescarVivo(); }
+});
 
 /* ===== Descarga en Excel (Formador y GTR) ===== */
 function hojaExcel(filas, anchos){
@@ -1975,6 +1979,8 @@ function dibujarPanel(){
     const m = $('#main'); if(!m) return;
     m.insertAdjacentHTML('beforeend', panelExamenesHTML() + '<div id="pnl-estados"></div>');
   }
+  const {desde, hasta} = rangoEst();
+  if(S.est.ok && S.est.clave === desde + hasta && Date.now() - S.est.cargado < 180000){ $('#pnl-estados').innerHTML = estadosHTML(); return; }
   cargarEstadosPanel();
 }
 
@@ -2045,12 +2051,62 @@ Object.assign(ACC, {
 
 /* ===== Arranque ===== */
 let temporizador, tiempoReal = false;
-function programarRefresco(){
+/* ===== Actualización en vivo optimizada =====
+   Antes, cualquier cambio volvía a descargar TODO (unas 14 consultas por persona).
+   Ahora: las filas de vistos buenos, omisiones, preguntas e intentos se aplican directo con el dato
+   que ya llega por Realtime (0 consultas), y si cambia contenido solo se vuelve a leer esa tabla. */
+const ordT = (t, c) => sb.from(t).select('*').order(c, {ascending:true});
+const armarMenu = (g, t) => g.map(x => ({...x, subs: t.filter(y => y.grupo_id === x.id).map(y => ({id:y.id, nombre:y.nombre, desc:y.descr || '', orden:y.orden}))}));
+const RECARGA = {
+  accesos: async () => { const r = await ordT('accesos','orden'); if(!r.error) S.accesos = r.data; },
+  grupos: async () => { const [g, t] = await Promise.all([ordT('grupos','orden'), ordT('temas','orden')]); if(!g.error && !t.error) S.menu = armarMenu(g.data, t.data); },
+  noticias: async () => { const r = await sb.from('noticias').select('*').order('creado',{ascending:false}).order('id',{ascending:false}); if(!r.error){ S.noticias = r.data; await firmarArchivos(); } },
+  materiales: async () => { const r = await sb.from('materiales').select('*').order('fecha',{ascending:false}).order('id',{ascending:false}); if(!r.error){ S.materiales = r.data; await firmarArchivos(); } },
+  bloques: async () => { const r = await ordT('bloques','orden'); if(!r.error) S.bloques = r.data; },
+  categorias: async () => { const r = await ordT('categorias','orden'); if(!r.error) S.cats = r.data; },
+  estado_sitio: async () => { const r = await sb.from('estado_sitio').select('*').eq('id',1).maybeSingle(); if(!r.error) S.estado = r.data; },
+  perfiles: async () => { if(!esPanel()) return; const r = await sb.from('perfiles').select('*'); if(!r.error) S.perfiles = r.data; },
+  examenes: async () => { const r = await sb.from('examenes').select('*').order('creado',{ascending:false}); if(!r.error) S.examenes = r.data; },
+  examen_preguntas: async () => {}   // se leen al abrir el examen; no hace falta recargar nada
+};
+RECARGA.temas = RECARGA.grupos;
+/* Tablas cuyas filas llegan completas por Realtime: se aplican sin consultar */
+const APLICAR = {noticia_vistos:'vistos', noticia_omisiones:'omisiones', noticia_preguntas:'preguntas', examen_intentos:'intentos'};
+const claveFila = r => r.id != null ? 'i' + r.id : r.noticia_id + '|' + r.user_id;
+function aplicarFila(arr, fila){
+  const l = S[arr] || (S[arr] = []), k = claveFila(fila), i = l.findIndex(x => claveFila(x) === k);
+  if(i >= 0) l[i] = {...l[i], ...fila}; else l.push(fila);
+}
+const pendTablas = new Set();
+function alCambioTabla(p){
+  const t = p.table;
+  if(APLICAR[t] && p.eventType !== 'DELETE' && p.new && Object.keys(p.new).length){ aplicarFila(APLICAR[t], p.new); programarRefresco(null); return; }
+  pendTablas.add(RECARGA[t] || APLICAR[t] ? t : '*');
+  programarRefresco(null);
+}
+/* programarRefresco()      -> recarga todo (se usa poco)
+   programarRefresco(null)  -> solo lo pendiente de Realtime y redibuja */
+function programarRefresco(modo){
+  if(modo === undefined) pendTablas.add('*');
   clearTimeout(temporizador);
   temporizador = setTimeout(async () => {
     if(!S.uid) return;
-    if(dlg.open || exd.open || ['q','qn'].includes(document.activeElement?.id)){ programarRefresco(); return; }
-    try{ await cargar(); dibujar(); }catch(e){}
+    if(dlg.open || exd.open || ['q','qn'].includes(document.activeElement?.id)){ programarRefresco(null); return; }
+    const ts = [...pendTablas]; pendTablas.clear();
+    try{
+      if(ts.includes('*')) await cargar();
+      else {
+        const hechas = new Set();
+        await Promise.all(ts.map(t => {
+          if(APLICAR[t]){ // un borrado: se vuelve a leer solo esa tabla
+            const q = t === 'examen_intentos' ? leerTodo('examen_intentos','id,examen_id,user_id,inicio,fin,estado,nota,correctas,total,aprobado','id') : sb.from(t).select('*');
+            return q.then(r => { if(!r.error) S[APLICAR[t]] = r.data; });
+          }
+          const f = RECARGA[t]; if(!f || hechas.has(f)) return null; hechas.add(f); return f();
+        }));
+      }
+      dibujar();
+    }catch(e){}
   }, 800);
 }
 function iniciarTiempoReal(){
@@ -2060,8 +2116,8 @@ function iniciarTiempoReal(){
   sb.channel('cambios').on('postgres_changes', {event:'*', schema:'public'}, p => {
     if(p.table === 'estado_cambio'){ alCambioEstado(); return; }
     if(p.table === 'acceso_alertas'){ alCambioAlerta(); return; }
-    if(p.table === 'estado_actual') return;
-    programarRefresco();
+    if(p.table === 'estado_actual' || p.table === 'estado_log') return;
+    alCambioTabla(p);
   }).subscribe();
 }
 async function entrar(ses){
