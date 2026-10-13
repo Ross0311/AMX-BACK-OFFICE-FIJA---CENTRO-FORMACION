@@ -10,9 +10,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --navy:#0E1A36; --navy2:#17284F; --teal:#0B8F8A; --teal-soft:#DCF2F0;
-  --amber:#F5A524; --amber-soft:#FFF0D3; --red:#D63B3B; --red-soft:#FBE4E4;
-  --paper:#F2F5F8; --white:#fff; --ink:#121B30; --muted:#5A6682; --line:#DCE3EC;
+  --navy:#111111; --navy2:#1E1E1E; --teal:#D7192D; --teal-soft:#FCE8EA;
+  --amber:#D7192D; --amber-soft:#FCE8EA; --red:#B3121F; --red-soft:#FBE4E6;
+  --paper:#F4F4F5; --white:#fff; --ink:#111111; --muted:#5F6368; --line:#E2E2E5;
   --head:'Newsreader',Georgia,'Times New Roman',serif;
   --body:'Figtree','Segoe UI',Arial,sans-serif; --side:288px;
 }
@@ -69,19 +69,19 @@ a{color:inherit}
 .qa{display:inline-flex;align-items:center;gap:6px;background:var(--paper);border:1px solid var(--line);color:var(--ink);text-decoration:none;font:600 14px var(--body);padding:7px 14px;border-radius:999px;transition:all .2s}
 .qa:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
 .qa button{background:none;border:none;color:var(--red);font-weight:800;font-size:15px;line-height:1}
-.btn{font:700 14.5px var(--body);border-radius:10px;padding:10px 18px;border:1.5px solid var(--navy);background:var(--navy);color:#fff;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
-.btn:hover{background:var(--teal);border-color:var(--teal)}
+.btn{font:700 14.5px var(--body);border-radius:10px;padding:10px 18px;border:1.5px solid var(--teal);background:var(--teal);color:#fff;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.btn:hover{background:var(--navy);border-color:var(--navy)}
 .btn.ghost{background:#fff;color:var(--navy);border-color:var(--line)}
 .btn.ghost:hover{border-color:var(--teal);color:var(--teal);background:#fff}
 .btn.sm{padding:7px 12px;font-size:13.5px}
 .btn.danger{background:#fff;color:var(--red);border-color:#F0C4C4}
 .btn.danger:hover{background:var(--red);color:#fff;border-color:var(--red)}
-.btn.add{background:var(--teal-soft);color:var(--teal);border-color:var(--teal-soft)}
+.btn.add{background:#fff;color:var(--teal);border-color:var(--teal)}
 .btn.add:hover{background:var(--teal);color:#fff}
 
 /* ---------- Cinta de última hora ---------- */
 .ticker{display:flex;align-items:stretch;background:var(--navy);color:#fff;overflow:hidden}
-.ticker .lbl{background:var(--amber);color:var(--navy);font-weight:800;padding:12px 22px;font-size:15px;white-space:nowrap;position:relative;z-index:1}
+.ticker .lbl{background:var(--amber);color:#fff;font-weight:800;padding:12px 22px;font-size:15px;white-space:nowrap;position:relative;z-index:1}
 .ticker .rail{overflow:hidden;flex:1;display:flex;align-items:center}
 .ticker .run{display:flex;gap:56px;white-space:nowrap;padding-left:32px;animation:run 38s linear infinite}
 .ticker .run span::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--amber);margin-right:12px}
@@ -97,12 +97,12 @@ h2{font-family:var(--head);font-size:26px;font-weight:700;margin:36px 0 16px;let
 /* ---------- Noticias ---------- */
 .news{display:grid;grid-template-columns:1.5fr 1fr;gap:22px}
 .hero-n{background:var(--navy);color:#fff;border-radius:20px;padding:34px;display:flex;flex-direction:column;gap:14px;position:relative;overflow:hidden;min-height:340px}
-.hero-n::after{content:"";position:absolute;right:-60px;top:-60px;width:260px;height:260px;border-radius:50%;border:38px solid rgba(11,143,138,.35)}
+.hero-n::after{content:"";position:absolute;right:-60px;top:-60px;width:260px;height:260px;border-radius:50%;border:38px solid rgba(215,25,45,.35)}
 .hero-n > *{position:relative;z-index:1}
 .hero-n h3{font-family:var(--head);font-size:clamp(26px,3vw,36px);line-height:1.15;font-weight:700;margin-top:auto;max-width:22ch}
 .hero-n p{color:#C6D2EC;max-width:52ch}
 .tag{align-self:flex-start;font-weight:700;font-size:13px;padding:4px 12px;border-radius:999px;background:var(--teal-soft);color:var(--teal)}
-.tag.urg{background:var(--amber);color:var(--navy)}
+.tag.urg{background:var(--amber);color:#fff}
 .meta{font-size:13.5px;color:var(--muted)}
 .hero-n .meta{color:#9FB0D3}
 .nlist{display:flex;flex-direction:column;gap:14px}
@@ -116,10 +116,10 @@ h2{font-family:var(--head);font-size:26px;font-weight:700;margin:36px 0 16px;let
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:18px}
 .mat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:12px;transition:transform .2s,box-shadow .2s}
 .mat:hover{transform:translateY(-3px);box-shadow:0 16px 30px -20px rgba(14,26,54,.5)}
-.ico{width:46px;height:54px;border-radius:8px;display:grid;place-items:center;font-weight:800;font-size:13px;color:#fff;background:var(--red);position:relative}
+.ico{width:46px;height:54px;border-radius:8px;display:grid;place-items:center;font-weight:800;font-size:13px;color:#fff;background:var(--teal);position:relative}
 .ico::after{content:"";position:absolute;right:0;top:0;border-style:solid;border-width:0 14px 14px 0;border-color:transparent rgba(255,255,255,.55) transparent transparent}
-.ico.Flyer{background:var(--amber);color:var(--navy)}
-.ico.Enlace{background:var(--teal)}
+.ico.Flyer{background:#111;color:#fff}
+.ico.Enlace{background:#6B6B70}
 .mat h3{font-size:16.5px;line-height:1.35;font-weight:700}
 .mat .meta{margin-top:-6px}
 .mat .acts{margin-top:auto;display:flex;gap:8px;flex-wrap:wrap}
@@ -189,10 +189,10 @@ footer b{color:var(--ink)}
 .q{background:var(--paper);border-radius:12px;padding:12px 14px;font-size:14.5px}
 .q b{display:block;font-size:13px;color:var(--muted);margin-bottom:2px}
 .q .r{margin-top:8px;padding:10px 12px;background:#fff;border-left:4px solid var(--teal);border-radius:8px}
-.q .nuevo{background:var(--amber);color:var(--navy);font-size:11.5px;font-weight:800;border-radius:999px;padding:1px 8px;margin-left:6px}
+.q .nuevo{background:var(--amber);color:#fff;font-size:11.5px;font-weight:800;border-radius:999px;padding:1px 8px;margin-left:6px}
 .aviso{background:var(--amber-soft);border-radius:14px;padding:12px 16px;margin-bottom:18px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;font-weight:600}
 .resumen{display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-size:14px}
-.bdg{font-style:normal;background:var(--amber);color:var(--navy);font-size:12px;font-weight:800;border-radius:999px;padding:1px 8px;margin-left:auto}
+.bdg{font-style:normal;background:var(--amber);color:#fff;font-size:12px;font-weight:800;border-radius:999px;padding:1px 8px;margin-left:auto}
 .estado-act{margin:0 0 14px;padding:10px 12px;border-radius:10px;background:rgba(255,255,255,.07);font-size:12.5px;color:#C6D2EC;line-height:1.4}
 .estado-act b{color:#fff;display:block;font-size:13px}
 
@@ -288,6 +288,65 @@ dialog::backdrop{background:rgba(14,26,54,.7);backdrop-filter:blur(4px)}
 .urow span{font-size:13px;color:var(--muted)}
 
 
+/* ---------- Cambios 01: estados, exámenes, paneles ---------- */
+.estado-box{margin:0 0 14px;padding:12px;border-radius:12px;background:rgba(255,255,255,.07)}
+.estado-box b{display:block;font-size:13px;margin-bottom:8px;color:#fff}
+.estados{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.estados button{background:rgba(255,255,255,.1);border:1.5px solid transparent;color:#E4E4E7;font:600 12.5px var(--body);padding:7px 6px;border-radius:8px}
+.estados button:hover{background:rgba(255,255,255,.22)}
+.estados button.on{background:var(--teal);color:#fff}
+.estado-box small{display:block;margin-top:8px;color:#A1A1AA;font-size:12px}
+
+.exgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:18px}
+.exc{background:#fff;border:1px solid var(--line);border-left:5px solid var(--teal);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:10px}
+.exc.borrador{border-left-color:#B7B7BD}
+.exc h3{font-family:var(--head);font-size:22px;line-height:1.2;font-weight:700}
+.exc p{color:var(--muted);font-size:15px;white-space:pre-line}
+.exc .tags .tag{font-size:12.5px}
+.exc .tag.plano{background:var(--paper);color:var(--muted)}
+.exc .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto;padding-top:6px}
+
+#ex{width:min(920px,96vw);max-height:92vh;overflow:auto;border-radius:20px}
+#ex h4{font-size:16px;margin-top:6px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+.pq{border:1.5px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:10px;background:#fff}
+.pq textarea{min-height:70px}
+.pqh{display:flex;align-items:center;gap:12px;justify-content:space-between;flex-wrap:wrap}
+.pqh .meta{display:flex;align-items:center;gap:6px}
+.pqh .pts{width:70px;padding:6px 8px}
+.ops{display:flex;flex-direction:column;gap:8px}
+.op{display:flex;align-items:center;gap:8px}
+.op input:not([type=radio]){flex:1;min-width:0}
+.op .chk{white-space:nowrap;font-size:13px;gap:6px;flex-direction:row;align-items:center}
+.op .chk input{width:18px;height:18px;padding:0}
+
+.rend-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.timer{font:800 24px var(--head);background:var(--navy);color:#fff;border-radius:12px;padding:8px 16px;white-space:nowrap}
+.timer.low{background:var(--teal)}
+.rq{border:1.5px solid var(--line);border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+.rq legend{font-weight:700;font-size:13px;color:var(--muted);padding:0 6px}
+.rq-t{font-weight:600;white-space:pre-line}
+.dlg .ro{flex-direction:row;align-items:flex-start;gap:10px;font-weight:500;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;cursor:pointer;background:#fff}
+.dlg .ro:hover{border-color:var(--teal)}
+.dlg .ro.sel{border-color:var(--teal);background:var(--teal-soft)}
+.dlg .ro input{width:18px;height:18px;padding:0;margin-top:2px;flex:none}
+.resu{text-align:center;display:flex;flex-direction:column;gap:10px;align-items:center;padding:10px 0}
+.resu .nota{font:700 64px/1 var(--head)}
+.resu .nota.ok{color:#177A48}
+.resu .nota.no{color:var(--teal)}
+
+.apil{display:flex;height:12px;border-radius:6px;overflow:hidden;background:var(--paper);min-width:120px}
+.apil i{display:block;height:100%}
+.leyE{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;margin:6px 0 10px}
+.leyE span::before{content:"";display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:6px;background:var(--c)}
+.chipE{display:inline-block;font-size:12.5px;font-weight:700;border-radius:999px;padding:3px 11px;background:var(--paper);color:var(--ink)}
+.chipE.e-activo{background:#111;color:#fff}
+.chipE.e-capacitacion{background:var(--teal);color:#fff}
+.chipE.e-break{background:#F8D3D7;color:#8B0F1C}
+.chipE.e-bano{background:#E4E4E7;color:#333}
+.chipE.e-desconectado{background:#fff;border:1px solid var(--line);color:var(--muted)}
+.vivo{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+
 @media (max-width:980px){
   .side{transform:translateX(-100%)}
   .side.open{transform:none}
@@ -349,6 +408,7 @@ dialog::backdrop{background:rgba(14,26,54,.7);backdrop-filter:blur(4px)}
 
 <dialog id="dlg"></dialog>
 <dialog id="alerta" aria-label="Noticias pendientes de visto bueno"></dialog>
+<dialog id="ex" aria-label="Exámenes"></dialog>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
@@ -379,7 +439,11 @@ const S = {
   abiertos: {}
 };
 const CATS = ['Activaciones','Validaciones','Programación','Seguimiento'];
-const COL_CAT = {'Activaciones':'#0B8F8A','Validaciones':'#6C5CE7','Programación':'#F5A524','Seguimiento':'#D63B3B'};
+const COL_CAT = {'Activaciones':'#D7192D','Validaciones':'#111111','Programación':'#8A8A90','Seguimiento':'#E8707B'};
+const ROLES = {asesor:'Asesor', gtr:'GTR', supervisor:'Supervisor', coordinador:'Coordinador', formador:'Formador'};
+const AREAS = {tecnico:'Back Office Técnico', administrativo:'Back Office Administrativo'};
+const esJefe = () => S.rol === 'supervisor' || S.rol === 'coordinador';
+const esPanel = () => esF() || esJefe();
 const norm = t => String(t??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
 const diaKey = iso => { const d=new Date(iso); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); };
 const fechaHora = iso => iso ? new Date(iso).toLocaleString('es-PE',{day:'numeric',month:'short',year:'numeric',hour:'numeric',minute:'2-digit',hour12:true}) : '';
@@ -451,23 +515,27 @@ async function cargar(){
     sb.from('noticia_vistos').select('*'),
     sb.from('noticia_preguntas').select('*').order('creado',{ascending:true}),
     sb.from('estado_sitio').select('*').eq('id',1).maybeSingle(),
-    esF() ? sb.from('perfiles').select('id,codigo,nombre,rol,creado') : Promise.resolve({data:[]}),
+    (esF() || esJefe()) ? sb.from('perfiles').select('*') : Promise.resolve({data:[]}),
     sb.from('noticia_omisiones').select('*')
   ]);
   /* Categorías: si aún no se corrió 06_categorias.sql, el menú sigue como antes (sin categorías). */
   const c = await ord('categorias','orden');
   S.cats = c.error ? [] : c.data;
+  const exr = await sb.from('examenes').select('*').order('creado',{ascending:false});
+  S.examenes = exr.error ? [] : exr.data; S.sinExamenes = !!exr.error;
+  const itr = exr.error ? {data:[]} : await leerTodo('examen_intentos','id,examen_id,user_id,inicio,fin,estado,nota,correctas,total,aprobado','id');
+  S.intentos = itr.error ? [] : itr.data;
   const fallo = [a,g,t,n,m,b,vi,pr,es,pf,om].find(r=>r.error);
   if(fallo) throw fallo.error;
   S.accesos = a.data; S.noticias = n.data; S.materiales = m.data; S.bloques = b.data;
   S.vistos = vi.data; S.preguntas = pr.data; S.estado = es.data; S.perfiles = pf.data; S.omisiones = om.data;
   await firmarArchivos();
   S.menu = g.data.map(x => ({...x, subs: t.data.filter(y=>y.grupo_id===x.id).map(y=>({id:y.id,nombre:y.nombre,desc:y.descr||'',orden:y.orden}))}));
-  if(!temaDe(S.vista) && !(S.vista==='panel' && esF())) S.vista = 'inicio';
+  if(!temaDe(S.vista) && S.vista !== 'examenes' && !(S.vista==='panel' && esPanel())) S.vista = 'inicio';
 }
 async function cargarPerfil(){
-  const {data} = await sb.from('perfiles').select('rol,codigo,nombre').eq('id', S.uid).maybeSingle();
-  S.rol = data?.rol || 'asesor'; S.codigo = data?.codigo || ''; S.nombre = data?.nombre || '';
+  const {data} = await sb.from('perfiles').select('*').eq('id', S.uid).maybeSingle();
+  S.rol = data?.rol || 'asesor'; S.codigo = data?.codigo || ''; S.nombre = data?.nombre || ''; S.area = data?.area || null;
 }
 async function refrescar(){ await cargar(); dibujar(); }
 
@@ -485,17 +553,18 @@ function dibujarMenu(){
   const pend = S.preguntas.filter(p=>!p.respuesta).length;
   const insignia = esF() ? (pend?` <em class="bdg">${pend}</em>`:'') : (nuevas?` <em class="bdg">${nuevas}</em>`:'');
   $('#nav').innerHTML = `<button class="item ${S.vista==='inicio'?'on':''}" data-go="inicio">Inicio y noticias${insignia}</button>` +
-    (esF() ? `<button class="item ${S.vista==='panel'?'on':''}" data-go="panel">Panel de indicadores</button>` : '') +
+    `<button class="item ${S.vista==='examenes'?'on':''}" data-go="examenes">Exámenes${pendientesEx() ? ` <em class="bdg">${pendientesEx()}</em>` : ''}</button>` +
+    (esPanel() ? `<button class="item ${S.vista==='panel'?'on':''}" data-go="panel">${esF() ? 'Panel de indicadores' : 'Mi equipo'}</button>` : '') +
     sueltos.map(grpHtml).join('') +
     S.cats.map(c => {
       const gs = S.menu.filter(g => g.categoria_id === c.id), k = 'cat:'+c.id;
       return `<button class="cat" data-cat="${esc(c.id)}" aria-expanded="${!!S.abiertos[k]}">${esc(c.nombre)} <span class="n">(${gs.length})</span>${chev}</button>
       <div class="catbody ${S.abiertos[k]?'open':''}">${gs.map(grpHtml).join('')}
-      ${esF()?`<div class="mini cm"><button data-act="add-grp" data-id="${esc(c.id)}">+ Grupo</button><button data-act="edit-cat" data-id="${esc(c.id)}">Renombrar</button><button data-act="del-cat" data-id="${esc(c.id)}">Quitar categoría</button></div>`:''}</div>`;
+      ${esF()?`<div class="mini cm"><button data-act="add-grp" data-id="${esc(c.id)}">+ Grupo</button></div>`:''}</div>`;
     }).join('') +
-    (esF() ? '<button class="item addg" data-act="add-cat">+ Agregar categoría</button>' + (S.cats.length ? '' : '<button class="item addg" data-act="add-grp">+ Agregar grupo al menú</button>') : '');
+    (esF() && !S.cats.length ? '<button class="item addg" data-act="add-grp">+ Agregar grupo al menú</button>' : '');
   $('#foot').innerHTML = (S.estado ? `<div class="estado-act"><b>Última actualización</b>${esc(fechaHora(S.estado.actualizado))}${S.estado.detalle?'<br>'+esc(S.estado.detalle):''}</div>` : '') +
-    `<div class="role ${esF()?'edit':''}"><i></i>${esF()?'Modo formador':'Modo lectura'}</div>` +
+    estadoHTML() + `<div class="role ${esF()?'edit':''}"><i></i>${esF()?'Modo formador':'Rol: '+esc(ROLES[S.rol]||'Asesor')}</div>` + (S.area ? `<div class="meta2">${esc(AREAS[S.area]||'')}</div>` : '') +
     (S.codigo ? `<div class="meta2">${S.nombre?esc(S.nombre)+' · ':''}Usuario ${esc(S.codigo)}</div>` : '') +
     (esF() ? '<button class="lnk" data-act="usuarios">Gestionar usuarios</button>' : '') +
     '<div style="margin-top:8px">By Jhonatan Morzán</div>';
@@ -555,7 +624,7 @@ function revisarAlerta(){
   if(!S.uid || esF() || S.cargando || S.error){ if(alerta.open) alerta.close(); return; }
   const pend = pendientesAlerta();
   if(!pend.length){ if(alerta.open) alerta.close(); return; }
-  if(dlg.open && !alerta.open) return;
+  if((dlg.open || exd.open) && !alerta.open) return;
   alerta.innerHTML = `<div class="alt"><div class="altcab"><span class="altico">⚠️</span><div><h3>Tienes ${pend.length} noticia${pend.length > 1 ? 's' : ''} pendiente${pend.length > 1 ? 's' : ''} de visto bueno</h3>
     <p>Léela${pend.length > 1 ? 's' : ''} y confirma para continuar. Puedes omitir cada una hasta 2 veces; la tercera es obligatoria.</p></div></div>
     ${pend.map(cartaAlerta).join('')}
@@ -572,7 +641,7 @@ function noticiasFiltradas(){
     (!ql || norm(n.titulo+' '+n.cuerpo+' '+n.categoria).includes(ql)));
 }
 function quienes(n){
-  const ases = S.perfiles.filter(p => p.rol === 'asesor');
+  const ases = miembros();
   const vm = new Map(S.vistos.filter(v => v.noticia_id === n.id).map(v => [v.user_id, v]));
   const ok = [], duda = [], pend = [];
   ases.forEach(a => { const v = vm.get(a.id); (!v ? pend : v.estado === 'ok' ? ok : duda).push({a, v}); });
@@ -661,7 +730,7 @@ function dibujarInicio(){
 /* ===== Panel de indicadores (solo formadores) ===== */
 function fmtH(h){ return h == null ? '—' : h < 1 ? Math.round(h*60)+' min' : h < 48 ? h.toFixed(1)+' h' : (h/24).toFixed(1)+' días'; }
 function datosPanel(){
-  const ases = S.perfiles.filter(p => p.rol === 'asesor');
+  const ases = miembros();
   const ids = new Set(ases.map(a => a.id));
   const desde = S.p.dias === 'todo' ? 0 : Date.now() - Number(S.p.dias) * 864e5;
   const nots = S.noticias.filter(n => new Date(n.creado).getTime() >= desde && (!S.p.cat || n.categoria === S.p.cat));
@@ -671,7 +740,7 @@ function datosPanel(){
 }
 const barra = (nm, ok, duda, pend) => { const t = (ok+duda+pend) || 1;
   return `<div class="bar"><span class="nm" title="${esc(nm)}">${esc(nm)}</span><div class="tr"><i class="c-ok" style="width:${ok*100/t}%"></i><i class="c-duda" style="width:${duda*100/t}%"></i><i class="c-pend" style="width:${pend*100/t}%"></i></div><span class="vl">${Math.round(ok*100/t)}% ✔</span></div>`; };
-function dibujarPanel(){
+function dibujarPanelBase(){
   const {ases, nots, nmap, vs} = datosPanel();
   const A = ases.length, N = nots.length, esperado = A * N;
   const ok = vs.filter(v => v.estado === 'ok').length, duda = vs.filter(v => v.estado === 'duda').length;
@@ -717,12 +786,12 @@ function dibujarPanel(){
 
   const a1 = pct, a2 = pct + (esperado ? Math.round(duda * 100 / esperado) : 0);
   $('#main').innerHTML = `
-    <div class="head"><div><h1>Panel de indicadores</h1><p class="sub">Visto bueno de las noticias, dudas y actividad del área. Solo visible para formadores.</p></div>
+    <div class="head"><div><h1>${esF() ? 'Panel de indicadores' : 'Mi equipo'}</h1><p class="sub">Visto bueno de las noticias, exámenes y estados. ${esF() ? 'Solo visible para formadores, supervisores y coordinadores.' : 'Aquí ves únicamente a los asesores que tienes asignados.'}</p></div>
       <div class="tools"><button class="btn add" data-act="csv-matriz">Descargar reporte general (CSV)</button></div></div>
     <div class="filtros">
       <select id="pdias" aria-label="Periodo">${[['7','Últimos 7 días'],['30','Últimos 30 días'],['90','Últimos 90 días'],['todo','Todo el historial']].map(([v,l]) => `<option value="${v}" ${S.p.dias===v?'selected':''}>${l}</option>`).join('')}</select>
       <select id="pcat" aria-label="Categoría"><option value="">Todas las categorías</option>${CATS.map(c => `<option ${S.p.cat===c?'selected':''}>${c}</option>`).join('')}</select>
-      <span class="meta">Se calcula sobre los ${A} asesores creados en “Gestionar usuarios”.</span>
+      <span class="meta">${esF() ? `Se calcula sobre los ${A} asesores creados en “Gestionar usuarios”.` : `Se calcula sobre las ${A} personas de tu equipo.`}</span>
     </div>
     <div class="kpis">
       <div class="kpi"><span>Asesores</span><b>${A}</b><small>usuarios con rol asesor</small></div>
@@ -731,9 +800,9 @@ function dibujarPanel(){
       <div class="kpi"><span>Con duda</span><b>${duda}</b><small>asesores marcaron ✖</small></div>
       <div class="kpi"><span>Sin responder (asesor)</span><b>${pend}</b><small>pendientes de ✔ o ✖</small></div>
       <div class="kpi"><span>Obligatorias vigentes</span><b>${S.noticias.filter(alertable).length}</b><small>con panel de alerta activo</small></div>
-      <div class="kpi"><span>Preguntas por responder</span><b>${abiertas.length}</b><small>${pregs.length} preguntas en total</small></div>
+      <div class="kpi" ${esF() ? '' : 'hidden'}><span>Preguntas por responder</span><b>${abiertas.length}</b><small>${pregs.length} preguntas en total</small></div>
       <div class="kpi"><span>Tiempo hasta el ✔</span><b>${fmtH(prom(tConf))}</b><small>promedio desde la publicación</small></div>
-      <div class="kpi"><span>Tiempo de respuesta</span><b>${fmtH(prom(tResp))}</b><small>promedio de los formadores</small></div>
+      <div class="kpi" ${esF() ? '' : 'hidden'}><span>Tiempo de respuesta</span><b>${fmtH(prom(tResp))}</b><small>promedio de los formadores</small></div>
     </div>
     <div class="two">
       <section class="card"><h3>Estado global</h3>
@@ -756,7 +825,7 @@ function dibujarPanel(){
     <section class="card" style="margin-bottom:18px"><h3>Noticias obligatorias o recordadas vigentes</h3>
       ${(() => { const act = S.noticias.filter(alertable);
         return act.length ? `<div class="scroll"><table class="tb"><thead><tr><th>Noticia</th><th>Vence</th><th>Sin ✔</th><th>Recordatorios</th><th></th></tr></thead><tbody>${act.map(n => { const q = quienes(n);
-          return `<tr><td>${esc(n.titulo)}<br><small class="meta">${esc(n.categoria)} · ${esc(fechaHora(n.creado))}</small></td><td>${n.vence ? esc(fecha(n.vence)) : 'Sin límite'}</td><td>${q.pend.length + q.duda.length}</td><td>${n.recordatorios || 0}</td><td><button class="btn add sm" data-act="recordar" data-id="${n.id}">🔔 Recordar</button></td></tr>`; }).join('')}</tbody></table></div>`
+          return `<tr><td>${esc(n.titulo)}<br><small class="meta">${esc(n.categoria)} · ${esc(fechaHora(n.creado))}</small></td><td>${n.vence ? esc(fecha(n.vence)) : 'Sin límite'}</td><td>${q.pend.length + q.duda.length}</td><td>${n.recordatorios || 0}</td><td>${esF() ? `<button class="btn add sm" data-act="recordar" data-id="${n.id}">🔔 Recordar</button>` : ''}</td></tr>`; }).join('')}</tbody></table></div>`
         : '<p class="meta">No hay noticias obligatorias vigentes. Márcalas como obligatorias al publicarlas o usa “Recordar a pendientes” en cualquier noticia.</p>'; })()}</section>
     <section class="card" style="margin-bottom:18px"><h3>Reporte por noticia</h3>
       ${nots.length ? `<div class="filtros"><select id="pnot" style="flex:1;min-width:240px">${nots.map(n => `<option value="${n.id}" ${nSel && nSel.id === n.id ? 'selected' : ''}>${esc(fecha(n.creado))} · ${esc(n.titulo.slice(0,70))}</option>`).join('')}</select>
@@ -766,7 +835,7 @@ function dibujarPanel(){
         <div class="scroll"><table class="tb"><thead><tr><th>Asesor</th><th>✔</th><th>✖</th><th>Pend.</th><th>%</th><th title="Veces que omitió una noticia obligatoria">Omis.</th></tr></thead><tbody>
         ${filas.map(f => `<tr><td>${esc(quien(f.a))}</td><td>${f.o}</td><td>${f.d}</td><td>${f.p}</td><td><span class="mini-bar"><i style="width:${f.pc}%"></i></span>${f.pc}%</td><td>${f.om}</td></tr>`).join('') || '<tr><td colspan="6">Aún no hay asesores.</td></tr>'}
         </tbody></table></div></section>
-      <section class="card"><h3>Preguntas por responder</h3>
+      <section class="card" ${esF() ? '' : 'hidden'}><h3>Preguntas por responder</h3>
         <div class="scroll">${abiertas.slice().reverse().map(p => { const u = per(p.user_id), n = nmap.get(p.noticia_id);
           return `<div class="q" style="margin-bottom:8px;white-space:pre-line"><b>${esc(u ? quien(u) : 'Usuario')} · ${esc(fechaHora(p.creado))}</b><i>${esc(n ? n.titulo : '')}</i><br>${esc(p.pregunta)}
             <div class="tools" style="margin-top:8px"><button class="btn sm" data-act="resp-preg" data-id="${p.id}">Responder</button></div></div>`; }).join('') || '<p class="meta">No hay preguntas pendientes. 🎉</p>'}</div></section>
@@ -807,11 +876,12 @@ function dibujar(){
   if(S.error){ $('#ticker').innerHTML=''; $('#main').innerHTML=`<div class="empty"><b>No se pudo cargar el contenido</b>${esc(S.error)}</div>`; return; }
   dibujarTicker();
   const t = temaDe(S.vista);
-  const enNoticias = !t && S.vista !== 'panel';
+  const enNoticias = !t && S.vista !== 'panel' && S.vista !== 'examenes';
   $('#cols').classList.toggle('solo', !enNoticias);
   $('#rcol').hidden = !enNoticias;
   if(t) dibujarTema(t);
-  else if(S.vista === 'panel' && esF()) dibujarPanel();
+  else if(S.vista === 'panel' && esPanel()) dibujarPanel();
+  else if(S.vista === 'examenes') dibujarExamenes();
   else dibujarInicio();
   revisarAlerta();
 }
@@ -824,6 +894,7 @@ function ir(id){
 
 /* ===== Ventanas de formulario ===== */
 const dlg = $('#dlg');
+const exd = $('#ex');
 function form(titulo, campos, guardar, vals={}){
   dlg.innerHTML = `<form class="dlg"><h3>${esc(titulo)}</h3>` + campos.map(c => {
     const v = vals[c.k] ?? c.def ?? '';
@@ -867,11 +938,12 @@ async function borrarArchivo(link){
 async function usuariosDlg(){
   let lista = [];
   try{ const r = await sb.from('perfiles').select('*').order('codigo'); if(r.error) throw r.error; lista = r.data; }catch(e){ alert(msg(e)); return; }
+  const nom = id => { const p = lista.find(x => x.id === id); return p ? (p.nombre || p.codigo) : ''; };
   dlg.innerHTML = `<div class="dlg"><h3>Gestionar usuarios</h3>
-    <p class="note">El usuario de cada persona es su código de la empresa y su contraseña es su DNI. Desde aquí los creas, cambias su rol o les quitas el acceso.</p>
-    <div class="ulist">${lista.map(u=>`<div class="urow"><div><b>${esc(u.nombre||'Sin nombre')} · ${esc(u.codigo||'')}</b><span>${u.rol==='formador'?'Formador':'Asesor'}${u.id===S.uid?' (tú)':''}</span></div>
+    <p class="note">El usuario de cada persona es su código de la empresa y su contraseña es su DNI. Al crear a alguien le asignas rol, área (Back Office Técnico o Administrativo), coordinador y supervisor. Los coordinadores y supervisores ven a sus asesores asignados.</p>
+    <div class="ulist">${lista.map(u=>`<div class="urow"><div><b>${esc(u.nombre||'Sin nombre')} · ${esc(u.codigo||'')}</b><span>${esc(ROLES[u.rol]||u.rol)} · ${esc(AREAS[u.area]||'Sin área')}${u.coordinador_id?' · Coord.: '+esc(nom(u.coordinador_id)):''}${u.supervisor_id?' · Sup.: '+esc(nom(u.supervisor_id)):''}${u.id===S.uid?' (tú)':''}</span></div>
       <button class="btn ghost sm" data-act="clave-user" data-id="${u.id}">Contraseña</button>
-      ${u.id===S.uid ? '' : `<button class="btn ${u.rol==='formador'?'ghost':'add'} sm" data-act="rol-user" data-id="${u.id}" data-rol="${u.rol==='formador'?'asesor':'formador'}">${u.rol==='formador'?'Pasar a asesor':'Hacer formador'}</button><button class="btn danger sm" data-act="del-user" data-id="${u.id}">Quitar</button>`}</div>`).join('') || '<p class="meta">Aún no hay usuarios.</p>'}</div>
+      ${u.id===S.uid ? '' : `<button class="btn add sm" data-act="edit-user" data-id="${u.id}">Editar</button><button class="btn danger sm" data-act="del-user" data-id="${u.id}">Quitar</button>`}</div>`).join('') || '<p class="meta">Aún no hay usuarios.</p>'}</div>
     <div class="row"><button class="btn ghost" data-close>Cerrar</button><button class="btn" data-act="add-users">+ Agregar usuarios</button></div></div>`;
   if(!dlg.open) dlg.showModal();
 }
@@ -901,7 +973,7 @@ const camposMat = [{k:'titulo',l:'Nombre del material',req:1},{k:'tipo',l:'Tipo'
   {k:'archivo',l:'Subir archivo (PDF o imagen)',t:'file',acc:'.pdf,image/*'},{k:'link',l:'…o pegar un enlace',p:'https://'}];
 
 const ACC = {
-  logout: async () => { await sb.auth.signOut(); },
+  logout: async () => { await marcarDesconectado(); await sb.auth.signOut(); },
 
   /* Noticias: filtro por fecha, visto bueno, preguntas y reportes */
   dia: (k) => { S.f.dia = k || ''; dibujarInicio(); },
@@ -936,20 +1008,41 @@ const ACC = {
         filas.push([a.codigo, a.nombre || '', ...est.map(estTxt), o, d, nots.length - o - d, nots.length ? Math.round(o * 100 / nots.length) + '%' : '0%']); });
       descargarCSV('reporte-general-' + hoyKey() + '.csv', filas); },
   usuarios: () => usuariosDlg(),
-  'add-users': () => form('Agregar usuarios',[
-      {k:'rol',l:'Rol de estas personas',t:'sel',o:['Asesor','Formador']},
-      {k:'lista',l:'Una persona por línea: código, DNI, nombre (el nombre es opcional). Puedes pegar directo desde Excel.',t:'area',req:1,p:'1234567, 45678912, Ana Pérez\n7654321, 12345678, Luis Soto'}],
-      async o => {
-        const items = o.lista.split(/\r?\n/).map(l=>l.trim()).filter(Boolean).map(l => { const p=l.split(/[,;\t]/).map(x=>x.trim()); return {codigo:p[0], clave:p[1]||'', nombre:p.slice(2).join(' ')}; });
-        if(!items.length) throw new Error('Escribe al menos una línea.');
-        const {data, error} = await sb.rpc('crear_usuarios', {p_lista:items, p_rol:o.rol==='Formador'?'formador':'asesor'});
-        if(error) throw error;
-        const f = data.fallos || [];
-        const detalle = f.length ? `No se crearon ${f.length}:\n` + f.map(x=>`• ${x.codigo||'(vacío)'}: ${x.motivo}`).join('\n') : '';
-        if(!data.creados && f.length) throw new Error(detalle);
-        return () => { alert(`Usuarios creados: ${data.creados}.` + (detalle ? '\n\n'+detalle : '')); usuariosDlg(); };
-      }),
-  'rol-user': async (id, el) => { await mut(sb.from('perfiles').update({rol: el.dataset.rol}).eq('id',id)); await usuariosDlg(); },
+  'add-users': () => {
+      const cs = jefesDe('coordinador'), ss = jefesDe('supervisor');
+      form('Agregar usuarios',[
+        {k:'rol',l:'Rol de estas personas',t:'sel',o:Object.values(ROLES)},
+        {k:'area',l:'Área de estas personas',t:'sel',o:[...Object.values(AREAS),'Sin área']},
+        {k:'coord',l:'Coordinador asignado',t:'sel',o:['(Sin asignar)',...cs.map(x=>x.t)]},
+        {k:'sup',l:'Supervisor asignado',t:'sel',o:['(Sin asignar)',...ss.map(x=>x.t)]},
+        {k:'lista',l:'Una persona por línea: código, DNI, nombre (el nombre es opcional). Puedes pegar directo desde Excel.',t:'area',req:1,p:'1234567, 45678912, Ana Pérez\n7654321, 12345678, Luis Soto'}],
+        async o => {
+          const items = o.lista.split(/\r?\n/).map(l=>l.trim()).filter(Boolean).map(l => { const p=l.split(/[,;\t]/).map(x=>x.trim()); return {codigo:p[0], clave:p[1]||'', nombre:p.slice(2).join(' ')}; });
+          if(!items.length) throw new Error('Escribe al menos una línea.');
+          const {data, error} = await sb.rpc('crear_usuarios', {p_lista:items, p_rol:claveDe(ROLES,o.rol)||'asesor', p_area:claveDe(AREAS,o.area), p_coordinador:idDe(cs,o.coord), p_supervisor:idDe(ss,o.sup)});
+          if(error) throw error;
+          const f = data.fallos || [];
+          const detalle = f.length ? `No se crearon ${f.length}:\n` + f.map(x=>`• ${x.codigo||'(vacío)'}: ${x.motivo}`).join('\n') : '';
+          if(!data.creados && f.length) throw new Error(detalle);
+          return () => { alert(`Usuarios creados: ${data.creados}.` + (detalle ? '\n\n'+detalle : '')); usuariosDlg(); };
+        });
+  },
+  'edit-user': id => {
+      const u = S.perfiles.find(x => x.id === id); if(!u) return;
+      const cs = jefesDe('coordinador').filter(x => x.id !== id), ss = jefesDe('supervisor').filter(x => x.id !== id);
+      form('Editar usuario · ' + u.codigo,[
+        {k:'nombre',l:'Nombre'},
+        {k:'rol',l:'Rol',t:'sel',o:Object.values(ROLES)},
+        {k:'area',l:'Área',t:'sel',o:[...Object.values(AREAS),'Sin área']},
+        {k:'coord',l:'Coordinador asignado',t:'sel',o:['(Sin asignar)',...cs.map(x=>x.t)]},
+        {k:'sup',l:'Supervisor asignado',t:'sel',o:['(Sin asignar)',...ss.map(x=>x.t)]}],
+        async o => {
+          await mut(sb.from('perfiles').update({nombre:o.nombre||null, rol:claveDe(ROLES,o.rol)||'asesor', area:claveDe(AREAS,o.area), coordinador_id:idDe(cs,o.coord), supervisor_id:idDe(ss,o.sup)}).eq('id',id));
+          return () => usuariosDlg();
+        },
+        {nombre:u.nombre||'', rol:ROLES[u.rol], area:AREAS[u.area]||'Sin área',
+         coord:(cs.find(x=>x.id===u.coordinador_id)||{}).t||'(Sin asignar)', sup:(ss.find(x=>x.id===u.supervisor_id)||{}).t||'(Sin asignar)'});
+  },
   'clave-user': async id => {
       const c = prompt('Nueva contraseña para esta persona (mínimo 6 caracteres, por ejemplo su DNI):');
       if(c === null) return;
@@ -1051,7 +1144,7 @@ const ACC = {
 
 document.addEventListener('click', e => {
   const t = e.target;
-  if(t.closest('[data-close]')){ dlg.close(); return; }
+  if(t.closest('[data-close]')){ const dd = t.closest('dialog') || dlg; if(dd === exd){ S.enExamen = false; } dd.close(); return; }
   const ct = t.closest('[data-cat]');
   if(ct){ const k='cat:'+ct.dataset.cat; S.abiertos[k] = !S.abiertos[k]; dibujarMenu(); return; }
   const g = t.closest('[data-grp]');
@@ -1073,6 +1166,7 @@ document.addEventListener('change', e => {
   else if(id === 'pdias'){ S.p.dias = v; dibujarPanel(); }
   else if(id === 'pcat'){ S.p.cat = v; S.p.noticia = ''; dibujarPanel(); }
   else if(id === 'pnot'){ S.p.noticia = v; dibujarPanel(); }
+  else if(id === 'peu'){ S.p.eu = v; cargarEstadosPanel(); }
 });
 // Menú lateral: en computadora se oculta/muestra; en celular se abre/cierra. Se recuerda la preferencia.
 const ESCRITORIO = window.matchMedia('(min-width:981px)');
@@ -1098,13 +1192,440 @@ $('#gform').addEventListener('submit', async e => {
 });
 $('#gver').addEventListener('change', e => { $('#gform').clave.type = e.target.checked ? 'text' : 'password'; });
 
+/* Ayudas para asignar coordinador / supervisor */
+const jefesDe = rol => S.perfiles.filter(p => p.rol === rol).map(p => ({id:p.id, t:quien(p)}));
+const idDe = (arr, t) => (arr.find(x => x.t === t) || {}).id || null;
+const claveDe = (obj, v) => Object.keys(obj).find(k => obj[k] === v) || null;
+
+/* =====================================================================
+   CAMBIOS 01 · ROLES, ÁREAS, EXÁMENES Y ESTADOS
+   ===================================================================== */
+Object.assign(S, {examenes:[], intentos:[], estadoMio:null, area:null, enExamen:false, sinExamenes:false});
+const ESTADOS = [['activo','Activo'],['bano','Baño'],['break','Break'],['capacitacion','Capacitación']];
+const EST_NOM = {activo:'Activo', bano:'Baño', break:'Break', capacitacion:'Capacitación', desconectado:'Desconectado'};
+const EST_COL = {activo:'#111111', bano:'#8A8A90', break:'#E8707B', capacitacion:'#D7192D'};
+const EST_ORD = ['activo','bano','break','capacitacion'];
+const AREA_EX = {todos:'Todas las áreas', tecnico:'Back Office Técnico', administrativo:'Back Office Administrativo'};
+const fmtS = s => { const m = Math.round(Number(s || 0) / 60); return m < 60 ? m + ' min' : Math.floor(m / 60) + ' h ' + String(m % 60).padStart(2, '0') + ' min'; };
+const porCodigo = (a, b) => (a.codigo || '').localeCompare(b.codigo || '');
+
+/* Personas que se miden: el formador ve a todos los asesores; coordinador/supervisor, solo a su equipo. */
+const miembros = () => esF() ? S.perfiles.filter(p => p.rol === 'asesor') : S.perfiles.filter(p => p.id !== S.uid && p.rol !== 'formador');
+
+/* ===== Mi estado (activo, baño, break, capacitación) ===== */
+function textoEstado(){
+  const e = S.estadoMio; if(!e || !e.desde) return '';
+  const d = new Date(e.desde), min = Math.max(0, Math.round((Date.now() - d.getTime()) / 60000));
+  return 'Desde las ' + d.toLocaleTimeString('es-PE', {hour:'numeric', minute:'2-digit', hour12:true}) + ' · ' + (min < 60 ? min + ' min' : Math.floor(min / 60) + ' h ' + String(min % 60).padStart(2, '0') + ' min');
+}
+function estadoHTML(){
+  if(esF() || !S.uid || !S.rol) return '';
+  const e = (S.estadoMio && S.estadoMio.estado) || 'activo';
+  return `<div class="estado-box"><b>Mi estado</b><div class="estados">${ESTADOS.map(([k,l]) => `<button class="${e===k?'on':''}" data-act="estado" data-id="${k}" aria-pressed="${e===k}">${l}</button>`).join('')}</div><small id="est-t">${esc(textoEstado())}</small></div>`;
+}
+async function iniciarEstado(){
+  if(esF()) return;
+  try{
+    const {data} = await sb.rpc('iniciar_estado');
+    S.estadoMio = (data && data.estado) ? data : {estado:'activo', desde:new Date().toISOString()};
+  }catch(e){ S.estadoMio = {estado:'activo', desde:new Date().toISOString()}; }
+}
+async function cambiarEstado(k){
+  if(S.estadoMio && S.estadoMio.estado === k) return;
+  const {error} = await sb.rpc('cambiar_estado', {p_estado:k}); if(error) throw error;
+  S.estadoMio = {estado:k, desde:new Date().toISOString()}; dibujarMenu();
+}
+async function marcarDesconectado(){
+  if(S.uid && S.rol && !esF()){ try{ await sb.rpc('cambiar_estado', {p_estado:'desconectado'}); }catch(e){} }
+}
+// Latido cada 45 s: mantiene vivo el estado y sirve para no contar tiempo si cierran la pestaña.
+setInterval(() => { if(S.uid && S.rol && !esF()) sb.rpc('latido').then(() => {}, () => {}); }, 45000);
+document.addEventListener('visibilitychange', () => { if(!document.hidden && S.uid && S.rol && !esF()) sb.rpc('latido').then(() => {}, () => {}); });
+setInterval(() => { const t = $('#est-t'); if(t) t.textContent = textoEstado(); }, 30000);
+
+/* ===== Exámenes: lectura ===== */
+async function leerTodo(tabla, cols, orden){
+  let todo = [], desde = 0;
+  while(true){
+    const {data, error} = await sb.from(tabla).select(cols).order(orden, {ascending:true}).range(desde, desde + 999);
+    if(error) return {error};
+    todo = todo.concat(data);
+    if(data.length < 1000) break;
+    desde += 1000;
+  }
+  return {data:todo};
+}
+const puedeRendir = e => !esF() && e.publicado && (e.area === 'todos' || e.area === S.area);
+const misIntentos = eid => S.intentos.filter(i => i.examen_id === eid && i.user_id === S.uid);
+const cerradosDe = arr => arr.filter(i => i.estado !== 'en_curso');
+function mejorDe(eid, uid){
+  const l = S.intentos.filter(i => i.examen_id === eid && i.user_id === uid && i.estado !== 'en_curso' && i.nota != null);
+  return l.length ? l.reduce((m, x) => Number(x.nota) > Number(m.nota) ? x : m) : null;
+}
+const pendientesEx = () => esF() ? 0 : S.examenes.filter(e => puedeRendir(e) && !cerradosDe(misIntentos(e.id)).length).length;
+const resTxt = m => !m ? 'Sin rendir' : (m.aprobado ? 'Aprobado' : 'Desaprobado');
+
+/* ===== Exámenes: pantalla principal ===== */
+function tarjetaExamen(e){
+  const tags = `<span class="tag cat">${esc(AREA_EX[e.area] || e.area)}</span><span class="tag">${e.n_preguntas} pregunta${e.n_preguntas === 1 ? '' : 's'}</span>`
+    + (e.duracion_min ? `<span class="tag">⏱ ${e.duracion_min} min</span>` : '<span class="tag plano">Sin límite de tiempo</span>')
+    + `<span class="tag">Aprueba con ${e.aprobatorio}%</span><span class="tag">${e.intentos} intento${e.intentos === 1 ? '' : 's'}</span>`;
+  const desc = e.descripcion ? `<p>${esc(e.descripcion)}</p>` : '';
+  if(esF()){
+    const cer = S.intentos.filter(i => i.examen_id === e.id && i.estado !== 'en_curso');
+    const quienesN = new Set(cer.map(i => i.user_id)).size;
+    return `<article class="exc ${e.publicado ? '' : 'borrador'}"><div class="tags">${e.publicado ? '<span class="tag">Publicado</span>' : '<span class="tag plano">Borrador</span>'}</div>
+      <h3>${esc(e.titulo)}</h3>${desc}<div class="tags">${tags}</div>
+      <div class="meta">${quienesN} persona${quienesN === 1 ? '' : 's'} ya lo rindieron · ${cer.length} intento${cer.length === 1 ? '' : 's'} en total</div>
+      <div class="acts"><button class="btn sm" data-act="edit-exam" data-id="${e.id}">Editar</button>
+        <button class="btn ghost sm" data-act="pub-exam" data-id="${e.id}">${e.publicado ? 'Ocultar' : 'Publicar'}</button>
+        <button class="btn add sm" data-act="res-exam" data-id="${e.id}">Resultados</button>
+        <button class="btn danger sm" data-act="del-exam" data-id="${e.id}">Quitar</button></div></article>`;
+  }
+  const mis = misIntentos(e.id), cer = cerradosDe(mis), curso = mis.find(i => i.estado === 'en_curso');
+  const mej = mejorDe(e.id, S.uid), quedan = e.intentos - mis.length;
+  let estado = '<span class="est pend">Sin rendir</span>';
+  if(mej) estado = `<span class="est ${mej.aprobado ? 'ok' : 'duda'}">${mej.aprobado ? 'Aprobado' : 'Desaprobado'} · mejor nota ${Number(mej.nota).toFixed(0)}%</span>`;
+  else if(cer.length) estado = '<span class="est duda">Sin nota</span>';
+  let boton;
+  if(curso) boton = `<button class="btn sm" data-act="rendir" data-id="${e.id}">Continuar examen</button>`;
+  else if(quedan > 0) boton = `<button class="btn sm" data-act="rendir" data-id="${e.id}">${cer.length ? 'Intentar de nuevo' : 'Rendir examen'}</button>`;
+  else boton = '<button class="btn ghost sm" disabled>Sin intentos disponibles</button>';
+  return `<article class="exc"><h3>${esc(e.titulo)}</h3>${desc}<div class="tags">${tags}</div>
+    <div class="vb" style="border-top:none;padding-top:0">${estado}<span class="meta">${curso ? 'Tienes un intento en curso' : 'Te quedan ' + Math.max(0, quedan) + ' intento' + (quedan === 1 ? '' : 's')}</span></div>
+    <div class="acts">${boton}</div></article>`;
+}
+function dibujarExamenes(){
+  const F = esF();
+  const lista = F ? S.examenes : S.examenes.filter(puedeRendir);
+  $('#main').innerHTML = `<div class="head"><div><h1>Exámenes</h1><p class="sub">${F ? 'Crea, publica y revisa los exámenes. Cada examen puede ser para un área o para todas.' : 'Exámenes disponibles para tu área. Cada intento cuenta, responde con calma.'}</p></div>
+    ${F ? '<button class="btn" data-act="add-exam">+ Crear examen</button>' : ''}</div>
+    ${S.sinExamenes ? '<div class="aviso"><span>⚠️ Falta ejecutar el SQL de cambios (exámenes) en Supabase.</span></div>' : ''}
+    <div class="exgrid">${lista.map(tarjetaExamen).join('') || `<div class="empty"><b>${F ? 'Aún no hay exámenes' : 'No tienes exámenes disponibles'}</b>${F ? 'Usa “Crear examen” para armar el primero.' : 'Cuando un formador publique uno para tu área, aparecerá aquí.'}</div>`}</div>`;
+}
+
+/* ===== Exámenes: editor del formador ===== */
+let EXE = null;
+const nuevaPreg = () => ({enunciado:'', opciones:['', ''], correcta:0, puntaje:1});
+function renderEditor(){
+  const e = EXE, sc = exd.scrollTop;
+  const conIntentos = e.id && S.intentos.some(i => i.examen_id === e.id);
+  exd.innerHTML = `<div class="dlg"><h3>${e.id ? 'Editar examen' : 'Crear examen'}</h3>
+    ${conIntentos ? '<p class="note">Este examen ya tiene intentos. Si cambias las preguntas, las notas ya guardadas no se recalculan.</p>' : ''}
+    <label>Título<input data-ex="titulo" value="${esc(e.titulo)}" placeholder="Ej. Examen de rechazos técnicos"></label>
+    <label>Descripción o instrucciones (opcional)<textarea data-ex="descripcion" style="min-height:80px">${esc(e.descripcion)}</textarea></label>
+    <div class="grid3">
+      <label>Dirigido a<select data-ex="area">${Object.entries(AREA_EX).map(([v,l]) => `<option value="${v}" ${e.area === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
+      <label>Tiempo en minutos (vacío = sin límite)<input type="number" min="1" max="480" data-ex="duracion" value="${esc(e.duracion)}"></label>
+      <label>Nota para aprobar (%)<input type="number" min="0" max="100" data-ex="aprobatorio" value="${esc(e.aprobatorio)}"></label>
+      <label>Intentos permitidos<input type="number" min="1" max="20" data-ex="intentos" value="${esc(e.intentos)}"></label>
+    </div>
+    <label class="chk"><input type="checkbox" data-ex="publicado" ${e.publicado ? 'checked' : ''}> Publicado (los asesores ya pueden rendirlo)</label>
+    <h4>Preguntas (${e.preguntas.length})</h4>
+    ${e.preguntas.map((p, i) => `<div class="pq"><div class="pqh"><b>Pregunta ${i + 1}</b>
+        <span class="meta">Puntaje <input class="pts" type="number" min="1" max="100" data-pq="${i}" data-f="puntaje" value="${esc(p.puntaje)}"></span>
+        <button class="btn danger sm" type="button" data-act="ex-del-preg" data-id="${i}">Quitar pregunta</button></div>
+      <textarea data-pq="${i}" data-f="enunciado" placeholder="Escribe la pregunta">${esc(p.enunciado)}</textarea>
+      <div class="ops">${p.opciones.map((o, j) => `<div class="op"><label class="chk"><input type="radio" name="c${i}" data-pq="${i}" data-cor="${j}" ${p.correcta === j ? 'checked' : ''}> Correcta</label>
+          <input data-pq="${i}" data-op="${j}" value="${esc(o)}" placeholder="Opción ${String.fromCharCode(65 + j)}">
+          <button class="btn ghost sm" type="button" data-act="ex-del-op" data-id="${i}" data-j="${j}" ${p.opciones.length <= 2 ? 'disabled' : ''} aria-label="Quitar opción">×</button></div>`).join('')}
+        <div><button class="btn ghost sm" type="button" data-act="ex-ag-op" data-id="${i}" ${p.opciones.length >= 6 ? 'hidden' : ''}>+ Opción</button></div></div></div>`).join('')}
+    <div><button class="btn add sm" type="button" data-act="ex-ag-preg">+ Agregar pregunta</button></div>
+    <p class="err" id="exerr" hidden></p>
+    <div class="row"><button class="btn ghost" type="button" data-close>Cancelar</button><button class="btn" type="button" data-act="ex-guardar">Guardar examen</button></div></div>`;
+  exd.scrollTop = sc;
+}
+function abrirEditor(e, pregs){
+  EXE = e
+    ? {id:e.id, titulo:e.titulo, descripcion:e.descripcion || '', area:e.area, duracion:e.duracion_min || '', aprobatorio:e.aprobatorio, intentos:e.intentos, publicado:e.publicado,
+       preguntas:(pregs || []).map(p => ({enunciado:p.enunciado, opciones:[...p.opciones], correcta:p.correcta, puntaje:p.puntaje}))}
+    : {id:null, titulo:'', descripcion:'', area:'todos', duracion:'', aprobatorio:70, intentos:1, publicado:false, preguntas:[nuevaPreg()]};
+  if(!EXE.preguntas.length) EXE.preguntas.push(nuevaPreg());
+  S.enExamen = false;
+  renderEditor(); if(!exd.open) exd.showModal();
+}
+function sincEditor(e){
+  const t = e.target; if(!EXE) return;
+  if(t.dataset.ex){ EXE[t.dataset.ex] = t.type === 'checkbox' ? t.checked : t.value; }
+  else if(t.dataset.pq !== undefined){
+    const p = EXE.preguntas[Number(t.dataset.pq)]; if(!p) return;
+    if(t.dataset.f) p[t.dataset.f] = t.value;
+    else if(t.dataset.op !== undefined) p.opciones[Number(t.dataset.op)] = t.value;
+    else if(t.dataset.cor !== undefined) p.correcta = Number(t.dataset.cor);
+  }
+}
+async function guardarEditor(){
+  const E = EXE, er = $('#exerr'), btn = exd.querySelector('[data-act="ex-guardar"]');
+  const fallo = t => { er.textContent = t; er.hidden = false; };
+  er.hidden = true;
+  if(!E.titulo.trim()) return fallo('Escribe el título del examen.');
+  if(E.publicado && !E.preguntas.length) return fallo('Para publicar agrega al menos una pregunta.');
+  for(let i = 0; i < E.preguntas.length; i++){
+    const p = E.preguntas[i];
+    if(!p.enunciado.trim()) return fallo(`La pregunta ${i + 1} está vacía.`);
+    if(p.opciones.some(o => !o.trim())) return fallo(`La pregunta ${i + 1} tiene opciones vacías: complétalas o quítalas.`);
+    if(p.correcta == null || p.correcta >= p.opciones.length) return fallo(`Marca la respuesta correcta de la pregunta ${i + 1}.`);
+  }
+  const apr = Number(E.aprobatorio), intn = Number(E.intentos), dur = E.duracion === '' ? null : Number(E.duracion);
+  if(!(apr >= 0 && apr <= 100)) return fallo('La nota para aprobar debe estar entre 0 y 100.');
+  if(!(intn >= 1 && intn <= 20)) return fallo('Los intentos permitidos deben ser de 1 a 20.');
+  if(dur !== null && !(dur >= 1 && dur <= 480)) return fallo('El tiempo debe ser de 1 a 480 minutos, o vacío.');
+  btn.disabled = true; btn.textContent = 'Guardando…';
+  try{
+    const {error} = await sb.rpc('guardar_examen', {
+      p_examen:{id:E.id, titulo:E.titulo.trim(), descripcion:E.descripcion.trim(), area:E.area, duracion_min:dur, aprobatorio:apr, intentos:intn, publicado:!!E.publicado},
+      p_preguntas:E.preguntas.map(p => ({enunciado:p.enunciado.trim(), opciones:p.opciones.map(o => o.trim()), correcta:p.correcta, puntaje:Math.max(1, Number(p.puntaje) || 1)}))
+    });
+    if(error) throw error;
+    await refrescar(); EXE = null; exd.close();
+  }catch(x){ fallo(msg(x)); btn.disabled = false; btn.textContent = 'Guardar examen'; }
+}
+
+/* ===== Exámenes: resultados (formador, coordinador, supervisor) ===== */
+function filasExamen(e){
+  const aplic = miembros().filter(m => e.area === 'todos' || m.area === e.area);
+  return aplic.map(m => {
+    const its = S.intentos.filter(i => i.examen_id === e.id && i.user_id === m.id), cer = cerradosDe(its);
+    const ult = cer.length ? cer.reduce((a, b) => new Date(b.fin || b.inicio) > new Date(a.fin || a.inicio) ? b : a) : null;
+    return {m, its, cer, mej:mejorDe(e.id, m.id), ult};
+  }).sort((a, b) => (b.mej ? Number(b.mej.nota) : -1) - (a.mej ? Number(a.mej.nota) : -1) || porCodigo(a.m, b.m));
+}
+function resultadosExamenDlg(id){
+  const e = S.examenes.find(x => x.id == id); if(!e) return;
+  const filas = filasExamen(e);
+  const rind = filas.filter(f => f.mej), apr = rind.filter(f => f.mej.aprobado).length;
+  const prom = rind.length ? rind.reduce((s, f) => s + Number(f.mej.nota), 0) / rind.length : null;
+  exd.innerHTML = `<div class="dlg"><h3>${esc(e.titulo)}</h3>
+    <p class="meta">${esc(AREA_EX[e.area])} · aprueba con ${e.aprobatorio}% · ${e.intentos} intento${e.intentos === 1 ? '' : 's'} · se toma la mejor nota de cada persona</p>
+    <div class="resumen"><span class="est pend">${filas.length} asesores</span><span class="est ok">✔ ${apr} aprobados</span><span class="est duda">✖ ${rind.length - apr} desaprobados</span><span class="est pend">⏳ ${filas.length - rind.length} sin rendir</span>${prom == null ? '' : `<span class="est pend">Promedio ${prom.toFixed(1)}%</span>`}</div>
+    <div class="scroll"><table class="tb"><thead><tr><th>Asesor</th><th>Intentos</th><th>Mejor nota</th><th>Resultado</th><th>Último intento</th>${esF() ? '<th></th>' : ''}</tr></thead><tbody>
+    ${filas.map(f => `<tr><td>${esc(quien(f.m))}</td><td>${f.its.length}/${e.intentos}</td><td>${f.mej ? Number(f.mej.nota).toFixed(1) + '%' : '—'}</td><td><span class="est ${f.mej ? (f.mej.aprobado ? 'ok' : 'duda') : 'pend'}">${resTxt(f.mej)}</span></td><td>${f.ult ? esc(fechaHora(f.ult.fin || f.ult.inicio)) : '—'}</td>${esF() ? `<td>${f.its.length ? `<button class="btn ghost sm" data-act="reset-int" data-id="${e.id}" data-uid="${f.m.id}">Reiniciar intentos</button>` : ''}</td>` : ''}</tr>`).join('') || '<tr><td colspan="6">No hay asesores para este examen.</td></tr>'}
+    </tbody></table></div>
+    <div class="row"><button class="btn ghost" data-act="csv-examen" data-id="${e.id}">Descargar CSV</button><button class="btn" data-close>Cerrar</button></div></div>`;
+  if(!exd.open) exd.showModal();
+}
+const filaCSVExamen = (e, f) => [e.titulo, AREA_EX[e.area], f.m.codigo, f.m.nombre || '', AREA_EX[f.m.area] || 'Sin área', f.its.length, f.mej ? Number(f.mej.nota).toFixed(1) : '', resTxt(f.mej), f.ult ? fechaHora(f.ult.fin || f.ult.inicio) : ''];
+const CAB_CSV_EX = ['Examen','Área del examen','Código','Nombre','Área del asesor','Intentos','Mejor nota (%)','Resultado','Último intento'];
+
+/* ===== Exámenes: rendir (asesor) ===== */
+let RE = null, RE_T = null;
+function renderExamen(){
+  const r = RE, n = r.preguntas.length;
+  exd.innerHTML = `<div class="dlg"><div class="rend-top"><div><h3>${esc(r.titulo)}</h3><p class="meta">${n} pregunta${n === 1 ? '' : 's'} · aprueba con ${r.aprobatorio}%</p></div>${r.fin ? '<div class="timer" id="ex-t">--:--</div>' : ''}</div>
+    ${r.descripcion ? `<p class="note">${esc(r.descripcion)}</p>` : ''}
+    ${r.preguntas.map((p, i) => `<fieldset class="rq"><legend>Pregunta ${i + 1} de ${n}</legend><p class="rq-t">${esc(p.enunciado)}</p>
+      ${p.opciones.map((o, j) => `<label class="ro ${r.resp[p.id] === j ? 'sel' : ''}"><input type="radio" name="q${p.id}" data-rp="${p.id}" data-opc="${j}" ${r.resp[p.id] === j ? 'checked' : ''}><span><b>${String.fromCharCode(65 + j)}.</b> ${esc(o)}</span></label>`).join('')}</fieldset>`).join('')}
+    <p class="err" id="exerr" hidden></p>
+    <div class="row"><button class="btn ghost" type="button" data-act="ex-salir">Salir y continuar después</button><button class="btn" type="button" data-act="ex-enviar">Enviar examen</button></div></div>`;
+}
+function tickExamen(){
+  if(!RE || !RE.fin) return;
+  const s = Math.max(0, Math.round((RE.fin - Date.now()) / 1000)), el = $('#ex-t');
+  if(el){ el.textContent = String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0'); el.classList.toggle('low', s <= 60); }
+  if(s <= 0){ clearInterval(RE_T); enviarExamen(true); }
+}
+async function rendirExamen(id){
+  const {data, error} = await sb.rpc('iniciar_examen', {p_id:Number(id)}); if(error) throw error;
+  let resp = {}; try{ resp = JSON.parse(sessionStorage.getItem('exr_' + data.intento_id) || '{}'); }catch(e){}
+  const ids = new Set(data.preguntas.map(p => String(p.id)));
+  Object.keys(resp).forEach(k => { if(!ids.has(k)) delete resp[k]; });
+  const rest = data.duracion_min ? data.duracion_min * 60 - (Date.parse(data.ahora) - Date.parse(data.inicio)) / 1000 : null;
+  RE = {intento:data.intento_id, titulo:data.titulo, descripcion:data.descripcion, aprobatorio:data.aprobatorio, preguntas:data.preguntas, resp,
+        fin: rest == null ? null : Date.now() + Math.max(0, rest) * 1000, enviando:false};
+  S.enExamen = true; renderExamen(); if(!exd.open) exd.showModal();
+  clearInterval(RE_T); if(RE.fin){ tickExamen(); RE_T = setInterval(tickExamen, 1000); }
+}
+async function enviarExamen(auto){
+  if(!RE || RE.enviando) return;
+  const faltan = RE.preguntas.length - Object.keys(RE.resp).length;
+  if(!auto && faltan > 0 && !confirm(`Te faltan ${faltan} pregunta${faltan > 1 ? 's' : ''} por responder. ¿Enviar el examen de todos modos?`)) return;
+  RE.enviando = true;
+  try{
+    const {data, error} = await sb.rpc('enviar_examen', {p_intento:RE.intento, p_respuestas:RE.resp});
+    if(error) throw error;
+    clearInterval(RE_T); S.enExamen = false;
+    try{ sessionStorage.removeItem('exr_' + RE.intento); }catch(e){}
+    const titulo = RE.titulo; RE = null;
+    resultadoExamenHTML(data, titulo);
+    await refrescar();
+  }catch(x){
+    RE.enviando = false;
+    const er = $('#exerr'); if(er){ er.textContent = msg(x); er.hidden = false; }
+  }
+}
+function resultadoExamenHTML(d, titulo){
+  const nota = Number(d.nota);
+  exd.innerHTML = `<div class="dlg"><h3>${esc(titulo)}</h3><div class="resu">
+    ${d.fuera_de_tiempo ? '<p class="note">El tiempo del examen terminó antes de que se enviara. Este intento se registró con nota 0.</p>' : ''}
+    <div class="nota ${d.aprobado ? 'ok' : 'no'}">${nota.toFixed(nota % 1 ? 1 : 0)}%</div>
+    <span class="est ${d.aprobado ? 'ok' : 'duda'}">${d.aprobado ? '✔ Aprobado' : '✖ Desaprobado'}</span>
+    <p class="meta">${d.correctas} de ${d.total} preguntas correctas · se aprueba con ${d.aprobatorio}%</p></div>
+    <div class="row"><button class="btn" data-close>Cerrar</button></div></div>`;
+}
+exd.addEventListener('input', sincEditor);
+exd.addEventListener('change', e => {
+  sincEditor(e);
+  const t = e.target;
+  if(t.dataset.rp && RE){
+    RE.resp[t.dataset.rp] = Number(t.dataset.opc);
+    try{ sessionStorage.setItem('exr_' + RE.intento, JSON.stringify(RE.resp)); }catch(x){}
+    const fs = t.closest('fieldset'); if(fs) fs.querySelectorAll('.ro').forEach(l => l.classList.toggle('sel', l.contains(t)));
+  }
+});
+exd.addEventListener('cancel', e => { if(S.enExamen) e.preventDefault(); });
+exd.addEventListener('close', () => { if(S.enExamen && RE) exd.showModal(); });
+
+/* ===== Panel: exámenes y estados ===== */
+function panelExamenesHTML(){
+  if(S.sinExamenes) return '';
+  const ms = miembros(), exs = S.examenes.filter(e => e.publicado);
+  const filasE = exs.map(e => {
+    const ap = ms.filter(m => e.area === 'todos' || m.area === e.area);
+    const mejs = ap.map(m => mejorDe(e.id, m.id)).filter(Boolean);
+    const apr = mejs.filter(x => x.aprobado).length;
+    const prom = mejs.length ? mejs.reduce((s, x) => s + Number(x.nota), 0) / mejs.length : null;
+    return `<tr><td>${esc(e.titulo)}<br><small class="meta">${esc(AREA_EX[e.area])}</small></td><td>${ap.length}</td><td>${mejs.length}</td><td>${prom == null ? '—' : prom.toFixed(1) + '%'}</td><td>${mejs.length ? Math.round(apr * 100 / mejs.length) + '%' : '—'}</td><td><button class="btn ghost sm" data-act="res-exam" data-id="${e.id}">Detalle</button></td></tr>`;
+  }).join('');
+  const filasA = ms.slice().sort(porCodigo).map(m => {
+    const ap = exs.filter(e => e.area === 'todos' || m.area === e.area);
+    const mejs = ap.map(e => mejorDe(e.id, m.id)).filter(Boolean);
+    const apr = mejs.filter(x => x.aprobado).length;
+    const prom = mejs.length ? mejs.reduce((s, x) => s + Number(x.nota), 0) / mejs.length : null;
+    return `<tr><td>${esc(quien(m))}</td><td>${mejs.length}/${ap.length}</td><td>${prom == null ? '—' : prom.toFixed(1) + '%'}</td><td>${apr}</td></tr>`;
+  }).join('');
+  return `<div class="head" style="margin:26px 0 12px"><h2 style="margin:0">Resultados de exámenes</h2><button class="btn add sm" data-act="csv-examenes">Descargar CSV de exámenes</button></div>
+    <div class="two">
+      <section class="card"><h3>Por examen (mejor nota de cada persona)</h3>
+        <div class="scroll"><table class="tb"><thead><tr><th>Examen</th><th>Asesores</th><th>Rindieron</th><th>Promedio</th><th>Aprobados</th><th></th></tr></thead><tbody>${filasE || '<tr><td colspan="6">Aún no hay exámenes publicados.</td></tr>'}</tbody></table></div></section>
+      <section class="card"><h3>Por asesor</h3>
+        <div class="scroll"><table class="tb"><thead><tr><th>Asesor</th><th>Rendidos</th><th>Promedio</th><th>Aprobados</th></tr></thead><tbody>${filasA || '<tr><td colspan="4">Aún no hay asesores.</td></tr>'}</tbody></table></div></section>
+    </div>`;
+}
+function estadosHTML(vivo, porAs, porDia){
+  const ms = miembros(), ahora = Date.now();
+  const vm = new Map(vivo.map(r => [r.user_id, r]));
+  const actual = id => {
+    const r = vm.get(id);
+    if(!r || r.estado === 'desconectado' || ahora - new Date(r.ultimo_latido).getTime() > 180000) return {e:'desconectado', desde:r ? r.desde : null};
+    return {e:r.estado, desde:r.desde};
+  };
+  const orden = ['activo','capacitacion','break','bano','desconectado'];
+  const filasV = ms.map(m => ({m, ...actual(m.id)})).sort((a, b) => orden.indexOf(a.e) - orden.indexOf(b.e) || porCodigo(a.m, b.m));
+  const cuenta = {}; filasV.forEach(f => { cuenta[f.e] = (cuenta[f.e] || 0) + 1; });
+  const vivoHtml = `<div class="vivo">${orden.map(k => `<span class="chipE e-${k}">${EST_NOM[k]}: ${cuenta[k] || 0}</span>`).join('')}</div>
+    <div class="scroll" style="max-height:300px"><table class="tb"><thead><tr><th>Persona</th><th>Estado ahora</th><th>Desde</th></tr></thead><tbody>
+    ${filasV.map(f => `<tr><td>${esc(quien(f.m))}</td><td><span class="chipE e-${f.e}">${EST_NOM[f.e]}</span></td><td>${f.desde && f.e !== 'desconectado' ? esc(fechaHora(f.desde)) : '—'}</td></tr>`).join('') || '<tr><td colspan="3">Aún no hay personas.</td></tr>'}
+    </tbody></table></div>`;
+  const tm = new Map();
+  porAs.forEach(r => { if(!tm.has(r.user_id)) tm.set(r.user_id, {}); tm.get(r.user_id)[r.estado] = Number(r.segundos); });
+  const tabla = ms.slice().sort(porCodigo).map(m => {
+    const t = tm.get(m.id) || {}, tot = EST_ORD.reduce((s, k) => s + (t[k] || 0), 0);
+    return `<tr><td>${esc(quien(m))}</td>${EST_ORD.map(k => `<td>${t[k] ? fmtS(t[k]) : '—'}</td>`).join('')}<td><b>${tot ? fmtS(tot) : '—'}</b></td></tr>`;
+  }).join('');
+  const dm = new Map();
+  porDia.forEach(r => { if(!dm.has(r.dia)) dm.set(r.dia, {n:r.usuarios || 1}); dm.get(r.dia)[r.estado] = Number(r.segundos); });
+  const val = (d, k) => (d[k] || 0) / (S.p.eu ? 1 : (d.n || 1));
+  const dias = [...dm.keys()].sort().reverse();
+  const maxT = Math.max(1, ...dias.map(k => EST_ORD.reduce((s, e) => s + val(dm.get(k), e), 0)));
+  const filasD = dias.map(k => { const d = dm.get(k), tot = EST_ORD.reduce((s, e) => s + val(d, e), 0);
+    return `<tr><td>${esc(diaLargo(k))}</td>${EST_ORD.map(e => `<td>${d[e] ? fmtS(val(d, e)) : '—'}</td>`).join('')}<td><b>${fmtS(tot)}</b></td>
+      <td><div class="apil" style="width:${Math.max(8, tot * 100 / maxT)}%">${EST_ORD.map(e => `<i style="width:${tot ? val(d, e) * 100 / tot : 0}%;background:${EST_COL[e]}" title="${EST_NOM[e]}: ${fmtS(val(d, e))}"></i>`).join('')}</div></td></tr>`; }).join('');
+  const ley = `<div class="leyE">${EST_ORD.map(e => `<span style="--c:${EST_COL[e]}">${EST_NOM[e]}</span>`).join('')}</div>`;
+  return `<div class="head" style="margin:26px 0 12px"><h2 style="margin:0">Estados y tiempos</h2></div>
+    <section class="card" style="margin-bottom:18px"><h3>Estados en este momento</h3>${vivoHtml}</section>
+    <section class="card" style="margin-bottom:18px"><h3>Tiempo por estado en el periodo (por persona)</h3>${ley}
+      <div class="scroll"><table class="tb"><thead><tr><th>Persona</th>${EST_ORD.map(k => `<th>${EST_NOM[k]}</th>`).join('')}<th>Total</th></tr></thead><tbody>${tabla || '<tr><td colspan="6">Aún no hay personas.</td></tr>'}</tbody></table></div></section>
+    <section class="card" style="margin-bottom:18px"><h3>Tiempo por día</h3>
+      <div class="filtros"><select id="peu" aria-label="Persona" style="flex:1;min-width:240px"><option value="">Todos (promedio por persona)</option>${ms.slice().sort(porCodigo).map(m => `<option value="${m.id}" ${S.p.eu === m.id ? 'selected' : ''}>${esc(quien(m))}</option>`).join('')}</select></div>
+      ${ley}<div class="scroll"><table class="tb"><thead><tr><th>Día</th>${EST_ORD.map(k => `<th>${EST_NOM[k]}</th>`).join('')}<th>Total</th><th></th></tr></thead><tbody>${filasD || '<tr><td colspan="7">Aún no hay tiempos registrados en este periodo.</td></tr>'}</tbody></table></div>
+      <p class="meta" style="margin-top:8px">Solo se miden Activo, Baño, Break y Capacitación mientras la persona tiene la página abierta. “Desconectado” se muestra en tiempo real.</p></section>`;
+}
+async function cargarEstadosPanel(){
+  const cont = $('#pnl-estados'); if(!cont) return;
+  cont.innerHTML = '<section class="card"><h3>Estados y tiempos</h3><p class="meta">Cargando…</p></section>';
+  const n = S.p.dias === 'todo' ? 180 : Number(S.p.dias);
+  const hasta = diaKey(new Date()), desde = diaKey(new Date(Date.now() - n * 864e5));
+  const [a, b, c] = await Promise.all([
+    sb.from('estado_actual').select('*'),
+    sb.rpc('estados_por_asesor', {p_desde:desde, p_hasta:hasta}),
+    sb.rpc('estados_por_dia', {p_desde:desde, p_hasta:hasta, p_user:S.p.eu || null})
+  ]);
+  const cont2 = $('#pnl-estados'); if(!cont2) return;
+  const err = a.error || b.error || c.error;
+  cont2.innerHTML = err
+    ? `<section class="card"><h3>Estados y tiempos</h3><p class="meta">${esc(msg(err))}</p></section>`
+    : estadosHTML(a.data || [], b.data || [], c.data || []);
+}
+function dibujarPanel(){
+  dibujarPanelBase();
+  const m = $('#main'); if(!m) return;
+  m.insertAdjacentHTML('beforeend', panelExamenesHTML() + '<div id="pnl-estados"></div>');
+  cargarEstadosPanel();
+}
+
+/* ===== Acciones nuevas ===== */
+Object.assign(ACC, {
+  estado: id => cambiarEstado(id),
+
+  'add-exam': () => abrirEditor(null, []),
+  'edit-exam': async id => {
+    const e = S.examenes.find(x => x.id == id); if(!e) return;
+    const {data, error} = await sb.from('examen_preguntas').select('*').eq('examen_id', e.id).order('orden'); if(error) throw error;
+    abrirEditor(e, data);
+  },
+  'pub-exam': async id => {
+    const e = S.examenes.find(x => x.id == id); if(!e) return;
+    if(!e.publicado && !e.n_preguntas) throw new Error('Agrega al menos una pregunta antes de publicar el examen.');
+    await mut(sb.from('examenes').update({publicado:!e.publicado}).eq('id', id)); await refrescar();
+  },
+  'del-exam': async id => {
+    const e = S.examenes.find(x => x.id == id); if(!e) return;
+    if(!confirm(`¿Quitar el examen "${e.titulo}" con sus preguntas y TODOS los resultados? Esto no se puede deshacer.`)) return;
+    await mut(sb.from('examenes').delete().eq('id', id)); await refrescar();
+  },
+  'res-exam': id => resultadosExamenDlg(id),
+  'reset-int': async (id, el) => {
+    const e = S.examenes.find(x => x.id == id), u = per(el.dataset.uid);
+    if(!confirm(`¿Reiniciar los intentos de ${u ? quien(u) : 'esta persona'} en "${e.titulo}"? Se borran sus notas de este examen y podrá rendirlo de nuevo.`)) return;
+    await mut(sb.from('examen_intentos').delete().eq('examen_id', id).eq('user_id', el.dataset.uid));
+    await refrescar(); resultadosExamenDlg(id);
+  },
+  'csv-examen': id => {
+    const e = S.examenes.find(x => x.id == id); if(!e) return;
+    descargarCSV('examen-' + hoyKey() + '.csv', [CAB_CSV_EX, ...filasExamen(e).map(f => filaCSVExamen(e, f))]);
+  },
+  'csv-examenes': () => {
+    const filas = [CAB_CSV_EX];
+    S.examenes.filter(e => e.publicado).forEach(e => filasExamen(e).forEach(f => filas.push(filaCSVExamen(e, f))));
+    descargarCSV('examenes-' + hoyKey() + '.csv', filas);
+  },
+  rendir: id => rendirExamen(id),
+  'ex-enviar': () => enviarExamen(false),
+  'ex-salir': () => { S.enExamen = false; clearInterval(RE_T); RE = null; exd.close(); },
+
+  'ex-ag-preg': () => { EXE.preguntas.push(nuevaPreg()); renderEditor(); exd.scrollTo({top:exd.scrollHeight}); },
+  'ex-del-preg': id => {
+    if(EXE.preguntas.length <= 1){ alert('El examen necesita al menos una pregunta.'); return; }
+    EXE.preguntas.splice(Number(id), 1); renderEditor();
+  },
+  'ex-ag-op': id => { const p = EXE.preguntas[Number(id)]; if(p.opciones.length < 6){ p.opciones.push(''); renderEditor(); } },
+  'ex-del-op': (id, el) => {
+    const p = EXE.preguntas[Number(id)], j = Number(el.dataset.j);
+    if(p.opciones.length <= 2) return;
+    p.opciones.splice(j, 1);
+    if(p.correcta === j) p.correcta = 0; else if(p.correcta > j) p.correcta--;
+    renderEditor();
+  },
+  'ex-guardar': () => guardarEditor()
+});
+
 /* ===== Arranque ===== */
 let temporizador, tiempoReal = false;
 function programarRefresco(){
   clearTimeout(temporizador);
   temporizador = setTimeout(async () => {
     if(!S.uid) return;
-    if(dlg.open || ['q','qn'].includes(document.activeElement?.id)){ programarRefresco(); return; }
+    if(dlg.open || exd.open || ['q','qn'].includes(document.activeElement?.id)){ programarRefresco(); return; }
     try{ await cargar(); dibujar(); }catch(e){}
   }, 800);
 }
@@ -1118,7 +1639,7 @@ async function entrar(ses){
   hechasCargar();
   S.vista = location.hash.slice(1) || 'inicio';
   document.body.classList.remove('locked'); dibujar();
-  try{ await cargarPerfil(); await cargar(); }catch(e){ S.error = msg(e); }
+  try{ await cargarPerfil(); await iniciarEstado(); await cargar(); }catch(e){ S.error = msg(e); }
   S.cargando = false;
   if(!abrirDe(S.vista) && S.cats[0]) S.abiertos['cat:'+S.cats[0].id] = true;
   dibujar(); iniciarTiempoReal();
@@ -1127,11 +1648,13 @@ function salir(){
   S.uid = null; S.rol = null; S.codigo = ''; S.nombre = ''; S.vista = 'inicio'; S.cargando = true; S.error = '';
   S.accesos = []; S.menu = []; S.cats = []; S.noticias = []; S.materiales = []; S.bloques = [];
   S.vistos = []; S.preguntas = []; S.perfiles = []; S.estado = null; S.omisiones = []; S.hechas = new Set();
+  S.examenes = []; S.intentos = []; S.estadoMio = null; S.area = null; S.enExamen = false; S.sinExamenes = false; RE = null; clearInterval(RE_T);
   if(alerta.open) alerta.close();
   S.f = {q:'', cat:'', dia:''}; S.p = {dias:'30', cat:'', noticia:''};
   try{ sb.removeAllChannels(); }catch(e){}
   tiempoReal = false; FIRMAS.clear();
   if(dlg.open) dlg.close();
+  if(exd.open) exd.close();
   history.replaceState(null,'',location.pathname+location.search);
   $('#gform').reset(); $('#gform').clave.type = 'password'; gerr('');
   mostrarGate();
@@ -1146,7 +1669,7 @@ function iniciar(){
     if(ses && (ev==='SIGNED_IN' || ev==='INITIAL_SESSION')){
       if(S.uid !== ses.user.id){
         // Si la página se abre con una sesión guardada pero pasaron más de 10 min sin actividad, se cierra.
-        if(ev==='INITIAL_SESSION' && sesionCaducada()){ await sb.auth.signOut({scope:'local'}); return; }
+        if(ev==='INITIAL_SESSION' && sesionCaducada()){ try{ await sb.rpc('cambiar_estado',{p_estado:'desconectado'}); }catch(e){} await sb.auth.signOut({scope:'local'}); return; }
         if(ev==='SIGNED_IN') marcarActividad(true);
         await entrar(ses);
       }
@@ -1155,12 +1678,13 @@ function iniciar(){
     else if(ev==='INITIAL_SESSION') mostrarGate();
   }, 0); });
 }
-window.addEventListener('hashchange', () => { if(!S.uid) return; const id = location.hash.slice(1) || 'inicio'; if(id!==S.vista && (id==='inicio' || temaDe(id) || (id==='panel' && esF()))) ir(id); });
+window.addEventListener('hashchange', () => { if(!S.uid) return; const id = location.hash.slice(1) || 'inicio'; if(id!==S.vista && (id==='inicio' || id==='examenes' || temaDe(id) || (id==='panel' && esPanel()))) ir(id); });
 /* ===== Cierre de sesión por inactividad (10 minutos) =====
    Se guarda la hora de la última actividad (clic, tecla, mouse, scroll, toque). Se revisa cada 30 s,
    al volver a la pestaña y al abrir la página, así también funciona si la computadora estuvo
    dormida o la pestaña quedó abierta en segundo plano toda la noche. */
-const MIN_INACTIVIDAD = 10, CLAVE_ACT = 'hitss_ultima_actividad';
+const MIN_INACTIVIDAD = 10, MIN_INACT_PAUSA = 60, CLAVE_ACT = 'hitss_ultima_actividad';
+/* Con 10 min sin actividad se cierra la sesión. Si la persona está en Baño, Break o Capacitación el límite sube a 60 min; durante un examen no se cierra. */
 let ultimaAct = Date.now(), ultimoGuardado = 0;
 function marcarActividad(forzar){
   if(!S.uid && forzar !== true) return;
@@ -1176,8 +1700,9 @@ function sesionCaducada(){
   try{ const g = Number(localStorage.getItem(CLAVE_ACT)); return !!g && Date.now() - g > MIN_INACTIVIDAD * 60 * 1000; }catch(e){ return false; }
 }
 async function revisarInactividad(){
-  if(!S.uid) return;
-  if(Date.now() - actividadReciente() > MIN_INACTIVIDAD * 60 * 1000) await sb.auth.signOut({scope:'local'});
+  if(!S.uid || S.enExamen) return;
+  const lim = (!esF() && S.estadoMio && S.estadoMio.estado !== 'activo') ? MIN_INACT_PAUSA : MIN_INACTIVIDAD;
+  if(Date.now() - actividadReciente() > lim * 60 * 1000){ await marcarDesconectado(); await sb.auth.signOut({scope:'local'}); }
 }
 ['click','keydown','mousemove','scroll','touchstart'].forEach(ev => window.addEventListener(ev, () => marcarActividad(), {passive:true}));
 setInterval(revisarInactividad, 30 * 1000);
