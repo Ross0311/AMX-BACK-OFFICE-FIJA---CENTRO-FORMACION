@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Centro de Formación | HITSS</title>
-<link rel="icon" type="image/svg+xml" href="marca.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&display=swap" rel="stylesheet">
@@ -355,6 +354,9 @@ dialog::backdrop{background:rgba(14,26,54,.7);backdrop-filter:blur(4px)}
 .bcard p{font-size:16px;color:var(--ink);margin-bottom:12px}
 .bcard .bnota{font-size:14px;color:var(--muted);background:var(--teal-soft);border-radius:12px;padding:12px 14px;margin:6px 0 0}
 .alerta-acc.hay{border-color:#F0B9C0;border-left:5px solid var(--teal)}
+[data-act="al-validar"]{white-space:nowrap}
+.al-hist{margin-top:14px;border-top:1px solid var(--line);padding-top:10px}
+.al-hist summary{cursor:pointer;font-weight:600;color:var(--muted);margin-bottom:8px}
 
 /* ---------- Cambios 03: conectividad en vivo e imágenes en exámenes ---------- */
 .estbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
@@ -1259,8 +1261,9 @@ async function bloquearCelular(){
   }catch(e){}
 }
 function revisarTactil(){
-  if(!S.uid || esF() || !esTactilSospechoso()) return;
-  sb.rpc('registrar_alerta_acceso', {p_tipo:'tactil', p_detalle:detalleEquipo()}).then(() => {}, () => {});
+  if(!S.uid || esF()) return;
+  if(esTactilSospechoso()) sb.rpc('registrar_alerta_acceso', {p_tipo:'tactil', p_detalle:detalleEquipo()}).then(() => {}, () => {});
+  else sb.rpc('registrar_ingreso_pc').then(() => {}, () => {});   // entró por computadora normal: se cierran sus alertas
 }
 
 /* ===== Pantalla de ingreso ===== */
@@ -1626,15 +1629,36 @@ function alertasEst(ms){
   const mm = new Map(ms.map(m => [m.id, m]));
   return (S.est.alertas || []).filter(a => mm.has(a.user_id)).map(a => ({...a, m:mm.get(a.user_id)}));
 }
+/* Alertas: PENDIENTE hasta que la persona vuelva a entrar por computadora (se cierra sola)
+   o hasta que coordinador, supervisor, GTR o formador le dé el check de "Validado". */
+const pendiente = a => !a.resuelta_en;
+function estadoAlerta(a){
+  if(pendiente(a)) return 'Pendiente';
+  if(a.resolucion === 'computadora') return 'Resuelta sola: volvió a entrar por computadora el ' + fechaHora(a.resuelta_en);
+  return 'Validada por ' + (a.resuelta_por_nombre || 'un responsable') + ' el ' + fechaHora(a.resuelta_en);
+}
+const vecesTxt = a => (a.veces > 1 ? `${a.veces} veces · último intento ${fechaHora(a.ultima)}` : '');
 function alertasHTML(ms){
   if(S.est.sinAlertas) return '';
-  const l = alertasEst(ms);
-  return `<section class="card alerta-acc ${l.length ? 'hay' : ''}" style="margin-bottom:18px"><h3>📱 Alertas de acceso desde celular ${l.length ? `<span class="chipE e-capacitacion">${l.length}</span>` : ''}</h3>
-    ${l.length ? `<div class="scroll" style="max-height:280px"><table class="tb"><thead><tr><th>Fecha y hora</th><th>Persona</th>${veTodo() ? '<th>Área</th><th>Coordinador</th>' : ''}<th>Qué pasó</th><th>Equipo</th></tr></thead><tbody>
-      ${l.map(a => `<tr><td>${esc(fechaHora(a.creado))}</td><td>${esc(quien(a.m))}${a.m.rol === 'coordinador' ? ' <small class="meta">(coordinador)</small>' : ''}</td>${veTodo() ? `<td>${esc(NOM_AREA_C[a.m.area] || 'Sin área')}</td><td>${a.m.rol === 'coordinador' ? '—' : esc(nomCoord(a.m))}</td>` : ''}<td><b>${esc(TIPO_ALERTA[a.tipo] || a.tipo)}</b></td><td><small class="meta">${esc(a.detalle || '')}</small></td></tr>`).join('')}
-      </tbody></table></div>` : '<p class="meta">Sin alertas en este periodo. Nadie intentó entrar desde un celular.</p>'}</section>`;
+  const l = alertasEst(ms), pend = l.filter(pendiente), hist = l, V = veTodo();
+  const persona = a => `${esc(quien(a.m))}${a.m.rol === 'coordinador' ? ' <small class="meta">(coordinador)</small>' : ''}`;
+  const area = a => V ? `<td>${esc(NOM_AREA_C[a.m.area] || 'Sin área')}</td><td>${a.m.rol === 'coordinador' ? '—' : esc(nomCoord(a.m))}</td>` : '';
+  const cabArea = V ? '<th>Área</th><th>Coordinador</th>' : '';
+  const enVivo = pend.length ? `<div class="scroll" style="max-height:300px"><table class="tb"><thead><tr><th>Desde</th><th>Persona</th>${cabArea}<th>Qué pasó</th><th>Equipo</th><th></th></tr></thead><tbody>
+      ${pend.map(a => `<tr><td>${esc(fechaHora(a.creado))}${vecesTxt(a) ? `<br><small class="meta">${esc(vecesTxt(a))}</small>` : ''}</td><td>${persona(a)}</td>${area(a)}<td><b>${esc(TIPO_ALERTA[a.tipo] || a.tipo)}</b></td><td><small class="meta">${esc(a.detalle || '')}</small></td>
+        <td><button class="btn add sm" data-act="al-validar" data-id="${a.id}" title="Marcar como revisada">✓ Validado</button></td></tr>`).join('')}
+      </tbody></table></div>`
+    : '<p class="meta">✅ Sin alertas pendientes. Nadie está entrando desde un celular en este momento.</p>';
+  const historial = hist.length ? `<details class="al-hist" ${S.histAl ? 'open' : ''} ontoggle="S.histAl = this.open"><summary>Historial del periodo (${hist.length})</summary>
+      <div class="scroll" style="max-height:300px"><table class="tb"><thead><tr><th>Fecha y hora</th><th>Persona</th>${cabArea}<th>Qué pasó</th><th>Estado</th></tr></thead><tbody>
+      ${hist.map(a => `<tr><td>${esc(fechaHora(a.creado))}${vecesTxt(a) ? `<br><small class="meta">${esc(vecesTxt(a))}</small>` : ''}</td><td>${persona(a)}</td>${area(a)}<td>${esc(TIPO_ALERTA[a.tipo] || a.tipo)}</td>
+        <td>${pendiente(a) ? '<span class="chipE e-capacitacion">Pendiente</span>' : a.resolucion === 'computadora' ? `<span class="chipE e-activo">💻 Volvió a computadora</span><br><small class="meta">${esc(fechaHora(a.resuelta_en))}</small>` : `<span class="chipE e-bano">✓ Validada</span><br><small class="meta">${esc((a.resuelta_por_nombre || '') + ' · ' + fechaHora(a.resuelta_en))}</small>`}</td></tr>`).join('')}
+      </tbody></table></div></details>` : '';
+  return `<section class="card alerta-acc ${pend.length ? 'hay' : ''}" style="margin-bottom:18px"><h3>📱 Alertas de acceso desde celular ${pend.length ? `<span class="chipE e-capacitacion">${pend.length} pendiente${pend.length > 1 ? 's' : ''}</span>` : ''}</h3>
+    ${enVivo}${historial}</section>`;
 }
-const alertaHoy = () => { const hoy = diaKey(new Date()); return new Set((S.est.alertas || []).filter(a => diaKey(a.creado) === hoy).map(a => a.user_id)); };
+/* Personas con alerta pendiente (para la marca 📱 en las tablas en vivo) */
+const alertaHoy = () => new Set((S.est.alertas || []).filter(pendiente).map(a => a.user_id));
 Object.assign(S.p, {edias:'7', ea:'', ec:'', eu:''});
 const EST_VIVO = ['activo','capacitacion','break','bano','desconectado'];
 const NOM_AREA_C = {tecnico:'Técnico', administrativo:'Administrativo'};
@@ -1667,7 +1691,7 @@ function coordVivoHTML(cs){
   const cuenta = {}; filas.forEach(f => { cuenta[f.e] = (cuenta[f.e] || 0) + 1; });
   return `<div class="vivo">${EST_VIVO.map(k => `<span class="chipE e-${k}">${EST_NOM[k]}: ${cuenta[k] || 0}</span>`).join('')}</div>
     <div class="scroll" style="max-height:300px"><table class="tb"><thead><tr><th>Coordinador</th><th>Área</th><th class="num">Asesores a cargo</th><th>Estado ahora</th><th>Desde</th><th class="num">Tiempo</th></tr></thead><tbody>
-    ${filas.map(f => `<tr><td>${esc(quien(f.c))}${ah.has(f.c.id) ? ' <span class="chipE e-capacitacion" title="Hoy tiene una alerta de acceso desde celular">📱 Alerta</span>' : ''}</td><td>${esc(NOM_AREA_C[f.c.area] || 'Sin área')}</td><td class="num">${aCargo(f.c)}</td>
+    ${filas.map(f => `<tr><td>${esc(quien(f.c))}${ah.has(f.c.id) ? ' <span class="chipE e-capacitacion" title="Tiene una alerta de acceso desde celular pendiente">📱 Alerta</span>' : ''}</td><td>${esc(NOM_AREA_C[f.c.area] || 'Sin área')}</td><td class="num">${aCargo(f.c)}</td>
       <td><span class="chipE e-${f.e}">${EST_NOM[f.e]}</span></td><td>${horaDesde(f.desde, f.e)}</td>${celdaTiempo(f.desde, f.e)}</tr>`).join('') || '<tr><td colspan="6">No hay coordinadores con estos filtros.</td></tr>'}
     </tbody></table></div>`;
 }
@@ -1717,7 +1741,7 @@ function vivoHTML(ms){
   const cuenta = {}; filas.forEach(f => { cuenta[f.e] = (cuenta[f.e] || 0) + 1; });
   return `<div class="vivo">${EST_VIVO.map(k => `<span class="chipE e-${k}">${EST_NOM[k]}: ${cuenta[k] || 0}</span>`).join('')}</div>
     <div class="scroll" style="max-height:340px"><table class="tb"><thead><tr><th>Asesor</th>${V ? '<th>Área</th><th>Coordinador</th>' : ''}<th>Estado ahora</th><th>Desde</th><th class="num">Tiempo</th></tr></thead><tbody>
-    ${filas.map(f => `<tr><td>${esc(quien(f.m))}${ah.has(f.m.id) ? ' <span class="chipE e-capacitacion" title="Hoy tiene una alerta de acceso desde celular">📱 Alerta</span>' : ''}</td>${V ? `<td>${esc(NOM_AREA_C[f.m.area] || 'Sin área')}</td><td>${esc(nomCoord(f.m))}</td>` : ''}
+    ${filas.map(f => `<tr><td>${esc(quien(f.m))}${ah.has(f.m.id) ? ' <span class="chipE e-capacitacion" title="Tiene una alerta de acceso desde celular pendiente">📱 Alerta</span>' : ''}</td>${V ? `<td>${esc(NOM_AREA_C[f.m.area] || 'Sin área')}</td><td>${esc(nomCoord(f.m))}</td>` : ''}
       <td><span class="chipE e-${f.e}">${EST_NOM[f.e]}</span></td>
       <td>${horaDesde(f.desde, f.e)}</td>${celdaTiempo(f.desde, f.e)}</tr>`).join('') || `<tr><td colspan="${V ? 6 : 4}">No hay asesores con estos filtros.</td></tr>`}
     </tbody></table></div>`;
@@ -1775,7 +1799,7 @@ function estadosHTML(){
     ${filtros}
     <section class="card" style="margin-bottom:18px"><h3>Estados en este momento</h3><div id="est-vivo">${vivoHTML(ms)}</div></section>
     ${V ? `<section class="card" style="margin-bottom:18px"><h3>Coordinadores en este momento</h3><div id="est-coord">${coordVivoHTML(cs)}</div></section>` : ''}
-    ${alertasHTML(V ? [...ms, ...cs] : ms)}
+    <div id="est-alertas">${alertasHTML(V ? [...ms, ...cs] : ms)}</div>
     <div id="est-res">${resumenesHTML(ms)}</div>
     <section class="card" style="margin-bottom:18px"><h3>Tiempo por estado en el periodo (por asesor)</h3>${ley}
       <div class="scroll"><table class="tb"><thead><tr><th>Asesor</th>${V ? '<th>Área</th><th>Coordinador</th>' : ''}${EST_ORD.map(k => `<th class="num">${EST_NOM[k]}</th>`).join('')}<th class="num">Total</th><th class="num">% Activo</th></tr></thead><tbody>${tabla || `<tr><td colspan="${cols}">No hay asesores con estos filtros.</td></tr>`}</tbody></table></div></section>
@@ -1794,6 +1818,7 @@ function pintarEstados(soloVivo){
     const ms = miembrosEst();
     const v = $('#est-vivo'); if(v){ const sc = v.querySelector('.scroll'), top = sc ? sc.scrollTop : 0; v.innerHTML = vivoHTML(ms); const sc2 = v.querySelector('.scroll'); if(sc2) sc2.scrollTop = top; }
     const r = $('#est-res'); if(r) r.innerHTML = resumenesHTML(ms);
+    const al = $('#est-alertas'); if(al){ const sc = al.querySelector('.scroll'), top = sc ? sc.scrollTop : 0; al.innerHTML = alertasHTML(veTodo() ? [...ms, ...coordsEst()] : ms); const sc2 = al.querySelector('.scroll'); if(sc2) sc2.scrollTop = top; }
     const co = $('#est-coord'); if(co){ const sc = co.querySelector('.scroll'), top = sc ? sc.scrollTop : 0; co.innerHTML = coordVivoHTML(coordsEst()); const sc2 = co.querySelector('.scroll'); if(sc2) sc2.scrollTop = top; }
     const h = $('#est-hora'); if(h && S.est.hora) h.textContent = 'En vivo · actualizado ' + S.est.hora.toLocaleTimeString('es-PE', {hour:'numeric', minute:'2-digit', second:'2-digit', hour12:true});
     return;
@@ -1819,7 +1844,7 @@ async function cargarEstadosPanel(){
   const [a, b, c] = await Promise.all([
     sb.from('estado_actual').select('*'),
     rpcTodo('estados_detalle', {p_desde:desde, p_hasta:hasta}),
-    sb.from('acceso_alertas').select('*').gte('creado', new Date(desde + 'T00:00:00-05:00').toISOString()).order('creado', {ascending:false}).limit(1000)
+    consultaAlertas(desde)
   ]);
   const cont2 = $('#pnl-estados'); if(!cont2) return;
   const err = a.error || b.error;
@@ -1830,12 +1855,27 @@ async function cargarEstadosPanel(){
   S.est = {vivo:a.data || [], det:b.data || [], alertas:c.error ? [] : (c.data || []), sinAlertas:!!c.error, ok:true, hora:new Date()};
   cont2.innerHTML = estadosHTML();
 }
+const consultaAlertas = desde => sb.from('acceso_alertas').select('*')
+  .or(`creado.gte.${new Date(desde + 'T00:00:00-05:00').toISOString()},resuelta_en.is.null`)
+  .order('creado', {ascending:false}).limit(1000);
+/* Solo las alertas: cuando llega una nueva, se cierra sola o alguien la valida */
+async function refrescarAlertas(){
+  if(!$('#pnl-estados') || !S.est.ok) return;
+  const {data, error} = await consultaAlertas(rangoEst().desde); if(error) return;
+  S.est.alertas = data || []; pintarEstados(true);
+}
+let alTimer = null;
+function alCambioAlerta(){
+  if(S.vista !== 'panel' || !esPanel() || alTimer) return;
+  alTimer = setTimeout(() => { alTimer = null; refrescarAlertas(); }, 600);
+}
 /* Solo la tabla en vivo: se usa cada 30 s y con el botón Actualizar */
 async function refrescarVivo(){
   if(!$('#pnl-estados') || !S.est.ok) return;
-  const {data, error} = await sb.from('estado_actual').select('*');
+  const [{data, error}, al] = await Promise.all([sb.from('estado_actual').select('*'), consultaAlertas(rangoEst().desde)]);
   if(error) return;
   S.est.vivo = data || []; S.est.hora = new Date();
+  if(!al.error) S.est.alertas = al.data || [];
   pintarEstados(true);
 }
 /* Llega un cambio de estado real por Realtime (tabla espejo estado_cambio): se refresca la tabla en vivo.
@@ -1920,9 +1960,9 @@ async function descargarExcelEst(){
       co.push([c.codigo, c.nombre || '', NOM_AREA_C[c.area] || '', aCargo(c), EST_NOM[x.e], x.desde ? fechaHora(x.desde) : '', x.desde && x.e !== 'desconectado' ? dia((ahora - new Date(x.desde).getTime()) / 1000) : '', ...fila(tm.get(c.id) || {})]); });
     XLSX.utils.book_append_sheet(wb, pctCol(hojaExcel(co, [12,30,16,12,16,22,16,12,12,12,14,12,12,10]), co), 'Coordinadores');
   }
-  const al = [['Fecha y hora','Código','Nombre','Rol','Área','Coordinador','Qué pasó','Equipo']];
-  alertasEst(V ? [...ms, ...cs] : ms).forEach(a => al.push([fechaHora(a.creado), a.m.codigo, a.m.nombre || '', a.m.rol === 'coordinador' ? 'Coordinador' : 'Asesor', NOM_AREA_C[a.m.area] || '', a.m.rol === 'coordinador' ? '' : nomCoord(a.m), TIPO_ALERTA[a.tipo] || a.tipo, a.detalle || '']));
-  XLSX.utils.book_append_sheet(wb, hojaExcel(al, [22,12,30,14,16,26,48,60]), 'Alertas de acceso');
+  const al = [['Fecha y hora','Código','Nombre','Rol','Área','Coordinador','Qué pasó','Veces','Último intento','Estado','Cerrada el','Cómo se cerró','Validada por','Equipo']];
+  alertasEst(V ? [...ms, ...cs] : ms).forEach(a => al.push([fechaHora(a.creado), a.m.codigo, a.m.nombre || '', a.m.rol === 'coordinador' ? 'Coordinador' : 'Asesor', NOM_AREA_C[a.m.area] || '', a.m.rol === 'coordinador' ? '' : nomCoord(a.m), TIPO_ALERTA[a.tipo] || a.tipo, a.veces || 1, a.ultima ? fechaHora(a.ultima) : '', pendiente(a) ? 'Pendiente' : 'Cerrada', a.resuelta_en ? fechaHora(a.resuelta_en) : '', pendiente(a) ? '' : a.resolucion === 'computadora' ? 'Volvió a entrar por computadora' : 'Validada', a.resuelta_por_nombre || '', a.detalle || '']));
+  XLSX.utils.book_append_sheet(wb, hojaExcel(al, [22,12,30,14,16,26,48,8,22,12,22,30,26,60]), 'Alertas de acceso');
   XLSX.writeFile(wb, nombre + '.xlsx');
 }
 
@@ -1991,6 +2031,12 @@ Object.assign(ACC, {
     renderEditor();
   },
   'est-act': async (id, el) => { el.disabled = true; el.textContent = 'Actualizando…'; await cargarEstadosPanel(); },
+  'al-validar': async (id, el) => {
+    el.disabled = true; el.textContent = 'Validando…';
+    const {error} = await sb.rpc('validar_alerta_acceso', {p_id:Number(id)});
+    if(error){ el.disabled = false; el.textContent = '✓ Validado'; alert(/validar_alerta_acceso/.test(error.message || '') ? 'Falta ejecutar el SQL de cambios 05 en Supabase.' : msg(error)); return; }
+    await refrescarAlertas();
+  },
   'xls-est': async (id, el) => { el.disabled = true; el.textContent = 'Preparando…'; try{ await descargarExcelEst(); } finally { el.disabled = false; el.textContent = 'Descargar Excel'; } },
   'ex-quitar-img': id => { const p = EXE && EXE.preguntas[Number(id)]; if(p){ p.imagen = ''; renderEditor(); } },
   'ex-guardar': () => guardarEditor()
@@ -2012,6 +2058,7 @@ function iniciarTiempoReal(){
   // Los estados de los asesores van aparte: solo refrescan la tabla de conectividad (los latidos no recargan nada).
   sb.channel('cambios').on('postgres_changes', {event:'*', schema:'public'}, p => {
     if(p.table === 'estado_cambio'){ alCambioEstado(); return; }
+    if(p.table === 'acceso_alertas'){ alCambioAlerta(); return; }
     if(p.table === 'estado_actual') return;
     programarRefresco();
   }).subscribe();
