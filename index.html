@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Centro de Formación | HITSS</title>
-<link rel="icon" type="image/svg+xml" href="marca.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&display=swap" rel="stylesheet">
@@ -347,6 +346,15 @@ dialog::backdrop{background:rgba(14,26,54,.7);backdrop-filter:blur(4px)}
 .chipE.e-desconectado{background:#fff;border:1px solid var(--line);color:var(--muted)}
 .vivo{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
 
+/* ---------- Cambios 04: bloqueo de celulares y alertas de acceso ---------- */
+.bloqueo{min-height:100vh;display:grid;align-content:center;justify-items:center;gap:18px;padding:24px;background:#5C0A12}
+.bcard{background:#fff;border-radius:20px;border-top:8px solid var(--teal);padding:34px 28px;width:min(440px,100%);text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+.bico{font-size:64px;line-height:1;margin-bottom:12px}
+.bcard h1{font-family:var(--head);font-size:34px;color:var(--teal);margin-bottom:12px}
+.bcard p{font-size:16px;color:var(--ink);margin-bottom:12px}
+.bcard .bnota{font-size:14px;color:var(--muted);background:var(--teal-soft);border-radius:12px;padding:12px 14px;margin:6px 0 0}
+.alerta-acc.hay{border-color:#F0B9C0;border-left:5px solid var(--teal)}
+
 /* ---------- Cambios 03: conectividad en vivo e imágenes en exámenes ---------- */
 .estbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
 .estbar select{font:600 14px var(--body);padding:9px 11px;border:1.5px solid var(--line);border-radius:10px;background:#fff}
@@ -392,6 +400,16 @@ dialog::backdrop{background:rgba(14,26,54,.7);backdrop-filter:blur(4px)}
       <button class="btn" type="submit">Ingresar</button>
       <p class="gfoot">¿No puedes entrar? Comunícate con tu formador.</p>
     </form>
+  </div>
+  <p class="gcopy">© 2026 Jhonatan Morzán · Todos los derechos reservados</p>
+</section>
+
+<section class="bloqueo" id="bloqueo" hidden>
+  <div class="bcard" role="alert">
+    <div class="bico" aria-hidden="true">⛔</div>
+    <h1>Acceso prohibido</h1>
+    <p>Este portal solo se puede usar desde una computadora de la empresa. El ingreso desde celulares y tablets está bloqueado.</p>
+    <p class="bnota">Los intentos de ingreso desde un celular quedan registrados y se informan a tu coordinador, supervisor, GTR y al área de formación.</p>
   </div>
   <p class="gcopy">© 2026 Jhonatan Morzán · Todos los derechos reservados</p>
 </section>
@@ -1209,6 +1227,41 @@ $('#burger').addEventListener('click', () => {
   } else $('#side').classList.toggle('open');
 });
 
+/* ===== Bloqueo de celulares =====
+   Celular o tablet: pantalla de "Acceso prohibido", no se puede entrar.
+   Si alguien usa el "modo escritorio" del celular para saltárselo, se detecta la pantalla táctil
+   y se registra una alerta que ven formador, supervisor, GTR y su coordinador. */
+const UA = navigator.userAgent || '';
+const esCelular = !!(navigator.userAgentData && navigator.userAgentData.mobile) ||
+  /Android|iPhone|iPad|iPod|Mobile|Opera Mini|IEMobile|BlackBerry|Silk|Kindle/i.test(UA);
+const esTactilSospechoso = () => {
+  try{
+    return matchMedia('(pointer: coarse)').matches ||
+      (navigator.maxTouchPoints > 0 && Math.min(screen.width, screen.height) < 700);
+  }catch(e){ return false; }
+};
+const detalleEquipo = () => {
+  const so = /Android/i.test(UA) ? 'Android' : /iPhone|iPad|iPod|Macintosh/i.test(UA) ? 'Apple' : /Windows/i.test(UA) ? 'Windows' : /Linux/i.test(UA) ? 'Linux' : 'Otro';
+  return `${so} · pantalla ${screen.width}×${screen.height} · ${navigator.maxTouchPoints || 0} puntos táctiles · ${UA.slice(0, 160)}`;
+};
+async function bloquearCelular(){
+  $('#gate').hidden = true; $('#bloqueo').hidden = false; document.body.classList.add('locked');
+  if(!sb) return;
+  // Si ya tenía la sesión guardada en el celular: se registra el intento y se cierra la sesión.
+  try{
+    const {data} = await sb.auth.getSession();
+    if(data && data.session){
+      try{ await sb.rpc('registrar_alerta_acceso', {p_tipo:'celular', p_detalle:detalleEquipo()}); }catch(e){}
+      try{ await sb.rpc('cambiar_estado', {p_estado:'desconectado'}); }catch(e){}
+      await sb.auth.signOut({scope:'local'});
+    }
+  }catch(e){}
+}
+function revisarTactil(){
+  if(!S.uid || esF() || !esTactilSospechoso()) return;
+  sb.rpc('registrar_alerta_acceso', {p_tipo:'tactil', p_detalle:detalleEquipo()}).then(() => {}, () => {});
+}
+
 /* ===== Pantalla de ingreso ===== */
 function mostrarGate(){ $('#gcargando').hidden = true; $('#gform').hidden = false; document.body.classList.add('locked'); }
 function gerr(t){ const p = $('#gerr'); p.textContent = t || ''; p.hidden = !t; }
@@ -1237,7 +1290,13 @@ const EST_NOM = {activo:'Activo', bano:'Baño', break:'Break', capacitacion:'Cap
 const EST_COL = {activo:'#111111', bano:'#8A8A90', break:'#E8707B', capacitacion:'#D7192D'};
 const EST_ORD = ['activo','bano','break','capacitacion'];
 const AREA_EX = {todos:'Todas las áreas', tecnico:'Back Office Técnico', administrativo:'Back Office Administrativo'};
-const fmtS = s => { const m = Math.round(Number(s || 0) / 60); return m < 60 ? m + ' min' : Math.floor(m / 60) + ' h ' + String(m % 60).padStart(2, '0') + ' min'; };
+/* Tiempo legible: "45 s", "12 min 05 s", "2 h 03 min 41 s" */
+const fmtS = s => {
+  const t = Math.max(0, Math.round(Number(s || 0))), h = Math.floor(t / 3600), m = Math.floor(t % 3600 / 60), x = t % 60, d2 = n => String(n).padStart(2, '0');
+  return h ? `${h} h ${d2(m)} min ${d2(x)} s` : m ? `${m} min ${d2(x)} s` : `${x} s`;
+};
+/* Para Excel y CSV: "h:mm:ss" */
+const hms = s => { const t = Math.max(0, Math.round(Number(s || 0))); return Math.floor(t / 3600) + ':' + String(Math.floor(t % 3600 / 60)).padStart(2, '0') + ':' + String(t % 60).padStart(2, '0'); };
 const porCodigo = (a, b) => (a.codigo || '').localeCompare(b.codigo || '');
 
 /* Asesores que se miden: formador, supervisor y GTR ven a todos; el coordinador solo a los que tiene asignados. */
@@ -1560,7 +1619,22 @@ function panelExamenesHTML(){
 /* ===== Conectividad (estados): en vivo, por área, por coordinador y descarga en Excel =====
    Formador, Supervisor y GTR ven a todos los asesores; el coordinador solo a los suyos.
    Descargan el Excel solo Formador y GTR. */
-S.est = {vivo:[], det:[], ok:false, hora:null};
+S.est = {vivo:[], det:[], alertas:[], ok:false, hora:null};
+const TIPO_ALERTA = {celular:'Intentó entrar desde un celular (bloqueado)', tactil:'Entró con pantalla táctil (posible celular en modo escritorio)'};
+/* Alertas del periodo de los asesores visibles (con filtros), de la más reciente a la más antigua */
+function alertasEst(ms){
+  const mm = new Map(ms.map(m => [m.id, m]));
+  return (S.est.alertas || []).filter(a => mm.has(a.user_id)).map(a => ({...a, m:mm.get(a.user_id)}));
+}
+function alertasHTML(ms){
+  if(S.est.sinAlertas) return '';
+  const l = alertasEst(ms);
+  return `<section class="card alerta-acc ${l.length ? 'hay' : ''}" style="margin-bottom:18px"><h3>📱 Alertas de acceso desde celular ${l.length ? `<span class="chipE e-capacitacion">${l.length}</span>` : ''}</h3>
+    ${l.length ? `<div class="scroll" style="max-height:280px"><table class="tb"><thead><tr><th>Fecha y hora</th><th>Asesor</th>${veTodo() ? '<th>Área</th><th>Coordinador</th>' : ''}<th>Qué pasó</th><th>Equipo</th></tr></thead><tbody>
+      ${l.map(a => `<tr><td>${esc(fechaHora(a.creado))}</td><td>${esc(quien(a.m))}</td>${veTodo() ? `<td>${esc(NOM_AREA_C[a.m.area] || 'Sin área')}</td><td>${esc(nomCoord(a.m))}</td>` : ''}<td><b>${esc(TIPO_ALERTA[a.tipo] || a.tipo)}</b></td><td><small class="meta">${esc(a.detalle || '')}</small></td></tr>`).join('')}
+      </tbody></table></div>` : '<p class="meta">Sin alertas en este periodo. Nadie intentó entrar desde un celular.</p>'}</section>`;
+}
+const alertaHoy = () => { const hoy = diaKey(new Date()); return new Set((S.est.alertas || []).filter(a => diaKey(a.creado) === hoy).map(a => a.user_id)); };
 Object.assign(S.p, {edias:'7', ea:'', ec:'', eu:''});
 const EST_VIVO = ['activo','capacitacion','break','bano','desconectado'];
 const NOM_AREA_C = {tecnico:'Técnico', administrativo:'Administrativo'};
@@ -1608,13 +1682,13 @@ function gruposCoord(ms){
 }
 
 function vivoHTML(ms){
-  const vm = mapaVivo(), V = veTodo(), ahora = Date.now();
+  const vm = mapaVivo(), V = veTodo(), ahora = Date.now(), ah = alertaHoy();
   const filas = ms.map(m => ({m, ...estadoAhora(vm.get(m.id))}))
     .sort((a, b) => EST_VIVO.indexOf(a.e) - EST_VIVO.indexOf(b.e) || porCodigo(a.m, b.m));
   const cuenta = {}; filas.forEach(f => { cuenta[f.e] = (cuenta[f.e] || 0) + 1; });
   return `<div class="vivo">${EST_VIVO.map(k => `<span class="chipE e-${k}">${EST_NOM[k]}: ${cuenta[k] || 0}</span>`).join('')}</div>
     <div class="scroll" style="max-height:340px"><table class="tb"><thead><tr><th>Asesor</th>${V ? '<th>Área</th><th>Coordinador</th>' : ''}<th>Estado ahora</th><th>Desde</th><th class="num">Tiempo</th></tr></thead><tbody>
-    ${filas.map(f => `<tr><td>${esc(quien(f.m))}</td>${V ? `<td>${esc(NOM_AREA_C[f.m.area] || 'Sin área')}</td><td>${esc(nomCoord(f.m))}</td>` : ''}
+    ${filas.map(f => `<tr><td>${esc(quien(f.m))}${ah.has(f.m.id) ? ' <span class="chipE e-capacitacion" title="Hoy tiene una alerta de acceso desde celular">📱 Alerta</span>' : ''}</td>${V ? `<td>${esc(NOM_AREA_C[f.m.area] || 'Sin área')}</td><td>${esc(nomCoord(f.m))}</td>` : ''}
       <td><span class="chipE e-${f.e}">${EST_NOM[f.e]}</span></td>
       <td>${f.desde && f.e !== 'desconectado' ? esc(new Date(f.desde).toLocaleTimeString('es-PE', {hour:'numeric', minute:'2-digit', hour12:true})) : f.desde ? 'Últ. vez ' + esc(fechaHora(f.desde)) : '—'}</td>
       <td class="num">${f.desde && f.e !== 'desconectado' ? fmtS((ahora - new Date(f.desde).getTime()) / 1000) : '—'}</td></tr>`).join('') || `<tr><td colspan="${V ? 6 : 4}">No hay asesores con estos filtros.</td></tr>`}
@@ -1672,6 +1746,7 @@ function estadosHTML(){
   return `${esGTR() ? `<p class="meta" style="margin:-14px 0 14px">${rango}</p>` : `<div class="head" style="margin:26px 0 12px"><div><h2 style="margin:0">Conectividad</h2><p class="meta">${rango}</p></div></div>`}
     ${filtros}
     <section class="card" style="margin-bottom:18px"><h3>Estados en este momento</h3><div id="est-vivo">${vivoHTML(ms)}</div></section>
+    ${alertasHTML(ms)}
     <div id="est-res">${resumenesHTML(ms)}</div>
     <section class="card" style="margin-bottom:18px"><h3>Tiempo por estado en el periodo (por asesor)</h3>${ley}
       <div class="scroll"><table class="tb"><thead><tr><th>Asesor</th>${V ? '<th>Área</th><th>Coordinador</th>' : ''}${EST_ORD.map(k => `<th class="num">${EST_NOM[k]}</th>`).join('')}<th class="num">Total</th><th class="num">% Activo</th></tr></thead><tbody>${tabla || `<tr><td colspan="${cols}">No hay asesores con estos filtros.</td></tr>`}</tbody></table></div></section>
@@ -1709,9 +1784,10 @@ async function cargarEstadosPanel(){
   if(S.est.ok) cont.innerHTML = estadosHTML();
   else cont.innerHTML = '<section class="card"><h3>Conectividad</h3><p class="meta">Cargando…</p></section>';
   const {desde, hasta} = rangoEst();
-  const [a, b] = await Promise.all([
+  const [a, b, c] = await Promise.all([
     sb.from('estado_actual').select('*'),
-    rpcTodo('estados_detalle', {p_desde:desde, p_hasta:hasta})
+    rpcTodo('estados_detalle', {p_desde:desde, p_hasta:hasta}),
+    sb.from('acceso_alertas').select('*').gte('creado', new Date(desde + 'T00:00:00-05:00').toISOString()).order('creado', {ascending:false}).limit(1000)
   ]);
   const cont2 = $('#pnl-estados'); if(!cont2) return;
   const err = a.error || b.error;
@@ -1719,7 +1795,7 @@ async function cargarEstadosPanel(){
     cont2.innerHTML = `<section class="card"><h3>Conectividad</h3><p class="meta">${/estados_detalle/.test(err.message || '') ? '⚠️ Falta ejecutar el SQL de cambios 03 en Supabase.' : esc(msg(err))}</p></section>`;
     return;
   }
-  S.est = {vivo:a.data || [], det:b.data || [], ok:true, hora:new Date()};
+  S.est = {vivo:a.data || [], det:b.data || [], alertas:c.error ? [] : (c.data || []), sinAlertas:!!c.error, ok:true, hora:new Date()};
   cont2.innerHTML = estadosHTML();
 }
 /* Solo la tabla en vivo: se usa cada 30 s y con el botón Actualizar */
@@ -1751,24 +1827,25 @@ async function descargarExcelEst(){
   await refrescarVivo();
   const ms = miembrosEst().slice().sort(porCodigo), vm = mapaVivo(), tm = totalesPorPersona(), V = veTodo();
   const {desde, hasta} = rangoEst(), ahora = Date.now();
-  const cabT = EST_ORD.map(k => EST_NOM[k] + ' (min)');
-  const fila = (t) => [...EST_ORD.map(k => minutos(t[k])), minutos(totalDe(t)), totalDe(t) ? pctAct(t) / 100 : 0];
+  const cabT = EST_ORD.map(k => EST_NOM[k] + ' (h:mm:ss)');
+  const dia = seg => Number(seg || 0) / 86400;   // Excel guarda el tiempo como fracción de día
+  const fila = (t) => [...EST_ORD.map(k => dia(t[k])), dia(totalDe(t)), totalDe(t) ? pctAct(t) / 100 : 0];
 
-  const vivo = [['Código','Nombre','Área','Coordinador','Estado ahora','Desde','Minutos en el estado']];
+  const vivo = [['Código','Nombre','Área','Coordinador','Estado ahora','Desde','Tiempo en el estado (h:mm:ss)']];
   ms.map(m => ({m, ...estadoAhora(vm.get(m.id))})).sort((a, b) => EST_VIVO.indexOf(a.e) - EST_VIVO.indexOf(b.e) || porCodigo(a.m, b.m)).forEach(f =>
-    vivo.push([f.m.codigo, f.m.nombre || '', NOM_AREA_C[f.m.area] || '', nomCoord(f.m), EST_NOM[f.e], f.desde ? fechaHora(f.desde) : '', f.desde && f.e !== 'desconectado' ? Math.round((ahora - new Date(f.desde).getTime()) / 60000) : '']));
+    vivo.push([f.m.codigo, f.m.nombre || '', NOM_AREA_C[f.m.area] || '', nomCoord(f.m), EST_NOM[f.e], f.desde ? fechaHora(f.desde) : '', f.desde && f.e !== 'desconectado' ? dia((ahora - new Date(f.desde).getTime()) / 1000) : '']));
 
-  const porAs = [['Código','Nombre','Área','Coordinador', ...cabT, 'Total (min)', '% Activo']];
+  const porAs = [['Código','Nombre','Área','Coordinador', ...cabT, 'Total (h:mm:ss)', '% Activo']];
   ms.forEach(m => porAs.push([m.codigo, m.nombre || '', NOM_AREA_C[m.area] || '', nomCoord(m), ...fila(tm.get(m.id) || {})]));
 
-  const cabR = ['Asesores','Activos ahora','En pausa ahora','Desconectados ahora', ...cabT, 'Total (min)', '% Activo'];
+  const cabR = ['Asesores','Activos ahora','En pausa ahora','Desconectados ahora', ...cabT, 'Total (h:mm:ss)', '% Activo'];
   const filaR = r => [r.n, r.ahora.activo, r.ahora.pausa, r.ahora.desconectado, ...fila(r.t)];
   const porCo = [['Coordinador','Área', ...cabR]];
   gruposCoord(ms).forEach(g => porCo.push([g.nombre, NOM_AREA_C[g.area] || '', ...filaR(resumenGrupo(g.ms, vm, tm))]));
   const porAr = [['Área', ...cabR]];
   Object.entries(AREAS_EQUIPO).forEach(([k, l]) => { const l2 = ms.filter(m => m.area === k); if(l2.length) porAr.push([l, ...filaR(resumenGrupo(l2, vm, tm))]); });
 
-  const det = [['Día','Código','Nombre','Área','Coordinador', ...cabT, 'Total (min)', '% Activo']];
+  const det = [['Día','Código','Nombre','Área','Coordinador', ...cabT, 'Total (h:mm:ss)', '% Activo']];
   const ids = new Map(ms.map(m => [m.id, m])), pd = new Map();
   S.est.det.filter(r => ids.has(r.user_id)).forEach(r => { const k = r.dia + '|' + r.user_id; if(!pd.has(k)) pd.set(k, {dia:r.dia, m:ids.get(r.user_id), t:{}}); const x = pd.get(k).t; x[r.estado] = (x[r.estado] || 0) + Number(r.segundos); });
   [...pd.values()].sort((a, b) => a.dia.localeCompare(b.dia) || porCodigo(a.m, b.m)).forEach(x =>
@@ -1776,19 +1853,29 @@ async function descargarExcelEst(){
 
   const nombre = `conectividad-${desde}${desde === hasta ? '' : '-a-' + hasta}`;
   if(!window.XLSX){
-    descargarCSV(nombre + '.csv', porAs.map((r, i) => i ? [...r.slice(0, -1), Math.round(r[r.length - 1] * 100) + '%'] : r));
+    descargarCSV(nombre + '.csv', porAs.map((r, i) => i ? [...r.slice(0, 4), ...r.slice(4, -1).map(v => hms(v * 86400)), Math.round(r[r.length - 1] * 100) + '%'] : r));
     alert('No se pudo cargar el generador de Excel; se descargó la hoja "Por asesor" en CSV (se abre igual en Excel).');
     return;
   }
-  const pctCol = (ws, filas) => { const c = filas[0].length - 1; for(let i = 1; i < filas.length; i++){ const ref = XLSX.utils.encode_cell({r:i, c}); if(ws[ref]) ws[ref].z = '0%'; } return ws; };
+  /* Da formato a cada columna según su título: tiempos [h]:mm:ss y porcentajes 0% */
+  const pctCol = (ws, filas) => {
+    filas[0].forEach((cab, c) => {
+      const z = /h:mm:ss/.test(cab) ? '[h]:mm:ss' : cab === '% Activo' ? '0%' : null; if(!z) return;
+      for(let i = 1; i < filas.length; i++){ const ref = XLSX.utils.encode_cell({r:i, c}); if(ws[ref] && typeof ws[ref].v === 'number') ws[ref].z = z; }
+    });
+    return ws;
+  };
   const wb = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, hojaExcel(vivo, [12,30,16,26,16,22,12]), 'En vivo');
+  XLSX.utils.book_append_sheet(wb, pctCol(hojaExcel(vivo, [12,30,16,26,16,22,16]), vivo), 'En vivo');
   XLSX.utils.book_append_sheet(wb, pctCol(hojaExcel(porAs, [12,30,16,26,12,12,12,14,12,10]), porAs), 'Por asesor');
   if(V){
     XLSX.utils.book_append_sheet(wb, pctCol(hojaExcel(porCo, [28,16,10,12,12,14,12,12,12,14,12,10]), porCo), 'Por coordinador');
     if(porAr.length > 1) XLSX.utils.book_append_sheet(wb, pctCol(hojaExcel(porAr, [28,10,12,12,14,12,12,12,14,12,10]), porAr), 'Por área');
   }
   XLSX.utils.book_append_sheet(wb, pctCol(hojaExcel(det, [12,12,30,16,26,12,12,12,14,12,10]), det), 'Detalle por día');
+  const al = [['Fecha y hora','Código','Nombre','Área','Coordinador','Qué pasó','Equipo']];
+  alertasEst(ms).forEach(a => al.push([fechaHora(a.creado), a.m.codigo, a.m.nombre || '', NOM_AREA_C[a.m.area] || '', nomCoord(a.m), TIPO_ALERTA[a.tipo] || a.tipo, a.detalle || '']));
+  XLSX.utils.book_append_sheet(wb, hojaExcel(al, [22,12,30,16,26,48,60]), 'Alertas de acceso');
   XLSX.writeFile(wb, nombre + '.xlsx');
 }
 
@@ -1887,7 +1974,7 @@ async function entrar(ses){
   hechasCargar();
   S.vista = location.hash.slice(1) || 'inicio';
   document.body.classList.remove('locked'); dibujar();
-  try{ await cargarPerfil(); await iniciarEstado(); await cargar(); }catch(e){ S.error = msg(e); }
+  try{ await cargarPerfil(); revisarTactil(); await iniciarEstado(); await cargar(); }catch(e){ S.error = msg(e); }
   S.cargando = false;
   if(!abrirDe(S.vista) && S.cats[0]) S.abiertos['cat:'+S.cats[0].id] = true;
   dibujar(); iniciarTiempoReal();
@@ -1898,7 +1985,7 @@ function salir(){
   S.vistos = []; S.preguntas = []; S.perfiles = []; S.estado = null; S.omisiones = []; S.hechas = new Set();
   S.examenes = []; S.intentos = []; S.estadoMio = null; S.area = null; S.enExamen = false; S.sinExamenes = false; RE = null; clearInterval(RE_T);
   if(alerta.open) alerta.close();
-  S.f = {q:'', cat:'', dia:''}; S.p = {dias:'30', cat:'', noticia:'', edias:'7', ea:'', ec:'', eu:''}; S.est = {vivo:[], det:[], ok:false, hora:null};
+  S.f = {q:'', cat:'', dia:''}; S.p = {dias:'30', cat:'', noticia:'', edias:'7', ea:'', ec:'', eu:''}; S.est = {vivo:[], det:[], alertas:[], ok:false, hora:null};
   try{ sb.removeAllChannels(); }catch(e){}
   tiempoReal = false; FIRMAS.clear();
   if(dlg.open) dlg.close();
@@ -1908,6 +1995,7 @@ function salir(){
   mostrarGate();
 }
 function iniciar(){
+  if(esCelular){ bloquearCelular(); return; }
   if(!configurado){
     mostrarGate(); $('#gform').querySelector('[type=submit]').disabled = true;
     gerr('Falta conectar la base de datos: abre index.html y pega tu Project URL y tu clave pública de Supabase en la parte de CONFIGURACIÓN (al inicio del script).');
