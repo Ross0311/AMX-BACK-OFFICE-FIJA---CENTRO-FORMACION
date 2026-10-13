@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Centro de Formación | HITSS</title>
-<link rel="icon" type="image/svg+xml" href="marca.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&display=swap" rel="stylesheet">
@@ -1306,8 +1305,8 @@ const miembros = () => S.perfiles.filter(p => p.rol === 'asesor' && (veTodo() ||
 /* ===== Mi estado (activo, baño, break, capacitación) ===== */
 function textoEstado(){
   const e = S.estadoMio; if(!e || !e.desde) return '';
-  const d = new Date(e.desde), min = Math.max(0, Math.round((Date.now() - d.getTime()) / 60000));
-  return 'Desde las ' + d.toLocaleTimeString('es-PE', {hour:'numeric', minute:'2-digit', hour12:true}) + ' · ' + (min < 60 ? min + ' min' : Math.floor(min / 60) + ' h ' + String(min % 60).padStart(2, '0') + ' min');
+  const d = new Date(e.desde);
+  return 'Desde las ' + d.toLocaleTimeString('es-PE', {hour:'numeric', minute:'2-digit', hour12:true}) + ' · ' + fmtS((Date.now() - d.getTime()) / 1000);
 }
 function estadoHTML(){
   if(esF() || !S.uid || !S.rol) return '';
@@ -1332,7 +1331,6 @@ async function marcarDesconectado(){
 // Latido cada 45 s: mantiene vivo el estado y sirve para no contar tiempo si cierran la pestaña.
 setInterval(() => { if(S.uid && S.rol && !esF()) sb.rpc('latido').then(() => {}, () => {}); }, 45000);
 document.addEventListener('visibilitychange', () => { if(!document.hidden && S.uid && S.rol && !esF()) sb.rpc('latido').then(() => {}, () => {}); });
-setInterval(() => { const t = $('#est-t'); if(t) t.textContent = textoEstado(); }, 30000);
 
 /* ===== Exámenes: lectura ===== */
 async function leerTodo(tabla, cols, orden){
@@ -1631,8 +1629,8 @@ function alertasHTML(ms){
   if(S.est.sinAlertas) return '';
   const l = alertasEst(ms);
   return `<section class="card alerta-acc ${l.length ? 'hay' : ''}" style="margin-bottom:18px"><h3>📱 Alertas de acceso desde celular ${l.length ? `<span class="chipE e-capacitacion">${l.length}</span>` : ''}</h3>
-    ${l.length ? `<div class="scroll" style="max-height:280px"><table class="tb"><thead><tr><th>Fecha y hora</th><th>Asesor</th>${veTodo() ? '<th>Área</th><th>Coordinador</th>' : ''}<th>Qué pasó</th><th>Equipo</th></tr></thead><tbody>
-      ${l.map(a => `<tr><td>${esc(fechaHora(a.creado))}</td><td>${esc(quien(a.m))}</td>${veTodo() ? `<td>${esc(NOM_AREA_C[a.m.area] || 'Sin área')}</td><td>${esc(nomCoord(a.m))}</td>` : ''}<td><b>${esc(TIPO_ALERTA[a.tipo] || a.tipo)}</b></td><td><small class="meta">${esc(a.detalle || '')}</small></td></tr>`).join('')}
+    ${l.length ? `<div class="scroll" style="max-height:280px"><table class="tb"><thead><tr><th>Fecha y hora</th><th>Persona</th>${veTodo() ? '<th>Área</th><th>Coordinador</th>' : ''}<th>Qué pasó</th><th>Equipo</th></tr></thead><tbody>
+      ${l.map(a => `<tr><td>${esc(fechaHora(a.creado))}</td><td>${esc(quien(a.m))}${a.m.rol === 'coordinador' ? ' <small class="meta">(coordinador)</small>' : ''}</td>${veTodo() ? `<td>${esc(NOM_AREA_C[a.m.area] || 'Sin área')}</td><td>${a.m.rol === 'coordinador' ? '—' : esc(nomCoord(a.m))}</td>` : ''}<td><b>${esc(TIPO_ALERTA[a.tipo] || a.tipo)}</b></td><td><small class="meta">${esc(a.detalle || '')}</small></td></tr>`).join('')}
       </tbody></table></div>` : '<p class="meta">Sin alertas en este periodo. Nadie intentó entrar desde un celular.</p>'}</section>`;
 }
 const alertaHoy = () => { const hoy = diaKey(new Date()); return new Set((S.est.alertas || []).filter(a => diaKey(a.creado) === hoy).map(a => a.user_id)); };
@@ -1650,6 +1648,35 @@ function miembrosEst(){
   return miembros().filter(m => (!S.p.ea || m.area === S.p.ea) &&
     (!S.p.ec || (S.p.ec === 'sin' ? !m.coordinador_id : m.coordinador_id === S.p.ec)));
 }
+/* Coordinadores visibles en conectividad: solo para quien ve a todos (formador, supervisor y GTR) */
+function coordsEst(){
+  if(!veTodo() || S.p.ec === 'sin') return [];
+  return S.perfiles.filter(p => p.rol === 'coordinador' && (!S.p.ea || p.area === S.p.ea) && (!S.p.ec || p.id === S.p.ec))
+    .sort((a, b) => (a.nombre || a.codigo || '').localeCompare(b.nombre || b.codigo || ''));
+}
+const aCargo = c => S.perfiles.filter(p => p.rol === 'asesor' && p.coordinador_id === c.id).length;
+/* Celda de tiempo que avanza sola cada segundo (ver relojVivo) */
+const celdaTiempo = (desde, e) => desde && e !== 'desconectado'
+  ? `<td class="num" data-desde="${esc(desde)}">${fmtS((Date.now() - new Date(desde).getTime()) / 1000)}</td>` : '<td class="num">—</td>';
+const horaDesde = (desde, e) => desde && e !== 'desconectado' ? esc(new Date(desde).toLocaleTimeString('es-PE', {hour:'numeric', minute:'2-digit', hour12:true})) : desde ? 'Últ. vez ' + esc(fechaHora(desde)) : '—';
+function coordVivoHTML(cs){
+  const vm = mapaVivo(), ah = alertaHoy();
+  const filas = cs.map(c => ({c, ...estadoAhora(vm.get(c.id))}))
+    .sort((a, b) => EST_VIVO.indexOf(a.e) - EST_VIVO.indexOf(b.e) || (a.c.nombre || '').localeCompare(b.c.nombre || ''));
+  const cuenta = {}; filas.forEach(f => { cuenta[f.e] = (cuenta[f.e] || 0) + 1; });
+  return `<div class="vivo">${EST_VIVO.map(k => `<span class="chipE e-${k}">${EST_NOM[k]}: ${cuenta[k] || 0}</span>`).join('')}</div>
+    <div class="scroll" style="max-height:300px"><table class="tb"><thead><tr><th>Coordinador</th><th>Área</th><th class="num">Asesores a cargo</th><th>Estado ahora</th><th>Desde</th><th class="num">Tiempo</th></tr></thead><tbody>
+    ${filas.map(f => `<tr><td>${esc(quien(f.c))}${ah.has(f.c.id) ? ' <span class="chipE e-capacitacion" title="Hoy tiene una alerta de acceso desde celular">📱 Alerta</span>' : ''}</td><td>${esc(NOM_AREA_C[f.c.area] || 'Sin área')}</td><td class="num">${aCargo(f.c)}</td>
+      <td><span class="chipE e-${f.e}">${EST_NOM[f.e]}</span></td><td>${horaDesde(f.desde, f.e)}</td>${celdaTiempo(f.desde, f.e)}</tr>`).join('') || '<tr><td colspan="6">No hay coordinadores con estos filtros.</td></tr>'}
+    </tbody></table></div>`;
+}
+function coordPeriodoHTML(cs){
+  const tm = totalesPorPersona();
+  return cs.map(c => { const t = tm.get(c.id) || {}, tot = totalDe(t);
+    return `<tr><td>${esc(quien(c))}</td><td>${esc(NOM_AREA_C[c.area] || 'Sin área')}</td>${EST_ORD.map(k => `<td class="num">${t[k] ? fmtS(t[k]) : '—'}</td>`).join('')}<td class="num"><b>${tot ? fmtS(tot) : '—'}</b></td><td class="num">${tot ? pctAct(t) + '%' : '—'}</td></tr>`; }).join('')
+    || `<tr><td colspan="${EST_ORD.length + 4}">No hay coordinadores con estos filtros.</td></tr>`;
+}
+
 function estadoAhora(r){
   if(!r || r.estado === 'desconectado' || Date.now() - new Date(r.ultimo_latido).getTime() > 180000)
     return {e:'desconectado', desde: r ? (r.estado === 'desconectado' ? r.desde : r.ultimo_latido) : null};
@@ -1691,8 +1718,7 @@ function vivoHTML(ms){
     <div class="scroll" style="max-height:340px"><table class="tb"><thead><tr><th>Asesor</th>${V ? '<th>Área</th><th>Coordinador</th>' : ''}<th>Estado ahora</th><th>Desde</th><th class="num">Tiempo</th></tr></thead><tbody>
     ${filas.map(f => `<tr><td>${esc(quien(f.m))}${ah.has(f.m.id) ? ' <span class="chipE e-capacitacion" title="Hoy tiene una alerta de acceso desde celular">📱 Alerta</span>' : ''}</td>${V ? `<td>${esc(NOM_AREA_C[f.m.area] || 'Sin área')}</td><td>${esc(nomCoord(f.m))}</td>` : ''}
       <td><span class="chipE e-${f.e}">${EST_NOM[f.e]}</span></td>
-      <td>${f.desde && f.e !== 'desconectado' ? esc(new Date(f.desde).toLocaleTimeString('es-PE', {hour:'numeric', minute:'2-digit', hour12:true})) : f.desde ? 'Últ. vez ' + esc(fechaHora(f.desde)) : '—'}</td>
-      <td class="num">${f.desde && f.e !== 'desconectado' ? fmtS((ahora - new Date(f.desde).getTime()) / 1000) : '—'}</td></tr>`).join('') || `<tr><td colspan="${V ? 6 : 4}">No hay asesores con estos filtros.</td></tr>`}
+      <td>${horaDesde(f.desde, f.e)}</td>${celdaTiempo(f.desde, f.e)}</tr>`).join('') || `<tr><td colspan="${V ? 6 : 4}">No hay asesores con estos filtros.</td></tr>`}
     </tbody></table></div>`;
 }
 function resumenHTML(titulo, filas){
@@ -1710,7 +1736,7 @@ function resumenesHTML(ms){
   return porArea + resumenHTML('Resumen por coordinador', gruposCoord(ms).map(g => ({nombre:g.nombre, sub: g.area ? AREAS_EQUIPO[g.area] : '', r:resumenGrupo(g.ms, vm, tm)})));
 }
 function estadosHTML(){
-  const V = veTodo(), ms = miembrosEst(), vm = mapaVivo(), tm = totalesPorPersona();
+  const V = veTodo(), ms = miembrosEst(), cs = coordsEst(), vm = mapaVivo(), tm = totalesPorPersona();
   const {desde, hasta} = rangoEst();
   const coords = S.perfiles.filter(p => p.rol === 'coordinador' && (!S.p.ea || p.area === S.p.ea)).sort((a, b) => (a.nombre || a.codigo || '').localeCompare(b.nombre || b.codigo || ''));
   const hora = S.est.hora ? S.est.hora.toLocaleTimeString('es-PE', {hour:'numeric', minute:'2-digit', second:'2-digit', hour12:true}) : '';
@@ -1743,15 +1769,18 @@ function estadosHTML(){
   const ley = `<div class="leyE">${EST_ORD.map(e => `<span style="--c:${EST_COL[e]}">${EST_NOM[e]}</span>`).join('')}</div>`;
   const cols = V ? 9 : 7;
 
-  const rango = `${V ? 'Todos los asesores' : 'Tus asesores asignados'} · del ${esc(diaLargo(desde))} al ${esc(diaLargo(hasta))}`;
+  const rango = `${V ? 'Todos los asesores y coordinadores' : 'Tus asesores asignados'} · del ${esc(diaLargo(desde))} al ${esc(diaLargo(hasta))}`;
   return `${esGTR() ? `<p class="meta" style="margin:-14px 0 14px">${rango}</p>` : `<div class="head" style="margin:26px 0 12px"><div><h2 style="margin:0">Conectividad</h2><p class="meta">${rango}</p></div></div>`}
     ${filtros}
     <section class="card" style="margin-bottom:18px"><h3>Estados en este momento</h3><div id="est-vivo">${vivoHTML(ms)}</div></section>
-    ${alertasHTML(ms)}
+    ${V ? `<section class="card" style="margin-bottom:18px"><h3>Coordinadores en este momento</h3><div id="est-coord">${coordVivoHTML(cs)}</div></section>` : ''}
+    ${alertasHTML(V ? [...ms, ...cs] : ms)}
     <div id="est-res">${resumenesHTML(ms)}</div>
     <section class="card" style="margin-bottom:18px"><h3>Tiempo por estado en el periodo (por asesor)</h3>${ley}
       <div class="scroll"><table class="tb"><thead><tr><th>Asesor</th>${V ? '<th>Área</th><th>Coordinador</th>' : ''}${EST_ORD.map(k => `<th class="num">${EST_NOM[k]}</th>`).join('')}<th class="num">Total</th><th class="num">% Activo</th></tr></thead><tbody>${tabla || `<tr><td colspan="${cols}">No hay asesores con estos filtros.</td></tr>`}</tbody></table></div></section>
-    <section class="card" style="margin-bottom:18px"><h3>Tiempo por día</h3>
+    ${V ? `<section class="card" style="margin-bottom:18px"><h3>Tiempo por estado en el periodo (coordinadores)</h3>${ley}
+      <div class="scroll"><table class="tb"><thead><tr><th>Coordinador</th><th>Área</th>${EST_ORD.map(k => `<th class="num">${EST_NOM[k]}</th>`).join('')}<th class="num">Total</th><th class="num">% Activo</th></tr></thead><tbody>${coordPeriodoHTML(cs)}</tbody></table></div></section>` : ''}
+    <section class="card" style="margin-bottom:18px"><h3>Tiempo por día (asesores)</h3>
       <div class="filtros"><select id="peu" aria-label="Asesor" style="flex:1;min-width:240px"><option value="">Todos (promedio por asesor)</option>${ms.slice().sort(porCodigo).map(m => `<option value="${m.id}" ${S.p.eu === m.id ? 'selected' : ''}>${esc(quien(m))}</option>`).join('')}</select></div>
       ${ley}<div class="scroll"><table class="tb"><thead><tr><th>Día</th>${EST_ORD.map(k => `<th class="num">${EST_NOM[k]}</th>`).join('')}<th class="num">Total</th><th></th></tr></thead><tbody>${filasD || '<tr><td colspan="7">Aún no hay tiempos registrados en este periodo.</td></tr>'}</tbody></table></div>
       <p class="meta" style="margin-top:8px">Se miden Activo, Baño, Break y Capacitación mientras el asesor tiene la página abierta. Los estados de arriba se actualizan solos, sin recargar.</p></section>`;
@@ -1764,6 +1793,7 @@ function pintarEstados(soloVivo){
     const ms = miembrosEst();
     const v = $('#est-vivo'); if(v){ const sc = v.querySelector('.scroll'), top = sc ? sc.scrollTop : 0; v.innerHTML = vivoHTML(ms); const sc2 = v.querySelector('.scroll'); if(sc2) sc2.scrollTop = top; }
     const r = $('#est-res'); if(r) r.innerHTML = resumenesHTML(ms);
+    const co = $('#est-coord'); if(co){ const sc = co.querySelector('.scroll'), top = sc ? sc.scrollTop : 0; co.innerHTML = coordVivoHTML(coordsEst()); const sc2 = co.querySelector('.scroll'); if(sc2) sc2.scrollTop = top; }
     const h = $('#est-hora'); if(h && S.est.hora) h.textContent = 'En vivo · actualizado ' + S.est.hora.toLocaleTimeString('es-PE', {hour:'numeric', minute:'2-digit', second:'2-digit', hour12:true});
     return;
   }
@@ -1815,6 +1845,14 @@ function alCambioEstado(){
   estTimer = setTimeout(() => { estTimer = null; refrescarVivo(); }, 800);
 }
 setInterval(() => { if(S.uid && S.vista === 'panel' && esPanel() && !document.hidden) refrescarVivo(); }, 30000);
+/* Cada segundo: avanza el "Tiempo" de las tablas en vivo y "Mi estado", sin consultar la base de datos */
+function relojVivo(){
+  if(document.hidden) return;
+  const ahora = Date.now();
+  document.querySelectorAll('td[data-desde]').forEach(td => { td.textContent = fmtS((ahora - new Date(td.dataset.desde).getTime()) / 1000); });
+  const t = $('#est-t'); if(t) t.textContent = textoEstado();
+}
+setInterval(relojVivo, 1000);
 document.addEventListener('visibilitychange', () => { if(!document.hidden && S.uid && S.vista === 'panel' && esPanel()) refrescarVivo(); });
 
 /* ===== Descarga en Excel (Formador y GTR) ===== */
@@ -1874,15 +1912,22 @@ async function descargarExcelEst(){
     if(porAr.length > 1) XLSX.utils.book_append_sheet(wb, pctCol(hojaExcel(porAr, [28,10,12,12,14,12,12,12,14,12,10]), porAr), 'Por área');
   }
   XLSX.utils.book_append_sheet(wb, pctCol(hojaExcel(det, [12,12,30,16,26,12,12,12,14,12,10]), det), 'Detalle por día');
-  const al = [['Fecha y hora','Código','Nombre','Área','Coordinador','Qué pasó','Equipo']];
-  alertasEst(ms).forEach(a => al.push([fechaHora(a.creado), a.m.codigo, a.m.nombre || '', NOM_AREA_C[a.m.area] || '', nomCoord(a.m), TIPO_ALERTA[a.tipo] || a.tipo, a.detalle || '']));
-  XLSX.utils.book_append_sheet(wb, hojaExcel(al, [22,12,30,16,26,48,60]), 'Alertas de acceso');
+  const cs = coordsEst();
+  if(V){
+    const co = [['Código','Nombre','Área','Asesores a cargo','Estado ahora','Desde','Tiempo en el estado (h:mm:ss)', ...cabT, 'Total (h:mm:ss)', '% Activo']];
+    cs.forEach(c => { const x = estadoAhora(vm.get(c.id));
+      co.push([c.codigo, c.nombre || '', NOM_AREA_C[c.area] || '', aCargo(c), EST_NOM[x.e], x.desde ? fechaHora(x.desde) : '', x.desde && x.e !== 'desconectado' ? dia((ahora - new Date(x.desde).getTime()) / 1000) : '', ...fila(tm.get(c.id) || {})]); });
+    XLSX.utils.book_append_sheet(wb, pctCol(hojaExcel(co, [12,30,16,12,16,22,16,12,12,12,14,12,12,10]), co), 'Coordinadores');
+  }
+  const al = [['Fecha y hora','Código','Nombre','Rol','Área','Coordinador','Qué pasó','Equipo']];
+  alertasEst(V ? [...ms, ...cs] : ms).forEach(a => al.push([fechaHora(a.creado), a.m.codigo, a.m.nombre || '', a.m.rol === 'coordinador' ? 'Coordinador' : 'Asesor', NOM_AREA_C[a.m.area] || '', a.m.rol === 'coordinador' ? '' : nomCoord(a.m), TIPO_ALERTA[a.tipo] || a.tipo, a.detalle || '']));
+  XLSX.utils.book_append_sheet(wb, hojaExcel(al, [22,12,30,14,16,26,48,60]), 'Alertas de acceso');
   XLSX.writeFile(wb, nombre + '.xlsx');
 }
 
 function dibujarPanel(){
   if(esGTR()){
-    $('#main').innerHTML = `<div class="head"><div><h1>Conectividad</h1><p class="sub">Estados de todos los asesores en tiempo real, por área y por coordinador.</p></div></div><div id="pnl-estados"></div>`;
+    $('#main').innerHTML = `<div class="head"><div><h1>Conectividad</h1><p class="sub">Estados de todos los asesores y coordinadores en tiempo real, por área y por coordinador.</p></div></div><div id="pnl-estados"></div>`;
   } else {
     dibujarPanelBase();
     const m = $('#main'); if(!m) return;
