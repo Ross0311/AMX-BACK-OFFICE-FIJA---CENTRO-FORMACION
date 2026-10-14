@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Centro de Formación | HITSS</title>
-<link rel="icon" type="image/svg+xml" href="marca.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&display=swap" rel="stylesheet">
@@ -372,6 +371,23 @@ dialog::backdrop{background:rgba(14,26,54,.7);backdrop-filter:blur(4px)}
 .mi-est b{font-size:15px}
 .top{padding:10px 16px}
 }
+.tipo-sw{display:inline-flex;border:1.5px solid var(--line);border-radius:12px;overflow:hidden;align-self:flex-start}
+.tipo-sw button{border:none;background:#fff;padding:9px 14px;font:600 14px var(--body);cursor:pointer;color:var(--muted)}
+.tipo-sw button.on{background:var(--ink);color:#fff}
+.rq-ab{width:100%;min-height:130px;font:500 15.5px var(--body);padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;background:#fff;resize:vertical}
+.rq-ab:focus{outline:none;border-color:var(--teal)}
+.btn.calif{background:#7C3AED;border-color:#7C3AED;color:#fff}
+.calif-aviso{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.coment-f{font-size:14px;background:var(--paper);border-left:4px solid #7C3AED;border-radius:8px;padding:8px 12px;margin:4px 0}
+.nota.pendn{font-size:54px}
+.cal-res{background:var(--paper);border-radius:10px;padding:10px 12px;font-size:14.5px}
+.cal-q{border:1.5px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.cal-qh{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.cal-en{font-weight:600}
+.cal-resp{white-space:pre-wrap;background:#FAF7FF;border:1px solid #E4D9FB;border-radius:10px;padding:12px;font-size:15px;max-height:260px;overflow:auto}
+.dlg label.cal-pts{flex-direction:row;align-items:center;gap:8px;flex-wrap:wrap}
+.cal-pts input{width:110px}
+.cal-prev{font-size:16px;padding:10px 12px;border-radius:10px;background:var(--amber-soft)}
 #aviso-cierre{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:60;background:#14213D;color:#fff;padding:12px 44px 12px 18px;border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,.3);font-size:15px;max-width:calc(100% - 32px)}
 #aviso-cierre button{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:0;color:#fff;font-size:20px;cursor:pointer}
 .bloqueo{min-height:100vh;display:grid;align-content:center;justify-items:center;gap:18px;padding:24px;background:#5C0A12}
@@ -509,11 +525,10 @@ setInterval(async()=>{if(!S.uid)return;await firmarArchivos();dibujar();},100*60
 'orden'),sb.from('noticia_vistos').select('*'),sb.from('noticia_preguntas').select('*').order('creado',{ascending:true}),sb.from('estado_sitio').select('*').eq('id',
 1).maybeSingle(),esPanel()?sb.from('perfiles').select('*'):Promise.resolve({data:[]}),sb.from('noticia_omisiones').select('*')]);const c=await ord('categorias',
 'orden');S.cats=c.error?[]:c.data;const exr=await sb.from('examenes').select('*').order('creado',{ascending:false});S.examenes=exr.error?[]:exr.data;S.sinExamenes=!!exr.error;
-const itr=exr.error?{data:[]}:await leerTodo('examen_intentos','id,examen_id,user_id,inicio,fin,estado,nota,correctas,total,aprobado','id');S.intentos=itr.error?[]:itr.data;
-const fallo=[a,g,t,n,m,b,vi,pr,es,pf,om].find(r=>r.error);if(fallo)throw fallo.error;S.accesos=a.data;S.noticias=n.data;S.materiales=m.data;S.bloques=b.data;
-S.vistos=vi.data;S.preguntas=pr.data;S.estado=es.data;S.perfiles=pf.data;S.omisiones=om.data;await firmarArchivos();S.menu=g.data.map(x=>({...x,subs:t.data.filter(y=>y.grupo_id===x.id).map(y=>({
-id:y.id,nombre:y.nombre,desc:y.descr||'',orden:y.orden}))}));if(!temaDe(S.vista)&&S.vista!=='examenes'&&!(S.vista==='panel'&&esPanel()))S.vista='inicio';
-}
+const itr=exr.error?{data:[]}:await leerIntentos();S.intentos=itr.error?[]:itr.data;const fallo=[a,g,t,n,m,b,vi,pr,es,pf,om].find(r=>r.error);if(fallo)throw fallo.error;
+S.accesos=a.data;S.noticias=n.data;S.materiales=m.data;S.bloques=b.data;S.vistos=vi.data;S.preguntas=pr.data;S.estado=es.data;S.perfiles=pf.data;S.omisiones=om.data;
+await firmarArchivos();S.menu=g.data.map(x=>({...x,subs:t.data.filter(y=>y.grupo_id===x.id).map(y=>({id:y.id,nombre:y.nombre,desc:y.descr||'',orden:y.orden}))}));
+if(!temaDe(S.vista)&&S.vista!=='examenes'&&!(S.vista==='panel'&&esPanel()))S.vista='inicio';}
 async function cargarPerfil(){const{data}=await sb.from('perfiles').select('*').eq('id',S.uid).maybeSingle();S.rol=data?.rol||'asesor';S.codigo=data?.codigo||'';
 S.nombre=data?.nombre||'';S.area=data?.area||null;}
 async function refrescar(){await cargar();dibujar();}
@@ -528,7 +543,7 @@ $('#nav').innerHTML=`<button class="item ${S.vista==='inicio'?'on':''}" data-go=
 const gs=S.menu.filter(g=>g.categoria_id===c.id),k='cat:'+c.id;return`<button class="cat" data-cat="${esc(c.id)}" aria-expanded="${!!S.abiertos[k]}">${esc(c.nombre)} <span class="n">(${gs.length})</span>${chev}</button>
       <div class="catbody ${S.abiertos[k]?'open':''}">${gs.map(grpHtml).join('')}
       ${esF()?`<div class="mini cm"><button data-act="add-grp" data-id="${esc(c.id)}">+ Grupo</button></div>`:''}</div>`;}).join('')+(esF()&&!S.cats.length?'<button class="item addg" data-act="add-grp">+ Agregar grupo al menú</button>':'');
-$('#foot').innerHTML=(S.estado?`<div class="estado-act"><b>Última actualización</b>${esc(fechaHora(S.estado.actualizado))}${S.estado.detalle?'<br>'+esc(S.estado.detalle):''}</div>`:'')+`<div class="role ${esF()?'edit':''}"><i></i>${esTodo()?'Modo todopoderoso':esF()?'Modo formador':'Rol: '+esc(ROLES[S.rol]||'Asesor')}</div>`+(S.area?`<div class="meta2">${esc(AREAS[S.area]||'')}</div>`:'')+(S.codigo?`<div class="meta2">${S.nombre?esc(S.nombre)+' · ':''}Usuario ${esc(S.codigo)}</div>`:'')+(esTodo()?'<button class="lnk" data-act="usuarios">Gestionar usuarios</button>':'')+'<div style="margin-top:8px">By Jhonatan Morzán</div>';
+$('#foot').innerHTML=(S.estado?`<div class="estado-act"><b>Última actualización</b>${esc(fechaHora(S.estado.actualizado))}${S.estado.detalle?'<br>'+esc(S.estado.detalle):''}</div>`:'')+`<div class="role ${esF()?'edit':''}"><i></i>${esTodo()?'Modo todopoderoso':esF()?'Modo formador':'Rol: '+esc(ROLES[S.rol]||'Asesor')}</div>`+(S.area?`<div class="meta2">${esc(AREAS[S.area]||'')}</div>`:'')+(S.codigo?`<div class="meta2">${S.nombre?esc(S.nombre)+' · ':''}Usuario ${esc(S.codigo)}</div>`:'')+(esTodo()?'<button class="lnk" data-act="usuarios">Gestionar usuarios</button><button class="lnk" data-act="horario">Horario de atención</button>':'')+'<div style="margin-top:8px">By Jhonatan Morzán</div>';
 }
 function dibujarTop(){$('#quick').innerHTML='<span class="lab">Accesos directos</span>'+S.accesos.map(a=>`<a class="qa" href="${esc(a.url)}" target="_blank" rel="noopener">${esc(a.nombre)}${esF()?`<button data-act="del-acc" data-id="${a.id}" title="Quitar acceso" aria-label="Quitar ${esc(a.nombre)}">×</button>`:''}</a>`).join('')+(esF()?'<button class="btn add sm" data-act="add-acc">+ Agregar acceso</button>':'');
 $('#auth').innerHTML=estadoTopHTML()+'<button class="btn ghost" data-act="logout">Cerrar sesión</button>';}
@@ -881,7 +896,7 @@ try{await sb.rpc('cambiar_estado',{p_estado:'desconectado'});}catch(e){}
 await sb.auth.signOut({scope:'local'});}}catch(e){}}
 function revisarTactil(){if(!S.uid||esF())return;if(esTactilSospechoso())sb.rpc('registrar_alerta_acceso',{p_tipo:'tactil',p_detalle:detalleEquipo()}).then(()=>{
 },()=>{});else sb.rpc('registrar_ingreso_pc').then(()=>{},()=>{});}
-function mostrarGate(){$('#gcargando').hidden=true;$('#gform').hidden=false;document.body.classList.add('locked');$('#ghorario').textContent=TEXTO_HORARIO;
+function mostrarGate(){$('#gcargando').hidden=true;$('#gform').hidden=false;document.body.classList.add('locked');$('#ghorario').textContent=textoHorario();
 if(motivoSalida){gerr(motivoSalida);motivoSalida='';}}
 function gerr(t){const p=$('#gerr');p.textContent=t||'';p.hidden=!t;}
 $('#gform').addEventListener('submit',async e=>{e.preventDefault();const f=e.target,cod=f.codigo.value.trim(),btn=f.querySelector('[type=submit]');if(! /^[0-9]{4,10}$/ .test(cod))return gerr('El usuario es tu código de la empresa: solo números.');
@@ -941,14 +956,17 @@ a.id='aviso-pausa';a.setAttribute('role','alertdialog');a.innerHTML=`<div class=
       <li><b>Windows:</b> que la computadora no entre en suspensión mientras trabajas (Configuración → Sistema → Energía). Si no tienes permiso, pídelo a soporte.</li>
       <li>No minimices el navegador; deja el portal abierto en una pestaña.</li></ul></details>
     <button class="btn" type="button">Entendido</button></div>`;a.querySelector('button').onclick=()=>a.remove();document.body.appendChild(a);}
+const COLS_INT_BASE='id,examen_id,user_id,inicio,fin,estado,nota,correctas,total,aprobado';const COLS_INT=COLS_INT_BASE+',abiertas,pts_opcion,pts_total,comentario,calificado_por_nombre,calificado_en';
+async function leerIntentos(){const r=await leerTodo('examen_intentos',COLS_INT,'id');return r.error?leerTodo('examen_intentos',COLS_INT_BASE,'id'):r;
+}
 async function leerTodo(tabla,cols,orden){let todo=[],desde=0;while(true){const{data,error}=await sb.from(tabla).select(cols).order(orden,{ascending:true}).range(desde,
 desde+999);if(error)return{error};todo=todo.concat(data);if(data.length<1000)break;desde+=1000;}
 return{data:todo};}
 const puedeRendir=e=>['asesor','coordinador'].includes(S.rol)&&e.publicado&&(e.area==='todos'||e.area===S.area);const misIntentos=eid=>S.intentos.filter(i=>i.examen_id===eid&&i.user_id===S.uid);
 const cerradosDe=arr=>arr.filter(i=>i.estado!=='en_curso');function mejorDe(eid,uid){const l=S.intentos.filter(i=>i.examen_id===eid&&i.user_id===uid&&i.estado!=='en_curso'&&i.nota!=null);
 return l.length?l.reduce((m,x)=>Number(x.nota)>Number(m.nota)?x:m):null;}
-const pendientesEx=()=>esF()?0:S.examenes.filter(e=>puedeRendir(e)&&!cerradosDe(misIntentos(e.id)).length).length;const resTxt=m=>!m?'Sin rendir':(m.aprobado?'Aprobado':'Desaprobado');
-function tarjetaExamen(e){const tags=`<span class="tag cat">${esc(AREA_EX[e.area]||e.area)}</span><span class="tag">${e.n_preguntas} pregunta${e.n_preguntas===1?'':'s'}</span>`
+const porCalificar=eid=>S.intentos.filter(i=>i.estado==='por_calificar'&&(!eid||i.examen_id===eid));const pendientesEx=()=>esF()?porCalificar().length:S.examenes.filter(e=>puedeRendir(e)&&!cerradosDe(misIntentos(e.id)).length).length;
+const resTxt=m=>!m?'Sin rendir':(m.aprobado?'Aprobado':'Desaprobado');function tarjetaExamen(e){const tags=`<span class="tag cat">${esc(AREA_EX[e.area]||e.area)}</span><span class="tag">${e.n_preguntas} pregunta${e.n_preguntas===1?'':'s'}</span>`
 +(e.duracion_min?`<span class="tag">⏱ ${e.duracion_min} min</span>`:'<span class="tag plano">Sin límite de tiempo</span>')
 +`<span class="tag">Aprueba con ${e.aprobatorio}%</span><span class="tag">${e.intentos} intento${e.intentos===1?'':'s'}</span>`;const desc=e.descripcion?`<p>${esc(e.descripcion)}</p>`:'';
 if(esF()){const cer=S.intentos.filter(i=>i.examen_id===e.id&&i.estado!=='en_curso');const quienesN=new Set(cer.map(i=>i.user_id)).size;return`<article class="exc ${e.publicado?'':'borrador'}"><div class="tags">${e.publicado?'<span class="tag">Publicado</span>':'<span class="tag plano">Borrador</span>'}</div>
@@ -957,20 +975,24 @@ if(esF()){const cer=S.intentos.filter(i=>i.examen_id===e.id&&i.estado!=='en_curs
       <div class="acts"><button class="btn sm" data-act="edit-exam" data-id="${e.id}">Editar</button>
         <button class="btn ghost sm" data-act="pub-exam" data-id="${e.id}">${e.publicado?'Ocultar':'Publicar'}</button>
         <button class="btn add sm" data-act="res-exam" data-id="${e.id}">Resultados</button>
+        ${porCalificar(e.id).length?`<button class="btn sm calif" data-act="calif-lista" data-id="${e.id}">✍ Calificar (${porCalificar(e.id).length})</button>`:''}
         <button class="btn danger sm" data-act="del-exam" data-id="${e.id}">Quitar</button></div></article>`;}
 const mis=misIntentos(e.id),cer=cerradosDe(mis),curso=mis.find(i=>i.estado==='en_curso');const mej=mejorDe(e.id,S.uid),quedan=e.intentos-mis.length;let estado='<span class="est pend">Sin rendir</span>';
-if(mej)estado=`<span class="est ${mej.aprobado?'ok':'duda'}">${mej.aprobado?'Aprobado':'Desaprobado'} · mejor nota ${Number(mej.nota).toFixed(0)}%</span>`;
-else if(cer.length)estado='<span class="est duda">Sin nota</span>';let boton;if(curso)boton=`<button class="btn sm" data-act="rendir" data-id="${e.id}">Continuar examen</button>`;
-else if(quedan>0)boton=`<button class="btn sm" data-act="rendir" data-id="${e.id}">${cer.length?'Intentar de nuevo':'Rendir examen'}</button>`;else boton='<button class="btn ghost sm" disabled>Sin intentos disponibles</button>';
-return`<article class="exc"><h3>${esc(e.titulo)}</h3>${desc}<div class="tags">${tags}</div>
+const pc=mis.filter(i=>i.estado==='por_calificar');if(mej)estado=`<span class="est ${mej.aprobado?'ok':'duda'}">${mej.aprobado?'Aprobado':'Desaprobado'} · mejor nota ${Number(mej.nota).toFixed(0)}%</span>`
++(pc.length?' <span class="est pend">⏳ 1 intento pendiente de evaluación</span>':'');else if(pc.length)estado='<span class="est pend">⏳ Pendiente de evaluación</span>';
+else if(cer.length)estado='<span class="est duda">Sin nota</span>';const ultCal=cer.filter(i=>i.comentario).sort((a,b)=>new Date(b.calificado_en||0)-new Date(a.calificado_en||0))[0];
+let boton;if(curso)boton=`<button class="btn sm" data-act="rendir" data-id="${e.id}">Continuar examen</button>`;else if(quedan>0)boton=`<button class="btn sm" data-act="rendir" data-id="${e.id}">${cer.length?'Intentar de nuevo':'Rendir examen'}</button>`;
+else boton='<button class="btn ghost sm" disabled>Sin intentos disponibles</button>';return`<article class="exc"><h3>${esc(e.titulo)}</h3>${desc}<div class="tags">${tags}</div>
     <div class="vb" style="border-top:none;padding-top:0">${estado}<span class="meta">${curso?'Tienes un intento en curso':'Te quedan '+Math.max(0,quedan)+' intento'+(quedan===1?'':'s')}</span></div>
+    ${ultCal?`<p class="coment-f"><b>💬 Comentario del formador:</b> ${esc(ultCal.comentario)}</p>`:''}
     <div class="acts">${boton}</div></article>`;}
 function dibujarExamenes(){const F=esF();const lista=F?S.examenes:S.examenes.filter(puedeRendir);$('#main').innerHTML=`<div class="head"><div><h1>Exámenes</h1><p class="sub">${F?'Crea, publica y revisa los exámenes. Cada examen puede ser para un área o para todas.':'Exámenes disponibles para tu área. Cada intento cuenta, responde con calma.'}</p></div>
     ${F?'<button class="btn" data-act="add-exam">+ Crear examen</button>':''}</div>
     ${S.sinExamenes?'<div class="aviso"><span>⚠️ Falta ejecutar el SQL de cambios (exámenes) en Supabase.</span></div>':''}
+    ${F&&porCalificar().length?`<div class="aviso calif-aviso"><span>✍ Tienes <b>${porCalificar().length}</b> examen${porCalificar().length===1?'':'es'} con respuestas abiertas por calificar.</span><button class="btn sm" data-act="calif-lista">Calificar ahora</button></div>`:''}
     <div class="exgrid">${lista.map(tarjetaExamen).join('')||`<div class="empty"><b>${F?'Aún no hay exámenes':'No tienes exámenes disponibles'}</b>${F?'Usa “Crear examen” para armar el primero.':'Cuando un formador publique uno para tu área, aparecerá aquí.'}</div>`}</div>`;
 }
-let EXE=null;const nuevaPreg=()=>({enunciado:'',opciones:['',''],correcta:0,puntaje:1,imagen:''});async function firmarLista(urls){const l=[...new Set((urls||[]).filter(u=>u&&rutaDe(u)&&!FIRMAS.has(u)))];
+let EXE=null;const nuevaPreg=()=>({tipo:'opcion',enunciado:'',opciones:['',''],correcta:0,puntaje:1,imagen:''});async function firmarLista(urls){const l=[...new Set((urls||[]).filter(u=>u&&rutaDe(u)&&!FIRMAS.has(u)))];
 if(!l.length)return;try{const{data}=await sb.storage.from(BUCKET).createSignedUrls(l.map(rutaDe),7200);(data||[]).forEach((d,i)=>{if(d&&d.signedUrl)FIRMAS.set(l[i],
 d.signedUrl);});}catch(e){}}
 async function subirImagenPreg(i,file){const p=EXE&&EXE.preguntas[i];if(!p||!file)return;if(! /^image\/(png|jpe?g|gif|webp)$/i .test(file.type))return alert('Elige una imagen JPG, PNG, GIF o WEBP.');
@@ -997,51 +1019,93 @@ function renderEditor(){const e=EXE,sc=exd.scrollTop;const conIntentos=e.id&&S.i
       <div class="pimg">${p.imagen?`<a href="${esc(uf(p.imagen))}" target="_blank" rel="noopener" title="Ver en tamaño completo"><img src="${esc(uf(p.imagen))}" alt="Imagen de la pregunta ${i+1}"></a>`:''}
         <label class="btn ghost sm subeimg">${p.subiendo?'Subiendo imagen…':p.imagen?'Cambiar imagen':'🖼 Adjuntar imagen (opcional)'}<input type="file" accept="image/png,image/jpeg,image/gif,image/webp" data-img="${i}" hidden ${p.subiendo?'disabled':''}></label>
         ${p.imagen&&!p.subiendo?`<button class="btn danger sm" type="button" data-act="ex-quitar-img" data-id="${i}">Quitar imagen</button>`:''}</div>
-      <div class="ops">${p.opciones.map((o,j)=>`<div class="op"><label class="chk"><input type="radio" name="c${i}" data-pq="${i}" data-cor="${j}" ${p.correcta===j?'checked':''}> Correcta</label>
+      <div class="tipo-sw" role="group" aria-label="Tipo de pregunta">
+        <button type="button" class="${p.tipo!=='abierta'?'on':''}" data-act="ex-tipo" data-id="${i}" data-t="opcion">◉ Opción múltiple</button>
+        <button type="button" class="${p.tipo==='abierta'?'on':''}" data-act="ex-tipo" data-id="${i}" data-t="abierta">✍ Respuesta abierta</button></div>
+      ${p.tipo==='abierta'?`<p class="note">El asesor escribirá su respuesta con sus propias palabras. Tú le pondrás de 0 hasta el puntaje de esta pregunta desde “Calificar”. Mientras tanto, su examen figurará como <b>Pendiente de evaluación</b>.</p>`:`<div class="ops">${p.opciones.map((o,
+j)=>`<div class="op"><label class="chk"><input type="radio" name="c${i}" data-pq="${i}" data-cor="${j}" ${p.correcta===j?'checked':''}> Correcta</label>
           <input data-pq="${i}" data-op="${j}" value="${esc(o)}" placeholder="Opción ${String.fromCharCode(65+j)}">
           <button class="btn ghost sm" type="button" data-act="ex-del-op" data-id="${i}" data-j="${j}" ${p.opciones.length<=2?'disabled':''} aria-label="Quitar opción">×</button></div>`).join('')}
-        <div><button class="btn ghost sm" type="button" data-act="ex-ag-op" data-id="${i}" ${p.opciones.length>=6?'hidden':''}>+ Opción</button></div></div></div>`).join('')}
+        <div><button class="btn ghost sm" type="button" data-act="ex-ag-op" data-id="${i}" ${p.opciones.length>=6?'hidden':''}>+ Opción</button></div></div>`}</div>`).join('')}
     <div><button class="btn add sm" type="button" data-act="ex-ag-preg">+ Agregar pregunta</button></div>
     <p class="err" id="exerr" hidden></p>
     <div class="row"><button class="btn ghost" type="button" data-close>Cancelar</button><button class="btn" type="button" data-act="ex-guardar">Guardar examen</button></div></div>`;
 exd.scrollTop=sc;}
 async function abrirEditor(e,pregs){await firmarLista((pregs||[]).map(p=>p.imagen));EXE=e?{id:e.id,titulo:e.titulo,descripcion:e.descripcion||'',area:e.area,
-duracion:e.duracion_min||'',aprobatorio:e.aprobatorio,intentos:e.intentos,publicado:e.publicado,preguntas:(pregs||[]).map(p=>({enunciado:p.enunciado,opciones:[...p.opciones],
-correcta:p.correcta,puntaje:p.puntaje,imagen:p.imagen||''}))}:{id:null,titulo:'',descripcion:'',area:'todos',duracion:'',aprobatorio:70,intentos:1,publicado:false,
-preguntas:[nuevaPreg()]};if(!EXE.preguntas.length)EXE.preguntas.push(nuevaPreg());S.enExamen=false;renderEditor();if(!exd.open)exd.showModal();}
+duracion:e.duracion_min||'',aprobatorio:e.aprobatorio,intentos:e.intentos,publicado:e.publicado,preguntas:(pregs||[]).map(p=>({tipo:p.tipo||'opcion',enunciado:p.enunciado,
+opciones:(p.opciones||[]).length?[...p.opciones]:['',''],correcta:p.correcta??0,puntaje:p.puntaje,imagen:p.imagen||''}))}:{id:null,titulo:'',descripcion:'',
+area:'todos',duracion:'',aprobatorio:70,intentos:1,publicado:false,preguntas:[nuevaPreg()]};if(!EXE.preguntas.length)EXE.preguntas.push(nuevaPreg());S.enExamen=false;
+renderEditor();if(!exd.open)exd.showModal();}
 function sincEditor(e){const t=e.target;if(!EXE)return;if(t.dataset.ex){EXE[t.dataset.ex]=t.type==='checkbox'?t.checked:t.value;}
 else if(t.dataset.pq!==undefined){const p=EXE.preguntas[Number(t.dataset.pq)];if(!p)return;if(t.dataset.f)p[t.dataset.f]=t.value;else if(t.dataset.op!==undefined)p.opciones[Number(t.dataset.op)]=t.value;
 else if(t.dataset.cor!==undefined)p.correcta=Number(t.dataset.cor);}}
 async function guardarEditor(){const E=EXE,er=$('#exerr'),btn=exd.querySelector('[data-act="ex-guardar"]');const fallo=t=>{er.textContent=t;er.hidden=false;
 };er.hidden=true;if(!E.titulo.trim())return fallo('Escribe el título del examen.');if(E.preguntas.some(p=>p.subiendo))return fallo('Espera a que terminen de subir las imágenes.');
 if(E.publicado&&!E.preguntas.length)return fallo('Para publicar agrega al menos una pregunta.');for(let i=0;i<E.preguntas.length;i++){const p=E.preguntas[i];
-if(!p.enunciado.trim())return fallo(`La pregunta ${i+1} está vacía.`);if(p.opciones.some(o=>!o.trim()))return fallo(`La pregunta ${i+1} tiene opciones vacías: complétalas o quítalas.`);
+if(!p.enunciado.trim())return fallo(`La pregunta ${i+1} está vacía.`);if(p.tipo==='abierta')continue;if(p.opciones.some(o=>!o.trim()))return fallo(`La pregunta ${i+1} tiene opciones vacías: complétalas o quítalas.`);
 if(p.correcta==null||p.correcta>=p.opciones.length)return fallo(`Marca la respuesta correcta de la pregunta ${i+1}.`);}
 const apr=Number(E.aprobatorio),intn=Number(E.intentos),dur=E.duracion===''?null:Number(E.duracion);if(!(apr>=0&&apr<=100))return fallo('La nota para aprobar debe estar entre 0 y 100.');
 if(!(intn>=1&&intn<=20))return fallo('Los intentos permitidos deben ser de 1 a 20.');if(dur!==null&&!(dur>=1&&dur<=480))return fallo('El tiempo debe ser de 1 a 480 minutos, o vacío.');
 btn.disabled=true;btn.textContent='Guardando…';try{const{error}=await sb.rpc('guardar_examen',{p_examen:{id:E.id,titulo:E.titulo.trim(),descripcion:E.descripcion.trim(),
-area:E.area,duracion_min:dur,aprobatorio:apr,intentos:intn,publicado:!!E.publicado},p_preguntas:E.preguntas.map(p=>({enunciado:p.enunciado.trim(),opciones:p.opciones.map(o=>o.trim()),
-correcta:p.correcta,puntaje:Math.max(1,Number(p.puntaje)||1),imagen:p.imagen||null}))});if(error)throw error;await refrescar();EXE=null;exd.close();}catch(x){
-fallo(msg(x));btn.disabled=false;btn.textContent='Guardar examen';}}
-function filasExamen(e){const aplic=miembros().filter(m=>e.area==='todos'||m.area===e.area);return aplic.map(m=>{const its=S.intentos.filter(i=>i.examen_id===e.id&&i.user_id===m.id),
+area:E.area,duracion_min:dur,aprobatorio:apr,intentos:intn,publicado:!!E.publicado},p_preguntas:E.preguntas.map(p=>({tipo:p.tipo==='abierta'?'abierta':'opcion',
+enunciado:p.enunciado.trim(),opciones:p.tipo==='abierta'?[]:p.opciones.map(o=>o.trim()),correcta:p.tipo==='abierta'?null:p.correcta,puntaje:Math.max(1,
+Number(p.puntaje)||1),imagen:p.imagen||null}))});if(error)throw error;await refrescar();EXE=null;exd.close();}catch(x){fallo(msg(x));btn.disabled=false;
+btn.textContent='Guardar examen';}}
+function filasExamen(e){const aplic=miembrosEx().filter(m=>e.area==='todos'||m.area===e.area);return aplic.map(m=>{const its=S.intentos.filter(i=>i.examen_id===e.id&&i.user_id===m.id),
 cer=cerradosDe(its);const ult=cer.length?cer.reduce((a,b)=>new Date(b.fin||b.inicio)>new Date(a.fin||a.inicio)?b:a):null;return{m,its,cer,mej:mejorDe(e.id,
-m.id),ult};}).sort((a,b)=>(b.mej?Number(b.mej.nota):-1)-(a.mej?Number(a.mej.nota):-1)||porCodigo(a.m,b.m));}
+m.id),ult,pc:its.filter(i=>i.estado==='por_calificar')};}).sort((a,b)=>(b.mej?Number(b.mej.nota):-1)-(a.mej?Number(a.mej.nota):-1)||porCodigo(a.m,b.m));
+}
 function resultadosExamenDlg(id){const e=S.examenes.find(x=>x.id==id);if(!e)return;const filas=filasExamen(e);const rind=filas.filter(f=>f.mej),apr=rind.filter(f=>f.mej.aprobado).length;
 const prom=rind.length?rind.reduce((s,f)=>s+Number(f.mej.nota),0)/rind.length:null;exd.innerHTML=`<div class="dlg"><h3>${esc(e.titulo)}</h3>
     <p class="meta">${esc(AREA_EX[e.area])} · aprueba con ${e.aprobatorio}% · ${e.intentos} intento${e.intentos===1?'':'s'} · se toma la mejor nota de cada persona</p>
     <div class="resumen"><span class="est pend">${filas.length} asesores</span><span class="est ok">✔ ${apr} aprobados</span><span class="est duda">✖ ${rind.length-apr} desaprobados</span><span class="est pend">⏳ ${filas.length-rind.length} sin rendir</span>${prom==null?'':`<span class="est pend">Promedio ${prom.toFixed(1)}%</span>`}</div>
     <div class="scroll"><table class="tb"><thead><tr><th>Asesor</th><th>Intentos</th><th>Mejor nota</th><th>Resultado</th><th>Último intento</th>${esF()?'<th></th>':''}</tr></thead><tbody>
-    ${filas.map(f=>`<tr><td>${esc(quien(f.m))}</td><td>${f.its.length}/${e.intentos}</td><td>${f.mej?Number(f.mej.nota).toFixed(1)+'%':'—'}</td><td><span class="est ${f.mej?(f.mej.aprobado?'ok':'duda'):'pend'}">${resTxt(f.mej)}</span></td><td>${f.ult?esc(fechaHora(f.ult.fin||f.ult.inicio)):'—'}</td>${esF()?`<td>${f.its.length?`<button class="btn ghost sm" data-act="reset-int" data-id="${e.id}" data-uid="${f.m.id}">Reiniciar intentos</button>`:''}</td>`:''}</tr>`).join('')||'<tr><td colspan="6">No hay asesores para este examen.</td></tr>'}
+    ${filas.map(f=>`<tr><td>${esc(quien(f.m))}</td><td>${f.its.length}/${e.intentos}</td><td>${f.mej?Number(f.mej.nota).toFixed(1)+'%':'—'}</td><td><span class="est ${f.mej?(f.mej.aprobado?'ok':'duda'):'pend'}">${f.mej||!f.pc.length?resTxt(f.mej):'⏳ Por calificar'}</span>${f.mej&&f.pc.length?' <span class="est pend">⏳ 1 por calificar</span>':''}</td><td>${f.ult?esc(fechaHora(f.ult.fin||f.ult.inicio)):'—'}</td>${esF()?`<td>${f.pc.length?`<button class="btn sm calif" data-act="calif" data-id="${f.pc[0].id}">✍ Calificar</button> `:''}${f.its.length?`<button class="btn ghost sm" data-act="reset-int" data-id="${e.id}" data-uid="${f.m.id}">Reiniciar intentos</button>`:''}</td>`:''}</tr>`).join('')||'<tr><td colspan="6">No hay asesores para este examen.</td></tr>'}
     </tbody></table></div>
     <div class="row"><button class="btn ghost" data-act="csv-examen" data-id="${e.id}">Descargar CSV</button><button class="btn" data-close>Cerrar</button></div></div>`;
 if(!exd.open)exd.showModal();}
 const filaCSVExamen=(e,f)=>[e.titulo,AREA_EX[e.area],f.m.codigo,f.m.nombre||'',AREA_EX[f.m.area]||'Sin área',f.its.length,f.mej?Number(f.mej.nota).toFixed(1):'',
-resTxt(f.mej),f.ult?fechaHora(f.ult.fin||f.ult.inicio):''];const CAB_CSV_EX=['Examen','Área del examen','Código','Nombre','Área del asesor','Intentos',
-'Mejor nota (%)','Resultado','Último intento'];let RE=null,RE_T=null;function renderExamen(){const r=RE,n=r.preguntas.length;exd.innerHTML=`<div class="dlg"><div class="rend-top"><div><h3>${esc(r.titulo)}</h3><p class="meta">${n} pregunta${n===1?'':'s'} · aprueba con ${r.aprobatorio}%</p></div>${r.fin?'<div class="timer" id="ex-t">--:--</div>':''}</div>
+f.mej||!(f.pc||[]).length?resTxt(f.mej):'Por calificar',f.ult?fechaHora(f.ult.fin||f.ult.inicio):''];const CAB_CSV_EX=['Examen','Área del examen','Código',
+'Nombre','Área del asesor','Intentos','Mejor nota (%)','Resultado','Último intento'];function calificarListaDlg(eid){const l=porCalificar(eid?Number(eid):null).slice().sort((a,
+b)=>new Date(a.fin||a.inicio)-new Date(b.fin||b.inicio));const ex=id=>S.examenes.find(x=>x.id===id);exd.innerHTML=`<div class="dlg"><h3>✍ Por calificar</h3>
+    <p class="meta">${eid&&ex(Number(eid))?esc(ex(Number(eid)).titulo)+' · ':''}Exámenes con preguntas de respuesta abierta que esperan tu nota. Los más antiguos van primero.</p>
+    ${l.length?`<div class="scroll"><table class="tb"><thead><tr><th>Persona</th><th>Examen</th><th>Enviado</th><th>Abiertas</th><th></th></tr></thead><tbody>
+      ${l.map(i=>{const u=per(i.user_id),e=ex(i.examen_id);return`<tr><td>${esc(u?quien(u):'Usuario')}</td><td>${esc(e?e.titulo:'Examen')}</td><td>${esc(fechaHora(i.fin||i.inicio))}</td><td>${(i.abiertas||[]).length}</td>
+          <td><button class="btn sm" data-act="calif" data-id="${i.id}">Calificar</button></td></tr>`;}).join('')}
+      </tbody></table></div>`:'<p class="meta">🎉 No hay exámenes pendientes de calificar.</p>'}
+    <div class="row"><button class="btn" data-close>Cerrar</button></div></div>`;exd.dataset.califEx=eid||'';if(!exd.open)exd.showModal();}
+let CAL=null;function calificarDlg(id){const it=S.intentos.find(i=>i.id==id);if(!it)return;if(!it.abiertas)throw new Error('Para calificar falta ejecutar el SQL de cambios 09 en Supabase.');
+const u=per(it.user_id),e=S.examenes.find(x=>x.id===it.examen_id);CAL=it;exd.innerHTML=`<div class="dlg"><h3>Calificar examen</h3>
+    <p class="meta"><b>${esc(u?quien(u):'Usuario')}</b> · ${esc(e?e.titulo:'Examen')} · enviado ${esc(fechaHora(it.fin||it.inicio))}</p>
+    <div class="cal-res">Opción múltiple: <b>${it.correctas??0}</b> correcta${it.correctas===1?'':'s'} · ${Number(it.pts_opcion||0)} punto${Number(it.pts_opcion)===1?'':'s'} ya ganados (corrección automática)</div>
+    ${it.abiertas.map((q,k)=>`<section class="cal-q"><div class="cal-qh"><b>Pregunta abierta ${k+1}</b><span class="meta">vale ${q.puntaje} punto${q.puntaje===1?'':'s'}</span></div>
+      <p class="cal-en">${esc(q.enunciado)}</p>
+      <div class="cal-resp">${q.respuesta&&q.respuesta.trim()?esc(q.respuesta):'<i class="meta">(No escribió respuesta)</i>'}</div>
+      <label class="cal-pts">Puntos <input type="number" min="0" max="${q.puntaje}" step="0.5" data-cal="${q.id}" value="${q.puntos??''}" placeholder="0 a ${q.puntaje}"> <span class="meta">de ${q.puntaje}</span>
+        <button type="button" class="btn ghost sm" data-act="cal-max" data-id="${q.id}">Todo</button><button type="button" class="btn ghost sm" data-act="cal-cero" data-id="${q.id}">0</button></label></section>`).join('')}
+    <label>Comentario para la persona (opcional)<textarea id="cal-com" style="min-height:70px" placeholder="Ej.: Buena respuesta, faltó mencionar el número de SOT.">${esc(it.comentario||'')}</textarea></label>
+    <div class="cal-prev" id="cal-prev"></div>
+    <p class="err" id="exerr" hidden></p>
+    <div class="row"><button class="btn ghost" type="button" data-act="calif-lista" data-id="${exd.dataset.califEx||''}">← Volver</button><button class="btn" type="button" data-act="calif-guardar">Guardar calificación</button></div></div>`;
+previaCalificacion();if(!exd.open)exd.showModal();}
+function previaCalificacion(){const el=$('#cal-prev');if(!el||!CAL)return;const e=S.examenes.find(x=>x.id===CAL.examen_id);let suma=0,faltan=0;exd.querySelectorAll('[data-cal]').forEach(i=>{
+if(i.value==='')faltan++;else suma+=Number(i.value)||0;});const tot=Number(CAL.pts_total||0),nota=tot?(Number(CAL.pts_opcion||0)+suma)*100/tot:0,apr=e?nota>=e.aprobatorio:false;
+el.innerHTML=faltan?`Faltan los puntos de ${faltan} pregunta${faltan===1?'':'s'}.`:`Nota final: <b>${nota.toFixed(nota%1?1:0)}%</b> · <span class="est ${apr?'ok':'duda'}">${apr?'✔ Aprobado':'✖ Desaprobado'}</span>${e?` <span class="meta">(aprueba con ${e.aprobatorio}%)</span>`:''}`;
+}
+async function guardarCalificacion(btn){const er=$('#exerr'),puntos={};er.hidden=true;for(const i of exd.querySelectorAll('[data-cal]')){const q=CAL.abiertas.find(x=>String(x.id)===i.dataset.cal),
+v=i.value.trim();if(v===''){er.textContent='Pon los puntos de todas las preguntas abiertas (puede ser 0).';er.hidden=false;i.focus();return;}
+const n=Number(v);if(!(n>=0&&n<=q.puntaje)){er.textContent=`Los puntos de cada pregunta van de 0 a ${q.puntaje}.`;er.hidden=false;i.focus();return;}
+puntos[i.dataset.cal]=n;}
+btn.disabled=true;btn.textContent='Guardando…';try{const{error}=await sb.rpc('calificar_intento',{p_intento:CAL.id,p_puntos:puntos,p_comentario:$('#cal-com').value});
+if(error)throw error;CAL=null;await refrescar();const quedan=porCalificar(exd.dataset.califEx?Number(exd.dataset.califEx):null).length;if(quedan)calificarListaDlg(exd.dataset.califEx||null);
+else{exd.close();alert('Calificación guardada. No quedan exámenes por calificar.');}}catch(x){er.textContent=msg(x);er.hidden=false;btn.disabled=false;
+btn.textContent='Guardar calificación';}}
+let RE=null,RE_T=null;function renderExamen(){const r=RE,n=r.preguntas.length;exd.innerHTML=`<div class="dlg"><div class="rend-top"><div><h3>${esc(r.titulo)}</h3><p class="meta">${n} pregunta${n===1?'':'s'} · aprueba con ${r.aprobatorio}%</p></div>${r.fin?'<div class="timer" id="ex-t">--:--</div>':''}</div>
     ${r.descripcion?`<p class="note">${esc(r.descripcion)}</p>`:''}
     ${r.preguntas.map((p,i)=>`<fieldset class="rq"><legend>Pregunta ${i+1} de ${n}</legend><p class="rq-t">${esc(p.enunciado)}</p>
       ${p.imagen?`<a class="rq-img" href="${esc(uf(p.imagen))}" target="_blank" rel="noopener" title="Ver en tamaño completo"><img src="${esc(uf(p.imagen))}" alt="Imagen de apoyo de la pregunta ${i+1}"></a>`:''}
-      ${p.opciones.map((o,j)=>`<label class="ro ${r.resp[p.id]===j?'sel':''}"><input type="radio" name="q${p.id}" data-rp="${p.id}" data-opc="${j}" ${r.resp[p.id]===j?'checked':''}><span><b>${String.fromCharCode(65+j)}.</b> ${esc(o)}</span></label>`).join('')}</fieldset>`).join('')}
+      ${p.tipo==='abierta'?`<textarea class="rq-ab" data-ra="${p.id}" maxlength="5000" placeholder="Escribe tu respuesta aquí…">${esc(r.resp[p.id]||'')}</textarea><small class="meta">✍ Respuesta abierta: la calificará un formador.</small>`:(p.opciones||[]).map((o,
+j)=>`<label class="ro ${r.resp[p.id]===j?'sel':''}"><input type="radio" name="q${p.id}" data-rp="${p.id}" data-opc="${j}" ${r.resp[p.id]===j?'checked':''}><span><b>${String.fromCharCode(65+j)}.</b> ${esc(o)}</span></label>`).join('')}</fieldset>`).join('')}
     <p class="err" id="exerr" hidden></p>
     <div class="row"><button class="btn ghost" type="button" data-act="ex-salir">Salir y continuar después</button><button class="btn" type="button" data-act="ex-enviar">Enviar examen</button></div></div>`;
 }
@@ -1054,18 +1118,27 @@ const ids=new Set(data.preguntas.map(p=>String(p.id)));Object.keys(resp).forEach
 RE={intento:data.intento_id,titulo:data.titulo,descripcion:data.descripcion,aprobatorio:data.aprobatorio,preguntas:data.preguntas,resp,fin:rest==null?null:Date.now()+Math.max(0,
 rest)*1000,enviando:false};S.enExamen=true;renderExamen();if(!exd.open)exd.showModal();clearInterval(RE_T);if(RE.fin){tickExamen();RE_T=setInterval(tickExamen,
 1000);}}
-async function enviarExamen(auto){if(!RE||RE.enviando)return;const faltan=RE.preguntas.length-Object.keys(RE.resp).length;if(!auto&&faltan>0&&!confirm(`Te faltan ${faltan} pregunta${faltan>1?'s':''} por responder. ¿Enviar el examen de todos modos?`))return;
-RE.enviando=true;try{const{data,error}=await sb.rpc('enviar_examen',{p_intento:RE.intento,p_respuestas:RE.resp});if(error)throw error;clearInterval(RE_T);
-S.enExamen=false;try{sessionStorage.removeItem('exr_'+RE.intento);}catch(e){}
+async function enviarExamen(auto){if(!RE||RE.enviando)return;const faltan=RE.preguntas.filter(p=>{const v=RE.resp[p.id];return v===undefined||v===null||String(v).trim()==='';
+}).length;if(!auto&&faltan>0&&!confirm(`Te faltan ${faltan} pregunta${faltan>1?'s':''} por responder. ¿Enviar el examen de todos modos?`))return;RE.enviando=true;
+try{const{data,error}=await sb.rpc('enviar_examen',{p_intento:RE.intento,p_respuestas:RE.resp});if(error)throw error;clearInterval(RE_T);S.enExamen=false;
+try{sessionStorage.removeItem('exr_'+RE.intento);}catch(e){}
 const titulo=RE.titulo;RE=null;resultadoExamenHTML(data,titulo);await refrescar();}catch(x){RE.enviando=false;const er=$('#exerr');if(er){er.textContent=msg(x);
 er.hidden=false;}}}
-function resultadoExamenHTML(d,titulo){const nota=Number(d.nota);exd.innerHTML=`<div class="dlg"><h3>${esc(titulo)}</h3><div class="resu">
+function resultadoExamenHTML(d,titulo){if(d.por_calificar){exd.innerHTML=`<div class="dlg"><h3>${esc(titulo)}</h3><div class="resu">
+      <div class="nota pendn">⏳</div>
+      <span class="est pend">Pendiente de evaluación</span>
+      <p>Tu examen tiene <b>${d.abiertas}</b> pregunta${d.abiertas===1?'':'s'} de respuesta abierta. Un formador ${d.abiertas===1?'la':'las'} revisará y tu <b>nota final</b> aparecerá en Exámenes.</p>
+      <p class="meta">En las preguntas de opción múltiple tuviste ${d.correctas} correcta${d.correctas===1?'':'s'}.</p></div>
+      <div class="row"><button class="btn" data-close>Cerrar</button></div></div>`;return;}
+const nota=Number(d.nota);exd.innerHTML=`<div class="dlg"><h3>${esc(titulo)}</h3><div class="resu">
     ${d.fuera_de_tiempo?'<p class="note">El tiempo del examen terminó antes de que se enviara. Este intento se registró con nota 0.</p>':''}
     <div class="nota ${d.aprobado?'ok':'no'}">${nota.toFixed(nota%1?1:0)}%</div>
     <span class="est ${d.aprobado?'ok':'duda'}">${d.aprobado?'✔ Aprobado':'✖ Desaprobado'}</span>
     <p class="meta">${d.correctas} de ${d.total} preguntas correctas · se aprueba con ${d.aprobatorio}%</p></div>
     <div class="row"><button class="btn" data-close>Cerrar</button></div></div>`;}
-exd.addEventListener('input',sincEditor);exd.addEventListener('change',e=>{sincEditor(e);const t=e.target;if(t.dataset.img!==undefined&&t.files&&t.files[0]){
+exd.addEventListener('input',sincEditor);exd.addEventListener('input',e=>{const t=e.target;if(t.dataset.ra&&RE){RE.resp[t.dataset.ra]=t.value;try{sessionStorage.setItem('exr_'+RE.intento,
+JSON.stringify(RE.resp));}catch(x){}}
+if(t.dataset.cal!==undefined)previaCalificacion();});exd.addEventListener('change',e=>{sincEditor(e);const t=e.target;if(t.dataset.img!==undefined&&t.files&&t.files[0]){
 subirImagenPreg(Number(t.dataset.img),t.files[0]);t.value='';return;}
 if(t.dataset.rp&&RE){RE.resp[t.dataset.rp]=Number(t.dataset.opc);try{sessionStorage.setItem('exr_'+RE.intento,JSON.stringify(RE.resp));}catch(x){}
 const fs=t.closest('fieldset');if(fs)fs.querySelectorAll('.ro').forEach(l=>l.classList.toggle('sel',l.contains(t)));}});exd.addEventListener('cancel',
@@ -1074,7 +1147,7 @@ const ms=miembrosEx(),exs=S.examenes.filter(e=>e.publicado);const filasE=exs.map
 m.id)).filter(Boolean);const apr=mejs.filter(x=>x.aprobado).length;const prom=mejs.length?mejs.reduce((s,x)=>s+Number(x.nota),0)/mejs.length:null;return`<tr><td>${esc(e.titulo)}<br><small class="meta">${esc(AREA_EX[e.area])}</small></td><td>${ap.length}</td><td>${mejs.length}</td><td>${prom==null?'—':prom.toFixed(1)+'%'}</td><td>${mejs.length?Math.round(apr*100/mejs.length)+'%':'—'}</td><td>${esF()?`<button class="btn ghost sm" data-act="res-exam" data-id="${e.id}">Detalle</button>`:''}</td></tr>`;
 }).join('');const filasA=ms.slice().sort(porCodigo).map(m=>{const ap=exs.filter(e=>e.area==='todos'||m.area===e.area);const mejs=ap.map(e=>mejorDe(e.id,
 m.id)).filter(Boolean);const apr=mejs.filter(x=>x.aprobado).length;const prom=mejs.length?mejs.reduce((s,x)=>s+Number(x.nota),0)/mejs.length:null;return`<tr><td>${esc(quien(m))}</td><td>${mejs.length}/${ap.length}</td><td>${prom==null?'—':prom.toFixed(1)+'%'}</td><td>${apr}</td></tr>`;
-}).join('');return`${esF()?'<div class="tools" style="margin-bottom:12px"><button class="btn add sm" data-act="csv-examenes">Descargar CSV de exámenes</button></div>':''}
+}).join('');return`${esF()?`<div class="tools" style="margin-bottom:12px"><button class="btn add sm" data-act="csv-examenes">Descargar CSV de exámenes</button>${porCalificar().length?`<button class="btn sm calif" data-act="calif-lista">✍ Por calificar (${porCalificar().length})</button>`:''}</div>`:''}
     <div class="two">
       <section class="card"><h3>Por examen (mejor nota de cada persona)</h3>
         <div class="scroll"><table class="tb"><thead><tr><th>Examen</th><th>Personas</th><th>Rindieron</th><th>Promedio</th><th>Aprobados</th><th></th></tr></thead><tbody>${filasE||'<tr><td colspan="6">Aún no hay exámenes publicados.</td></tr>'}</tbody></table></div></section>
@@ -1262,10 +1335,17 @@ return`<div class="scroll" style="max-height:300px"><table class="tb"><thead><tr
     ${filas.map(f=>`<tr><td>${esc(quien(f.p))}${f.p.id===S.uid?' <small class="meta">(tú)</small>':''}</td><td>${esc(ROLES[f.p.rol])}</td><td><span class="chipE e-${f.e}">${EST_NOM[f.e]}</span></td><td>${horaDesde(f.desde,
 f.e)}</td>${celdaTiempo(f.desde,f.e)}</tr>`).join('')||'<tr><td colspan="5">No hay formadores ni GTR.</td></tr>'}
     </tbody></table></div>`;}
-Object.assign(ACC,{estado:id=>cambiarEstado(id),'est-menu':()=>{estMenuAbierto=!estMenuAbierto;dibujarTop();},'ir-sec':id=>{const el=$('#sec-'+id);if(el)el.scrollIntoView({
-behavior:'smooth',block:'start'});},'add-exam':()=>abrirEditor(null,[]),'edit-exam':async id=>{const e=S.examenes.find(x=>x.id==id);if(!e)return;const{
-data,error}=await sb.from('examen_preguntas').select('*').eq('examen_id',e.id).order('orden');if(error)throw error;await abrirEditor(e,data);},'pub-exam':async id=>{
-const e=S.examenes.find(x=>x.id==id);if(!e)return;if(!e.publicado&&!e.n_preguntas)throw new Error('Agrega al menos una pregunta antes de publicar el examen.');
+Object.assign(ACC,{estado:id=>cambiarEstado(id),'est-menu':()=>{estMenuAbierto=!estMenuAbierto;dibujarTop();},'ex-tipo':(id,el)=>{const p=EXE&&EXE.preguntas[Number(id)];
+if(!p)return;p.tipo=el.dataset.t;if(p.tipo==='opcion'&&p.opciones.length<2)p.opciones=['',''];renderEditor();},'calif-lista':id=>calificarListaDlg(id||null),
+calif:id=>calificarDlg(id),'cal-max':(id,el)=>{const i=exd.querySelector(`[data-cal="${id}"]`);if(i){i.value=i.max;previaCalificacion();}},'cal-cero':(id,
+el)=>{const i=exd.querySelector(`[data-cal="${id}"]`);if(i){i.value=0;previaCalificacion();}},'calif-guardar':(id,el)=>guardarCalificacion(el),horario:()=>{
+if(!esTodo())return;const inf=S.horarioInfo;form('Horario de atención',[{k:'_n',t:'nota',l:'Fuera de este horario nadie puede ingresar, excepto Formadores y Todopoderoso. Cinco minutos antes del cierre aparece un aviso y a la hora de cierre se cierran las sesiones. El cambio les llega a todos al instante.'+(inf&&inf.actualizado_por?` Último cambio: ${inf.actualizado_por}, ${fechaHora(inf.actualizado)}.`:'')},
+{k:'ini',l:'Abre a las (hora de Perú)',t:'time',req:1},{k:'fin',l:'Cierra a las (hora de Perú)',t:'time',req:1}],async o=>{if(!o.ini||!o.fin)throw new Error('Completa las dos horas.');
+if(o.ini>=o.fin)throw new Error('La hora de apertura debe ser anterior a la de cierre.');const{error}=await sb.rpc('guardar_horario',{p_inicio:o.ini,p_fin:o.fin});
+if(error)throw /guardar_horario/ .test(error.message||'')?new Error('Falta ejecutar el SQL de cambios 09 en Supabase.'):error;await cargarHorario();return()=>alert('Horario actualizado: '+textoHorario().replace('Horario de atención: ',
+'')+'.');},{ini:HORA_INICIO,fin:HORA_FIN});},'ir-sec':id=>{const el=$('#sec-'+id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},'add-exam':()=>abrirEditor(null,
+[]),'edit-exam':async id=>{const e=S.examenes.find(x=>x.id==id);if(!e)return;const{data,error}=await sb.from('examen_preguntas').select('*').eq('examen_id',
+e.id).order('orden');if(error)throw error;await abrirEditor(e,data);},'pub-exam':async id=>{const e=S.examenes.find(x=>x.id==id);if(!e)return;if(!e.publicado&&!e.n_preguntas)throw new Error('Agrega al menos una pregunta antes de publicar el examen.');
 await mut(sb.from('examenes').update({publicado:!e.publicado}).eq('id',id));await refrescar();},'del-exam':async id=>{const e=S.examenes.find(x=>x.id==id);
 if(!e)return;if(!confirm(`¿Quitar el examen "${e.titulo}" con sus preguntas y TODOS los resultados? Esto no se puede deshacer.`))return;await mut(sb.from('examenes').delete().eq('id',
 id));await refrescar();},'res-exam':id=>resultadosExamenDlg(id),'reset-int':async(id,el)=>{const e=S.examenes.find(x=>x.id==id),u=per(el.dataset.uid);
@@ -1293,17 +1373,16 @@ if(!r.error){S.materiales=r.data;await firmarArchivos();}},bloques:async()=>{con
 const r=await ordT('categorias','orden');if(!r.error)S.cats=r.data;},estado_sitio:async()=>{const r=await sb.from('estado_sitio').select('*').eq('id',
 1).maybeSingle();if(!r.error)S.estado=r.data;},perfiles:async()=>{if(!esPanel())return;const r=await sb.from('perfiles').select('*');if(!r.error)S.perfiles=r.data;
 },examenes:async()=>{const r=await sb.from('examenes').select('*').order('creado',{ascending:false});if(!r.error)S.examenes=r.data;},examen_preguntas:async()=>{
-}};RECARGA.temas=RECARGA.grupos;const APLICAR={noticia_vistos:'vistos',noticia_omisiones:'omisiones',noticia_preguntas:'preguntas',examen_intentos:'intentos'};
-const claveFila=r=>r.id!=null?'i'+r.id:r.noticia_id+'|'+r.user_id;function aplicarFila(arr,fila){const l=S[arr]||(S[arr]=[]),k=claveFila(fila),i=l.findIndex(x=>claveFila(x)===k);
-if(i>=0)l[i]={...l[i],...fila};else l.push(fila);}
+},ajustes:async()=>{await cargarHorario();revisarHorario();}};RECARGA.temas=RECARGA.grupos;const APLICAR={noticia_vistos:'vistos',noticia_omisiones:'omisiones',
+noticia_preguntas:'preguntas',examen_intentos:'intentos'};const claveFila=r=>r.id!=null?'i'+r.id:r.noticia_id+'|'+r.user_id;function aplicarFila(arr,fila){
+const l=S[arr]||(S[arr]=[]),k=claveFila(fila),i=l.findIndex(x=>claveFila(x)===k);if(i>=0)l[i]={...l[i],...fila};else l.push(fila);}
 const pendTablas=new Set();function alCambioTabla(p){const t=p.table;if(APLICAR[t]&&p.eventType!=='DELETE'&&p.new&&Object.keys(p.new).length){aplicarFila(APLICAR[t],
 p.new);programarRefresco(null);return;}
 pendTablas.add(RECARGA[t]||APLICAR[t]?t:'*');programarRefresco(null);}
 function programarRefresco(modo){if(modo===undefined)pendTablas.add('*');clearTimeout(temporizador);temporizador=setTimeout(async()=>{if(!S.uid)return;
 if(dlg.open||exd.open||['q','qn'].includes(document.activeElement?.id)){programarRefresco(null);return;}
 const ts=[...pendTablas];pendTablas.clear();try{if(ts.includes('*'))await cargar();else{const hechas=new Set();await Promise.all(ts.map(t=>{if(APLICAR[t]){
-const q=t==='examen_intentos'?leerTodo('examen_intentos','id,examen_id,user_id,inicio,fin,estado,nota,correctas,total,aprobado','id'):sb.from(t).select('*');
-return q.then(r=>{if(!r.error)S[APLICAR[t]]=r.data;});}
+const q=t==='examen_intentos'?leerIntentos():sb.from(t).select('*');return q.then(r=>{if(!r.error)S[APLICAR[t]]=r.data;});}
 const f=RECARGA[t];if(!f||hechas.has(f))return null;hechas.add(f);return f();}));}
 dibujar();}catch(e){}},800);}
 function iniciarTiempoReal(){if(tiempoReal)return;tiempoReal=true;sb.channel('cambios').on('postgres_changes',{event:'*',schema:'public'},p=>{if(p.table==='estado_cambio'){
@@ -1311,8 +1390,8 @@ alCambioEstado();return;}
 if(p.table==='acceso_alertas'){alCambioAlerta();return;}
 if(p.table==='estado_actual'||p.table==='estado_log')return;alCambioTabla(p);}).subscribe();}
 async function entrar(ses){S.uid=ses.user.id;S.cargando=true;S.error='';hechasCargar();S.vista=location.hash.slice(1)||'inicio';document.body.classList.remove('locked');
-dibujar();try{await cargarPerfil();if(conHorario()&&!enHorario()){motivoSalida=`El portal está fuera de horario. ${TEXTO_HORARIO}`;await sb.auth.signOut({
-scope:'local'});return;}
+dibujar();try{await cargarPerfil();await cargarHorario();if(conHorario()&&!enHorario()){motivoSalida=`El portal está fuera de horario. ${textoHorario()}`;
+await sb.auth.signOut({scope:'local'});return;}
 revisarTactil();await iniciarEstado();await cargar();}catch(e){S.error=msg(e);}
 S.cargando=false;if(!veMateriales()&&temaDe(S.vista))S.vista='inicio';if(!abrirDe(S.vista)&&S.cats[0])S.abiertos['cat:'+S.cats[0].id]=true;dibujar();iniciarTiempoReal();
 revisarHorario();if(tieneEstado()){retenerPagina();pedirPantalla();latir();}}
@@ -1326,17 +1405,20 @@ const x=document.getElementById(id);if(x)x.remove();});mostrarGate();}
 function iniciar(){if(esCelular){bloquearCelular();return;}
 if(!configurado){mostrarGate();$('#gform').querySelector('[type=submit]').disabled=true;gerr('Falta conectar la base de datos: abre index.html y pega tu Project URL y tu clave pública de Supabase en la parte de CONFIGURACIÓN (al inicio del script).');
 return;}
-sb.auth.onAuthStateChange((ev,ses)=>{setTimeout(async()=>{if(ses&&(ev==='SIGNED_IN'||ev==='INITIAL_SESSION')){if(S.uid!==ses.user.id){await entrar(ses);
-}}
+cargarHorario();sb.auth.onAuthStateChange((ev,ses)=>{setTimeout(async()=>{if(ses&&(ev==='SIGNED_IN'||ev==='INITIAL_SESSION')){if(S.uid!==ses.user.id){
+await entrar(ses);}}
 else if(ev==='SIGNED_OUT')salir();else if(ev==='INITIAL_SESSION')mostrarGate();},0);});}
 window.addEventListener('hashchange',()=>{if(!S.uid)return;const id=location.hash.slice(1)||'inicio';if(id!==S.vista&&(id==='inicio'||id==='examenes'||temaDe(id)||(id==='panel'&&esPanel())))ir(id);
-});const HORA_INICIO='05:55',HORA_FIN='22:20';const SIN_HORARIO=['formador','todopoderoso'];const AVISO_MIN=5;const aMin=h=>{const[a,b]=h.split(':').map(Number);
+});let HORA_INICIO='05:55',HORA_FIN='22:20';const SIN_HORARIO=['formador','todopoderoso'];const AVISO_MIN=5;const aMin=h=>{const[a,b]=h.split(':').map(Number);
 return a*60+b;};function minutosPeru(){const p=new Intl.DateTimeFormat('en-GB',{timeZone:'America/Lima',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(new Date());
 return Number(p.find(x=>x.type==='hour').value)*60+Number(p.find(x=>x.type==='minute').value);}
 const enHorario=()=>{const m=minutosPeru();return m>=aMin(HORA_INICIO)&&m<aMin(HORA_FIN);};const hora12=h=>{const[a,b]=h.split(':').map(Number);return`${(a%12)||12}:${String(b).padStart(2,
-'0')} ${a<12?'a. m.':'p. m.'}`;};const TEXTO_HORARIO=`Horario de atención: de ${hora12(HORA_INICIO)} a ${hora12(HORA_FIN)}`;const conHorario=()=>!!S.rol&&!SIN_HORARIO.includes(S.rol);
-let motivoSalida='';async function cerrarPorHorario(){motivoSalida=`El portal está fuera de horario. ${TEXTO_HORARIO}`;avisoCierre(false);await marcarDesconectado();
-await sb.auth.signOut({scope:'local'});}
+'0')} ${a<12?'a. m.':'p. m.'}`;};const textoHorario=()=>`Horario de atención: de ${hora12(HORA_INICIO)} a ${hora12(HORA_FIN)}`;async function cargarHorario(){
+if(!sb)return;try{const{data,error}=await sb.from('ajustes').select('hora_inicio,hora_fin,actualizado,actualizado_por').eq('id',1).maybeSingle();if(!error&&data){
+HORA_INICIO=String(data.hora_inicio).slice(0,5);HORA_FIN=String(data.hora_fin).slice(0,5);S.horarioInfo=data;}}catch(e){}
+const g=$('#ghorario');if(g)g.textContent=textoHorario();}
+const conHorario=()=>!!S.rol&&!SIN_HORARIO.includes(S.rol);let motivoSalida='';async function cerrarPorHorario(){motivoSalida=`El portal está fuera de horario. ${textoHorario()}`;
+avisoCierre(false);await marcarDesconectado();await sb.auth.signOut({scope:'local'});}
 function avisoCierre(ver){let a=$('#aviso-cierre');if(!ver){if(a)a.remove();return;}
 if(a)return;a=document.createElement('div');a.id='aviso-cierre';a.setAttribute('role','alert');a.innerHTML=`⏰ El portal se cerrará a las <b>${hora12(HORA_FIN)}</b> Guarda lo que estés haciendo. <button type="button" aria-label="Cerrar aviso">×</button>`;
 a.querySelector('button').onclick=()=>{a.hidden=true;};document.body.appendChild(a);}
