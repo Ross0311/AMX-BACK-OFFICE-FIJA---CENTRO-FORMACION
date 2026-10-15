@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Centro de Formación | HITSS</title>
-<link rel="icon" type="image/svg+xml" href="marca.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&display=swap" rel="stylesheet">
@@ -394,6 +393,66 @@ dialog::backdrop{background:rgba(14,26,54,.7);backdrop-filter:blur(4px)}
 .dlg label.cal-pts{flex-direction:row;align-items:center;gap:8px;flex-wrap:wrap}
 .cal-pts input{width:110px}
 .cal-prev{font-size:16px;padding:10px 12px;border-radius:10px;background:var(--amber-soft)}
+.ah-bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 14px}
+.ah-bar select,.ah-bar input{font:500 14px var(--body);padding:8px 10px;border:1.5px solid var(--line);border-radius:10px;background:var(--paper)}
+.sem-tx{font-size:15.5px;padding:0 6px}
+.ah-wrap{display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:16px;align-items:start}
+@media (max-width:1100px){.ah-wrap{grid-template-columns:1fr}
+}
+.ah-grid{border:1px solid var(--line);border-radius:14px;background:#fff}
+.tb.asis{font-size:13px;border-collapse:separate;border-spacing:0}
+.tb.asis th,.tb.asis td{padding:5px 4px;text-align:center}
+.tb.asis .ap,.tb.hor .ap{position:sticky;left:0;background:#fff;z-index:2;text-align:left;min-width:190px;box-shadow:1px 0 0 var(--line)}
+.tb .ap b{display:block;font-size:13.5px}
+.tb .ap small{color:var(--muted);font-weight:500}
+.tb.asis .dd{min-width:34px;font-size:12px;line-height:1.15}
+.tb.asis .dd small{display:block;color:var(--muted);font-weight:600}
+.tb .dd i,.tb .hd i{display:block;font-style:normal;font-size:9.5px;font-weight:800;color:#92400E}
+.tb .fer{background:#FFFBEB}
+.tb .dom{background:#FAFAFA}
+.tb .hoy{box-shadow:inset 0 -3px 0 var(--teal)}
+.tb.asis td.edit,.tb.hor td.edit{cursor:pointer}
+.tb.asis td.edit:hover,.tb.hor td.edit:hover{background:#F1F5F9}
+.cod{display:inline-block;min-width:26px;padding:3px 4px;border-radius:7px;font-weight:800;font-size:11.5px;letter-spacing:.02em}
+.cod.sug{background:transparent;color:#A1A1AA;border:1px dashed #D4D4D8;font-weight:600}
+.cod.gana{box-shadow:0 0 0 2px #F59E0B}
+.cod.gana::after{content:'★';margin-left:2px;color:#B45309}
+.debe{color:#B45309;background:#FEF3C7;padding:2px 8px;border-radius:999px}
+.ah-ley{position:sticky;top:90px;display:flex;flex-direction:column;gap:4px;padding:14px}
+.ah-ley h3{margin-bottom:6px}
+.ley{display:flex;align-items:center;gap:10px;border:1.5px solid transparent;background:none;border-radius:10px;padding:5px 6px;font:500 13.5px var(--body);cursor:pointer;text-align:left;color:var(--ink)}
+.ley:disabled{cursor:default}
+.ley.on{border-color:var(--ink);background:var(--paper)}
+.comp-aviso{background:#FFFBEB;border-color:#FDE68A}
+.tb.hor{font-size:13px}
+.tb.hor td,.tb.hor th{padding:8px 6px;white-space:nowrap}
+.tb.hor .ap{min-width:230px;white-space:normal}
+.hcont{display:flex;align-items:center;gap:8px;margin-top:6px;flex-wrap:wrap}
+.hcont small{color:var(--muted);font-weight:500}
+.hb.vacio{background:var(--paper);color:var(--muted)}
+.tb.hor .hd{font-size:12px;text-align:center}
+.tu{display:inline-block;font-weight:700}
+.tv{color:#A1A1AA}
+.tu.e-D{color:#71717A}
+.tu.e-FR{color:#B45309}
+.tu.e-DC{color:#1D4ED8}
+.tu.e-VC{color:#0E7490}
+.tu.e-DM{color:#6D28D9}
+small.gana{display:block;color:#B45309;font-weight:700;font-size:11px}
+.hb{display:inline-block;padding:3px 9px;border-radius:999px;font-weight:700;font-size:12.5px}
+.hb.ok{background:#DCFCE7;color:#166534}
+.hb.falta{background:#FEF3C7;color:#92400E}
+.hb.exc{background:#FEE2E2;color:#991B1B}
+.mi-hor{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px;margin-bottom:16px}
+@media (max-width:900px){.mi-hor{grid-template-columns:repeat(2,1fr)}
+}
+.mh{background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:4px}
+.mh small{font-weight:700;color:var(--muted);font-size:11.5px}
+.mh b{font-size:16px}
+.mh span{font-size:12.5px;color:var(--muted)}
+.mh.hoy{border-color:var(--teal);box-shadow:0 0 0 2px var(--teal-soft)}
+.mh.fer{background:#FFFBEB}
+.tipo-sw.esp{flex-wrap:wrap}
 #aviso-cierre{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:60;background:#14213D;color:#fff;padding:12px 44px 12px 18px;border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,.3);font-size:15px;max-width:calc(100% - 32px)}
 #aviso-cierre button{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:0;color:#fff;font-size:20px;cursor:pointer}
 .bloqueo{min-height:100vh;display:grid;align-content:center;justify-items:center;gap:18px;padding:24px;background:#5C0A12}
@@ -545,7 +604,7 @@ function grpHtml(g){return`
 }
 function dibujarMenu(){const ids=new Set(S.cats.map(c=>c.id));const sueltos=S.menu.filter(g=>!g.categoria_id||!ids.has(g.categoria_id));const nuevas=S.preguntas.filter(p=>p.user_id===S.uid&&p.respuesta&&!p.leida).length;
 const pend=S.preguntas.filter(p=>!p.respuesta).length;const insignia=esF()?(pend?` <em class="bdg">${pend}</em>`:''):(nuevas?` <em class="bdg">${nuevas}</em>`:'');
-$('#nav').innerHTML=`<button class="item ${S.vista==='inicio'?'on':''}" data-go="inicio">Inicio y noticias${insignia}</button>`+(menuExamenes()?`<button class="item ${S.vista==='examenes'?'on':''}" data-go="examenes">Exámenes${pendientesEx()?` <em class="bdg">${pendientesEx()}</em>`:''}</button>`:'')+(esPanel()?`<button class="item ${S.vista==='panel'?'on':''}" data-go="panel">${esGTR()?'Conectividad':esCoord()?'Mi equipo':'Panel de indicadores'}</button>`:'')+(veMateriales()?sueltos.map(grpHtml).join(''):'')+(veMateriales()?S.cats:[]).map(c=>{
+$('#nav').innerHTML=`<button class="item ${S.vista==='inicio'?'on':''}" data-go="inicio">Inicio y noticias${insignia}</button>`+(menuExamenes()?`<button class="item ${S.vista==='examenes'?'on':''}" data-go="examenes">Exámenes${pendientesEx()?` <em class="bdg">${pendientesEx()}</em>`:''}</button>`:'')+(esPanel()?`<button class="item ${S.vista==='panel'?'on':''}" data-go="panel">${esGTR()?'Conectividad':esCoord()?'Mi equipo':'Panel de indicadores'}</button>`:'')+(veAsistencia()?`<button class="item ${S.vista==='asistencia'?'on':''}" data-go="asistencia">Asistencia</button><button class="item ${S.vista==='horario'?'on':''}" data-go="horario">Horario</button>`:'')+(veMateriales()?sueltos.map(grpHtml).join(''):'')+(veMateriales()?S.cats:[]).map(c=>{
 const gs=S.menu.filter(g=>g.categoria_id===c.id),k='cat:'+c.id;return`<button class="cat" data-cat="${esc(c.id)}" aria-expanded="${!!S.abiertos[k]}">${esc(c.nombre)} <span class="n">(${gs.length})</span>${chev}</button>
       <div class="catbody ${S.abiertos[k]?'open':''}">${gs.map(grpHtml).join('')}
       ${esF()?`<div class="mini cm"><button data-act="add-grp" data-id="${esc(c.id)}">+ Grupo</button></div>`:''}</div>`;}).join('')+(esF()&&!S.cats.length?'<button class="item addg" data-act="add-grp">+ Agregar grupo al menú</button>':'');
@@ -730,9 +789,10 @@ const lista=S.materiales.filter(m=>m.tema_id===t.id&&(m.titulo+' '+m.tipo).toLow
 function dibujar(){dibujarMenu();dibujarTop();if(S.cargando){$('#ticker').innerHTML='';$('#main').innerHTML='<div class="empty"><b>Cargando…</b>Un momento, por favor.</div>';
 return;}
 if(S.error){$('#ticker').innerHTML='';$('#main').innerHTML=`<div class="empty"><b>No se pudo cargar el contenido</b>${esc(S.error)}</div>`;return;}
-dibujarTicker();if(S.vista==='examenes'&&!menuExamenes())S.vista='inicio';const t=temaDe(S.vista);const enNoticias=!t&&S.vista!=='panel'&&S.vista!=='examenes';
-$('#cols').classList.toggle('solo',!enNoticias);$('#rcol').hidden=!enNoticias;if(t)dibujarTema(t);else if(S.vista==='panel'&&esPanel())dibujarPanel();
-else if(S.vista==='examenes')dibujarExamenes();else dibujarInicio();revisarAlerta();}
+dibujarTicker();if(S.vista==='examenes'&&!menuExamenes())S.vista='inicio';const t=temaDe(S.vista);if(['asistencia','horario'].includes(S.vista)&&!veAsistencia())S.vista='inicio';
+const enNoticias=!t&&!['panel','examenes','asistencia','horario'].includes(S.vista);$('#cols').classList.toggle('solo',!enNoticias);$('#rcol').hidden=!enNoticias;
+if(t)dibujarTema(t);else if(S.vista==='panel'&&esPanel())dibujarPanel();else if(S.vista==='examenes')dibujarExamenes();else if(S.vista==='asistencia')dibujarAsistencia();
+else if(S.vista==='horario')dibujarHorario();else dibujarInicio();revisarAlerta();}
 function ir(id){if(!veMateriales()&&temaDe(id))id='inicio';S.vista=id;abrirDe(id);history.replaceState(null,'',id==='inicio'?location.pathname+location.search:'#'+id);
 dibujar();scrollTo({top:0});}
 const dlg=$('#dlg');const exd=$('#ex');function form(titulo,campos,guardar,vals={}){dlg.innerHTML=`<form class="dlg"><h3>${esc(titulo)}</h3>`+campos.map(c=>{
@@ -887,6 +947,7 @@ else if(id==='pdias'){S.p.dias=v;dibujarPanel();}
 else if(id==='pcat'){S.p.cat=v;S.p.noticia='';dibujarPanel();}
 else if(id==='pnot'){S.p.noticia=v;dibujarPanel();}
 else if(id==='peu'){S.p.eu=v;e.target.blur();pintarEstados();}
+else if(id==='asmes'){S.ah.mes=v;e.target.blur();dibujar();}
 else if(id==='pdrol'){S.p.drol=v;S.p.eu='';e.target.blur();pintarEstados();}
 else if(id==='pedias'){S.p.edias=v;e.target.blur();cargarEstadosPanel();}
 else if(id==='pea'){S.p.ea=v;S.p.ec='';S.p.eu='';e.target.blur();pintarEstados();}
@@ -1431,9 +1492,10 @@ revisarTactil();await iniciarEstado();await cargar();}catch(e){S.error=msg(e);}
 S.cargando=false;if(!veMateriales()&&temaDe(S.vista))S.vista='inicio';if(!abrirDe(S.vista)&&S.cats[0])S.abiertos['cat:'+S.cats[0].id]=true;dibujar();iniciarTiempoReal();
 revisarHorario();if(tieneEstado()){retenerPagina();pedirPantalla();latir();}}
 function salir(){S.uid=null;S.rol=null;S.codigo='';S.nombre='';S.vista='inicio';S.cargando=true;S.error='';S.accesos=[];S.menu=[];S.cats=[];S.noticias=[];
-S.materiales=[];S.bloques=[];S.vistos=[];S.preguntas=[];S.perfiles=[];S.estado=null;S.omisiones=[];S.hechas=new Set();S.examenes=[];S.intentos=[];S.estadoMio=null;
-S.area=null;S.enExamen=false;S.sinExamenes=false;RE=null;clearInterval(RE_T);if(alerta.open)alerta.close();S.f={q:'',cat:'',dia:''};S.p={dias:'30',cat:'',
-noticia:'',edias:'hoy',ea:'',ec:'',eu:'',drol:'asesor'};S.est={vivo:[],det:[],alertas:[],ok:false,hora:null};try{sb.removeAllChannels();}catch(e){}
+S.materiales=[];S.bloques=[];S.vistos=[];S.preguntas=[];S.perfiles=[];S.estado=null;S.omisiones=[];S.hechas=new Set();S.ah.ok=false;S.ah.error='';S.ah.fichas=[];
+S.ah.asis=new Map();S.ah.hor=new Map();S.ah.mes=hoyISO().slice(0,7);S.ah.semana=lunesDe(hoyISO());S.examenes=[];S.intentos=[];S.estadoMio=null;S.area=null;
+S.enExamen=false;S.sinExamenes=false;RE=null;clearInterval(RE_T);if(alerta.open)alerta.close();S.f={q:'',cat:'',dia:''};S.p={dias:'30',cat:'',noticia:'',
+edias:'hoy',ea:'',ec:'',eu:'',drol:'asesor'};S.est={vivo:[],det:[],alertas:[],ok:false,hora:null};try{sb.removeAllChannels();}catch(e){}
 tiempoReal=false;FIRMAS.clear();if(dlg.open)dlg.close();if(exd.open)exd.close();history.replaceState(null,'',location.pathname+location.search);$('#gform').reset();
 $('#gform').clave.type='password';gerr('');avisoCierre(false);soltarPantalla();estMenuAbierto=false;['aviso-red','aviso-internet','aviso-pausa'].forEach(id=>{
 const x=document.getElementById(id);if(x)x.remove();});mostrarGate();}
@@ -1443,8 +1505,197 @@ return;}
 cargarHorario();sb.auth.onAuthStateChange((ev,ses)=>{setTimeout(async()=>{if(ses&&(ev==='SIGNED_IN'||ev==='INITIAL_SESSION')){if(S.uid!==ses.user.id){
 await entrar(ses);}}
 else if(ev==='SIGNED_OUT')salir();else if(ev==='INITIAL_SESSION')mostrarGate();},0);});}
-window.addEventListener('hashchange',()=>{if(!S.uid)return;const id=location.hash.slice(1)||'inicio';if(id!==S.vista&&(id==='inicio'||id==='examenes'||temaDe(id)||(id==='panel'&&esPanel())))ir(id);
-});let HORA_INICIO='05:55',HORA_FIN='22:20';const SIN_HORARIO=['formador','todopoderoso'];const AVISO_MIN=5;const aMin=h=>{const[a,b]=h.split(':').map(Number);
+window.addEventListener('hashchange',()=>{if(!S.uid)return;const id=location.hash.slice(1)||'inicio';if(id!==S.vista&&(id==='inicio'||id==='examenes'||(['asistencia',
+'horario'].includes(id)&&veAsistencia())||temaDe(id)||(id==='panel'&&esPanel())))ir(id);});const ROLES_PERSONAL=['formador','todopoderoso'];const veAsistencia=()=>esTodo()||S.rol==='formador';
+const CODIGOS=[['A','Asistencia','#DCFCE7','#166534'],['F','Falta','#FEE2E2','#991B1B'],['DM','Descanso médico','#EDE9FE','#5B21B6'],['C','Cese','#27272A',
+'#FFFFFF'],['VC','Vacaciones','#CFFAFE','#155E75'],['D','Descanso','#F4F4F5','#3F3F46'],['FR','Feriado','#FEF3C7','#92400E'],['DC','Descanso compensado',
+'#DBEAFE','#1E40AF'],['T','Traslado','#F3E8FF','#6B21A8'],['LSGH','Licencia sin goce','#FCE7F3','#9D174D'],['LCGH','Licencia con goce','#CCFBF1','#115E59']];
+const COD=Object.fromEntries(CODIGOS.map(([c,n,bg,fg])=>[c,{n,bg,fg}]));const TURNOS_ESP=['DESCANSO','FERIADO','COMPENSADO','VACACIONES','DM'];const TURNO_A_COD={
+DESCANSO:'D',FERIADO:'FR',COMPENSADO:'DC',VACACIONES:'VC',DM:'DM'};const REFRIGERIO_MIN=60;const REFRIGERIO_SI_MAS_DE=6;const MES_C=['ene','feb','mar',
+'abr','may','jun','jul','ago','sep','oct','nov','dic'];const MES_L=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre',
+'noviembre','diciembre'];const DIA_L=['DOMINGO','LUNES','MARTES','MIERCOLES','JUEVES','VIERNES','SABADO'];const DIA_C=['D','L','M','M','J','V','S'];const hoyISO=()=>new Intl.DateTimeFormat('en-CA',
+{timeZone:'America/Lima'}).format(new Date());const isoDe=(y,m,d)=>`${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`;const masDias=(iso,
+n)=>{const t=new Date(iso+'T12:00:00Z');t.setUTCDate(t.getUTCDate()+n);return t.toISOString().slice(0,10);};const diaSem=iso=>new Date(iso+'T12:00:00Z').getUTCDay();
+const lunesDe=iso=>masDias(iso,-((diaSem(iso)+6)%7));const diasDelMes=mes=>{const[y,m]=mes.split('-').map(Number);return Array.from({length:new Date(Date.UTC(y,
+m,0)).getUTCDate()},(_,i)=>isoDe(y,m,i+1));};const nombreMes=mes=>{const[y,m]=mes.split('-').map(Number);return`${MES_L[m-1]} ${y}`;};S.ah={ok:false,cargando:false,
+error:'',fichas:[],asis:new Map(),feriados:new Map(),hor:new Map(),mes:hoyISO().slice(0,7),semana:lunesDe(hoyISO()),pincel:'A'};const kA=(u,d)=>u+'|'+d;
+const kH=(u,s)=>u+'|'+s;function personalAH(){const yo=S.perfiles.find(p=>p.id===S.uid)||{id:S.uid,nombre:S.nombre,codigo:S.codigo,rol:S.rol};if(!esTodo())return[yo];
+return S.perfiles.filter(p=>ROLES_PERSONAL.includes(p.rol)).sort((a,b)=>(a.rol==='todopoderoso')-(b.rol==='todopoderoso')||(a.nombre||a.codigo||'').localeCompare(b.nombre||b.codigo||''));
+}
+const fichaDe=uid=>S.ah.fichas.find(f=>f.user_id===uid)||{};async function cargarAH(){if(S.ah.cargando)return;S.ah.cargando=true;S.ah.error='';try{const[fi,
+fe,as,ho]=await Promise.all([sb.from('personal_ficha').select('*'),sb.from('feriados').select('*').order('dia'),leerTodo('asistencia','user_id,dia,codigo',
+'dia'),leerTodo('horario','*','semana')]);const err=[fi,fe,as,ho].find(r=>r.error);if(err)throw /relation|does not exist|schema cache/i .test(err.error.message||'')?new Error('Falta ejecutar el SQL de cambios 11 en Supabase.'):err.error;
+S.ah.fichas=fi.data;S.ah.feriados=new Map(fe.data.map(f=>[f.dia,f]));S.ah.asis=new Map(as.data.map(r=>[kA(r.user_id,r.dia),r.codigo]));S.ah.hor=new Map(ho.data.map(r=>[kH(r.user_id,
+r.semana),r]));S.ah.ok=true;}catch(e){S.ah.error=msg(e);}
+S.ah.cargando=false;if(['asistencia','horario'].includes(S.vista))dibujar();}
+function compensados(uid,hasta){let gan=0,tom=0;S.ah.asis.forEach((c,k)=>{const[u,d]=k.split('|');if(u!==uid||(hasta&&d>hasta))return;if(c==='A'&&S.ah.feriados.has(d))gan++;
+if(c==='DC')tom++;});return{gan,tom,saldo:(Number(fichaDe(uid).comp_inicial)||0)+gan-tom};}
+function horasTurno(t){const m= /^(\d{2}):(\d{2}) - (\d{2}):(\d{2})$/ .exec(t||'');if(!m)return null;let min=(m[3]*60+ +m[4])-(m[1]*60+ +m[2]);if(min<=0)min+=1440;
+if(min>REFRIGERIO_SI_MAS_DE*60)min-=REFRIGERIO_MIN;return min/60;}
+function horasSemana(fila,objetivo){const porDia=objetivo/6;let trab=0,just=0,desc=0;for(let i=1;i<=7;i++){const t=fila&&fila['d'+i];const h=horasTurno(t);
+if(h!=null)trab+=h;else if(['FERIADO','COMPENSADO','VACACIONES','DM'].includes(t))just++;else if(t==='DESCANSO')desc++;}
+return{trab,just,desc,total:trab+just*porDia};}
+const turnoDeDia=(uid,iso)=>{const f=S.ah.hor.get(kH(uid,lunesDe(iso)));return f?f['d'+((diaSem(iso)+6)%7+1)]||'':'';};function sugerencia(uid,iso){const t=turnoDeDia(uid,
+iso);if(TURNO_A_COD[t])return TURNO_A_COD[t];if(horasTurno(t)!=null)return iso<=hoyISO()?'A':'';return S.ah.feriados.has(iso)?'FR':'';}
+function chipCod(c,extra=''){const x=COD[c];if(!x)return'';return`<span class="cod ${extra}" style="background:${x.bg};color:${x.fg}" title="${esc(x.n)}">${esc(c)}</span>`;
+}
+function selectorMes(id,valor){const hoy=hoyISO().slice(0,7),[y,m]=hoy.split('-').map(Number),ops=[];for(let i=-12;i<=3;i++){const t=new Date(Date.UTC(y,
+m-1+i,1));ops.push(t.toISOString().slice(0,7));}
+if(!ops.includes(valor))ops.push(valor);return`<select id="${id}" aria-label="Mes">${ops.sort().map(o=>`<option value="${o}" ${o===valor?'selected':''}>${esc(nombreMes(o).replace( /^./ ,
+c=>c.toUpperCase()))}</option>`).join('')}</select>`;}
+function dibujarAsistencia(){if(!S.ah.ok){$('#main').innerHTML=`<div class="head"><div><h1>Asistencia</h1></div></div>${S.ah.error?`<div class="aviso"><span>⚠️ ${esc(S.ah.error)}</span></div>`:'<div class="empty"><b>Cargando…</b></div>'}`;
+if(!S.ah.error)cargarAH();return;}
+const T=esTodo(),gente=personalAH(),dias=diasDelMes(S.ah.mes),hoy=hoyISO();const tot=c=>gente.reduce((s,p)=>s+dias.filter(d=>S.ah.asis.get(kA(p.id,d))===c).length,
+0);const head=dias.map(d=>{const f=S.ah.feriados.get(d),w=diaSem(d);return`<th class="dd ${f?'fer':''} ${w===0?'dom':''} ${d===hoy?'hoy':''}" title="${f?esc(f.nombre):''}"><small>${DIA_C[w]}</small>${+d.slice(8)}${f?'<i>FR</i>':''}</th>`;
+}).join('');const filas=gente.map(p=>{const fi=fichaDe(p.id),cp=compensados(p.id,dias[dias.length-1]);const celdas=dias.map(d=>{const c=S.ah.asis.get(kA(p.id,
+d)),s=!c?sugerencia(p.id,d):'';const gana=c==='A'&&S.ah.feriados.has(d);return`<td class="ac ${S.ah.feriados.has(d)?'fer':''} ${T?'edit':''}" ${T?`data-act="asis-pintar" data-id="${p.id}" data-dia="${d}"`:''} title="${esc(diaLargo(d))}${c?' · '+esc(COD[c].n):s?' · sugerido por el horario: '+esc(COD[s].n):''}${gana?' · trabajó feriado: genera 1 compensado':''}">
+        ${c?chipCod(c,gana?'gana':''):s?`<span class="cod sug">${esc(s)}</span>`:''}</td>`;}).join('');const n=c=>dias.filter(d=>S.ah.asis.get(kA(p.id,
+d))===c).length;return`<tr><th class="ap"><b>${esc(p.nombre||p.codigo)}</b><small>${esc(fi.cargo||ROLES[p.rol]||'')}</small></th>${celdas}
+      <td class="num">${n('A')}</td><td class="num">${n('F')}</td><td class="num">${n('DM')}</td><td class="num">${n('VC')}</td><td class="num">${n('D')}</td><td class="num">${n('DC')}</td>
+      <td class="num"><b class="${cp.saldo>0?'debe':''}">${cp.saldo}</b></td></tr>`;}).join('');const deben=gente.map(p=>({p,cp:compensados(p.id)})).filter(x=>x.cp.saldo>0);
+$('#main').innerHTML=`<div class="head"><div><h1>Asistencia</h1><p class="sub">${T?'Marca la asistencia del personal de formación. Elige un código en la leyenda y haz clic en los días.':'Tu asistencia registrada por la jefatura. Si ves algo incorrecto, avísale.'}</p></div></div>
+    <div class="ah-bar">
+      <button class="btn ghost sm" data-act="asis-mes" data-id="-1" aria-label="Mes anterior">◀</button>${selectorMes('asmes',S.ah.mes)}<button class="btn ghost sm" data-act="asis-mes" data-id="1" aria-label="Mes siguiente">▶</button>
+      ${T?`<button class="btn ghost sm" data-act="asis-aplicar">↧ Completar con el horario</button>
+        <button class="btn ghost sm" data-act="feriados">📅 Feriados</button>
+        <button class="btn ghost sm" data-act="fichas">🗂 Fichas del personal</button>
+        <button class="btn add sm" data-act="asis-xls">Descargar Excel</button>`:''}
+    </div>
+    ${T&&deben.length?`<div class="aviso comp-aviso"><span>💡 <b>Compensados pendientes:</b> ${deben.map(x=>`${esc(x.p.nombre||x.p.codigo)} (${x.cp.saldo})`).join(' · ')}</span></div>`:''}
+    ${!T?(()=>{const cp=compensados(S.uid);return`<div class="kpis" style="margin-bottom:16px"><div class="kpi"><span>Compensados pendientes</span><b>${cp.saldo}</b><small>días que la empresa te debe</small></div><div class="kpi"><span>Feriados trabajados</span><b>${cp.gan}</b><small>en total</small></div><div class="kpi"><span>Compensados tomados (DC)</span><b>${cp.tom}</b><small>en total</small></div></div>`;
+})():''}
+    <div class="ah-wrap">
+      <div class="scroll ah-grid"><table class="tb asis"><thead><tr><th class="ap">Colaborador</th>${head}<th class="num">A</th><th class="num">F</th><th class="num">DM</th><th class="num">VC</th><th class="num">D</th><th class="num">DC</th><th class="num" title="Compensados pendientes al cierre del mes">Comp.</th></tr></thead>
+        <tbody>${filas||`<tr><td colspan="${dias.length+8}">No hay formadores registrados.</td></tr>`}</tbody></table></div>
+      <aside class="card ah-ley"><h3>Leyenda</h3>
+        ${CODIGOS.map(([c,n])=>`<button type="button" class="ley ${T&&S.ah.pincel===c?'on':''}" ${T?`data-act="asis-pincel" data-id="${c}"`:'disabled'}>${chipCod(c)}<span>${esc(n)}</span></button>`).join('')}
+        ${T?`<button type="button" class="ley ${S.ah.pincel===''?'on':''}" data-act="asis-pincel" data-id=""><span class="cod" style="background:#fff;border:1px dashed var(--line)">⌫</span><span>Borrar</span></button>`:''}
+        <p class="meta">${T?`Código elegido: <b>${S.ah.pincel||'Borrar'}</b>.`:''} Los códigos en gris son <b>sugeridos por el horario</b>. ★ = trabajó un feriado (genera un compensado).</p>
+        <p class="meta">Totales del mes: ${['A','F','DM','VC'].map(c=>`${c} ${tot(c)}`).join(' · ')}</p></aside>
+    </div>`;}
+let colaAsis=new Map(),tAsis=null;function marcarAsis(uid,dia,cod){if(cod)S.ah.asis.set(kA(uid,dia),cod);else S.ah.asis.delete(kA(uid,dia));colaAsis.set(kA(uid,
+dia),{uid,dia,cod});clearTimeout(tAsis);tAsis=setTimeout(guardarAsis,500);}
+async function guardarAsis(){const l=[...colaAsis.values()];colaAsis.clear();if(!l.length)return;try{const up=l.filter(x=>x.cod).map(x=>({user_id:x.uid,
+dia:x.dia,codigo:x.cod,marcado_por:S.uid,actualizado:new Date().toISOString()}));if(up.length){const{error}=await sb.from('asistencia').upsert(up,{onConflict:'user_id,dia'});
+if(error)throw error;}
+const del=l.filter(x=>!x.cod),porU=new Map();del.forEach(x=>{if(!porU.has(x.uid))porU.set(x.uid,[]);porU.get(x.uid).push(x.dia);});for(const[u,ds]of porU){
+const{error}=await sb.from('asistencia').delete().eq('user_id',u).in('dia',ds);if(error)throw error;}}catch(e){alert('No se pudo guardar la asistencia: '+msg(e));
+S.ah.ok=false;cargarAH();}}
+async function completarConHorario(){const dias=diasDelMes(S.ah.mes),cambios=[];personalAH().forEach(p=>dias.forEach(d=>{if(!S.ah.asis.has(kA(p.id,d))){
+const s=sugerencia(p.id,d);if(s)cambios.push([p.id,d,s]);}}));if(!cambios.length)return alert('No hay días vacíos que se puedan completar con el horario en este mes.');
+if(!confirm(`Se completarán ${cambios.length} día(s) vacíos con lo que indica el horario (las asistencias "A" solo hasta hoy). Lo ya marcado no se toca. ¿Continuar?`))return;
+cambios.forEach(([u,d,c])=>marcarAsis(u,d,c));await guardarAsis();dibujar();}
+function xlsAsistencia(){if(typeof XLSX==='undefined')return alert('No se pudo cargar la librería de Excel. Recarga la página.');const dias=diasDelMes(S.ah.mes),
+col0=12,cA=XLSX.utils.encode_col(col0),cZ=XLSX.utils.encode_col(col0+dias.length-1);const cab=['','ID SAP','Documento ','Usuario E','Nombres y Apellidos',
+'Jefe Direto 1','Jefe Direto 2','Estatus','Fecha de Ingreso ','Tipo de Jornada ','Campaña','Tipo',...dias.map(d=>`${d.slice(8)}-${MES_C[+d.slice(5,7)-1]}`),
+'Asistencias','Faltas','DM','Vacaciones','Compensados ganados','Compensados tomados','Saldo compensados'];const aoa=[[],cab];personalAH().forEach((p,i)=>{
+const f=fichaDe(p.id),r=i+3,cp=compensados(p.id,dias[dias.length-1]);const cods=dias.map(d=>S.ah.asis.get(kA(p.id,d))||'');const cnt=c=>({t:'n',v:cods.filter(x=>x===c).length,
+f:`IFERROR((COUNTIF(${cA}${r}:${cZ}${r},"${c}")),"")`});aoa.push(['', /^\d+$/ .test(f.id_sap||'')?Number(f.id_sap):(f.id_sap||''), /^\d+$/ .test(f.documento||'')?Number(f.documento):(f.documento||''),
+f.usuario_e||('E'+(p.codigo||'')),p.nombre||'',f.jefe1||'',f.jefe2||'',f.estatus||'Activo',f.fecha_ingreso?new Date(f.fecha_ingreso+'T12:00:00'):'',f.jornada||'Full Time',
+f.campana||'',f.tipo||'',...cods,cnt('A'),cnt('F'),cnt('DM'),cnt('VC'),cp.gan,cp.tom,cp.saldo]);});const ws=XLSX.utils.aoa_to_sheet(aoa,{cellDates:true});
+for(let r=3;r<=aoa.length;r++){const c=ws['I'+r];if(c&&c.t==='d')c.z='dd/mm/yyyy';}
+ws['!cols']=[{wch:3},{wch:11},{wch:11},{wch:10},{wch:34},{wch:20},{wch:16},{wch:9},{wch:12},{wch:11},{wch:30},{wch:14},...dias.map(()=>({wch:6})),{wch:11},
+{wch:7},{wch:5},{wch:10},{wch:11},{wch:11},{wch:10}];const ley=XLSX.utils.aoa_to_sheet([[],['','Detalle','Signo'],...CODIGOS.map(([c,n])=>['',n,c])]);
+const fer=XLSX.utils.aoa_to_sheet([['Fecha','Feriado','Tipo'],...[...S.ah.feriados.values()].filter(f=>f.dia.startsWith(S.ah.mes.slice(0,4))).map(f=>[f.dia,
+f.nombre,f.tipo])]);const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,'Hoja1');XLSX.utils.book_append_sheet(wb,ley,'Leyenda');XLSX.utils.book_append_sheet(wb,
+fer,'Feriados');XLSX.writeFile(wb,`Asistencia_Formacion_${nombreMes(S.ah.mes).replace(' ','_')}.xlsx`);}
+function feriadosDlg(){const y=S.ah.mes.slice(0,4),l=[...S.ah.feriados.values()].filter(f=>f.dia.startsWith(y));dlg.innerHTML=`<div class="dlg"><h3>Feriados ${y}</h3>
+    <p class="note">Vienen precargados los feriados nacionales (públicos y privados). Agrega aquí los días no laborables que la empresa decida dar o los feriados de años siguientes.</p>
+    <div class="scroll" style="max-height:320px"><table class="tb"><thead><tr><th>Fecha</th><th>Nombre</th><th>Tipo</th><th></th></tr></thead><tbody>
+    ${l.map(f=>`<tr><td>${esc(diaLargo(f.dia))}</td><td>${esc(f.nombre)}</td><td>${f.tipo==='empresa'?'De la empresa':'Nacional'}</td><td><button class="btn danger sm" data-act="fer-del" data-id="${f.dia}">Quitar</button></td></tr>`).join('')||'<tr><td colspan="4">No hay feriados registrados para este año.</td></tr>'}
+    </tbody></table></div>
+    <div class="ah-bar"><input type="date" id="fer-dia" aria-label="Fecha"><input id="fer-nom" placeholder="Nombre (ej. Día no laborable)" style="flex:1"><select id="fer-tipo"><option value="empresa">De la empresa</option><option value="nacional">Nacional</option></select><button class="btn sm" data-act="fer-add">+ Agregar</button></div>
+    <div class="row"><button class="btn ghost" data-close>Cerrar</button></div></div>`;if(!dlg.open)dlg.showModal();}
+function fichasDlg(){dlg.innerHTML=`<div class="dlg ancho"><h3>Fichas del personal</h3>
+    <p class="note">Estos datos salen en las cabeceras del Excel de asistencia y en el horario (cargo y área). El saldo inicial de compensados es lo que cada persona tenía pendiente antes de usar el portal.</p>
+    <div class="ulist">${personalAH().map(p=>{const f=fichaDe(p.id);return`<div class="urow"><div><b>${esc(p.nombre||p.codigo)}</b><span>${esc(f.cargo||'Sin cargo')} · ${esc(f.area_trabajo||'Sin área')} · ${esc(f.jornada||'Full Time')} ${f.horas_semana||48} h · saldo inicial ${f.comp_inicial||0}</span></div>
+        <button class="btn add sm" data-act="ficha-edit" data-id="${p.id}">Editar ficha</button></div>`;}).join('')}</div>
+    <div class="row"><button class="btn ghost" data-close>Cerrar</button></div></div>`;if(!dlg.open)dlg.showModal();}
+function badgeHoras(h,obj){const d=Math.round((h.total-obj)*100)/100;if(Math.abs(d)<0.01)return`<span class="hb ok">✔ ${fmtHoras(h.total)}</span>`;return d<0?`<span class="hb falta">${fmtHoras(h.total)} · faltan ${fmtHoras(-d)}</span>`:`<span class="hb exc">${fmtHoras(h.total)} · excede ${fmtHoras(d)}</span>`;
+}
+const fmtHoras=h=>{const m=Math.round(h*60);return`${Math.floor(m/60)} h${m%60?' '+String(m%60).padStart(2,'0')+' min':''}`;};function rangoSemana(lun){
+const dom=masDias(lun,6),f=iso=>`${+iso.slice(8)} de ${MES_L[+iso.slice(5,7)-1]}`;return`del lunes ${f(lun)} al domingo ${f(dom)}${dom.slice(0,4)!==hoyISO().slice(0,
+4)?' de '+dom.slice(0,4):''}`;}
+function celdaTurno(t,iso){if(!t)return'<span class="tv">—</span>';const esp=TURNO_A_COD[t],h=horasTurno(t),fer=S.ah.feriados.has(iso);if(esp)return`<span class="tu e-${esp}">${esc(t)}</span>`;
+return`<span class="tu">${esc(t)}</span>${fer&&h!=null?'<small class="gana" title="Trabaja en feriado: genera un compensado">★ feriado</small>':''}`;}
+function dibujarHorario(){if(!S.ah.ok){$('#main').innerHTML=`<div class="head"><div><h1>Horario</h1></div></div>${S.ah.error?`<div class="aviso"><span>⚠️ ${esc(S.ah.error)}</span></div>`:'<div class="empty"><b>Cargando…</b></div>'}`;
+if(!S.ah.error)cargarAH();return;}
+const T=esTodo(),lun=S.ah.semana,dias=Array.from({length:7},(_,i)=>masDias(lun,i)),gente=personalAH(),hoy=hoyISO();const head=dias.map(d=>{const f=S.ah.feriados.get(d);
+return`<th class="hd ${f?'fer':''} ${d===hoy?'hoy':''}" title="${f?esc(f.nombre):''}">${DIA_L[diaSem(d)]} ${d.slice(8)}${f?`<i>FERIADO</i>`:''}</th>`;
+}).join('');const filas=gente.map(p=>{const fi=fichaDe(p.id),fila=S.ah.hor.get(kH(p.id,lun))||{},obj=Number(fi.horas_semana)||48;const h=horasSemana(fila,
+obj),arr=compensados(p.id,masDias(lun,-1)).saldo,cie=compensados(p.id,masDias(lun,6)).saldo;const conHor=fila.d1!==undefined;return`<tr><th class="ap"><b>${esc(p.nombre||p.codigo)}</b><small>${esc([(fi.cargo||ROLES[p.rol]||'').toUpperCase(),
+(fi.area_trabajo||'').toUpperCase()].filter(Boolean).join(' · '))}</small>
+        <div class="hcont">${conHor?badgeHoras(h,obj):'<span class="hb vacio">Sin horario</span>'}<small>meta ${obj} h</small></div></th>
+      ${dias.map((d,i)=>`<td class="ht ${S.ah.feriados.has(d)?'fer':''} ${T?'edit':''}" ${T?`data-act="hor-celda" data-id="${p.id}" data-i="${i+1}"`:''}>${celdaTurno(fila['d'+(i+1)],
+d)}</td>`).join('')}
+      <td class="ht ${T?'edit':''}" ${T?`data-act="hor-break" data-id="${p.id}"`:''}>${fila.refrigerio?esc(String(fila.refrigerio).slice(0,5)):'—'}</td>
+      <td class="num">${arr}</td><td class="num"><b class="${cie>0?'debe':''}">${cie}</b></td></tr>`;}).join('');const mio=!T&&S.ah.hor.get(kH(S.uid,lun));
+$('#main').innerHTML=`<div class="head"><div><h1>Horario</h1><p class="sub">${T?'Arma el horario semanal de cada formador. Haz clic en un día para editarlo. El contador de horas descuenta el refrigerio.':'Tu horario de la semana. Si necesitas un cambio, coordínalo con tu jefatura.'}</p></div></div>
+    <div class="ah-bar">
+      <button class="btn ghost sm" data-act="hor-sem" data-id="-7" aria-label="Semana anterior">◀</button><b class="sem-tx">Semana ${esc(rangoSemana(lun))}</b><button class="btn ghost sm" data-act="hor-sem" data-id="7" aria-label="Semana siguiente">▶</button>
+      <button class="btn ghost sm" data-act="hor-sem" data-id="0">Esta semana</button>
+      ${T?`<button class="btn ghost sm" data-act="hor-copiar">⧉ Copiar semana anterior</button>
+        <button class="btn ghost sm" data-act="fichas">🗂 Fichas del personal</button>
+        ${selectorMes('hormes',lun.slice(0,7))}<button class="btn add sm" data-act="hor-xls">Descargar Excel del mes</button>`:''}
+    </div>
+    ${mio?`<div class="mi-hor">${dias.map((d,i)=>{const t=mio['d'+(i+1)];return`<div class="mh ${d===hoy?'hoy':''} ${S.ah.feriados.has(d)?'fer':''}"><small>${DIA_L[diaSem(d)]} ${d.slice(8)}</small><b>${esc(t||'—')}</b>${horasTurno(t)!=null?`<span>${fmtHoras(horasTurno(t))}</span>`:''}</div>`;
+}).join('')}</div>`:(!T?'<div class="empty"><b>Aún no tienes horario para esta semana</b>Tu jefatura lo publicará pronto.</div>':'')}
+    ${T||mio?`<div class="scroll"><table class="tb hor"><thead><tr><th class="ap">Colaborador · horas de la semana</th>${head}<th>Break</th><th class="num" title="Compensados pendientes al empezar la semana">Arrastra comp.</th><th class="num" title="Compensados pendientes al terminar la semana">Cierre semana</th></tr></thead>
+      <tbody>${filas}</tbody></table></div>
+    <p class="meta" style="margin-top:8px">Horas: se descuentan ${REFRIGERIO_MIN} min de refrigerio en turnos de más de ${REFRIGERIO_SI_MAS_DE} h. Feriado, compensado, vacaciones y descanso médico cuentan como un día de jornada (meta ÷ 6). Los compensados se calculan con la asistencia marcada.</p>`:''}`;
+}
+async function guardarHorario(uid,cambios){const lun=S.ah.semana,prev=S.ah.hor.get(kH(uid,lun))||{user_id:uid,semana:lun};const fila={...prev,...cambios,
+user_id:uid,semana:lun,actualizado:new Date().toISOString()};S.ah.hor.set(kH(uid,lun),fila);dibujar();const{error}=await sb.from('horario').upsert({user_id:uid,
+semana:lun,d1:fila.d1||null,d2:fila.d2||null,d3:fila.d3||null,d4:fila.d4||null,d5:fila.d5||null,d6:fila.d6||null,d7:fila.d7||null,refrigerio:fila.refrigerio||null,
+actualizado:fila.actualizado},{onConflict:'user_id,semana'});if(error){alert('No se pudo guardar el horario: '+msg(error));S.ah.ok=false;cargarAH();}}
+function editarTurnoDlg(uid,i){const p=personalAH().find(x=>x.id===uid),d=masDias(S.ah.semana,i-1),fila=S.ah.hor.get(kH(uid,S.ah.semana))||{},t=fila['d'+i]||'';
+const m= /^(\d{2}:\d{2}) - (\d{2}:\d{2})$/ .exec(t),fer=S.ah.feriados.get(d);dlg.innerHTML=`<form class="dlg" id="turno-f"><h3>${esc(p?(p.nombre||p.codigo):'')}</h3><p class="meta">${esc(diaLargo(d))}${fer?' · <b>Feriado: '+esc(fer.nombre)+'</b> (si trabaja, genera un compensado)':''}</p>
+    <div class="grid3"><label>Entrada<input type="time" name="ini" value="${m?m[1]:''}"></label><label>Salida<input type="time" name="fin" value="${m?m[2]:''}"></label></div>
+    <div class="tipo-sw esp">${TURNOS_ESP.map(x=>`<button type="button" class="${t===x?'on':''}" data-esp="${x}">${x}</button>`).join('')}<button type="button" data-esp="">Vaciar</button></div>
+    <label class="chk"><input type="checkbox" name="todos"> Aplicar el mismo turno a los demás días laborables de la semana (no toca descansos, feriados ni vacaciones)</label>
+    <p class="err" id="ferr" hidden></p>
+    <div class="row"><button class="btn ghost" type="button" data-close>Cancelar</button><button class="btn" type="submit">Guardar</button></div></form>`;
+const fm=$('#turno-f');fm.querySelectorAll('[data-esp]').forEach(b=>b.onclick=()=>{dlg.close();guardarHorario(uid,{['d'+i]:b.dataset.esp});});fm.onsubmit=e=>{
+e.preventDefault();const ini=fm.ini.value,fin=fm.fin.value,er=$('#ferr');if(!ini||!fin){er.textContent='Pon la hora de entrada y de salida, o elige una opción como DESCANSO.';
+er.hidden=false;return;}
+const turno=`${ini} - ${fin}`,cambios={['d'+i]:turno};if(fm.todos.checked)for(let j=1;j<=7;j++){const v=fila['d'+j];if(j!==i&&(!v||horasTurno(v)!=null))cambios['d'+j]=turno;
+}
+dlg.close();guardarHorario(uid,cambios);};if(!dlg.open)dlg.showModal();}
+async function copiarSemanaAnterior(){const ant=masDias(S.ah.semana,-7),gente=personalAH().filter(p=>S.ah.hor.has(kH(p.id,ant)));if(!gente.length)return alert('La semana anterior no tiene horarios para copiar.');
+const pisa=gente.filter(p=>S.ah.hor.has(kH(p.id,S.ah.semana))).length;if(!confirm(`Se copiará el horario de la semana anterior a ${gente.length} persona(s)${pisa?`; ${pisa} ya tienen horario esta semana y se reemplazará`:''}. Los días feriados de esta semana quedarán como FERIADO (cámbialos si alguien trabaja). ¿Continuar?`))return;
+for(const p of gente){const f=S.ah.hor.get(kH(p.id,ant)),c={refrigerio:f.refrigerio};for(let j=1;j<=7;j++){const d=masDias(S.ah.semana,j-1);c['d'+j]=S.ah.feriados.has(d)&&horasTurno(f['d'+j])!=null?'FERIADO':(f['d'+j]||'');
+}
+await guardarHorario(p.id,c);}}
+function xlsHorario(mes){if(typeof XLSX==='undefined')return alert('No se pudo cargar la librería de Excel. Recarga la página.');const dias=diasDelMes(mes),
+semanas=[...new Set(dias.map(lunesDe))],gente=personalAH(),aoa=[],merges=[];aoa.push([]);aoa.push(['','','','','','HORARIO CAPACITACION']);merges.push({
+s:{r:1,c:5},e:{r:1,c:11}});semanas.forEach(lun=>{aoa.push([]);const rDia=aoa.length;aoa.push(['','','','','','DIA']);merges.push({s:{r:rDia,c:5},e:{r:rDia,
+c:11}});aoa.push(['','','CARGO','AREA','COLABORADORES',...Array.from({length:7},(_,i)=>{const d=masDias(lun,i);return`${DIA_L[diaSem(d)]} ${d.slice(8)}`;
+}),'BREAK','','Arrastra compensados','Cierre de semana','Horas semana']);gente.forEach(p=>{const f=fichaDe(p.id),fila=S.ah.hor.get(kH(p.id,lun))||{},h=horasSemana(fila,
+Number(f.horas_semana)||48);const br=fila.refrigerio?String(fila.refrigerio).slice(0,5).split(':'):null;aoa.push(['','',(f.cargo||ROLES[p.rol]||'').toUpperCase(),
+(f.area_trabajo||'').toUpperCase(),p.nombre||p.codigo,...Array.from({length:7},(_,i)=>fila['d'+(i+1)]||''),br?{t:'n',v:(+br[0]*60+ +br[1])/1440,z:'hh:mm'}:'',
+'',compensados(p.id,masDias(lun,-1)).saldo,compensados(p.id,masDias(lun,6)).saldo,fila.d1!==undefined?Math.round(h.total*100)/100:'']);});});const ws=XLSX.utils.aoa_to_sheet(aoa);
+ws['!merges']=merges;ws['!cols']=[{wch:2},{wch:2},{wch:20},{wch:16},{wch:34},...Array(7).fill({wch:15}),{wch:8},{wch:2},{wch:12},{wch:12},{wch:12}];const wb=XLSX.utils.book_new();
+XLSX.utils.book_append_sheet(wb,ws,nombreMes(mes).toUpperCase().slice(0,31));XLSX.writeFile(wb,`Horario_Formacion_${nombreMes(mes).replace(' ','_')}.xlsx`);
+}
+Object.assign(ACC,{'asis-pincel':id=>{S.ah.pincel=id||'';dibujar();},'asis-pintar':(id,el)=>{if(!esTodo())return;const d=el.dataset.dia,act=S.ah.asis.get(kA(id,
+d));marcarAsis(id,d,act===S.ah.pincel?'':S.ah.pincel);dibujar();},'asis-mes':id=>{const[y,m]=S.ah.mes.split('-').map(Number),t=new Date(Date.UTC(y,m-1+Number(id),
+1));S.ah.mes=t.toISOString().slice(0,7);dibujar();},'asis-aplicar':()=>completarConHorario(),'asis-xls':()=>xlsAsistencia(),feriados:()=>feriadosDlg(),
+'fer-add':async()=>{const d=$('#fer-dia').value,n=$('#fer-nom').value.trim(),t=$('#fer-tipo').value;if(!d||!n)return alert('Pon la fecha y el nombre del feriado.');
+const{error}=await sb.from('feriados').upsert({dia:d,nombre:n,tipo:t});if(error)return alert(msg(error));S.ah.feriados.set(d,{dia:d,nombre:n,tipo:t});
+feriadosDlg();dibujar();},'fer-del':async id=>{if(!confirm('¿Quitar este feriado?'))return;const{error}=await sb.from('feriados').delete().eq('dia',id);
+if(error)return alert(msg(error));S.ah.feriados.delete(id);feriadosDlg();dibujar();},fichas:()=>fichasDlg(),'ficha-edit':id=>{const p=personalAH().find(x=>x.id===id),
+f=fichaDe(id);form('Ficha · '+(p?(p.nombre||p.codigo):''),[{k:'cargo',l:'Cargo (ej. FORMADOR, FORMADORA)'},{k:'area_trabajo',l:'Área (ej. FIJA MASIVA, BO FIJA)'},
+{k:'id_sap',l:'ID SAP'},{k:'documento',l:'Documento (DNI)'},{k:'usuario_e',l:'Usuario E'},{k:'jefe1',l:'Jefe directo 1'},{k:'jefe2',l:'Jefe directo 2'},
+{k:'estatus',l:'Estatus',t:'sel',o:['Activo','Cese']},{k:'fecha_ingreso',l:'Fecha de ingreso',t:'date'},{k:'jornada',l:'Tipo de jornada',t:'sel',o:['Full Time',
+'Part Time']},{k:'horas_semana',l:'Horas por semana (meta del horario)',t:'number'},{k:'campana',l:'Campaña'},{k:'tipo',l:'Tipo (ej. Administrativo)'},
+{k:'comp_inicial',l:'Compensados pendientes al empezar (saldo inicial)',t:'number'}],async o=>{const fila={user_id:id,...o,fecha_ingreso:o.fecha_ingreso||null,
+horas_semana:Number(o.horas_semana)||48,comp_inicial:Number(o.comp_inicial)||0,actualizado:new Date().toISOString()};const{error}=await sb.from('personal_ficha').upsert(fila);
+if(error)throw error;S.ah.fichas=S.ah.fichas.filter(x=>x.user_id!==id).concat(fila);return()=>fichasDlg();},{...f,usuario_e:f.usuario_e||('E'+(p?p.codigo||'':'')),
+estatus:f.estatus||'Activo',jornada:f.jornada||'Full Time',horas_semana:f.horas_semana||48,comp_inicial:f.comp_inicial||0});},'hor-sem':id=>{S.ah.semana=Number(id)===0?lunesDe(hoyISO()):masDias(S.ah.semana,
+Number(id));dibujar();},'hor-celda':(id,el)=>{if(esTodo())editarTurnoDlg(id,Number(el.dataset.i));},'hor-break':id=>{if(!esTodo())return;const f=S.ah.hor.get(kH(id,
+S.ah.semana))||{};form('Hora de break (refrigerio)',[{k:'br',l:'Hora de inicio del break',t:'time'}],async o=>{await guardarHorario(id,{refrigerio:o.br||null});
+},{br:f.refrigerio?String(f.refrigerio).slice(0,5):''});},'hor-copiar':()=>copiarSemanaAnterior(),'hor-xls':()=>xlsHorario($('#hormes')?$('#hormes').value:S.ah.semana.slice(0,
+7))});let HORA_INICIO='05:55',HORA_FIN='22:20';const SIN_HORARIO=['formador','todopoderoso'];const AVISO_MIN=5;const aMin=h=>{const[a,b]=h.split(':').map(Number);
 return a*60+b;};function minutosPeru(){const p=new Intl.DateTimeFormat('en-GB',{timeZone:'America/Lima',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(new Date());
 return Number(p.find(x=>x.type==='hour').value)*60+Number(p.find(x=>x.type==='minute').value);}
 const enHorario=()=>{const m=minutosPeru();return m>=aMin(HORA_INICIO)&&m<aMin(HORA_FIN);};const hora12=h=>{const[a,b]=h.split(':').map(Number);return`${(a%12)||12}:${String(b).padStart(2,
