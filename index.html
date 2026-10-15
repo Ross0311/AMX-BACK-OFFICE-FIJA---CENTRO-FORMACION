@@ -313,6 +313,8 @@ dialog::backdrop{background:rgba(14,26,54,.7);backdrop-filter:blur(4px)}
 .chipE.e-capacitacion{background:var(--teal);color:#fff}
 .chipE.e-break{background:#F8D3D7;color:#8B0F1C}
 .chipE.e-bano{background:#E4E4E7;color:#333}
+.chipE.e-feedback{background:#CFFAFE;color:#155E75}
+.chipE.e-reunion{background:#FEF3C7;color:#92400E}
 .chipE.e-desconectado{background:#fff;border:1px solid var(--line);color:var(--muted)}
 .vivo{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
 #auth{display:flex;align-items:center;gap:12px}
@@ -332,6 +334,8 @@ dialog::backdrop{background:rgba(14,26,54,.7);backdrop-filter:blur(4px)}
 .mi-est.e-bano,.est-menu .e-bano.on{background:#2563EB}
 .mi-est.e-break,.est-menu .e-break.on{background:#D97706}
 .mi-est.e-capacitacion,.est-menu .e-capacitacion.on{background:#7C3AED}
+.mi-est.e-feedback,.est-menu .e-feedback.on{background:#0891B2}
+.mi-est.e-reunion,.est-menu .e-reunion.on{background:#DB2777}
 .mi-est.e-desconectado{background:#52525B}
 .est-menu{position:absolute;right:0;top:calc(100% + 8px);z-index:40;background:#fff;border-radius:16px;box-shadow:0 20px 50px rgba(0,0,0,.28);padding:12px;width:280px;display:flex;flex-direction:column;gap:8px}
 .est-menu p{font-size:12.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;padding:2px 4px}
@@ -378,6 +382,7 @@ dialog::backdrop{background:rgba(14,26,54,.7);backdrop-filter:blur(4px)}
 .rq-ab{width:100%;min-height:130px;font:500 15.5px var(--body);padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;background:#fff;resize:vertical}
 .rq-ab:focus{outline:none;border-color:var(--teal)}
 .btn.calif{background:#7C3AED;border-color:#7C3AED;color:#fff}
+.btn.herr{background:#111;border-color:#111;color:#fff}
 .calif-aviso{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .coment-f{font-size:14px;background:var(--paper);border-left:4px solid #7C3AED;border-radius:8px;padding:8px 12px;margin:4px 0}
 .nota.pendn{font-size:54px}
@@ -882,6 +887,7 @@ else if(id==='pdias'){S.p.dias=v;dibujarPanel();}
 else if(id==='pcat'){S.p.cat=v;S.p.noticia='';dibujarPanel();}
 else if(id==='pnot'){S.p.noticia=v;dibujarPanel();}
 else if(id==='peu'){S.p.eu=v;e.target.blur();pintarEstados();}
+else if(id==='pdrol'){S.p.drol=v;S.p.eu='';e.target.blur();pintarEstados();}
 else if(id==='pedias'){S.p.edias=v;e.target.blur();cargarEstadosPanel();}
 else if(id==='pea'){S.p.ea=v;S.p.ec='';S.p.eu='';e.target.blur();pintarEstados();}
 else if(id==='pec'){S.p.ec=v;S.p.eu='';e.target.blur();pintarEstados();}});const ESCRITORIO=window.matchMedia('(min-width:981px)');try{if(localStorage.getItem('menuOculto')==='1')document.body.classList.add('menu-off');
@@ -906,8 +912,9 @@ btn.textContent='Ingresar';if(error)gerr(msg(error));else f.clave.value='';});$(
 });const jefesDe=rol=>S.perfiles.filter(p=>p.rol===rol).map(p=>({id:p.id,t:quien(p)+(rol==='coordinador'&&AREAS_EQUIPO[p.area]?' ('+(p.area==='tecnico'?'Técnico':'Administrativo')+')':'')}));
 const idDe=(arr,t)=>(arr.find(x=>x.t===t)||{}).id||null;const claveDe=(obj,v)=>Object.keys(obj).find(k=>obj[k]===v)||null;Object.assign(S,{examenes:[],
 intentos:[],estadoMio:null,area:null,enExamen:false,sinExamenes:false});const ESTADOS=[['activo','Activo'],['bano','Baño'],['break','Break'],['capacitacion',
-'Capacitación']];const EST_NOM={activo:'Activo',bano:'Baño',break:'Break',capacitacion:'Capacitación',desconectado:'Desconectado'};const EST_COL={activo:'#111111',
-bano:'#8A8A90',break:'#E8707B',capacitacion:'#D7192D'};const EST_ORD=['activo','bano','break','capacitacion'];const AREA_EX={todos:'Todas las áreas',tecnico:'Back Office Técnico',
+'Capacitación'],['feedback','Feedback'],['reunion','Reunión']];const EST_NOM={activo:'Activo',bano:'Baño',break:'Break',capacitacion:'Capacitación',feedback:'Feedback',
+reunion:'Reunión',desconectado:'Desconectado'};const EST_COL={activo:'#111111',bano:'#8A8A90',break:'#E8707B',capacitacion:'#D7192D',feedback:'#0891B2',
+reunion:'#D97706'};const EST_ORD=['activo','bano','break','capacitacion','feedback','reunion'];const AREA_EX={todos:'Todas las áreas',tecnico:'Back Office Técnico',
 administrativo:'Back Office Administrativo'};const fmtS=s=>{const t=Math.max(0,Math.round(Number(s||0))),h=Math.floor(t/3600),m=Math.floor(t%3600/60),
 x=t%60,d2=n=>String(n).padStart(2,'0');return h?`${h} h ${d2(m)} min ${d2(x)} s`:m?`${m} min ${d2(x)} s`:`${x} s`;};const hms=s=>{const t=Math.max(0,Math.round(Number(s||0)));
 return Math.floor(t/3600)+':'+String(Math.floor(t%3600/60)).padStart(2,'0')+':'+String(t%60).padStart(2,'0');};const porCodigo=(a,b)=>(a.codigo||'').localeCompare(b.codigo||'');
@@ -915,8 +922,8 @@ const miembros=()=>S.perfiles.filter(p=>p.rol==='asesor'&&(veTodo()||p.coordinad
 const staffEst=()=>esF()?S.perfiles.filter(p=>['formador','gtr'].includes(p.rol)).sort((a,b)=>(a.nombre||a.codigo||'').localeCompare(b.nombre||b.codigo||'')):[];
 function textoEstado(){const e=S.estadoMio;if(!e||!e.desde)return'';const d=new Date(e.desde);return'Desde las '+d.toLocaleTimeString('es-PE',{hour:'numeric',
 minute:'2-digit',hour12:true})+' · '+fmtS((Date.now()-d.getTime())/1000);}
-const EST_ICO={activo:'🟢',bano:'🚻',break:'☕',capacitacion:'📚',desconectado:'⚫'};let estMenuAbierto=false;function estadoTopHTML(){if(!tieneEstado()||!S.uid)return'';
-const e=(S.estadoMio&&S.estadoMio.estado)||'activo';const t=S.estadoMio&&S.estadoMio.desde?fmtS((Date.now()-new Date(S.estadoMio.desde).getTime())/1000):'';
+const EST_ICO={activo:'🟢',bano:'🚻',break:'☕',capacitacion:'📚',feedback:'💬',reunion:'👥',desconectado:'⚫'};let estMenuAbierto=false;function estadoTopHTML(){
+if(!tieneEstado()||!S.uid)return'';const e=(S.estadoMio&&S.estadoMio.estado)||'activo';const t=S.estadoMio&&S.estadoMio.desde?fmtS((Date.now()-new Date(S.estadoMio.desde).getTime())/1000):'';
 return`<div class="mi-est-wrap"><button class="mi-est e-${e}" data-act="est-menu" aria-expanded="${estMenuAbierto}" title="Cambiar mi estado">
       <i class="pulso"></i><span class="mi-est-tx"><small>MI ESTADO</small><b>${EST_ICO[e]||''} ${esc((EST_NOM[e]||e).toUpperCase())}</b></span><span class="mi-est-t" id="est-top-t">${esc(t)}</span><span class="car">▾</span></button>
     ${estMenuAbierto?`<div class="est-menu" role="menu"><p>Elige tu estado actual</p>${ESTADOS.map(([k,l])=>`<button class="e-${k} ${e===k?'on':''}" data-act="estado" data-id="${k}" role="menuitem"><span>${EST_ICO[k]||''}</span>${esc(l)}${e===k?'<em>actual</em>':''}</button>`).join('')}</div>`:''}</div>`;
@@ -931,8 +938,8 @@ async function cambiarEstado(k){if(S.estadoMio&&S.estadoMio.estado===k)return;co
 S.estadoMio={estado:k,desde:new Date().toISOString()};estMenuAbierto=false;dibujarTop();dibujarMenu();}
 async function marcarDesconectado(){if(S.uid&&tieneEstado()){try{await sb.rpc('cambiar_estado',{p_estado:'desconectado'});}catch(e){}}}
 const MANTENER_PANTALLA=true;let ultimoLatido=0,ultimoTick=Date.now(),fallosLatido=0,wakeLock=null;async function latir(){if(!S.uid||!tieneEstado())return;
-ultimoLatido=Date.now();try{const{error}=await sb.rpc('latido');if(error)throw error;fallosLatido=0;avisoConexion('red',false);}catch(e){if(++fallosLatido>=2)avisoConexion('red',
-true);}}
+ultimoLatido=Date.now();try{const{data,error}=await sb.rpc('latido');if(error)throw error;fallosLatido=0;avisoConexion('red',false);if(data==='desconectado'&&S.estadoMio&&S.estadoMio.estado!=='desconectado'){
+await cargarHorario();if(S.uid&&!S.salidaPendiente){await iniciarEstado();dibujarTop();}}}catch(e){if(++fallosLatido>=2)avisoConexion('red',true);}}
 function vigilarConexion(){const ahora=Date.now(),pausa=ahora-ultimoTick;ultimoTick=ahora;if(!S.uid||!tieneEstado())return;avisoConexion('internet',navigator.onLine===false);
 if(pausa>170000)avisoPausa(pausa);if(ahora-ultimoLatido>=85000||pausa>60000)latir();}
 try{const w=new Worker(URL.createObjectURL(new Blob(['setInterval(function(){postMessage(0)},15000)'],{type:'text/javascript'})));w.onmessage=vigilarConexion;
@@ -1172,10 +1179,10 @@ const enVivo=pend.length?`<div class="scroll" style="max-height:300px"><table cl
         <td>${pendiente(a)?'<span class="chipE e-capacitacion">Pendiente</span>':a.resolucion==='computadora'?`<span class="chipE e-activo">💻 Volvió a computadora</span><br><small class="meta">${esc(fechaHora(a.resuelta_en))}</small>`:`<span class="chipE e-bano">✓ Validada</span><br><small class="meta">${esc((a.resuelta_por_nombre||'')+' · '+fechaHora(a.resuelta_en))}</small>`}</td></tr>`).join('')}
       </tbody></table></div></details>`:'';return`<section class="card alerta-acc ${pend.length?'hay':''}" style="margin-bottom:18px"><h3>📱 Alertas de acceso desde celular ${pend.length?`<span class="chipE e-capacitacion">${pend.length} pendiente${pend.length>1?'s':''}</span>`:''}</h3>
     ${enVivo}${historial}</section>`;}
-const alertaHoy=()=>new Set((S.est.alertas||[]).filter(pendiente).map(a=>a.user_id));Object.assign(S.p,{edias:'7',ea:'',ec:'',eu:''});const EST_VIVO=['activo',
-'capacitacion','break','bano','desconectado'];const NOM_AREA_C={tecnico:'Técnico',administrativo:'Administrativo'};const nomCoord=m=>{const c=per(m.coordinador_id);
-return c?(c.nombre||c.codigo):'Sin coordinador';};const minutos=s=>Math.round(Number(s||0)/60);function rangoEst(){const n=S.p.edias==='hoy'?0:Number(S.p.edias)-1;
-return{desde:diaKey(new Date(Date.now()-n*864e5)),hasta:diaKey(new Date())};}
+const alertaHoy=()=>new Set((S.est.alertas||[]).filter(pendiente).map(a=>a.user_id));Object.assign(S.p,{edias:'hoy',ea:'',ec:'',eu:'',drol:'asesor'});
+const EST_VIVO=['activo','capacitacion','feedback','reunion','break','bano','desconectado'];const NOM_AREA_C={tecnico:'Técnico',administrativo:'Administrativo'};
+const nomCoord=m=>{const c=per(m.coordinador_id);return c?(c.nombre||c.codigo):'Sin coordinador';};const minutos=s=>Math.round(Number(s||0)/60);function rangoEst(){
+const n=S.p.edias==='hoy'?0:Number(S.p.edias)-1;return{desde:diaKey(new Date(Date.now()-n*864e5)),hasta:diaKey(new Date())};}
 function miembrosEst(){return miembros().filter(m=>(!S.p.ea||m.area===S.p.ea)&&(!S.p.ec||(S.p.ec==='sin'?!m.coordinador_id:m.coordinador_id===S.p.ec)));
 }
 function coordsEst(){if(!veTodo()||S.p.ec==='sin')return[];return S.perfiles.filter(p=>p.rol==='coordinador'&&(!S.p.ea||p.area===S.p.ea)&&(!S.p.ec||p.id===S.p.ec)).sort((a,
@@ -1210,7 +1217,7 @@ b)=>EST_VIVO.indexOf(a.e)-EST_VIVO.indexOf(b.e)||porCodigo(a.m,b.m));const cuent
 function resumenHTML(titulo,filas){return`<section class="card" style="margin-bottom:18px"><h3>${titulo}</h3>
     <div class="scroll"><table class="tb"><thead><tr><th>${titulo.includes('coordinador')?'Coordinador':'Área'}</th><th class="num">Asesores</th><th class="num">Activos ahora</th><th class="num">En pausa ahora</th><th class="num">Desconectados</th>${EST_ORD.map(k=>`<th class="num">${EST_NOM[k]}</th>`).join('')}<th class="num">Total</th><th class="num">% Activo</th></tr></thead><tbody>
     ${filas.map(f=>`<tr><td>${esc(f.nombre)}${f.sub?`<br><small class="meta">${esc(f.sub)}</small>`:''}</td><td class="num">${f.r.n}</td><td class="num">${f.r.ahora.activo}</td><td class="num">${f.r.ahora.pausa}</td><td class="num">${f.r.ahora.desconectado}</td>
-      ${EST_ORD.map(k=>`<td class="num">${f.r.t[k]?fmtS(f.r.t[k]):'—'}</td>`).join('')}<td class="num"><b>${totalDe(f.r.t)?fmtS(totalDe(f.r.t)):'—'}</b></td><td class="num">${totalDe(f.r.t)?pctAct(f.r.t)+'%':'—'}</td></tr>`).join('')||'<tr><td colspan="11">Sin datos.</td></tr>'}
+      ${EST_ORD.map(k=>`<td class="num">${f.r.t[k]?fmtS(f.r.t[k]):'—'}</td>`).join('')}<td class="num"><b>${totalDe(f.r.t)?fmtS(totalDe(f.r.t)):'—'}</b></td><td class="num">${totalDe(f.r.t)?pctAct(f.r.t)+'%':'—'}</td></tr>`).join('')||`<tr><td colspan="${7+EST_ORD.length}">Sin datos.</td></tr>`}
     </tbody></table></div></section>`;}
 function resumenesHTML(ms){if(!veTodo())return'';const vm=mapaVivo(),tm=totalesPorPersona();const porArea=!S.p.ea?resumenHTML('Resumen por área',Object.entries(AREAS_EQUIPO).map(([k,
 l])=>({nombre:l,r:resumenGrupo(ms.filter(m=>m.area===k),vm,tm)}))):'';return porArea+resumenHTML('Resumen por coordinador',gruposCoord(ms).map(g=>({nombre:g.nombre,
@@ -1224,29 +1231,41 @@ l])=>`<option value="${v}" ${S.p.edias===v?'selected':''}>${l}</option>`).join('
       <select id="pec" aria-label="Coordinador"><option value="">Todos los coordinadores</option>${coords.map(c=>`<option value="${c.id}" ${S.p.ec===c.id?'selected':''}>${esc(c.nombre||c.codigo)}${S.p.ea?'':' ('+(NOM_AREA_C[c.area]||'sin área')+')'}</option>`).join('')}<option value="sin" ${S.p.ec==='sin'?'selected':''}>Sin coordinador</option></select>`:''}
       <button class="btn ghost sm" data-act="est-act">↻ Actualizar</button>
       ${puedeDescargar()?'<button class="btn add sm" data-act="xls-est">Descargar Excel</button>':''}
+      ${esTodo()?'<button class="btn sm herr" data-act="desc-roles">⏻ Desconectar por rol</button><button class="btn danger sm" data-act="reset-tiempos">🗑 Reiniciar tiempos</button>':''}
       <span class="envivo" id="est-hora">En vivo${hora?' · actualizado '+hora:''}</span></div>`;const tabla=ms.slice().sort(porCodigo).map(m=>{const t=tm.get(m.id)||{
 },tot=totalDe(t);return`<tr><td>${esc(quien(m))}</td>${V?`<td>${esc(NOM_AREA_C[m.area]||'Sin área')}</td><td>${esc(nomCoord(m))}</td>`:''}${EST_ORD.map(k=>`<td class="num">${t[k]?fmtS(t[k]):'—'}</td>`).join('')}<td class="num"><b>${tot?fmtS(tot):'—'}</b></td><td class="num">${tot?pctAct(t)+'%':'—'}</td></tr>`;
-}).join('');const ids=new Set(ms.map(m=>m.id)),dm=new Map();S.est.det.filter(r=>ids.has(r.user_id)&&(!S.p.eu||r.user_id===S.p.eu)).forEach(r=>{if(!dm.has(r.dia))dm.set(r.dia,
+}).join('');const ley=`<div class="leyE">${EST_ORD.map(e=>`<span style="--c:${EST_COL[e]}">${EST_NOM[e]}</span>`).join('')}</div>`;const cols=(V?5:3)+EST_ORD.length;
+const rango=`${esF()?'Asesores, coordinadores, formadores y GTR':V?'Asesores y coordinadores':'Tus asesores asignados'} · del ${esc(diaLargo(desde))} al ${esc(diaLargo(hasta))}`;
+const card=(titulo,cuerpo,id)=>`<section class="card" style="margin-bottom:18px"><h3>${titulo}</h3>${id?`<div id="${id}">${cuerpo}</div>`:cuerpo}</section>`;
+const thP=`${EST_ORD.map(k=>`<th class="num">${EST_NOM[k]}</th>`).join('')}<th class="num">Total</th><th class="num">% Activo</th>`;const vivo={asesores:card('Asesores en este momento',
+vivoHTML(ms),'est-vivo'),coords:V?card('Coordinadores en este momento',coordVivoHTML(cs),'est-coord'):'',staff:esF()?card('Formadores y GTR en este momento',
+staffVivoHTML(),'est-staff'):''};const periodo={asesores:card('Tiempo por estado en el periodo (asesores)',`${ley}<div class="scroll"><table class="tb"><thead><tr><th>Asesor</th>${V?'<th>Área</th><th>Coordinador</th>':''}${thP}</tr></thead><tbody>${tabla||`<tr><td colspan="${cols}">No hay asesores con estos filtros.</td></tr>`}</tbody></table></div>`),
+coords:V?card('Tiempo por estado en el periodo (coordinadores)',`${ley}<div class="scroll"><table class="tb"><thead><tr><th>Coordinador</th><th>Área</th>${thP}</tr></thead><tbody>${coordPeriodoHTML(cs)}</tbody></table></div>`):'',
+staff:esTodo()?card('Tiempo por estado en el periodo (formadores y GTR)',`${ley}<div class="scroll"><table class="tb"><thead><tr><th>Persona</th><th>Rol</th>${thP}</tr></thead><tbody>${staffPeriodoHTML()}</tbody></table></div>`):''};
+const orden=esF()?['staff','coords','asesores']:['asesores','coords','staff'];return`<p class="meta" style="margin:0 0 12px">${rango}</p>
+    ${filtros}
+    ${orden.map(k=>vivo[k]).join('')}
+    <div id="est-res">${resumenesHTML(ms)}</div>
+    ${orden.map(k=>periodo[k]).join('')}
+    ${tiempoPorDiaHTML(ms,ley)}`;}
+function staffPeriodoHTML(){const tm=totalesPorPersona();return staffEst().map(p=>{const t=tm.get(p.id)||{},tot=totalDe(t);return`<tr><td>${esc(quien(p))}</td><td>${esc(ROLES[p.rol])}</td>${EST_ORD.map(k=>`<td class="num">${t[k]?fmtS(t[k]):'—'}</td>`).join('')}<td class="num"><b>${tot?fmtS(tot):'—'}</b></td><td class="num">${tot?pctAct(t)+'%':'—'}</td></tr>`;
+}).join('')||`<tr><td colspan="${EST_ORD.length+4}">No hay formadores ni GTR.</td></tr>`;}
+function rolesDia(){if(esF())return['asesor','coordinador','formador','gtr'];if(veTodo())return['asesor','coordinador'];return['asesor'];}
+function personasDia(rol,ms){if(rol==='asesor')return ms.slice().sort(porCodigo);if(rol==='coordinador')return S.perfiles.filter(p=>p.rol==='coordinador'&&(!S.p.ea||p.area===S.p.ea)).sort(porCodigo);
+return staffEst().filter(p=>p.rol===rol);}
+function tiempoPorDiaHTML(ms,ley){const roles=rolesDia();if(!roles.includes(S.p.drol))S.p.drol=roles[0];const gente=personasDia(S.p.drol,ms);if(S.p.eu&&!gente.some(p=>p.id===S.p.eu))S.p.eu='';
+const ids=new Set(gente.map(p=>p.id)),dm=new Map();S.est.det.filter(r=>ids.has(r.user_id)&&(!S.p.eu||r.user_id===S.p.eu)).forEach(r=>{if(!dm.has(r.dia))dm.set(r.dia,
 {u:new Set()});const d=dm.get(r.dia);d.u.add(r.user_id);d[r.estado]=(d[r.estado]||0)+Number(r.segundos);});const val=(d,k)=>(d[k]||0)/(S.p.eu?1:(d.u.size||1));
 const dias=[...dm.keys()].sort().reverse();const maxT=Math.max(1,...dias.map(k=>EST_ORD.reduce((s,e)=>s+val(dm.get(k),e),0)));const filasD=dias.map(k=>{
 const d=dm.get(k),tot=EST_ORD.reduce((s,e)=>s+val(d,e),0);return`<tr><td>${esc(diaLargo(k))}</td>${EST_ORD.map(e=>`<td class="num">${d[e]?fmtS(val(d,e)):'—'}</td>`).join('')}<td class="num"><b>${fmtS(tot)}</b></td>
       <td><div class="apil" style="width:${Math.max(8,tot*100/maxT)}%">${EST_ORD.map(e=>`<i style="width:${tot?val(d,e)*100/tot:0}%;background:${EST_COL[e]}" title="${EST_NOM[e]}: ${fmtS(val(d,
-e))}"></i>`).join('')}</div></td></tr>`;}).join('');const ley=`<div class="leyE">${EST_ORD.map(e=>`<span style="--c:${EST_COL[e]}">${EST_NOM[e]}</span>`).join('')}</div>`;
-const cols=V?9:7;const rango=`${esF()?'Asesores, coordinadores, formadores y GTR':V?'Asesores y coordinadores':'Tus asesores asignados'} · del ${esc(diaLargo(desde))} al ${esc(diaLargo(hasta))}`;
-return`<p class="meta" style="margin:0 0 12px">${rango}</p>
-    ${filtros}
-    <section class="card" style="margin-bottom:18px"><h3>Estados en este momento</h3><div id="est-vivo">${vivoHTML(ms)}</div></section>
-    ${V?`<section class="card" style="margin-bottom:18px"><h3>Coordinadores en este momento</h3><div id="est-coord">${coordVivoHTML(cs)}</div></section>`:''}
-    ${esF()?`<section class="card" style="margin-bottom:18px"><h3>Formadores y GTR en este momento</h3><div id="est-staff">${staffVivoHTML()}</div></section>`:''}
-    <div id="est-res">${resumenesHTML(ms)}</div>
-    <section class="card" style="margin-bottom:18px"><h3>Tiempo por estado en el periodo (por asesor)</h3>${ley}
-      <div class="scroll"><table class="tb"><thead><tr><th>Asesor</th>${V?'<th>Área</th><th>Coordinador</th>':''}${EST_ORD.map(k=>`<th class="num">${EST_NOM[k]}</th>`).join('')}<th class="num">Total</th><th class="num">% Activo</th></tr></thead><tbody>${tabla||`<tr><td colspan="${cols}">No hay asesores con estos filtros.</td></tr>`}</tbody></table></div></section>
-    ${V?`<section class="card" style="margin-bottom:18px"><h3>Tiempo por estado en el periodo (coordinadores)</h3>${ley}
-      <div class="scroll"><table class="tb"><thead><tr><th>Coordinador</th><th>Área</th>${EST_ORD.map(k=>`<th class="num">${EST_NOM[k]}</th>`).join('')}<th class="num">Total</th><th class="num">% Activo</th></tr></thead><tbody>${coordPeriodoHTML(cs)}</tbody></table></div></section>`:''}
-    <section class="card" style="margin-bottom:18px"><h3>Tiempo por día (asesores)</h3>
-      <div class="filtros"><select id="peu" aria-label="Asesor" style="flex:1;min-width:240px"><option value="">Todos (promedio por asesor)</option>${ms.slice().sort(porCodigo).map(m=>`<option value="${m.id}" ${S.p.eu===m.id?'selected':''}>${esc(quien(m))}</option>`).join('')}</select></div>
-      ${ley}<div class="scroll"><table class="tb"><thead><tr><th>Día</th>${EST_ORD.map(k=>`<th class="num">${EST_NOM[k]}</th>`).join('')}<th class="num">Total</th><th></th></tr></thead><tbody>${filasD||'<tr><td colspan="7">Aún no hay tiempos registrados en este periodo.</td></tr>'}</tbody></table></div>
-      <p class="meta" style="margin-top:8px">Se miden Activo, Baño, Break y Capacitación mientras el asesor tiene la página abierta. Los estados de arriba se actualizan solos, sin recargar; los totales del periodo, con ↻ Actualizar o al cambiar el periodo.</p></section>`;
+e))}"></i>`).join('')}</div></td></tr>`;}).join('');const PLURAL={asesor:'asesores',coordinador:'coordinadores',formador:'formadores',gtr:'GTR'};return`<section class="card" style="margin-bottom:18px"><h3>Tiempo por día</h3>
+      <div class="filtros">
+        <select id="pdrol" aria-label="Tipo de rol" ${roles.length<2?'disabled':''}>${roles.map(r=>`<option value="${r}" ${S.p.drol===r?'selected':''}>${esc(ROLES[r]==='GTR'?'GTR':ROLES[r]+(r==='asesor'?'es':'es'))}</option>`).join('')}</select>
+        <select id="peu" aria-label="Persona" style="flex:1;min-width:240px"><option value="">Todos los ${PLURAL[S.p.drol]} (promedio por persona)</option>${gente.map(p=>`<option value="${p.id}" ${S.p.eu===p.id?'selected':''}>${esc(quien(p))}</option>`).join('')}</select>
+      </div>
+      ${ley}<div class="scroll"><table class="tb"><thead><tr><th>Día</th>${EST_ORD.map(k=>`<th class="num">${EST_NOM[k]}</th>`).join('')}<th class="num">Total</th><th></th></tr></thead><tbody>${filasD||`<tr><td colspan="${EST_ORD.length+3}">Aún no hay tiempos registrados en este periodo.</td></tr>`}</tbody></table></div>
+      <p class="meta" style="margin-top:8px">Se miden ${EST_ORD.map(k=>EST_NOM[k]).join(', ').replace( /, ([^,]*)$/ ,' y $1')} mientras la persona tiene la página abierta. % Activo = tiempo en Activo ÷ tiempo total medido. Los estados de arriba se actualizan solos; los totales del periodo, con ↻ Actualizar o al cambiar el periodo.</p></section>`;
 }
 function pintarEstados(soloVivo){const cont=$('#pnl-estados');if(!cont||!S.est.ok)return;const enFiltro=cont.contains(document.activeElement)&&document.activeElement.tagName==='SELECT';
 if(soloVivo||enFiltro){const ms=miembrosEst();const v=$('#est-vivo');if(v){const sc=v.querySelector('.scroll'),top=sc?sc.scrollTop:0;v.innerHTML=vivoHTML(ms);
@@ -1336,11 +1355,25 @@ return`<div class="scroll" style="max-height:300px"><table class="tb"><thead><tr
     ${filas.map(f=>`<tr><td>${esc(quien(f.p))}${f.p.id===S.uid?' <small class="meta">(tú)</small>':''}</td><td>${esc(ROLES[f.p.rol])}</td><td><span class="chipE e-${f.e}">${EST_NOM[f.e]}</span></td><td>${horaDesde(f.desde,
 f.e)}</td>${celdaTiempo(f.desde,f.e)}</tr>`).join('')||'<tr><td colspan="5">No hay formadores ni GTR.</td></tr>'}
     </tbody></table></div>`;}
-Object.assign(ACC,{estado:id=>cambiarEstado(id),'est-menu':()=>{estMenuAbierto=!estMenuAbierto;dibujarTop();},'ex-tipo':(id,el)=>{const p=EXE&&EXE.preguntas[Number(id)];
-if(!p)return;p.tipo=el.dataset.t;if(p.tipo==='opcion'&&p.opciones.length<2)p.opciones=['',''];renderEditor();},'calif-lista':id=>calificarListaDlg(id||null),
-calif:id=>calificarDlg(id),'cal-max':(id,el)=>{const i=exd.querySelector(`[data-cal="${id}"]`);if(i){i.value=i.max;previaCalificacion();}},'cal-cero':(id,
-el)=>{const i=exd.querySelector(`[data-cal="${id}"]`);if(i){i.value=0;previaCalificacion();}},'calif-guardar':(id,el)=>guardarCalificacion(el),horario:()=>{
-if(!esTodo())return;const inf=S.horarioInfo;form('Horario de atención',[{k:'_n',t:'nota',l:'Fuera de este horario nadie puede ingresar, excepto Formadores y Todopoderoso. Cinco minutos antes del cierre aparece un aviso y a la hora de cierre se cierran las sesiones. El cambio les llega a todos al instante.'+(inf&&inf.actualizado_por?` Último cambio: ${inf.actualizado_por}, ${fechaHora(inf.actualizado)}.`:'')},
+Object.assign(ACC,{estado:id=>cambiarEstado(id),'est-menu':()=>{estMenuAbierto=!estMenuAbierto;dibujarTop();},'desc-roles':()=>{if(!esTodo())return;const vm=mapaVivo(),
+con=r=>S.perfiles.filter(p=>p.rol===r&&estadoAhora(vm.get(p.id)).e!=='desconectado').length;const ops=['formador','supervisor','gtr','coordinador','asesor'].map(r=>[r,
+`${ROLES[r]}${r==='supervisor'?' (no registra estado; se cierra su sesión si está abierta)':` (${con(r)} conectado${con(r)===1?'':'s'} ahora)`}`]);form('Desconectar por rol',
+[{k:'_n',t:'nota',l:'Cierra la sesión de todas las personas de los roles que marques que tengan el portal abierto. Quedan como Desconectadas y ven el mensaje "La administración cerró tu sesión". Pueden volver a entrar dentro del horario. Si alguien está rindiendo un examen, se le deja terminar.'},
+{k:'roles',t:'checks',l:'Roles a desconectar',o:ops}],async o=>{if(!o.roles.length)throw new Error('Marca al menos un rol.');if(!confirm(`¿Desconectar ahora a: ${o.roles.map(r=>ROLES[r]).join(', ')}?`))throw new Error('Cancelado.');
+const{data,error}=await sb.rpc('desconectar_roles',{p_roles:o.roles});if(error)throw /desconectar_roles/ .test(error.message||'')?new Error('Falta ejecutar el SQL de cambios 10 en Supabase.'):error;
+cargarEstadosPanel();return()=>alert(`Listo: se desconectó a ${data} persona${data===1?'':'s'} con estado activo. Las sesiones abiertas de esos roles se cerrarán en unos segundos.`);
+});},'reset-tiempos':()=>{if(!esTodo())return;const hoy=diaKey(new Date());form('Reiniciar tiempos',[{k:'_n',t:'nota',l:'Borra los tiempos registrados (Activo, Baño, Break, Capacitación, Feedback y Reunión) de los roles que marques, entre las fechas indicadas (ambas incluidas). NO SE PUEDE DESHACER: si necesitas un respaldo, descarga antes el Excel.'},
+{k:'roles',t:'checks',l:'Roles',o:[['asesor','Asesores'],['coordinador','Coordinadores'],['gtr','GTR'],['formador','Formadores'],['supervisor','Supervisores (solo historial anterior)']]},
+{k:'desde',l:'Desde el día',t:'date',req:1},{k:'hasta',l:'Hasta el día',t:'date',req:1},{k:'conf',l:'Para confirmar, escribe BORRAR',p:'BORRAR',req:1}],
+async o=>{if(!o.roles.length)throw new Error('Marca al menos un rol.');if(!o.desde||!o.hasta||o.desde>o.hasta)throw new Error('Revisa las fechas: la inicial debe ser anterior o igual a la final.');
+if(String(o.conf).trim().toUpperCase()!=='BORRAR')throw new Error('Escribe BORRAR para confirmar.');const{data,error}=await sb.rpc('resetear_tiempos',
+{p_roles:o.roles,p_desde:o.desde,p_hasta:o.hasta});if(error)throw /resetear_tiempos/ .test(error.message||'')?new Error('Falta ejecutar el SQL de cambios 10 en Supabase.'):error;
+S.est.ok=false;cargarEstadosPanel();return()=>alert(`Listo: se reiniciaron los tiempos (${data} tramo${data===1?'':'s'} borrado${data===1?'':'s'}).`);
+},{desde:hoy,hasta:hoy});},'ex-tipo':(id,el)=>{const p=EXE&&EXE.preguntas[Number(id)];if(!p)return;p.tipo=el.dataset.t;if(p.tipo==='opcion'&&p.opciones.length<2)p.opciones=['',
+''];renderEditor();},'calif-lista':id=>calificarListaDlg(id||null),calif:id=>calificarDlg(id),'cal-max':(id,el)=>{const i=exd.querySelector(`[data-cal="${id}"]`);
+if(i){i.value=i.max;previaCalificacion();}},'cal-cero':(id,el)=>{const i=exd.querySelector(`[data-cal="${id}"]`);if(i){i.value=0;previaCalificacion();
+}},'calif-guardar':(id,el)=>guardarCalificacion(el),horario:()=>{if(!esTodo())return;const inf=S.horarioInfo;form('Horario de atención',[{k:'_n',t:'nota',
+l:'Fuera de este horario nadie puede ingresar, excepto Formadores y Todopoderoso. Cinco minutos antes del cierre aparece un aviso y a la hora de cierre se cierran las sesiones. El cambio les llega a todos al instante.'+(inf&&inf.actualizado_por?` Último cambio: ${inf.actualizado_por}, ${fechaHora(inf.actualizado)}.`:'')},
 {k:'ini',l:'Abre a las (hora de Perú)',t:'time',req:1},{k:'fin',l:'Cierra a las (hora de Perú)',t:'time',req:1}],async o=>{if(!o.ini||!o.fin)throw new Error('Completa las dos horas.');
 if(o.ini>=o.fin)throw new Error('La hora de apertura debe ser anterior a la de cierre.');const{error}=await sb.rpc('guardar_horario',{p_inicio:o.ini,p_fin:o.fin});
 if(error)throw /guardar_horario/ .test(error.message||'')?new Error('Falta ejecutar el SQL de cambios 09 en Supabase.'):error;await cargarHorario();return()=>alert('Horario actualizado: '+textoHorario().replace('Horario de atención: ',
@@ -1374,11 +1407,12 @@ if(!r.error){S.materiales=r.data;await firmarArchivos();}},bloques:async()=>{con
 const r=await ordT('categorias','orden');if(!r.error)S.cats=r.data;},estado_sitio:async()=>{const r=await sb.from('estado_sitio').select('*').eq('id',
 1).maybeSingle();if(!r.error)S.estado=r.data;},perfiles:async()=>{if(!esPanel())return;const r=await sb.from('perfiles').select('*');if(!r.error)S.perfiles=r.data;
 },examenes:async()=>{const r=await sb.from('examenes').select('*').order('creado',{ascending:false});if(!r.error)S.examenes=r.data;},examen_preguntas:async()=>{
-},ajustes:async()=>{await cargarHorario();revisarHorario();}};RECARGA.temas=RECARGA.grupos;const APLICAR={noticia_vistos:'vistos',noticia_omisiones:'omisiones',
-noticia_preguntas:'preguntas',examen_intentos:'intentos'};const claveFila=r=>r.id!=null?'i'+r.id:r.noticia_id+'|'+r.user_id;function aplicarFila(arr,fila){
-const l=S[arr]||(S[arr]=[]),k=claveFila(fila),i=l.findIndex(x=>claveFila(x)===k);if(i>=0)l[i]={...l[i],...fila};else l.push(fila);}
-const pendTablas=new Set();function alCambioTabla(p){const t=p.table;if(APLICAR[t]&&p.eventType!=='DELETE'&&p.new&&Object.keys(p.new).length){aplicarFila(APLICAR[t],
-p.new);programarRefresco(null);return;}
+},ajustes:async()=>{await cargarHorario();}};RECARGA.temas=RECARGA.grupos;const APLICAR={noticia_vistos:'vistos',noticia_omisiones:'omisiones',noticia_preguntas:'preguntas',
+examen_intentos:'intentos'};const claveFila=r=>r.id!=null?'i'+r.id:r.noticia_id+'|'+r.user_id;function aplicarFila(arr,fila){const l=S[arr]||(S[arr]=[]),
+k=claveFila(fila),i=l.findIndex(x=>claveFila(x)===k);if(i>=0)l[i]={...l[i],...fila};else l.push(fila);}
+const pendTablas=new Set();function alCambioTabla(p){const t=p.table;if(t==='ajustes'&&p.new&&Object.keys(p.new).length){aplicarAjustes(p.new);return;
+}
+if(APLICAR[t]&&p.eventType!=='DELETE'&&p.new&&Object.keys(p.new).length){aplicarFila(APLICAR[t],p.new);programarRefresco(null);return;}
 pendTablas.add(RECARGA[t]||APLICAR[t]?t:'*');programarRefresco(null);}
 function programarRefresco(modo){if(modo===undefined)pendTablas.add('*');clearTimeout(temporizador);temporizador=setTimeout(async()=>{if(!S.uid)return;
 if(dlg.open||exd.open||['q','qn'].includes(document.activeElement?.id)){programarRefresco(null);return;}
@@ -1391,7 +1425,7 @@ alCambioEstado();return;}
 if(p.table==='acceso_alertas'){alCambioAlerta();return;}
 if(p.table==='estado_actual'||p.table==='estado_log')return;alCambioTabla(p);}).subscribe();}
 async function entrar(ses){S.uid=ses.user.id;S.cargando=true;S.error='';hechasCargar();S.vista=location.hash.slice(1)||'inicio';document.body.classList.remove('locked');
-dibujar();try{await cargarPerfil();await cargarHorario();if(conHorario()&&!enHorario()){motivoSalida=`El portal está fuera de horario. ${textoHorario()}`;
+dibujar();try{await cargarPerfil();await cargarHorario(true);if(conHorario()&&!enHorario()){motivoSalida=`El portal está fuera de horario. ${textoHorario()}`;
 await sb.auth.signOut({scope:'local'});return;}
 revisarTactil();await iniciarEstado();await cargar();}catch(e){S.error=msg(e);}
 S.cargando=false;if(!veMateriales()&&temaDe(S.vista))S.vista='inicio';if(!abrirDe(S.vista)&&S.cats[0])S.abiertos['cat:'+S.cats[0].id]=true;dibujar();iniciarTiempoReal();
@@ -1399,7 +1433,7 @@ revisarHorario();if(tieneEstado()){retenerPagina();pedirPantalla();latir();}}
 function salir(){S.uid=null;S.rol=null;S.codigo='';S.nombre='';S.vista='inicio';S.cargando=true;S.error='';S.accesos=[];S.menu=[];S.cats=[];S.noticias=[];
 S.materiales=[];S.bloques=[];S.vistos=[];S.preguntas=[];S.perfiles=[];S.estado=null;S.omisiones=[];S.hechas=new Set();S.examenes=[];S.intentos=[];S.estadoMio=null;
 S.area=null;S.enExamen=false;S.sinExamenes=false;RE=null;clearInterval(RE_T);if(alerta.open)alerta.close();S.f={q:'',cat:'',dia:''};S.p={dias:'30',cat:'',
-noticia:'',edias:'7',ea:'',ec:'',eu:''};S.est={vivo:[],det:[],alertas:[],ok:false,hora:null};try{sb.removeAllChannels();}catch(e){}
+noticia:'',edias:'hoy',ea:'',ec:'',eu:'',drol:'asesor'};S.est={vivo:[],det:[],alertas:[],ok:false,hora:null};try{sb.removeAllChannels();}catch(e){}
 tiempoReal=false;FIRMAS.clear();if(dlg.open)dlg.close();if(exd.open)exd.close();history.replaceState(null,'',location.pathname+location.search);$('#gform').reset();
 $('#gform').clave.type='password';gerr('');avisoCierre(false);soltarPantalla();estMenuAbierto=false;['aviso-red','aviso-internet','aviso-pausa'].forEach(id=>{
 const x=document.getElementById(id);if(x)x.remove();});mostrarGate();}
@@ -1414,16 +1448,26 @@ window.addEventListener('hashchange',()=>{if(!S.uid)return;const id=location.has
 return a*60+b;};function minutosPeru(){const p=new Intl.DateTimeFormat('en-GB',{timeZone:'America/Lima',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(new Date());
 return Number(p.find(x=>x.type==='hour').value)*60+Number(p.find(x=>x.type==='minute').value);}
 const enHorario=()=>{const m=minutosPeru();return m>=aMin(HORA_INICIO)&&m<aMin(HORA_FIN);};const hora12=h=>{const[a,b]=h.split(':').map(Number);return`${(a%12)||12}:${String(b).padStart(2,
-'0')} ${a<12?'a. m.':'p. m.'}`;};const textoHorario=()=>`Horario de atención: de ${hora12(HORA_INICIO)} a ${hora12(HORA_FIN)}`;async function cargarHorario(){
-if(!sb)return;try{const{data,error}=await sb.from('ajustes').select('hora_inicio,hora_fin,actualizado,actualizado_por').eq('id',1).maybeSingle();if(!error&&data){
-HORA_INICIO=String(data.hora_inicio).slice(0,5);HORA_FIN=String(data.hora_fin).slice(0,5);S.horarioInfo=data;}}catch(e){}
+'0')} ${a<12?'a. m.':'p. m.'}`;};const textoHorario=()=>`Horario de atención: de ${hora12(HORA_INICIO)} a ${hora12(HORA_FIN)}`;async function cargarHorario(base){
+if(!sb)return;try{const{data,error}=await sb.from('ajustes').select('*').eq('id',1).maybeSingle();if(!error&&data)aplicarAjustes(data,base);}catch(e){
+}
 const g=$('#ghorario');if(g)g.textContent=textoHorario();}
+function aplicarAjustes(d,base){if(d.hora_inicio){HORA_INICIO=String(d.hora_inicio).slice(0,5);HORA_FIN=String(d.hora_fin).slice(0,5);}
+S.horarioInfo=d;const g=$('#ghorario');if(g)g.textContent=textoHorario();const sal=d.salida_forzada&&d.salida_forzada.en||null;if(base||!S.uid){S.exCambio=d.examenes_cambio||null;
+S.salidaVista=sal;return;}
+if((d.examenes_cambio||null)!==S.exCambio){S.exCambio=d.examenes_cambio||null;pendTablas.add('examenes');programarRefresco(null);}
+if(sal&&sal!==S.salidaVista){S.salidaVista=sal;if((d.salida_forzada.roles||[]).includes(S.rol)&&!esTodo())forzarSalida();}
+revisarHorario();}
+async function forzarSalida(){if(S.enExamen){S.salidaPendiente=true;return;}
+S.salidaPendiente=false;motivoSalida='La administración cerró tu sesión. Puedes volver a ingresar cuando te lo indiquen.';avisoCierre(false);await sb.auth.signOut({
+scope:'local'});}
 const conHorario=()=>!!S.rol&&!SIN_HORARIO.includes(S.rol);let motivoSalida='';async function cerrarPorHorario(){motivoSalida=`El portal está fuera de horario. ${textoHorario()}`;
 avisoCierre(false);await marcarDesconectado();await sb.auth.signOut({scope:'local'});}
 function avisoCierre(ver){let a=$('#aviso-cierre');if(!ver){if(a)a.remove();return;}
 if(a)return;a=document.createElement('div');a.id='aviso-cierre';a.setAttribute('role','alert');a.innerHTML=`⏰ El portal se cerrará a las <b>${hora12(HORA_FIN)}</b> Guarda lo que estés haciendo. <button type="button" aria-label="Cerrar aviso">×</button>`;
 a.querySelector('button').onclick=()=>{a.hidden=true;};document.body.appendChild(a);}
-async function revisarHorario(){if(!S.uid||!conHorario())return;if(!enHorario()){if(!S.enExamen)await cerrarPorHorario();return;}
+async function revisarHorario(){if(S.uid&&S.salidaPendiente&&!S.enExamen){forzarSalida();return;}
+if(!S.uid||!conHorario())return;if(!enHorario()){if(!S.enExamen)await cerrarPorHorario();return;}
 const faltan=aMin(HORA_FIN)-minutosPeru();avisoCierre(faltan<=AVISO_MIN);}
 setInterval(revisarHorario,30*1000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)revisarHorario();});iniciar();</script>
 </body>
