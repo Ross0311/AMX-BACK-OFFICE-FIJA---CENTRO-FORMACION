@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Centro de Formación | HITSS</title>
-<link rel="icon" type="image/svg+xml" href="marca.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&display=swap" rel="stylesheet">
@@ -1041,7 +1040,7 @@ ultimoLatido=Date.now();try{const{data,error}=await sb.rpc('latido');if(error)th
 if(data==='desconectado'&&S.estadoMio&&S.estadoMio.estado!=='desconectado'){await cargarHorario();if(S.uid&&!S.salidaPendiente){await iniciarEstado();
 dibujarTop();}}}catch(e){if(++fallosLatido>=2)avisoConexion('red',true);}}
 function vigilarConexion(){const ahora=Date.now(),pausa=ahora-ultimoTick;ultimoTick=ahora;if(!S.uid||!tieneEstado())return;avisoConexion('internet',navigator.onLine===false);
-if(pausa>170000)avisoPausa(pausa);if(ahora-ultimoLatido>=85000||pausa>60000)latir();}
+if(pausa>290000)avisoPausa(pausa);if(ahora-ultimoLatido>=145000||pausa>60000)latir();}
 try{const w=new Worker(URL.createObjectURL(new Blob(['setInterval(function(){postMessage(0)},15000)'],{type:'text/javascript'})));w.onmessage=vigilarConexion;
 }catch(e){}
 setInterval(vigilarConexion,15000);['visibilitychange','focus','pageshow','resume','online'].forEach(ev=>(ev==='visibilitychange'||ev==='resume'?document:window).addEventListener(ev,
@@ -1298,7 +1297,7 @@ f.e)}</td>`:''}</tr>`).join('')||'<tr><td colspan="7">No hay coordinadores con e
     </tbody></table></div>`;}
 function coordPeriodoHTML(cs){const tm=totalesPorPersona();return cs.map(c=>{const t=tm.get(c.id)||{},tot=totalDe(t);return`<tr><td>${esc(quien(c))}</td><td>${esc(NOM_AREA_C[c.area]||'Sin área')}</td>${EST_ORD.map(k=>`<td class="num">${t[k]?fmtS(t[k]):'—'}</td>`).join('')}<td class="num"><b>${tot?fmtS(tot):'—'}</b></td><td class="num">${tot?pctAct(t)+'%':'—'}</td></tr>`;
 }).join('')||`<tr><td colspan="${EST_ORD.length+4}">No hay coordinadores con estos filtros.</td></tr>`;}
-function estadoAhora(r){if(!r||r.estado==='desconectado'||Date.now()-new Date(r.ultimo_latido).getTime()>180000)
+function estadoAhora(r){if(!r||r.estado==='desconectado'||Date.now()-new Date(r.ultimo_latido).getTime()>300000)
 return{e:'desconectado',desde:r?(r.estado==='desconectado'?r.desde:r.ultimo_latido):null};return{e:r.estado,desde:r.desde};}
 const mapaVivo=()=>new Map(S.est.vivo.map(r=>[r.user_id,r]));function totalesPorPersona(){const tm=new Map();S.est.det.forEach(r=>{if(!tm.has(r.user_id))tm.set(r.user_id,
 {});const t=tm.get(r.user_id);t[r.estado]=(t[r.estado]||0)+Number(r.segundos);});return tm;}
