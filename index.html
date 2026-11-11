@@ -1,5 +1,4 @@
-<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>AMX Back Office Fija | Centro de Formación</title>
-<link rel="icon" type="image/svg+xml" href="marca.svg"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&display=swap" rel="stylesheet">
+<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Centro de Formación | HITSS</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&display=swap" rel="stylesheet">
 <style>:root{--navy:#111111;--navy2:#1E1E1E;--teal:#D7192D;--teal-soft:#FCE8EA;--amber:#D7192D;--amber-soft:#FCE8EA;--red:#B3121F;--red-soft:#FBE4E6;--paper:#F4F4F5;--white:#fff;--ink:#111111;--muted:#5F6368;--line:#E2E2E5;--head:'Newsreader',Georgia,'Times New Roman',serif;--body:'Figtree','Segoe UI',Arial,sans-serif;--side:288px}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:var(--body);background:var(--paper);color:var(--ink);line-height:1.55}
@@ -1445,8 +1444,8 @@ function _0x1d97(){if(!_0x1a08.uid||_0x1a3b())return;if(_0x1d8e())_0x1a07.rpc('r
 },()=>{});}
 function _0x1d98(){if(_0x1d8d&&_0x1a08.bloqueoCel){_0x1a34('#gate').hidden=true;_0x1a34('#bloqueo').hidden=false;document.body.classList.add('locked');
 return;}
-_0x1a34('#gcargando').hidden=true;_0x1a34('#gform').hidden=false;document.body.classList.add('locked');_0x1a34('#ghorario').textContent=_0x2636();if(_0x2647){
-_0x1da9(_0x2647);_0x2647='';}}
+_0x1a34('#gcargando').hidden=true;_0x1a34('#gform').hidden=false;document.body.classList.add('locked');_0x1a34('#ghorario').textContent=_0x2636();if(_0x264d){
+_0x1da9(_0x264d);_0x264d='';}}
 const _0x1d99=_0x1d9a=>new Date(_0x1d9a).toLocaleTimeString('es-PE',{hour:'numeric',minute:'2-digit',hour12:true});const _0x1d9b=_0x1d9c=>`Por seguridad, el ingreso con este usuario está bloqueado hasta las ${_0x1d99(_0x1d9c)} por varios intentos fallidos. Si no fuiste tú, avisa a tu coordinador o a la administración.`;
 async function _0x1d9d(){try{const{data:_0x1d9e,error:_0x1d9f}=await _0x1a07.rpc('registrar_ingreso',{p_equipo:_0x1e14()});if(_0x1d9f||!_0x1d9e)return;
 try{sessionStorage.setItem('amx_ing',JSON.stringify(_0x1d9e));}catch(_0x1da0){}
@@ -1909,9 +1908,9 @@ async function _0x2038(){if(_0x1e10()){try{await _0x1a07.rpc('soltar_sesion',{p_
 const _0x203a='Tu usuario se abrió en otro equipo mientras esta sesión estaba inactiva, así que aquí se cerró. Solo se permite una sesión a la vez.';async function _0x203b(){
 if(!_0x1a08.uid||!_0x1e10()&&!_0x1a19())return;_0x1e0c=Date.now();try{let{data:_0x203c,error:_0x203d}=await _0x1a07.rpc('latido_sesion',{p_sesion:_0x1e11()});
 if(_0x203d&& /latido_sesion/ .test(_0x203d.message||''))({data:_0x203c,error:_0x203d}=await _0x1a07.rpc('latido'));if(_0x203d)throw _0x203d;_0x1e0e=0;
-_0x204b('red',false);if(_0x203c==='otra_sesion'){_0x2644(_0x203a);return;}
+_0x204b('red',false);if(_0x203c==='otra_sesion'){_0x2647(_0x203a);return;}
 if(!_0x1a19())return;if(_0x203c&&_0x203c!=='desconectado')_0x1e02(_0x203c);if(_0x203c==='desconectado'&&_0x1a08.estadoMio&&_0x1a08.estadoMio.estado!=='desconectado'){
-await _0x2637();if(_0x1a08.uid&&!_0x1a08.salidaPendiente){if(await _0x1dfe()){_0x2644(_0x1df9);return;}
+await _0x2637();if(_0x1a08.uid&&!_0x1a08.salidaPendiente){if(await _0x1dfe()){_0x2647(_0x1df9);return;}
 await _0x1df3();_0x1ac1();}}}catch(_0x203e){if(++_0x1e0e>=2)_0x204b('red',true);}}
 function _0x203f(){const _0x2040=Date.now(),_0x2041=_0x2040-_0x1e0d;_0x1e0d=_0x2040;if(!_0x1a08.uid)return;if(!_0x1a19()){if(_0x1e10()&&(_0x2040-_0x1e0c>=145000||_0x2041>60000))_0x203b();
 return;}
@@ -2687,22 +2686,22 @@ _0x1c5a();}catch(_0x24af){}},800);}
 function _0x24b0(){if(_0x2484)return;_0x2484=true;_0x1a07.channel('cambios').on('postgres_changes',{event:'*',schema:'public'},_0x24b1=>{if(_0x24b1.table==='callbacks'){
 _0x1e4e(_0x24b1);return;}
 if(_0x24b1.table==='estado_cambio'){if(_0x24b1.new&&_0x24b1.new.user_id===_0x1a08.uid){if(_0x24b1.new.estado==='desconectado'&&_0x1a19())_0x1dfe().then(_0x24b2=>{
-if(_0x24b2)_0x2644(_0x1df9);});else _0x1e02(_0x24b1.new.estado,_0x24b1.new.desde);}
+if(_0x24b2)_0x2647(_0x1df9);});else _0x1e02(_0x24b1.new.estado,_0x24b1.new.desde);}
 _0x237a(_0x24b1.new);return;}
 if(_0x24b1.table==='estado_intervenciones'){if(_0x1a08.vista==='panel'&&_0x1a34('#est-interv'))_0x2309();return;}
 if(_0x24b1.table==='acceso_alertas'){_0x2374();return;}
 if(_0x24b1.table==='estado_actual'||_0x24b1.table==='estado_log')return;_0x24a4(_0x24b1);}).subscribe();}
-async function _0x24b3(_0x24b4){_0x1a08.uid=_0x24b4.user.id;_0x1a08.cargando=true;_0x1a08.error='';if(_0x1d8d){try{await _0x1a07.rpc('registrar_alerta_acceso',
+async function _0x24b3(_0x24b4){_0x1a08.uid=_0x24b4.user.id;_0x1a08.cargando=true;_0x1a08.error='';_0x1a08.entroEn=Date.now();if(_0x1d8d){try{await _0x1a07.rpc('registrar_alerta_acceso',
 {p_tipo:'celular',p_detalle:_0x1d90()});}catch(_0x24b5){}
 _0x1a08.bloqueoCel=true;await _0x1a07.auth.signOut({scope:'local'});return;}
 _0x1b3d();_0x1a08.vista=location.hash.slice(1)||'inicio';document.body.classList.remove('locked');_0x1c5a();try{await _0x1a8e();_0x1d97();await _0x2637(true);
-if(_0x2646()&&!_0x2630()){_0x2647=`El portal está fuera de horario. ${_0x2636()}`;await _0x1a07.auth.signOut({scope:'local'});return;}
-const _0x24b6=await _0x1e18();if(_0x24b6){_0x2647=_0x24b6;await _0x1a07.auth.signOut({scope:'local'});return;}
-if(_0x1a08.debeCambiar&&!(await _0x1e20(true))){await _0x2038();_0x2647='Para usar el portal debes crear tu contraseña nueva.';await _0x1a07.auth.signOut({
+if(_0x264c()&&!_0x2630()){_0x264d=`El portal está fuera de horario. ${_0x2636()}`;await _0x1a07.auth.signOut({scope:'local'});return;}
+const _0x24b6=await _0x1e18();if(_0x24b6){_0x264d=_0x24b6;await _0x1a07.auth.signOut({scope:'local'});return;}
+if(_0x1a08.debeCambiar&&!(await _0x1e20(true))){await _0x2038();_0x264d='Para usar el portal debes crear tu contraseña nueva.';await _0x1a07.auth.signOut({
 scope:'local'});return;}
 if(_0x1a08.ingresoIntento){_0x1a08.ingresoIntento=false;_0x1d9d();}
 _0x1e0c=Date.now();await _0x1df3();await _0x1a77();if(_0x1a08.rol!=='formador')_0x1e49();}catch(_0x24b7){_0x1a08.error=_0x1a4e(_0x24b7);}
-_0x1a08.cargando=false;if(!_0x1a1b()&&_0x1a3c(_0x1a08.vista))_0x1a08.vista='inicio';_0x1a40(_0x1a08.vista);_0x1c5a();_0x24b0();_0x264d();if(_0x1a19()){
+_0x1a08.cargando=false;if(!_0x1a1b()&&_0x1a3c(_0x1a08.vista))_0x1a08.vista='inicio';_0x1a40(_0x1a08.vista);_0x1c5a();_0x24b0();_0x2654();if(_0x1a19()){
 _0x2045();_0x2047();_0x203b();}}
 function _0x24b8(){_0x1a08.uid=null;_0x1a08.rol=null;_0x1a08.codigo='';_0x1a08.nombre='';_0x1a08.vista='inicio';_0x1a08.cargando=true;_0x1a08.error='';
 _0x1a08.ultInterv=null;_0x1e32.m=new Map();_0x1e32.ok=false;_0x1e32.avisados=new Set();_0x1a08.accesos=[];_0x1a08.menu=[];_0x1a08.cats=[];_0x1a08.noticias=[];
@@ -2712,7 +2711,7 @@ _0x1a08.examenes=[];_0x1a08.intentos=[];_0x1a08.estadoMio=null;_0x1a08.area=null
 if(_0x1b5b.open)_0x1b5b.close();_0x1a08.f={q:'',cat:'',dia:''};_0x1a08.p={dias:'30',cat:'',noticia:'',edias:'hoy',ea:'',ec:'',eu:'',drol:'asesor'};_0x1a08.est={
 vivo:[],det:[],alertas:[],ok:false,hora:null};try{_0x1a07.removeAllChannels();}catch(_0x24b9){}
 _0x2484=false;_0x1a56.clear();if(_0x1c5f.open)_0x1c5f.close();if(_0x1c60.open)_0x1c60.close();history.replaceState(null,'',location.pathname+location.search);
-_0x1a34('#gform').reset();_0x1a34('#gform').clave.type='password';_0x1da9('');_0x2649(false);_0x2049();_0x1de8=false;['aviso-red','aviso-internet','aviso-pausa'].forEach(_0x24ba=>{
+_0x1a34('#gform').reset();_0x1a34('#gform').clave.type='password';_0x1da9('');_0x2650(false);_0x2049();_0x1de8=false;['aviso-red','aviso-internet','aviso-pausa'].forEach(_0x24ba=>{
 const _0x24bb=document.getElementById(_0x24ba);if(_0x24bb)_0x24bb.remove();});_0x1d98();}
 function _0x24bc(){if(_0x1d8d){const _0x24bd=_0x1a34('#gform');if(_0x24bd&&!_0x1a34('#cel-aviso'))_0x24bd.insertAdjacentHTML('afterbegin','<p class="cel-aviso" id="cel-aviso">⛔ Estás en un celular. El portal solo funciona en una computadora de la empresa: si ingresas desde aquí, el intento quedará registrado a tu nombre y se informará a tu coordinador.</p>');
 }
@@ -2955,21 +2954,26 @@ const _0x2642=_0x1a34('#ghorario');if(_0x2642)_0x2642.textContent=_0x2636();cons
 _0x1a08.exCambio=_0x263e.examenes_cambio||null;_0x1a08.salidaVista=_0x2643;_0x1a08.cobCambio=_0x263e.cobertura_cambio||null;return;}
 if(_0x1a14()&&(_0x263e.cobertura_cambio||null)!==_0x1a08.cobCambio){_0x1a08.cobCambio=_0x263e.cobertura_cambio||null;_0x1a08.est.ok=false;_0x1a90();}
 if((_0x263e.examenes_cambio||null)!==_0x1a08.exCambio){_0x1a08.exCambio=_0x263e.examenes_cambio||null;_0x24a3.add('examenes');_0x24a7(null);}
-if(_0x2643&&_0x2643!==_0x1a08.salidaVista){_0x1a08.salidaVista=_0x2643;if((_0x263e.salida_forzada.roles||[]).includes(_0x1a08.rol)&&!_0x1a3a())_0x2644();
-}
-_0x264d();}
-async function _0x2644(_0x2645){if(_0x1a08.enExamen){_0x1a08.salidaPendiente=true;return;}
-_0x1a08.salidaPendiente=false;_0x2647=_0x2645||'La administración cerró tu sesión. Puedes volver a ingresar cuando te lo indiquen.';_0x2649(false);await _0x2038();
-await _0x1a07.auth.signOut({scope:'local'});}
-const _0x2646=()=>!!_0x1a08.rol&&!_0x2626.includes(_0x1a08.rol);let _0x2647='';async function _0x2648(){_0x2647=`El portal está fuera de horario. ${_0x2636()}`;
-_0x2649(false);await _0x1e09();await _0x1a07.auth.signOut({scope:'local'});}
-function _0x2649(_0x264a){let _0x264b=_0x1a34('#aviso-cierre');if(!_0x264a){if(_0x264b)_0x264b.remove();return;}
-if(_0x264b)return;_0x264b=document.createElement('div');_0x264b.id='aviso-cierre';_0x264b.setAttribute('role','alert');_0x264b.innerHTML=`⏰ El portal se cerrará a las <b>${_0x2632(_0x2625)}</b> Guarda lo que estés haciendo. <button type="button" aria-label="Cerrar aviso">×</button>`;
-_0x264b.querySelector('button').onclick=()=>{_0x264b.hidden=true;};document.body.appendChild(_0x264b);}
-let _0x264c=null;async function _0x264d(){if(_0x1a08.uid&&_0x1a14()){const _0x264e=_0x1dd9();if(_0x264c!==null&&_0x264e!==_0x264c){_0x1a08.est.ok=false;
-_0x1a90();}_0x264c=_0x264e;}
-if(_0x1a08.uid&&_0x1a08.salidaPendiente&&!_0x1a08.enExamen){_0x2644();return;}
-if(!_0x1a08.uid||!_0x2646())return;if(!_0x2630()){if(!_0x1a08.enExamen)await _0x2648();return;}
-const _0x264f=_0x2628(_0x2625)-_0x262c();_0x2649(_0x264f<=_0x2627);}
-setInterval(_0x264d,30*1000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)_0x264d();});_0x24bc();</script>
+if(_0x2643&&_0x1a08.salidaVista===undefined){_0x1a08.salidaVista=_0x2643;}
+else if(_0x2643&&_0x2643!==_0x1a08.salidaVista){_0x1a08.salidaVista=_0x2643;const _0x2644=Date.parse(_0x2643);if((_0x263e.salida_forzada.roles||[]).includes(_0x1a08.rol)&&!_0x1a3a()&&(!_0x1a08.entroEn||isNaN(_0x2644)||_0x2644>_0x1a08.entroEn-60000)){
+const _0x2645=_0x263e.salida_forzada.por?` (orden de ${_0x263e.salida_forzada.por}`:' (orden',_0x2646=isNaN(_0x2644)?'':` a las ${new Date(_0x2644).toLocaleTimeString('es-PE',
+{hour:'numeric',minute:'2-digit',timeZone:'America/Lima'})}`;_0x2647(`La administración cerró tu sesión${_0x2645}${_0x2646}). Puedes volver a ingresar cuando te lo indiquen.`,
+'orden_por_rol');}}
+_0x2654();}
+async function _0x2647(_0x2648,_0x2649){if(_0x1a08.enExamen){_0x1a08.salidaPendiente={texto:_0x2648,codigo:_0x2649};return;}
+_0x1a08.salidaPendiente=false;_0x264d=_0x2648||'La administración cerró tu sesión. Puedes volver a ingresar cuando te lo indiquen.';const _0x264a=_0x2649||(_0x2648===_0x203a?'otra_sesion':_0x2648===_0x1df9?'desconexion_por_coordinador_o_admin':'otro');
+try{await _0x1a07.rpc('registrar_cierre',{p_motivo:_0x264a,p_detalle:_0x1d90()});}catch(_0x264b){}
+_0x2650(false);await _0x2038();await _0x1a07.auth.signOut({scope:'local'});}
+const _0x264c=()=>!!_0x1a08.rol&&!_0x2626.includes(_0x1a08.rol);let _0x264d='';async function _0x264e(){_0x264d=`El portal está fuera de horario. ${_0x2636()}`;
+_0x2650(false);try{await _0x1a07.rpc('registrar_cierre',{p_motivo:'fuera_de_horario',p_detalle:_0x1d90()});}catch(_0x264f){}
+await _0x1e09();await _0x1a07.auth.signOut({scope:'local'});}
+function _0x2650(_0x2651){let _0x2652=_0x1a34('#aviso-cierre');if(!_0x2651){if(_0x2652)_0x2652.remove();return;}
+if(_0x2652)return;_0x2652=document.createElement('div');_0x2652.id='aviso-cierre';_0x2652.setAttribute('role','alert');_0x2652.innerHTML=`⏰ El portal se cerrará a las <b>${_0x2632(_0x2625)}</b> Guarda lo que estés haciendo. <button type="button" aria-label="Cerrar aviso">×</button>`;
+_0x2652.querySelector('button').onclick=()=>{_0x2652.hidden=true;};document.body.appendChild(_0x2652);}
+let _0x2653=null;async function _0x2654(){if(_0x1a08.uid&&_0x1a14()){const _0x2655=_0x1dd9();if(_0x2653!==null&&_0x2655!==_0x2653){_0x1a08.est.ok=false;
+_0x1a90();}_0x2653=_0x2655;}
+if(_0x1a08.uid&&_0x1a08.salidaPendiente&&!_0x1a08.enExamen){const _0x2656=_0x1a08.salidaPendiente;_0x2647(_0x2656.texto,_0x2656.codigo);return;}
+if(!_0x1a08.uid||!_0x264c())return;if(!_0x2630()){if(!_0x1a08.enExamen)await _0x264e();return;}
+const _0x2657=_0x2628(_0x2625)-_0x262c();_0x2650(_0x2657<=_0x2627);}
+setInterval(_0x2654,30*1000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)_0x2654();});_0x24bc();</script>
 </body></html>
