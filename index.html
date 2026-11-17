@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AMX Back Office Fija | Centro de Formación</title>
-<link rel="icon" type="image/svg+xml" href="marca.svg">
+<title>Centro de Formación | HITSS</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&display=swap" rel="stylesheet">
@@ -4389,6 +4388,15 @@ await _0x1aa8();
 catch (_0x21ed) {
 _0x21c7.enviando = false;
 const _0x21ee = _0x1a34('#exerr');
+if (_0x21e5 && !/ya fue enviado|no encontrado/i.test(_0x21ed.message || '')) {
+if (_0x21ee) {
+_0x21ee.textContent = '⏳ Se acabó el tiempo y estamos enviando tu examen… Si tu internet falló, no cierres esta ventana: se reintenta solo.';
+_0x21ee.hidden = false;
+}
+clearTimeout(_0x21c7.reintento);
+_0x21c7.reintento = setTimeout(() => _0x21e4(true), 5000);
+return;
+}
 if (_0x21ee) {
 _0x21ee.textContent = _0x1a50(_0x21ed);
 _0x21ee.hidden = false;
