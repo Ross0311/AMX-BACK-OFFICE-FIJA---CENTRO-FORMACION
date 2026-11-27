@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AMX Back Office Fija | Centro de Formación</title>
-<link rel="icon" type="image/svg+xml" href="marca.svg">
+<title>Centro de Formación | HITSS</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&display=swap" rel="stylesheet">
@@ -702,6 +701,10 @@ tr.tot td{background:var(--paper);font-weight:700}
 footer{padding:22px 16px}
 }
 @media (prefers-reduced-motion:reduce){.ticker .run{animation:none}*{transition:none!important}.envivo::before{animation:none}}
+.tb.hor td.saldo{min-width:150px;font-size:12.5px;line-height:1.35}.tb.hor td.saldo small{display:block;margin-top:3px}
+.rec-ok{color:#166534;font-weight:700}.rec-no{color:#92400E}.acu{color:var(--muted);max-width:220px;white-space:normal}
+.hmes{display:block;color:var(--muted);font-size:11.5px;margin-top:3px}
+.adel{color:#1E40AF;background:#DBEAFE;padding:2px 8px;border-radius:999px}.adel-t{display:block;color:#1E40AF;font-size:11px}
 dialog.avwin{border:0;border-radius:18px;padding:0;max-width:440px;width:calc(100% - 32px);box-shadow:0 20px 60px rgba(0,0,0,.35);background:var(--card,#fff);color:inherit}
 dialog.avwin::backdrop{background:rgba(10,12,20,.6)}
 .avwin-c{padding:28px 26px;text-align:center}.avwin-c h2{margin:6px 0 10px;font-size:1.25rem}.avwin-c p{margin:0 0 10px;line-height:1.45}
@@ -1031,7 +1034,7 @@ await _0x1a75();
 if (_0x1a3e())
 await _0x1b6f(false);
 _0x1a08.menu = _0x1aa6.data.map(_0x1ab4 => ({ ..._0x1ab4, subs: _0x1aa7.data.filter(_0x1ab5 => _0x1ab5.grupo_id === _0x1ab4.id).map(_0x1ab6 => ({ id: _0x1ab6.id, nombre: _0x1ab6.nombre, desc: _0x1ab6.descr || '', orden: _0x1ab6.orden })) }));
-if (!_0x1a41(_0x1a08.vista) && _0x1a08.vista !== 'examenes' && !(_0x1a08.vista === 'panel' && _0x1a19()) && !(['asistencia', 'horario'].includes(_0x1a08.vista) && _0x258d()) && !(_0x1a08.vista === 'callbacks' && _0x1e7c()) && !(_0x1a08.vista === 'indexamenes' && _0x1f44()))
+if (!_0x1a41(_0x1a08.vista) && _0x1a08.vista !== 'examenes' && !(_0x1a08.vista === 'panel' && _0x1a19()) && !_0x25a6(_0x1a08.vista) && !(_0x1a08.vista === 'callbacks' && _0x1e7c()) && !(_0x1a08.vista === 'indexamenes' && _0x1f44()))
 _0x1a08.vista = 'inicio';
 }
 async function _0x1ab7() {
@@ -1104,8 +1107,10 @@ if (_0x1a19())
 _0x1ae2.push({ k: 'panel', h: _0x2441() });
 if (_0x1e7c())
 _0x1ae2.push({ k: 'callbacks', h: `<button class="item ${_0x1a08.vista === 'callbacks' ? 'on' : ''}" data-go="callbacks">📞 Callbacks${_0x1e8b()}</button>` });
-if (_0x258d())
-_0x1ae2.push({ k: 'asistencia', h: `<button class="item ${_0x1a08.vista === 'asistencia' ? 'on' : ''}" data-go="asistencia">🗓️ Asistencia</button>` }, { k: 'horario', h: `<button class="item ${_0x1a08.vista === 'horario' ? 'on' : ''}" data-go="horario">⏰ Horario</button>` });
+if (_0x25a3())
+_0x1ae2.push({ k: 'asistencia', h: `<button class="item ${_0x1a08.vista === 'asistencia' ? 'on' : ''}" data-go="asistencia">🗓️ Asistencia</button>` });
+if (_0x25a4())
+_0x1ae2.push({ k: 'horario', h: `<button class="item ${_0x1a08.vista === 'horario' ? 'on' : ''}" data-go="horario">⏰ Horario</button>` });
 if (_0x1a1e()) {
 _0x1adb.forEach(_0x1ae3 => _0x1ae2.push({ k: 'g:' + _0x1ae3.id, h: _0x1aba(_0x1ae3) }));
 _0x1a08.cats.forEach(_0x1ae4 => {
@@ -1131,7 +1136,7 @@ function _0x1aea() {
 _0x1a37('#quick').innerHTML = '<span class="lab">Accesos directos</span>' +
 _0x1a08.accesos.map(_0x1aeb => `<a class="qa" href="${_0x1a39(_0x1aeb.url)}" target="_blank" rel="noopener">${_0x1a39(_0x1aeb.nombre)}${_0x1a3e() ? `<button data-act="del-acc" data-id="${_0x1aeb.id}" title="Quitar acceso" aria-label="Quitar ${_0x1a39(_0x1aeb.nombre)}">×</button>` : ''}</a>`).join('') +
 (_0x1a3e() ? '<button class="btn add sm" data-act="add-acc">+ Agregar acceso</button>' : '');
-_0x1a37('#auth').innerHTML = (_0x24a1() ? '<button class="avbloq" data-act="avisos-bloq" title="Cómo activar los avisos de Windows">🔕<span class="txt"> Avisos bloqueados</span></button>' : '') +
+_0x1a37('#auth').innerHTML = (_0x24b7() ? '<button class="avbloq" data-act="avisos-bloq" title="Cómo activar los avisos de Windows">🔕<span class="txt"> Avisos bloqueados</span></button>' : '') +
 _0x1b50() + _0x1e2e() + '<button class="btn ghost" data-act="logout">Cerrar sesión</button>';
 }
 const _0x1aec = [
@@ -1483,7 +1488,7 @@ _0x1a08.notifNot = _0x1a08.notifNot || new Set();
 const _0x1b8b = _0x1b8a.filter(_0x1b8c => !_0x1a08.notifNot.has(_0x1b8c.id));
 _0x1b8b.forEach(_0x1b8d => _0x1a08.notifNot.add(_0x1b8d.id));
 if (_0x1b8b.length && (document.hidden || !document.hasFocus()))
-_0x2491(_0x1b8b.length > 1 ? `📢 Tienes ${_0x1b8b.length} comunicados pendientes` : '📢 Comunicado pendiente de visto bueno', _0x1b8b.map(_0x1b8e => '• ' + (_0x1b8e.titulo || '')).join('\n').slice(0, 300), 'not-' + _0x1b8b.map(_0x1b8f => _0x1b8f.id).join('-'));
+_0x24a7(_0x1b8b.length > 1 ? `📢 Tienes ${_0x1b8b.length} comunicados pendientes` : '📢 Comunicado pendiente de visto bueno', _0x1b8b.map(_0x1b8e => '• ' + (_0x1b8e.titulo || '')).join('\n').slice(0, 300), 'not-' + _0x1b8b.map(_0x1b8f => _0x1b8f.id).join('-'));
 }
 function _0x1b90() {
 if (!_0x1a3e() || !_0x1a08.autorId || _0x1c93.open || _0x1c94.open || _0x1b84.open)
@@ -1812,7 +1817,7 @@ _0x1b56();
 if (_0x1a08.vista === 'examenes' && !_0x1a1b())
 _0x1a08.vista = 'inicio';
 const _0x1c8f = _0x1a41(_0x1a08.vista);
-if (['asistencia', 'horario'].includes(_0x1a08.vista) && !_0x258d())
+if (['asistencia', 'horario'].includes(_0x1a08.vista) && !_0x25a6(_0x1a08.vista))
 _0x1a08.vista = 'inicio';
 if (_0x1a08.vista === 'callbacks' && !_0x1e7c())
 _0x1a08.vista = 'inicio';
@@ -1830,9 +1835,9 @@ _0x2447();
 else if (_0x1a08.vista === 'examenes')
 _0x20d5();
 else if (_0x1a08.vista === 'asistencia')
-_0x2605();
+_0x2625();
 else if (_0x1a08.vista === 'horario')
-_0x267c();
+_0x26bc();
 else if (_0x1a08.vista === 'callbacks')
 _0x1ec1();
 else if (_0x1a08.vista === 'indexamenes')
@@ -2101,7 +2106,7 @@ const _0x1d1a = { noticia_id: Number(_0x1d19), user_id: _0x1a08.uid, estado: 'ok
 const { error: _0x1d1b } = await _0x1a07.from('noticia_vistos').upsert(_0x1d1a, { onConflict: 'noticia_id,user_id' });
 if (_0x1d1b)
 throw _0x1d1b;
-_0x2551('vistos', _0x1d1a);
+_0x2567('vistos', _0x1d1a);
 _0x1c8e();
 },
 'vb-duda': _0x1d1c => _0x1c95('Tengo una duda', [{ k: 'pregunta', l: 'Escribe tu pregunta para los formadores', t: 'area', req: 1, p: '¿Qué parte no te quedó clara?' }], async (_0x1d1d) => {
@@ -2630,10 +2635,10 @@ return;
 _0x1a37('#gcargando').hidden = true;
 _0x1a37('#gform').hidden = false;
 document.body.classList.add('locked');
-_0x1a37('#ghorario').textContent = _0x2715();
-if (_0x272c) {
-_0x1dea(_0x272c);
-_0x272c = '';
+_0x1a37('#ghorario').textContent = _0x2764();
+if (_0x277b) {
+_0x1dea(_0x277b);
+_0x277b = '';
 }
 }
 const _0x1dda = _0x1ddb => new Date(_0x1ddb).toLocaleTimeString('es-PE', { hour: 'numeric', minute: '2-digit', hour12: true });
@@ -2696,7 +2701,7 @@ return _0x1dea(_0x1ddc(_0x1df1.data));
 }
 catch (_0x1df2) { }
 _0x1a08.ingresoIntento = true;
-_0x2734();
+_0x2783();
 const { error: _0x1df3 } = await _0x1a07.auth.signInWithPassword({ email: _0x1a04(_0x1def), password: _0x1dee.clave.value });
 _0x1df0.disabled = false;
 _0x1df0.textContent = 'Ingresar';
@@ -3138,7 +3143,7 @@ _0x1eb1.appendChild(_0x1eb2);
 setTimeout(() => { if (_0x1eb2.isConnected)
 _0x1eb2.remove(); }, 10 * 60e3);
 _0x1ea0();
-_0x2491(_0x1eab, _0x1eac + '\n' + _0x1eb0.slice(0, 5).map(([_0x1eb7, _0x1eb8]) => _0x1eb7 + ': ' + _0x1eb8).join('\n'), 'cb-' + _0x1ea8 + '-' + _0x1ea7.id, () => _0x1c91('callbacks'));
+_0x24a7(_0x1eab, _0x1eac + '\n' + _0x1eb0.slice(0, 5).map(([_0x1eb7, _0x1eb8]) => _0x1eb7 + ': ' + _0x1eb8).join('\n'), 'cb-' + _0x1ea8 + '-' + _0x1ea7.id, () => _0x1c91('callbacks'));
 }
 function _0x1eb9(_0x1eba) {
 let _0x1ebb = _0x1a37('#cb-avisos');
@@ -3634,7 +3639,7 @@ const _0x2050 = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Lima' }).f
 if (_0x202c.agrupar === 'mes')
 return _0x2050.slice(0, 7);
 if (_0x202c.agrupar === 'semana')
-return 'Semana del ' + _0x25a7(_0x2050);
+return 'Semana del ' + _0x25c3(_0x2050);
 return _0x2050;
 }
 function _0x2051(_0x2052, _0x2053) {
@@ -3710,7 +3715,7 @@ throw _0x2081;
 _0x1e53 = 0;
 _0x208f('red', false);
 if (_0x2080 === 'otra_sesion') {
-_0x2726(_0x207e);
+_0x2775(_0x207e);
 return;
 }
 if (!_0x1a1c())
@@ -3718,10 +3723,10 @@ return;
 if (_0x2080 && _0x2080 !== 'desconectado')
 _0x1e47(_0x2080);
 if (_0x2080 === 'desconectado' && _0x1a08.estadoMio && _0x1a08.estadoMio.estado !== 'desconectado') {
-await _0x2716();
+await _0x2765();
 if (_0x1a08.uid && !_0x1a08.salidaPendiente) {
 if (await _0x1e43()) {
-_0x2726(_0x1e3e);
+_0x2775(_0x1e3e);
 return;
 }
 await _0x1e38();
@@ -4713,10 +4718,10 @@ const _0x22a6 = _0x22a7 => _0x1e0a.reduce((_0x22a8, _0x22a9) => _0x22a8 + (_0x22
 const _0x22aa = { formador: ['activo', 'capacitacion', 'voceo'], monitor: ['activo', 'monitoreo', 'feedback'] };
 const _0x22ab = '% Activo de formadores y monitores = tiempo productivo ÷ su jornada del día según el Horario (sin el break; si el día está marcado "sin break", la jornada completa). Formador: Activo, Capacitación y Voceo. Monitor: Activo, Monitoreo y Feedback. Los días de descanso, vacaciones o feriado no cuentan.';
 function _0x22ac(_0x22ad, _0x22ae) {
-const _0x22af = _0x1a08.est.hor && _0x1a08.est.hor.get(_0x22ad + '|' + _0x25a7(_0x22ae));
+const _0x22af = _0x1a08.est.hor && _0x1a08.est.hor.get(_0x22ad + '|' + _0x25c3(_0x22ae));
 if (!_0x22af)
 return undefined;
-const _0x22b0 = _0x25db(_0x22af['d' + ((_0x25a5(_0x22ae) + 6) % 7 + 1)]);
+const _0x22b0 = _0x25fb(_0x22af['d' + ((_0x25c1(_0x22ae) + 6) % 7 + 1)]);
 return _0x22b0 == null ? 0 : Math.round(_0x22b0 * 3600);
 }
 const _0x22b1 = (_0x22b2, _0x22b3) => {
@@ -4795,7 +4800,7 @@ return `<td>${_0x1a39(_0x22df(_0x22de))}</td><td class="num" title="${_0x22e6}">
 const _0x22eb = (_0x22ec, _0x22ed) => _0x22ed !== 'desconectado' && _0x22ec.id !== _0x1a08.uid && (_0x1a3d() || (_0x1a17() && _0x22ec.rol === 'asesor'));
 const _0x22ee = () => new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Lima' }).format(new Date());
 const _0x22ef = _0x22f0 => new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Lima' }).format(new Date(_0x22f0));
-const _0x22f1 = () => Object.keys(_0x258f).filter(_0x22f2 => _0x22f2 !== 'A');
+const _0x22f1 = () => Object.keys(_0x25ab).filter(_0x22f2 => _0x22f2 !== 'A');
 const _0x22f3 = _0x22f4 => !_0x22f4 || !_0x22f4.ultimo_latido || _0x22ef(_0x22f4.ultimo_latido) < _0x22ee();
 const _0x22f5 = _0x22f6 => _0x1a3d() || (_0x1a17() && _0x22f6.rol === 'asesor');
 function _0x22f7(_0x22f8, _0x22f9, _0x22fa) {
@@ -4804,8 +4809,8 @@ return '';
 const _0x22fb = (_0x1a08.est.motivos || new Map()).get(_0x22f8.id);
 if (_0x22f5(_0x22f8))
 return `<select data-motivo="${_0x22f8.id}" class="sel-motivo ${_0x22fb ? (_0x22fb.auto ? 'auto' : '') : 'falta'}" aria-label="Motivo de no conexión" title="${_0x22fb && _0x22fb.auto ? 'Según el horario (puedes cambiarlo)' : ''}">
-      <option value="">— Elegir motivo —</option>${_0x22f1().map(_0x22fc => `<option value="${_0x22fc}" ${_0x22fb && _0x22fb.codigo === _0x22fc ? 'selected' : ''}>${_0x1a39(_0x258f[_0x22fc].n)}</option>`).join('')}</select>`;
-return _0x22fb ? `<span class="chipE e-desconectado ${_0x22fb.auto ? 'auto' : ''}" title="${_0x22fb.auto ? 'Según el horario' : 'Registrado por ' + _0x1a39(_0x22fb.por_nombre || '')}">${_0x1a39(_0x258f[_0x22fb.codigo] ? _0x258f[_0x22fb.codigo].n : _0x22fb.codigo)}</span>` : '<span class="meta">Sin motivo</span>';
+      <option value="">— Elegir motivo —</option>${_0x22f1().map(_0x22fc => `<option value="${_0x22fc}" ${_0x22fb && _0x22fb.codigo === _0x22fc ? 'selected' : ''}>${_0x1a39(_0x25ab[_0x22fc].n)}</option>`).join('')}</select>`;
+return _0x22fb ? `<span class="chipE e-desconectado ${_0x22fb.auto ? 'auto' : ''}" title="${_0x22fb.auto ? 'Según el horario' : 'Registrado por ' + _0x1a39(_0x22fb.por_nombre || '')}">${_0x1a39(_0x25ab[_0x22fb.codigo] ? _0x25ab[_0x22fb.codigo].n : _0x22fb.codigo)}</span>` : '<span class="meta">Sin motivo</span>';
 }
 async function _0x22fd() {
 const _0x22fe = await _0x1a07.rpc('motivos_hoy');
@@ -5096,7 +5101,7 @@ _0x23b8('estados_detalle', { p_desde: _0x23c1, p_hasta: _0x23c2 }),
 _0x1a1d() ? _0x23ce(_0x23c1) : Promise.resolve({ data: [] }),
 _0x22fd(),
 _0x1a07.rpc('primeras_conexiones'),
-_0x1a3e() ? _0x1a07.from('horario').select('user_id,semana,d1,d2,d3,d4,d5,d6,d7').gte('semana', _0x25a7(_0x23c1)).lte('semana', _0x23c2) : Promise.resolve({ data: [] })
+_0x1a3e() ? _0x1a07.from('horario').select('user_id,semana,d1,d2,d3,d4,d5,d6,d7').gte('semana', _0x25c3(_0x23c1)).lte('semana', _0x23c2) : Promise.resolve({ data: [] })
 ]);
 const _0x23c9 = _0x1a37('#pnl-estados');
 if (!_0x23c9 && !_0x1a37('#pnl-alertas'))
@@ -5217,7 +5222,7 @@ const _0x2400 = _0x2401 => {
 if (_0x2401.e !== 'desconectado' || !_0x22f3(_0x23ee.get(_0x2401.m.id)))
 return '';
 const _0x2402 = (_0x1a08.est.motivos || new Map()).get(_0x2401.m.id);
-return _0x2402 ? (_0x258f[_0x2402.codigo] ? _0x258f[_0x2402.codigo].n : _0x2402.codigo) + (_0x2402.auto ? ' (según el horario)' : '') : 'Sin motivo';
+return _0x2402 ? (_0x25ab[_0x2402.codigo] ? _0x25ab[_0x2402.codigo].n : _0x2402.codigo) + (_0x2402.auto ? ' (según el horario)' : '') : 'Sin motivo';
 };
 _0x23ed.map(_0x2403 => ({ m: _0x2403, ..._0x2290(_0x23ee.get(_0x2403.id)) })).sort((_0x2404, _0x2405) => _0x2265.indexOf(_0x2404.e) - _0x2265.indexOf(_0x2405.e) || _0x1e18(_0x2404.m, _0x2405.m)).forEach(_0x2406 => _0x23fc.push([_0x2406.m.codigo, _0x2406.m.nombre || '', _0x2266[_0x2406.m.area] || '', _0x2267(_0x2406.m), _0x1e08[_0x2406.e], _0x2406.desde ? _0x1a2b(_0x2406.desde) : '', _0x2406.desde && _0x2406.e !== 'desconectado' ? _0x23f6((_0x23f3 - new Date(_0x2406.desde).getTime()) / 1000) : '', _0x23fd(_0x2406.m.id), _0x2400(_0x2406)]));
 const _0x2407 = [['Código', 'Nombre', 'Área', 'Coordinador', ..._0x23f4, 'Total (h:mm:ss)', '% Activo', 'Jornada', 'Conectado promedio por día (h:mm:ss)', '% de la jornada']];
@@ -5366,7 +5371,7 @@ return `<div class="scroll" style="max-height:300px"><table class="tb"><thead><t
     ${_0x2459.map(_0x245d => `<tr><td>${_0x1a39(_0x1a2f(_0x245d.p))}${_0x245d.p.id === _0x1a08.uid ? ' <small class="meta">(tú)</small>' : ''}</td><td>${_0x1a39(_0x1a0b[_0x245d.p.rol])}</td><td><span class="chipE e-${_0x245d.e}">${_0x1e08[_0x245d.e]}</span></td><td>${_0x227a(_0x245d.desde, _0x245d.e)}</td>${_0x2277(_0x245d.desde, _0x245d.e)}${_0x22dc(_0x245d.p.id)}<td>${_0x22f7(_0x245d.p, _0x245d.e, _0x2458.get(_0x245d.p.id))}</td>${_0x1a3d() ? `<td>${_0x2305(_0x245d.p, _0x245d.e)}</td>` : ''}</tr>`).join('') || '<tr><td colspan="9">No hay formadores, monitores ni GTR.</td></tr>'}
     </tbody></table></div>`;
 }
-const _0x245e = { base: new Map(), en: new Map(), dia: null, sync: 0, avisados: new Set(), cargando: false };
+const _0x245e = { base: new Map(), en: new Map(), dia: null, sync: 0, avisados: new Set(), cargando: false, turno: new Map(), con: new Set() };
 const _0x245f = 61 * 60, _0x2460 = 70 * 60;
 const _0x2461 = () => _0x1a17() || _0x1a3d();
 const _0x2462 = _0x2463 => !!_0x2463 && (_0x1a3d() ? _0x1a40.includes(_0x2463.rol) : _0x2463.rol === 'asesor' && (_0x2463.coordinador_id === _0x1a08.uid || _0x1e1e()));
@@ -5376,8 +5381,10 @@ return;
 _0x245e.cargando = true;
 try {
 const _0x2465 = _0x22ee(), _0x2466 = Date.now();
-const [_0x2467, _0x2468] = await Promise.all([_0x23b8('estados_detalle', { p_desde: _0x2465, p_hasta: _0x2465 }), _0x1a07.from('estado_actual').select('user_id,estado,desde,ultimo_latido')]);
-if (_0x2467.error || _0x2468.error)
+const _0x2467 = _0x25c3(_0x2465), _0x2468 = 'd' + ((_0x25c1(_0x2465) + 6) % 7 + 1);
+const [_0x2469, _0x246a, _0x246b] = await Promise.all([_0x23b8('estados_detalle', { p_desde: _0x2465, p_hasta: _0x2465 }), _0x1a07.from('estado_actual').select('user_id,estado,desde,ultimo_latido'),
+_0x1a07.from('horario').select('user_id,' + _0x2468).eq('semana', _0x2467)]);
+if (_0x2469.error || _0x246a.error)
 return;
 if (_0x245e.dia !== _0x2465) {
 _0x245e.dia = _0x2465;
@@ -5385,245 +5392,293 @@ _0x245e.avisados = new Set();
 }
 _0x245e.base = new Map();
 _0x245e.en = new Map();
-(_0x2467.data || []).forEach(_0x2469 => { if (_0x2469.estado === 'break' && _0x2469.dia === _0x2465)
-_0x245e.base.set(_0x2469.user_id, (_0x245e.base.get(_0x2469.user_id) || 0) + Number(_0x2469.segundos || 0)); });
-(_0x2468.data || []).forEach(_0x246a => { if (_0x246a.estado === 'break' && _0x2466 - new Date(_0x246a.ultimo_latido).getTime() <= 480000)
-_0x245e.en.set(_0x246a.user_id, _0x2466); });
+_0x245e.con = new Set();
+_0x245e.turno = new Map(_0x246b && !_0x246b.error ? (_0x246b.data || []).map(_0x246c => [_0x246c.user_id, _0x246c[_0x2468] || '']) : []);
+(_0x2469.data || []).forEach(_0x246d => { if (_0x246d.dia === _0x2465 && _0x246d.estado !== 'desconectado' && Number(_0x246d.segundos || 0) > 0)
+_0x245e.con.add(_0x246d.user_id); });
+(_0x246a.data || []).forEach(_0x246e => { if (_0x246e.estado !== 'desconectado' && _0x246e.desde && _0x22ef(_0x246e.desde) === _0x2465)
+_0x245e.con.add(_0x246e.user_id); });
+(_0x2469.data || []).forEach(_0x246f => { if (_0x246f.estado === 'break' && _0x246f.dia === _0x2465)
+_0x245e.base.set(_0x246f.user_id, (_0x245e.base.get(_0x246f.user_id) || 0) + Number(_0x246f.segundos || 0)); });
+(_0x246a.data || []).forEach(_0x2470 => { if (_0x2470.estado === 'break' && _0x2466 - new Date(_0x2470.ultimo_latido).getTime() <= 480000)
+_0x245e.en.set(_0x2470.user_id, _0x2466); });
 _0x245e.sync = _0x2466;
 }
-catch (_0x246b) { }
+catch (_0x2471) { }
 finally {
 _0x245e.cargando = false;
 }
-_0x2470();
+_0x2476();
 }
-function _0x246c(_0x246d) {
-if (!_0x246d || !_0x246d.user_id || !_0x2461() || !_0x245e.sync)
+function _0x2472(_0x2473) {
+if (!_0x2473 || !_0x2473.user_id || !_0x2461() || !_0x245e.sync)
 return;
-const _0x246e = _0x246d.desde ? new Date(_0x246d.desde).getTime() : Date.now(), _0x246f = _0x245e.en.get(_0x246d.user_id);
-if (_0x246f != null) {
-_0x245e.base.set(_0x246d.user_id, (_0x245e.base.get(_0x246d.user_id) || 0) + Math.max(0, (_0x246e - _0x246f) / 1000));
-_0x245e.en.delete(_0x246d.user_id);
+const _0x2474 = _0x2473.desde ? new Date(_0x2473.desde).getTime() : Date.now(), _0x2475 = _0x245e.en.get(_0x2473.user_id);
+if (_0x2475 != null) {
+_0x245e.base.set(_0x2473.user_id, (_0x245e.base.get(_0x2473.user_id) || 0) + Math.max(0, (_0x2474 - _0x2475) / 1000));
+_0x245e.en.delete(_0x2473.user_id);
 }
-if (_0x246d.estado === 'break')
-_0x245e.en.set(_0x246d.user_id, _0x246e);
-_0x2470();
+if (_0x2473.estado === 'break')
+_0x245e.en.set(_0x2473.user_id, _0x2474);
+if (_0x2473.estado !== 'desconectado')
+_0x245e.con.add(_0x2473.user_id);
+_0x2476();
 }
-function _0x2470() {
+function _0x2476() {
 if (!_0x1a08.uid || !_0x2461() || !_0x245e.sync)
 return;
 if (_0x245e.dia !== _0x22ee() || Date.now() - _0x245e.sync > 20 * 60e3) {
 _0x2464();
 return;
 }
-new Set([..._0x245e.base.keys(), ..._0x245e.en.keys()]).forEach(_0x2471 => {
-const _0x2472 = _0x1ba0(_0x2471);
-if (!_0x2462(_0x2472))
+new Set([..._0x245e.base.keys(), ..._0x245e.en.keys()]).forEach(_0x2477 => {
+const _0x2478 = _0x1ba0(_0x2477);
+if (!_0x2462(_0x2478))
 return;
-const _0x2473 = _0x245e.en.get(_0x2471), _0x2474 = (_0x245e.base.get(_0x2471) || 0) + (_0x2473 != null ? (Date.now() - _0x2473) / 1000 : 0);
-if (_0x2474 >= _0x2460 && !_0x245e.avisados.has(_0x2471 + '|2')) {
-_0x245e.avisados.add(_0x2471 + '|2');
-_0x245e.avisados.add(_0x2471 + '|1');
-_0x24a7(_0x2472, _0x2474, 2, _0x2473 != null);
+const _0x2479 = _0x245e.en.get(_0x2477), _0x247a = (_0x245e.base.get(_0x2477) || 0) + (_0x2479 != null ? (Date.now() - _0x2479) / 1000 : 0);
+if (_0x247a >= _0x2460 && !_0x245e.avisados.has(_0x2477 + '|2')) {
+_0x245e.avisados.add(_0x2477 + '|2');
+_0x245e.avisados.add(_0x2477 + '|1');
+_0x24bd(_0x2478, _0x247a, 2, _0x2479 != null);
 }
-else if (_0x2474 >= _0x245f && !_0x245e.avisados.has(_0x2471 + '|1')) {
-_0x245e.avisados.add(_0x2471 + '|1');
-_0x24a7(_0x2472, _0x2474, 1, _0x2473 != null);
+else if (_0x247a >= _0x245f && !_0x245e.avisados.has(_0x2477 + '|1')) {
+_0x245e.avisados.add(_0x2477 + '|1');
+_0x24bd(_0x2478, _0x247a, 1, _0x2479 != null);
+}
+});
+_0x247c();
+}
+const _0x247b = 5;
+function _0x247c() {
+const _0x247d = _0x275a();
+_0x245e.turno.forEach((_0x247e, _0x247f) => {
+const _0x2480 = /^(\d{2}):(\d{2}) - (\d{2}):(\d{2})/.exec(_0x247e || '');
+if (!_0x2480)
+return;
+const _0x2481 = _0x1ba0(_0x247f);
+if (!_0x2462(_0x2481) || _0x245e.con.has(_0x247f) || _0x245e.avisados.has(_0x247f + '|ing'))
+return;
+const _0x2482 = +_0x2480[1] * 60 + +_0x2480[2], _0x2483 = +_0x2480[3] * 60 + +_0x2480[4];
+if (_0x247d >= _0x2482 + _0x247b && (_0x2483 <= _0x2482 || _0x247d < _0x2483)) {
+_0x245e.avisados.add(_0x247f + '|ing');
+_0x1de5(_0x2481, _0x2480[1] + ':' + _0x2480[2], _0x247d - _0x2482);
 }
 });
 }
-setInterval(_0x2470, 30000);
-async function _0x2475() {
+function _0x1de5(_0x2484, _0x2485, _0x2486) {
+const _0x2487 = '⏰ NO SE HA CONECTADO', _0x2488 = `${_0x1a2f(_0x2484)} entraba a las ${_0x2760(_0x2485)} y aún no se conecta (van ${_0x2486} min).`;
+let _0x2489 = _0x1a37('#cb-avisos');
+if (!_0x2489) {
+_0x2489 = document.createElement('div');
+_0x2489.id = 'cb-avisos';
+document.body.appendChild(_0x2489);
+}
+const _0x248a = document.createElement('div');
+_0x248a.className = 'cb-toast tarde';
+_0x248a.setAttribute('role', 'alert');
+_0x248a.innerHTML = `<button type="button" class="x" aria-label="Cerrar">×</button><b>${_0x1a39(_0x2487)}</b><p>${_0x1a39(_0x2488)}</p>
+    <p class="meta">${_0x1a39(_0x1a0b[_0x2484.rol] || '')}${_0x2484.rol === 'asesor' ? ' · ' + _0x1a39(_0x2266[_0x2484.area] || '') : ''} · según su Horario de hoy</p>
+    <div class="cb-btns"><button type="button" class="btn sm" data-x="ver">Ver conectividad</button></div>`;
+_0x248a.querySelector('.x').onclick = () => _0x248a.remove();
+_0x248a.querySelector('[data-x=ver]').onclick = () => { _0x248a.remove(); _0x1a08.panelSec = 'conectividad'; _0x1a08.panelAbierto = true; _0x1c91('panel'); };
+_0x2489.appendChild(_0x248a);
+setTimeout(() => { if (_0x248a.isConnected)
+_0x248a.remove(); }, 30 * 60e3);
+_0x1ea0();
+_0x24a7(_0x2487, _0x2488, 'ing-' + _0x2484.id, () => { _0x1a08.panelSec = 'conectividad'; _0x1a08.panelAbierto = true; _0x1c91('panel'); });
+}
+setInterval(_0x2476, 30000);
+async function _0x248b() {
 if (!_0x1a3d())
 return;
-let _0x2476 = [], _0x2477 = 0;
+let _0x248c = [], _0x248d = 0;
 try {
-for (let _0x2478 = 0; _0x2478 < 50; _0x2478++) {
-const { data: _0x2479, error: _0x247a } = await _0x1a07.storage.from(_0x1a02).list('', { limit: 1000, offset: _0x2477, sortBy: { column: 'name', order: 'asc' } });
-if (_0x247a)
-throw _0x247a;
-_0x2476 = _0x2476.concat(_0x2479 || []);
-if (!_0x2479 || _0x2479.length < 1000)
+for (let _0x248e = 0; _0x248e < 50; _0x248e++) {
+const { data: _0x248f, error: _0x2490 } = await _0x1a07.storage.from(_0x1a02).list('', { limit: 1000, offset: _0x248d, sortBy: { column: 'name', order: 'asc' } });
+if (_0x2490)
+throw _0x2490;
+_0x248c = _0x248c.concat(_0x248f || []);
+if (!_0x248f || _0x248f.length < 1000)
 break;
-_0x2477 += 1000;
+_0x248d += 1000;
 }
 }
-catch (_0x247b) {
-alert(_0x1a53(_0x247b));
+catch (_0x2491) {
+alert(_0x1a53(_0x2491));
 return;
 }
-const _0x247c = _0x247d => Number(_0x247d.metadata && _0x247d.metadata.size) || 0;
-const _0x247e = _0x2476.filter(_0x247f => /\.(png|jpe?g|webp)$/i.test(_0x247f.name) && _0x247c(_0x247f) >= _0x1cb9);
-const _0x2480 = _0x2481 => (_0x2481 / 1048576).toFixed(1);
-if (!_0x247e.length) {
+const _0x2492 = _0x2493 => Number(_0x2493.metadata && _0x2493.metadata.size) || 0;
+const _0x2494 = _0x248c.filter(_0x2495 => /\.(png|jpe?g|webp)$/i.test(_0x2495.name) && _0x2492(_0x2495) >= _0x1cb9);
+const _0x2496 = _0x2497 => (_0x2497 / 1048576).toFixed(1);
+if (!_0x2494.length) {
 alert('No hay imágenes pesadas: todas pesan menos de 300 KB.');
 return;
 }
-const _0x2482 = _0x247e.reduce((_0x2483, _0x2484) => _0x2483 + _0x247c(_0x2484), 0);
-if (!confirm(`Hay ${_0x247e.length} imágenes pesadas (${_0x2480(_0x2482)} MB en total).\n\nSe achicarán una por una, manteniendo el mismo enlace, así que las noticias y materiales no cambian. Puede tardar unos minutos: no cierres la ventana.\n\n¿Continuar?`))
+const _0x2498 = _0x2494.reduce((_0x2499, _0x249a) => _0x2499 + _0x2492(_0x249a), 0);
+if (!confirm(`Hay ${_0x2494.length} imágenes pesadas (${_0x2496(_0x2498)} MB en total).\n\nSe achicarán una por una, manteniendo el mismo enlace, así que las noticias y materiales no cambian. Puede tardar unos minutos: no cierres la ventana.\n\n¿Continuar?`))
 return;
 _0x1c93.innerHTML = `<div class="dlg"><h3>Optimizando imágenes…</h3><p id="optim-p" class="meta">Empezando…</p></div>`;
 if (!_0x1c93.open)
 _0x1c93.showModal();
-let _0x2485 = 0, _0x2486 = 0, _0x2487 = 0, _0x2488 = 0;
-for (const [_0x2489, _0x248a] of _0x247e.entries()) {
-_0x1a37('#optim-p').textContent = `${_0x2489 + 1} de ${_0x247e.length} · ahorro hasta ahora: ${_0x2480(_0x2485 - _0x2486)} MB`;
+let _0x249b = 0, _0x249c = 0, _0x249d = 0, _0x249e = 0;
+for (const [_0x249f, _0x24a0] of _0x2494.entries()) {
+_0x1a37('#optim-p').textContent = `${_0x249f + 1} de ${_0x2494.length} · ahorro hasta ahora: ${_0x2496(_0x249b - _0x249c)} MB`;
 try {
-const { data: _0x248b, error: _0x248c } = await _0x1a07.storage.from(_0x1a02).download(_0x248a.name);
-if (_0x248c)
-throw _0x248c;
-const _0x248d = await _0x1cba(new File([_0x248b], _0x248a.name, { type: _0x248b.type || (/\.png$/i.test(_0x248a.name) ? 'image/png' : 'image/jpeg') }));
-if (_0x248d.size >= _0x248b.size) {
+const { data: _0x24a1, error: _0x24a2 } = await _0x1a07.storage.from(_0x1a02).download(_0x24a0.name);
+if (_0x24a2)
+throw _0x24a2;
+const _0x24a3 = await _0x1cba(new File([_0x24a1], _0x24a0.name, { type: _0x24a1.type || (/\.png$/i.test(_0x24a0.name) ? 'image/png' : 'image/jpeg') }));
+if (_0x24a3.size >= _0x24a1.size) {
 continue;
 }
-const { error: _0x248e } = await _0x1a07.storage.from(_0x1a02).upload(_0x248a.name, _0x248d, { upsert: true, contentType: _0x248d.type, cacheControl: '604800' });
-if (_0x248e)
-throw _0x248e;
-_0x2485 += _0x248b.size;
-_0x2486 += _0x248d.size;
-_0x2487++;
+const { error: _0x24a4 } = await _0x1a07.storage.from(_0x1a02).upload(_0x24a0.name, _0x24a3, { upsert: true, contentType: _0x24a3.type, cacheControl: '604800' });
+if (_0x24a4)
+throw _0x24a4;
+_0x249b += _0x24a1.size;
+_0x249c += _0x24a3.size;
+_0x249d++;
 }
-catch (_0x248f) {
-_0x2488++;
+catch (_0x24a5) {
+_0x249e++;
 }
 }
 try {
 localStorage.removeItem(_0x1a65);
 }
-catch (_0x2490) { }
+catch (_0x24a6) { }
 _0x1c93.innerHTML = `<div class="dlg"><h3>✅ Imágenes optimizadas</h3>
-    <p>${_0x2487} imágenes achicadas: de <b>${_0x2480(_0x2485)} MB</b> a <b>${_0x2480(_0x2486)} MB</b> (${_0x2485 ? Math.round(100 - _0x2486 * 100 / _0x2485) : 0}% menos).</p>
-    ${_0x2488 ? `<p class="meta">${_0x2488} no se pudieron procesar y quedaron como estaban.</p>` : ''}
+    <p>${_0x249d} imágenes achicadas: de <b>${_0x2496(_0x249b)} MB</b> a <b>${_0x2496(_0x249c)} MB</b> (${_0x249b ? Math.round(100 - _0x249c * 100 / _0x249b) : 0}% menos).</p>
+    ${_0x249e ? `<p class="meta">${_0x249e} no se pudieron procesar y quedaron como estaban.</p>` : ''}
     <div class="row"><button class="btn" data-close>Cerrar</button></div></div>`;
 }
-function _0x2491(_0x2492, _0x2493, _0x2494, _0x2495) {
+function _0x24a7(_0x24a8, _0x24a9, _0x24aa, _0x24ab) {
 try {
 if (!('Notification' in window) || Notification.permission !== 'granted')
 return;
-const _0x2496 = new Notification(_0x2492, { body: _0x2493, tag: _0x2494 || undefined, renotify: !!_0x2494, requireInteraction: true });
-_0x2496.onclick = () => { try {
+const _0x24ac = new Notification(_0x24a8, { body: _0x24a9, tag: _0x24aa || undefined, renotify: !!_0x24aa, requireInteraction: true });
+_0x24ac.onclick = () => { try {
 window.focus();
 }
-catch (_0x2497) { } try {
-if (_0x2495)
-_0x2495();
+catch (_0x24ad) { } try {
+if (_0x24ab)
+_0x24ab();
 }
-catch (_0x2498) { } _0x2496.close(); };
+catch (_0x24ae) { } _0x24ac.close(); };
 }
-catch (_0x2499) { }
+catch (_0x24af) { }
 }
-function _0x249a() {
-const _0x249b = 'Notification' in window, _0x249c = _0x249b ? Notification.permission : 'granted';
-let _0x249d = _0x1a37('#avwin'), _0x249e = _0x1a37('#avwin-bloq');
-if (_0x249d && _0x249d.dataset.ayuda)
+function _0x24b0() {
+const _0x24b1 = 'Notification' in window, _0x24b2 = _0x24b1 ? Notification.permission : 'granted';
+let _0x24b3 = _0x1a37('#avwin'), _0x24b4 = _0x1a37('#avwin-bloq');
+if (_0x24b3 && _0x24b3.dataset.ayuda)
 return;
-if (!_0x1a08.uid || _0x1a08.cargando || _0x1dce || _0x1a10() || _0x249c === 'granted') {
-if (_0x249d && _0x249d.open)
-_0x249d.close();
-if (_0x249e)
-_0x249e.remove();
+if (!_0x1a08.uid || _0x1a08.cargando || _0x1dce || _0x1a10() || _0x24b2 === 'granted') {
+if (_0x24b3 && _0x24b3.open)
+_0x24b3.close();
+if (_0x24b4)
+_0x24b4.remove();
 return;
 }
-if (_0x249c === 'default') {
-if (_0x249e)
-_0x249e.remove();
+if (_0x24b2 === 'default') {
+if (_0x24b4)
+_0x24b4.remove();
 if (_0x1a08.enExamen)
 return;
-if (!_0x249d) {
-_0x249d = document.createElement('dialog');
-_0x249d.id = 'avwin';
-_0x249d.className = 'avwin';
-document.body.appendChild(_0x249d);
-_0x249d.addEventListener('cancel', _0x249f => _0x249f.preventDefault());
+if (!_0x24b3) {
+_0x24b3 = document.createElement('dialog');
+_0x24b3.id = 'avwin';
+_0x24b3.className = 'avwin';
+document.body.appendChild(_0x24b3);
+_0x24b3.addEventListener('cancel', _0x24b5 => _0x24b5.preventDefault());
 }
-if (_0x249d.open)
+if (_0x24b3.open)
 return;
-_0x249d.innerHTML = `<div class="avwin-c"><div class="avwin-i">🔔</div><h2>Activa los avisos de Windows</h2>
+_0x24b3.innerHTML = `<div class="avwin-c"><div class="avwin-i">🔔</div><h2>Activa los avisos de Windows</h2>
       <p>Así te llegarán los avisos de <b>callbacks</b>, <b>comunicados</b> y <b>alertas</b> aunque estés trabajando en otro programa.</p>
       <p class="meta">Al presionar el botón, el navegador te preguntará: elige <b>Permitir</b>.</p>
       <button type="button" class="btn" id="avwin-si">Activar avisos</button></div>`;
-_0x249d.querySelector('#avwin-si').onclick = async () => {
+_0x24b3.querySelector('#avwin-si').onclick = async () => {
 try {
 await Notification.requestPermission();
 }
-catch (_0x24a0) { }
-_0x249a();
+catch (_0x24b6) { }
+_0x24b0();
 if (Notification.permission === 'granted')
-_0x2491('✅ Avisos activados', 'Desde ahora los avisos del portal te aparecerán aquí, aunque estés en otra ventana.', 'prueba');
+_0x24a7('✅ Avisos activados', 'Desde ahora los avisos del portal te aparecerán aquí, aunque estés en otra ventana.', 'prueba');
 };
-_0x249d.showModal();
+_0x24b3.showModal();
 return;
 }
-if (_0x249d && _0x249d.open && !_0x249d.dataset.ayuda)
-_0x249d.close();
+if (_0x24b3 && _0x24b3.open && !_0x24b3.dataset.ayuda)
+_0x24b3.close();
 if (!document.querySelector('#auth .avbloq'))
 _0x1aea();
 }
-const _0x24a1 = () => !!_0x1a08.uid && !_0x1dce && !_0x1a10() && 'Notification' in window && Notification.permission === 'denied';
-function _0x24a2() {
-let _0x24a3 = _0x1a37('#avwin');
-if (!_0x24a3) {
-_0x24a3 = document.createElement('dialog');
-_0x24a3.id = 'avwin';
-_0x24a3.className = 'avwin';
-document.body.appendChild(_0x24a3);
-_0x24a3.addEventListener('cancel', _0x24a4 => { if (!_0x24a3.dataset.ayuda)
-_0x24a4.preventDefault(); });
+const _0x24b7 = () => !!_0x1a08.uid && !_0x1dce && !_0x1a10() && 'Notification' in window && Notification.permission === 'denied';
+function _0x24b8() {
+let _0x24b9 = _0x1a37('#avwin');
+if (!_0x24b9) {
+_0x24b9 = document.createElement('dialog');
+_0x24b9.id = 'avwin';
+_0x24b9.className = 'avwin';
+document.body.appendChild(_0x24b9);
+_0x24b9.addEventListener('cancel', _0x24ba => { if (!_0x24b9.dataset.ayuda)
+_0x24ba.preventDefault(); });
 }
-_0x24a3.dataset.ayuda = '1';
-_0x24a3.innerHTML = `<div class="avwin-c"><div class="avwin-i">🔕</div><h2>Los avisos están bloqueados</h2>
+_0x24b9.dataset.ayuda = '1';
+_0x24b9.innerHTML = `<div class="avwin-c"><div class="avwin-i">🔕</div><h2>Los avisos están bloqueados</h2>
     <p>Sin ellos no te llegarán los avisos de callbacks, comunicados y alertas cuando estés en otra ventana.</p>
     <ol class="avwin-pasos"><li>Haz clic en el candado 🔒 (o en el ícono de ajustes) a la izquierda de la dirección de la página.</li>
       <li>En <b>Notificaciones</b>, elige <b>Permitir</b>.</li><li>Presiona <b>F5</b>.</li></ol>
     <p class="meta">Si la opción no aparece o no se puede cambiar, tu computadora la tiene bloqueada por la empresa: avisa a tu coordinador.</p>
     <button type="button" class="btn" id="avwin-ok">Entendido</button></div>`;
-_0x24a3.querySelector('#avwin-ok').onclick = () => { delete _0x24a3.dataset.ayuda; _0x24a3.close(); };
-if (!_0x24a3.open)
-_0x24a3.showModal();
+_0x24b9.querySelector('#avwin-ok').onclick = () => { delete _0x24b9.dataset.ayuda; _0x24b9.close(); };
+if (!_0x24b9.open)
+_0x24b9.showModal();
 }
-setInterval(_0x249a, 60000);
+setInterval(_0x24b0, 60000);
 try {
-navigator.permissions.query({ name: 'notifications' }).then(_0x24a5 => { _0x24a5.onchange = () => _0x249a(); }).catch(() => { });
+navigator.permissions.query({ name: 'notifications' }).then(_0x24bb => { _0x24bb.onchange = () => _0x24b0(); }).catch(() => { });
 }
-catch (_0x24a6) { }
-function _0x24a7(_0x24a8, _0x24a9, _0x24aa, _0x24ab) {
-const _0x24ac = Math.floor(_0x24a9 / 60), _0x24ad = _0x24aa === 2 ? '⚠️ BREAK EXCEDIDO · 70 MINUTOS' : '☕ BREAK EXCEDIDO';
-const _0x24ae = `${_0x1a2f(_0x24a8)} lleva ${_0x24ac} min de break hoy (máximo 60 min al día).${_0x24ab ? ' Sigue en break ahora.' : ''}`;
-let _0x24af = _0x1a37('#cb-avisos');
-if (!_0x24af) {
-_0x24af = document.createElement('div');
-_0x24af.id = 'cb-avisos';
-document.body.appendChild(_0x24af);
+catch (_0x24bc) { }
+function _0x24bd(_0x24be, _0x24bf, _0x24c0, _0x24c1) {
+const _0x24c2 = Math.floor(_0x24bf / 60), _0x24c3 = _0x24c0 === 2 ? '⚠️ BREAK EXCEDIDO · 70 MINUTOS' : '☕ BREAK EXCEDIDO';
+const _0x24c4 = `${_0x1a2f(_0x24be)} lleva ${_0x24c2} min de break hoy (máximo 60 min al día).${_0x24c1 ? ' Sigue en break ahora.' : ''}`;
+let _0x24c5 = _0x1a37('#cb-avisos');
+if (!_0x24c5) {
+_0x24c5 = document.createElement('div');
+_0x24c5.id = 'cb-avisos';
+document.body.appendChild(_0x24c5);
 }
-const _0x24b0 = document.createElement('div');
-_0x24b0.className = 'cb-toast ' + (_0x24aa === 2 ? 'tarde' : 'rec');
-_0x24b0.setAttribute('role', 'alert');
-_0x24b0.innerHTML = `<button type="button" class="x" aria-label="Cerrar">×</button><b>${_0x1a39(_0x24ad)}</b><p>${_0x1a39(_0x24ae)}</p>
-    <p class="meta">${_0x1a39(_0x1a0b[_0x24a8.rol] || '')}${_0x24a8.rol === 'asesor' ? ' · ' + _0x1a39(_0x2266[_0x24a8.area] || '') : ''}</p>
+const _0x24c6 = document.createElement('div');
+_0x24c6.className = 'cb-toast ' + (_0x24c0 === 2 ? 'tarde' : 'rec');
+_0x24c6.setAttribute('role', 'alert');
+_0x24c6.innerHTML = `<button type="button" class="x" aria-label="Cerrar">×</button><b>${_0x1a39(_0x24c3)}</b><p>${_0x1a39(_0x24c4)}</p>
+    <p class="meta">${_0x1a39(_0x1a0b[_0x24be.rol] || '')}${_0x24be.rol === 'asesor' ? ' · ' + _0x1a39(_0x2266[_0x24be.area] || '') : ''}</p>
     <div class="cb-btns"><button type="button" class="btn sm" data-x="ver">Ver conectividad</button></div>`;
-_0x24b0.querySelector('.x').onclick = () => _0x24b0.remove();
-_0x24b0.querySelector('[data-x=ver]').onclick = () => { _0x24b0.remove(); _0x1a08.panelSec = 'conectividad'; _0x1a08.panelAbierto = true; _0x1c91('panel'); };
-_0x24af.appendChild(_0x24b0);
-setTimeout(() => { if (_0x24b0.isConnected)
-_0x24b0.remove(); }, 15 * 60e3);
+_0x24c6.querySelector('.x').onclick = () => _0x24c6.remove();
+_0x24c6.querySelector('[data-x=ver]').onclick = () => { _0x24c6.remove(); _0x1a08.panelSec = 'conectividad'; _0x1a08.panelAbierto = true; _0x1c91('panel'); };
+_0x24c5.appendChild(_0x24c6);
+setTimeout(() => { if (_0x24c6.isConnected)
+_0x24c6.remove(); }, 15 * 60e3);
 _0x1ea0();
-_0x2491(_0x24ad, _0x24ae, 'brk-' + _0x24a8.id + '-' + _0x24aa, () => { _0x1a08.panelSec = 'conectividad'; _0x1a08.panelAbierto = true; _0x1c91('panel'); });
+_0x24a7(_0x24c3, _0x24c4, 'brk-' + _0x24be.id + '-' + _0x24c0, () => { _0x1a08.panelSec = 'conectividad'; _0x1a08.panelAbierto = true; _0x1c91('panel'); });
 }
 Object.assign(_0x1d10, {
-estado: _0x24b1 => _0x1e3b(_0x24b1),
+estado: _0x24c7 => _0x1e3b(_0x24c7),
 'est-menu': () => { _0x1e2d = !_0x1e2d; _0x1aea(); },
 'mi-clave': () => _0x1e65(false),
 'deco-temporada': () => {
-const _0x24b2 = _0x1aee();
-if (!_0x24b2)
+const _0x24c8 = _0x1aee();
+if (!_0x24c8)
 return;
 try {
-if (_0x1af1(_0x24b2))
-localStorage.removeItem('amx_sin_deco_' + _0x24b2.id);
+if (_0x1af1(_0x24c8))
+localStorage.removeItem('amx_sin_deco_' + _0x24c8.id);
 else
-localStorage.setItem('amx_sin_deco_' + _0x24b2.id, '1');
+localStorage.setItem('amx_sin_deco_' + _0x24c8.id, '1');
 }
-catch (_0x24b3) { }
+catch (_0x24c9) { }
 _0x1b4d();
 _0x1ad8();
 _0x1b56();
@@ -5633,105 +5688,105 @@ _0x1aea();
 'cbh-buscar': () => _0x2040(),
 'cbh-excel': () => _0x206b(),
 'ie-excel': () => _0x2019(),
-'cb-llamada': _0x24b4 => _0x1ee9(Number(_0x24b4)),
-'cb-res': async (_0x24b5, _0x24b6) => {
-const _0x24b7 = _0x1e77.m.get(Number(_0x24b5)), _0x24b8 = _0x1a37('#ferr'), _0x24b9 = Number(_0x24b6.dataset.res);
-const { data: _0x24ba, error: _0x24bb } = await _0x1a07.rpc('cb_registrar', { p_id: Number(_0x24b5), p_res: _0x24b9, p_comentario: (_0x1a37('#cb-com') || {}).value || null });
-if (_0x24bb) {
-_0x24b8.textContent = _0x1a53(_0x24bb);
-_0x24b8.hidden = false;
-if (/otra persona/.test(_0x24bb.message || '')) {
-_0x1e77.m.delete(Number(_0x24b5));
+'cb-llamada': _0x24ca => _0x1ee9(Number(_0x24ca)),
+'cb-res': async (_0x24cb, _0x24cc) => {
+const _0x24cd = _0x1e77.m.get(Number(_0x24cb)), _0x24ce = _0x1a37('#ferr'), _0x24cf = Number(_0x24cc.dataset.res);
+const { data: _0x24d0, error: _0x24d1 } = await _0x1a07.rpc('cb_registrar', { p_id: Number(_0x24cb), p_res: _0x24cf, p_comentario: (_0x1a37('#cb-com') || {}).value || null });
+if (_0x24d1) {
+_0x24ce.textContent = _0x1a53(_0x24d1);
+_0x24ce.hidden = false;
+if (/otra persona/.test(_0x24d1.message || '')) {
+_0x1e77.m.delete(Number(_0x24cb));
 _0x1ec1();
 }
 return;
 }
-_0x1e77.m.set(_0x24ba.id, _0x24ba);
+_0x1e77.m.set(_0x24d0.id, _0x24d0);
 _0x1c93.close();
 _0x1ec1();
 _0x1ad8();
-_0x1eb9(_0x24ba.estado === 2 ? '✅ Callback cerrado: cliente contactado.' : _0x24ba.estado === 3 ? '📕 Ciclo cumplido sin contacto: el caso se cerró.' :
-`📅 Siguiente intento: ${_0x1a2b(_0x24ba.proximo)} (intento ${(_0x24ba.intentos || []).length + 1} de 6).`);
+_0x1eb9(_0x24d0.estado === 2 ? '✅ Callback cerrado: cliente contactado.' : _0x24d0.estado === 3 ? '📕 Ciclo cumplido sin contacto: el caso se cerró.' :
+`📅 Siguiente intento: ${_0x1a2b(_0x24d0.proximo)} (intento ${(_0x24d0.intentos || []).length + 1} de 6).`);
 },
-'cb-recordar': async (_0x24bc) => { const { error: _0x24bd } = await _0x1a07.rpc('cb_recordar', { p_id: Number(_0x24bc) }); if (_0x24bd)
-return alert(_0x1a53(_0x24bd)); _0x1eb9('🔔 Recordatorio enviado al asesor.'); },
-'cb-reasignar': _0x24be => _0x1eef(Number(_0x24be)),
-'cb-anular': async (_0x24bf) => {
-const _0x24c0 = prompt('Motivo para anular este callback (por ejemplo: registrado por error):');
-if (_0x24c0 === null)
+'cb-recordar': async (_0x24d2) => { const { error: _0x24d3 } = await _0x1a07.rpc('cb_recordar', { p_id: Number(_0x24d2) }); if (_0x24d3)
+return alert(_0x1a53(_0x24d3)); _0x1eb9('🔔 Recordatorio enviado al asesor.'); },
+'cb-reasignar': _0x24d4 => _0x1eef(Number(_0x24d4)),
+'cb-anular': async (_0x24d5) => {
+const _0x24d6 = prompt('Motivo para anular este callback (por ejemplo: registrado por error):');
+if (_0x24d6 === null)
 return;
-const { error: _0x24c1 } = await _0x1a07.rpc('cb_anular', { p_id: Number(_0x24bf), p_motivo: _0x24c0 });
-if (_0x24c1)
-return alert(_0x1a53(_0x24c1));
-const _0x24c2 = _0x1e77.m.get(Number(_0x24bf));
-if (_0x24c2) {
-_0x24c2.estado = 4;
-_0x24c2.cerrado = new Date().toISOString();
-_0x24c2.comentario = _0x24c0 || _0x24c2.comentario;
+const { error: _0x24d7 } = await _0x1a07.rpc('cb_anular', { p_id: Number(_0x24d5), p_motivo: _0x24d6 });
+if (_0x24d7)
+return alert(_0x1a53(_0x24d7));
+const _0x24d8 = _0x1e77.m.get(Number(_0x24d5));
+if (_0x24d8) {
+_0x24d8.estado = 4;
+_0x24d8.cerrado = new Date().toISOString();
+_0x24d8.comentario = _0x24d6 || _0x24d8.comentario;
 }
 _0x1ec1();
 _0x1ad8();
 },
-'cb-copiar': (_0x24c3, _0x24c4) => { try {
-navigator.clipboard.writeText(_0x24c4.dataset.tel);
-_0x1eb9('📋 Número copiado: ' + _0x24c4.dataset.tel);
+'cb-copiar': (_0x24d9, _0x24da) => { try {
+navigator.clipboard.writeText(_0x24da.dataset.tel);
+_0x1eb9('📋 Número copiado: ' + _0x24da.dataset.tel);
 }
-catch (_0x24c5) { } },
+catch (_0x24db) { } },
 'cb-avisos': async () => { try {
 await Notification.requestPermission();
 }
-catch (_0x24c6) { } _0x1ec1(); },
+catch (_0x24dc) { } _0x1ec1(); },
 'cb-actualizar': async () => { await _0x1e8e(); },
 'cb-archivar': () => _0x1f36(),
 'cb-carpeta': async () => { await _0x1f20('cb_dir'); _0x1eb9('La próxima vez que archives, elegirás una carpeta nueva.'); },
 'orden-menu': () => { if (!_0x1a3e())
 return; _0x1a08.ordenTmp = _0x1ac8(); _0x1ad0(); },
-'om-mover': (_0x24c7, _0x24c8) => { _0x24c7 = Number(_0x24c7); const _0x24c9 = _0x24c7 + Number(_0x24c8.dataset.d), _0x24ca = _0x1a08.ordenTmp; if (_0x24c9 < 0 || _0x24c9 >= _0x24ca.length)
-return; [_0x24ca[_0x24c7], _0x24ca[_0x24c9]] = [_0x24ca[_0x24c9], _0x24ca[_0x24c7]]; _0x1ad0(); },
+'om-mover': (_0x24dd, _0x24de) => { _0x24dd = Number(_0x24dd); const _0x24df = _0x24dd + Number(_0x24de.dataset.d), _0x24e0 = _0x1a08.ordenTmp; if (_0x24df < 0 || _0x24df >= _0x24e0.length)
+return; [_0x24e0[_0x24dd], _0x24e0[_0x24df]] = [_0x24e0[_0x24df], _0x24e0[_0x24dd]]; _0x1ad0(); },
 'om-reset': () => { if (confirm('¿Volver al orden original del menú para todos?'))
 _0x1ad4(null); },
-'om-guardar': () => _0x1ad4(_0x1a08.ordenTmp.map(_0x24cb => _0x24cb.k)),
+'om-guardar': () => _0x1ad4(_0x1a08.ordenTmp.map(_0x24e1 => _0x24e1.k)),
 cobertura: () => { if (_0x1a3d())
 _0x2372(); },
-'cob-dar': async (_0x24cc) => {
-const _0x24cd = _0x1a37('#cob-h-' + _0x24cc).value;
-if (!_0x24cd)
+'cob-dar': async (_0x24e2) => {
+const _0x24e3 = _0x1a37('#cob-h-' + _0x24e2).value;
+if (!_0x24e3)
 return alert('Elige hasta qué fecha y hora.');
-const { error: _0x24ce } = await _0x1a07.rpc('asignar_cobertura', { p_coord: _0x24cc, p_hasta: new Date(_0x24cd).toISOString() });
-if (_0x24ce)
-return alert(/asignar_cobertura/.test(_0x24ce.message || '') ? 'Falta ejecutar el SQL de cambios 12 en Supabase.' : _0x1a53(_0x24ce));
-const _0x24cf = _0x1a08.perfiles.find(_0x24d0 => _0x24d0.id === _0x24cc);
-if (_0x24cf)
-_0x24cf.cobertura_hasta = new Date(_0x24cd).toISOString();
+const { error: _0x24e4 } = await _0x1a07.rpc('asignar_cobertura', { p_coord: _0x24e2, p_hasta: new Date(_0x24e3).toISOString() });
+if (_0x24e4)
+return alert(/asignar_cobertura/.test(_0x24e4.message || '') ? 'Falta ejecutar el SQL de cambios 12 en Supabase.' : _0x1a53(_0x24e4));
+const _0x24e5 = _0x1a08.perfiles.find(_0x24e6 => _0x24e6.id === _0x24e2);
+if (_0x24e5)
+_0x24e5.cobertura_hasta = new Date(_0x24e3).toISOString();
 _0x2372();
 },
-'cob-quitar': async (_0x24d1) => {
-const { error: _0x24d2 } = await _0x1a07.rpc('asignar_cobertura', { p_coord: _0x24d1, p_hasta: null });
-if (_0x24d2)
-return alert(_0x1a53(_0x24d2));
-const _0x24d3 = _0x1a08.perfiles.find(_0x24d4 => _0x24d4.id === _0x24d1);
-if (_0x24d3)
-_0x24d3.cobertura_hasta = null;
+'cob-quitar': async (_0x24e7) => {
+const { error: _0x24e8 } = await _0x1a07.rpc('asignar_cobertura', { p_coord: _0x24e7, p_hasta: null });
+if (_0x24e8)
+return alert(_0x1a53(_0x24e8));
+const _0x24e9 = _0x1a08.perfiles.find(_0x24ea => _0x24ea.id === _0x24e7);
+if (_0x24e9)
+_0x24e9.cobertura_hasta = null;
 _0x2372();
 },
-'est-de': _0x24d5 => {
-const _0x24d6 = _0x1ba0(_0x24d5), _0x24d7 = _0x2290(_0x2292().get(_0x24d5)).e;
-_0x1c93.innerHTML = `<div class="dlg"><h3>Cambiar estado</h3><p class="meta"><b>${_0x1a39(_0x24d6 ? _0x1a2f(_0x24d6) : '')}</b> · ahora está en <span class="chipE e-${_0x24d7}">${_0x1e08[_0x24d7]}</span></p>
+'est-de': _0x24eb => {
+const _0x24ec = _0x1ba0(_0x24eb), _0x24ed = _0x2290(_0x2292().get(_0x24eb)).e;
+_0x1c93.innerHTML = `<div class="dlg"><h3>Cambiar estado</h3><p class="meta"><b>${_0x1a39(_0x24ec ? _0x1a2f(_0x24ec) : '')}</b> · ahora está en <span class="chipE e-${_0x24ed}">${_0x1e08[_0x24ed]}</span></p>
         <p class="note">Úsalo cuando la persona olvidó cambiar su estado (por ejemplo, volvió del baño y sigue en Baño). Verá un aviso en su pantalla y el cambio queda en el historial.</p>
-        <div class="est-menu en-dlg">${_0x1e06((_0x1ba0(_0x24d5) || {}).rol).map(([_0x24d8, _0x24d9]) => `<button class="e-${_0x24d8} ${_0x24d7 === _0x24d8 ? 'on' : ''}" data-act="est-de-ok" data-id="${_0x24d5}" data-k="${_0x24d8}"><span>${_0x1e2c[_0x24d8] || ''}</span>${_0x1a39(_0x24d9)}${_0x24d7 === _0x24d8 ? '<em>actual</em>' : ''}</button>`).join('')}</div>
-        <button class="btn danger desc-btn" data-act="est-de-ok" data-id="${_0x24d5}" data-k="desconectado">⏻ Desconectar (cierra su sesión)</button>
+        <div class="est-menu en-dlg">${_0x1e06((_0x1ba0(_0x24eb) || {}).rol).map(([_0x24ee, _0x24ef]) => `<button class="e-${_0x24ee} ${_0x24ed === _0x24ee ? 'on' : ''}" data-act="est-de-ok" data-id="${_0x24eb}" data-k="${_0x24ee}"><span>${_0x1e2c[_0x24ee] || ''}</span>${_0x1a39(_0x24ef)}${_0x24ed === _0x24ee ? '<em>actual</em>' : ''}</button>`).join('')}</div>
+        <button class="btn danger desc-btn" data-act="est-de-ok" data-id="${_0x24eb}" data-k="desconectado">⏻ Desconectar (cierra su sesión)</button>
         <p class="err" id="ferr" hidden></p><div class="row"><button class="btn ghost" data-close>Cancelar</button></div></div>`;
 if (!_0x1c93.open)
 _0x1c93.showModal();
 },
-'est-de-ok': async (_0x24da, _0x24db) => {
-const _0x24dc = _0x24db.dataset.k, _0x24dd = _0x1a37('#ferr'), _0x24de = _0x1ba0(_0x24da);
-if (_0x24dc === 'desconectado' && !confirm(`¿Desconectar a ${_0x24de ? _0x1a2f(_0x24de) : 'esta persona'}? Se cerrará su sesión en el portal y su tiempo dejará de contar.`))
+'est-de-ok': async (_0x24f0, _0x24f1) => {
+const _0x24f2 = _0x24f1.dataset.k, _0x24f3 = _0x1a37('#ferr'), _0x24f4 = _0x1ba0(_0x24f0);
+if (_0x24f2 === 'desconectado' && !confirm(`¿Desconectar a ${_0x24f4 ? _0x1a2f(_0x24f4) : 'esta persona'}? Se cerrará su sesión en el portal y su tiempo dejará de contar.`))
 return;
-const { error: _0x24df } = await _0x1a07.rpc('cambiar_estado_de', { p_user: _0x24da, p_estado: _0x24dc });
-if (_0x24df) {
-_0x24dd.textContent = /cambiar_estado_de/.test(_0x24df.message || '') ? 'Falta ejecutar el SQL de cambios 12 en Supabase.' : _0x1a53(_0x24df);
-_0x24dd.hidden = false;
+const { error: _0x24f5 } = await _0x1a07.rpc('cambiar_estado_de', { p_user: _0x24f0, p_estado: _0x24f2 });
+if (_0x24f5) {
+_0x24f3.textContent = /cambiar_estado_de/.test(_0x24f5.message || '') ? 'Falta ejecutar el SQL de cambios 12 en Supabase.' : _0x1a53(_0x24f5);
+_0x24f3.hidden = false;
 return;
 }
 _0x1c93.close();
@@ -5741,423 +5796,423 @@ _0x2361();
 'desc-roles': () => {
 if (!_0x1a3d())
 return;
-const _0x24e0 = _0x2292(), _0x24e1 = _0x24e2 => _0x1a08.perfiles.filter(_0x24e3 => _0x24e3.rol === _0x24e2 && _0x2290(_0x24e0.get(_0x24e3.id)).e !== 'desconectado').length;
-const _0x24e4 = ['formador', 'monitor', 'supervisor', 'gtr', 'coordinador', 'asesor'].map(_0x24e5 => [_0x24e5, `${_0x1a0b[_0x24e5]}${_0x24e5 === 'supervisor' ? ' (no registra estado; se cierra su sesión si está abierta)' : ` (${_0x24e1(_0x24e5)} conectado${_0x24e1(_0x24e5) === 1 ? '' : 's'} ahora)`}`]);
+const _0x24f6 = _0x2292(), _0x24f7 = _0x24f8 => _0x1a08.perfiles.filter(_0x24f9 => _0x24f9.rol === _0x24f8 && _0x2290(_0x24f6.get(_0x24f9.id)).e !== 'desconectado').length;
+const _0x24fa = ['formador', 'monitor', 'supervisor', 'gtr', 'coordinador', 'asesor'].map(_0x24fb => [_0x24fb, `${_0x1a0b[_0x24fb]}${_0x24fb === 'supervisor' ? ' (no registra estado; se cierra su sesión si está abierta)' : ` (${_0x24f7(_0x24fb)} conectado${_0x24f7(_0x24fb) === 1 ? '' : 's'} ahora)`}`]);
 _0x1c95('Desconectar por rol', [
 { k: '_n', t: 'nota', l: 'Cierra la sesión de todas las personas de los roles que marques que tengan el portal abierto. Quedan como Desconectadas y ven el mensaje "La administración cerró tu sesión". Pueden volver a entrar dentro del horario. Si alguien está rindiendo un examen, se le deja terminar.' },
-{ k: 'roles', t: 'checks', l: 'Roles a desconectar', o: _0x24e4 }
-], async (_0x24e6) => {
-if (!_0x24e6.roles.length)
+{ k: 'roles', t: 'checks', l: 'Roles a desconectar', o: _0x24fa }
+], async (_0x24fc) => {
+if (!_0x24fc.roles.length)
 throw new Error('Marca al menos un rol.');
-if (!confirm(`¿Desconectar ahora a: ${_0x24e6.roles.map(_0x24e7 => _0x1a0b[_0x24e7]).join(', ')}?`))
+if (!confirm(`¿Desconectar ahora a: ${_0x24fc.roles.map(_0x24fd => _0x1a0b[_0x24fd]).join(', ')}?`))
 throw new Error('Cancelado.');
-const { data: _0x24e8, error: _0x24e9 } = await _0x1a07.rpc('desconectar_roles', { p_roles: _0x24e6.roles });
-if (_0x24e9)
-throw /desconectar_roles/.test(_0x24e9.message || '') ? new Error('Falta ejecutar el SQL de cambios 10 en Supabase.') : _0x24e9;
+const { data: _0x24fe, error: _0x24ff } = await _0x1a07.rpc('desconectar_roles', { p_roles: _0x24fc.roles });
+if (_0x24ff)
+throw /desconectar_roles/.test(_0x24ff.message || '') ? new Error('Falta ejecutar el SQL de cambios 10 en Supabase.') : _0x24ff;
 _0x23bf();
-return () => alert(`Listo: se desconectó a ${_0x24e8} persona${_0x24e8 === 1 ? '' : 's'} con estado activo. Las sesiones abiertas de esos roles se cerrarán en unos segundos.`);
+return () => alert(`Listo: se desconectó a ${_0x24fe} persona${_0x24fe === 1 ? '' : 's'} con estado activo. Las sesiones abiertas de esos roles se cerrarán en unos segundos.`);
 });
 },
 'reset-tiempos': () => {
 if (!_0x1a3d())
 return;
-const _0x24ea = _0x1a28(new Date());
+const _0x2500 = _0x1a28(new Date());
 _0x1c95('Reiniciar tiempos', [
 { k: '_n', t: 'nota', l: 'Borra los tiempos registrados (Activo, Baño, Break, Capacitación, Feedback y Reunión) de los roles que marques, entre las fechas indicadas (ambas incluidas). NO SE PUEDE DESHACER: si necesitas un respaldo, descarga antes el Excel.' },
 { k: 'roles', t: 'checks', l: 'Roles', o: [['asesor', 'Asesores'], ['coordinador', 'Coordinadores'], ['gtr', 'GTR'], ['formador', 'Formadores'], ['monitor', 'Monitores'], ['supervisor', 'Supervisores (solo historial anterior)']] },
 { k: 'desde', l: 'Desde el día', t: 'date', req: 1 },
 { k: 'hasta', l: 'Hasta el día', t: 'date', req: 1 },
 { k: 'conf', l: 'Para confirmar, escribe BORRAR', p: 'BORRAR', req: 1 }
-], async (_0x24eb) => {
-if (!_0x24eb.roles.length)
+], async (_0x2501) => {
+if (!_0x2501.roles.length)
 throw new Error('Marca al menos un rol.');
-if (!_0x24eb.desde || !_0x24eb.hasta || _0x24eb.desde > _0x24eb.hasta)
+if (!_0x2501.desde || !_0x2501.hasta || _0x2501.desde > _0x2501.hasta)
 throw new Error('Revisa las fechas: la inicial debe ser anterior o igual a la final.');
-if (String(_0x24eb.conf).trim().toUpperCase() !== 'BORRAR')
+if (String(_0x2501.conf).trim().toUpperCase() !== 'BORRAR')
 throw new Error('Escribe BORRAR para confirmar.');
-const { data: _0x24ec, error: _0x24ed } = await _0x1a07.rpc('resetear_tiempos', { p_roles: _0x24eb.roles, p_desde: _0x24eb.desde, p_hasta: _0x24eb.hasta });
-if (_0x24ed)
-throw /resetear_tiempos/.test(_0x24ed.message || '') ? new Error('Falta ejecutar el SQL de cambios 10 en Supabase.') : _0x24ed;
+const { data: _0x2502, error: _0x2503 } = await _0x1a07.rpc('resetear_tiempos', { p_roles: _0x2501.roles, p_desde: _0x2501.desde, p_hasta: _0x2501.hasta });
+if (_0x2503)
+throw /resetear_tiempos/.test(_0x2503.message || '') ? new Error('Falta ejecutar el SQL de cambios 10 en Supabase.') : _0x2503;
 _0x1a08.est.ok = false;
 _0x23bf();
-return () => alert(`Listo: se reiniciaron los tiempos (${_0x24ec} tramo${_0x24ec === 1 ? '' : 's'} borrado${_0x24ec === 1 ? '' : 's'}).`);
-}, { desde: _0x24ea, hasta: _0x24ea });
+return () => alert(`Listo: se reiniciaron los tiempos (${_0x2502} tramo${_0x2502 === 1 ? '' : 's'} borrado${_0x2502 === 1 ? '' : 's'}).`);
+}, { desde: _0x2500, hasta: _0x2500 });
 },
-'ex-tipo': (_0x24ee, _0x24ef) => {
-const _0x24f0 = _0x20d8 && _0x20d8.preguntas[Number(_0x24ee)];
-if (!_0x24f0)
+'ex-tipo': (_0x2504, _0x2505) => {
+const _0x2506 = _0x20d8 && _0x20d8.preguntas[Number(_0x2504)];
+if (!_0x2506)
 return;
-_0x24f0.tipo = _0x24ef.dataset.t;
-if (_0x24f0.tipo === 'opcion' && _0x24f0.opciones.length < 2)
-_0x24f0.opciones = ['', ''];
-_0x24f0.opImgs = _0x24f0.opciones.map((_0x24f1, _0x24f2) => (_0x24f0.opImgs || [])[_0x24f2] || '');
+_0x2506.tipo = _0x2505.dataset.t;
+if (_0x2506.tipo === 'opcion' && _0x2506.opciones.length < 2)
+_0x2506.opciones = ['', ''];
+_0x2506.opImgs = _0x2506.opciones.map((_0x2507, _0x2508) => (_0x2506.opImgs || [])[_0x2508] || '');
 _0x20f7();
 },
-'calif-lista': _0x24f3 => _0x21cb(_0x24f3 || null),
-calif: _0x24f4 => _0x21d7(_0x24f4),
-'cal-max': (_0x24f5, _0x24f6) => { const _0x24f7 = _0x1c94.querySelector(`[data-cal="${_0x24f5}"]`); if (_0x24f7) {
-_0x24f7.value = _0x24f7.max;
+'calif-lista': _0x2509 => _0x21cb(_0x2509 || null),
+calif: _0x250a => _0x21d7(_0x250a),
+'cal-max': (_0x250b, _0x250c) => { const _0x250d = _0x1c94.querySelector(`[data-cal="${_0x250b}"]`); if (_0x250d) {
+_0x250d.value = _0x250d.max;
 _0x21e0();
 } },
-'cal-cero': (_0x24f8, _0x24f9) => { const _0x24fa = _0x1c94.querySelector(`[data-cal="${_0x24f8}"]`); if (_0x24fa) {
-_0x24fa.value = 0;
+'cal-cero': (_0x250e, _0x250f) => { const _0x2510 = _0x1c94.querySelector(`[data-cal="${_0x250e}"]`); if (_0x2510) {
+_0x2510.value = 0;
 _0x21e0();
 } },
-'calif-guardar': (_0x24fb, _0x24fc) => _0x21ea(_0x24fc),
+'calif-guardar': (_0x2511, _0x2512) => _0x21ea(_0x2512),
 horario: () => {
 if (!_0x1a3d())
 return;
-const _0x24fd = _0x1a08.horarioInfo;
+const _0x2513 = _0x1a08.horarioInfo;
 _0x1c95('Horario de atención', [
-{ k: '_n', t: 'nota', l: 'Fuera de este horario nadie puede ingresar, excepto Formadores y Todopoderoso. Cinco minutos antes del cierre aparece un aviso y a la hora de cierre se cierran las sesiones. El cambio les llega a todos al instante.' + (_0x24fd && _0x24fd.actualizado_por ? ` Último cambio: ${_0x24fd.actualizado_por}, ${_0x1a2b(_0x24fd.actualizado)}.` : '') },
+{ k: '_n', t: 'nota', l: 'Fuera de este horario nadie puede ingresar, excepto Formadores y Todopoderoso. Cinco minutos antes del cierre aparece un aviso y a la hora de cierre se cierran las sesiones. El cambio les llega a todos al instante.' + (_0x2513 && _0x2513.actualizado_por ? ` Último cambio: ${_0x2513.actualizado_por}, ${_0x1a2b(_0x2513.actualizado)}.` : '') },
 { k: 'ini', l: 'Abre a las (hora de Perú)', t: 'time', req: 1 },
 { k: 'fin', l: 'Cierra a las (hora de Perú)', t: 'time', req: 1 }
-], async (_0x24fe) => {
-if (!_0x24fe.ini || !_0x24fe.fin)
+], async (_0x2514) => {
+if (!_0x2514.ini || !_0x2514.fin)
 throw new Error('Completa las dos horas.');
-if (_0x24fe.ini >= _0x24fe.fin)
+if (_0x2514.ini >= _0x2514.fin)
 throw new Error('La hora de apertura debe ser anterior a la de cierre.');
-const { error: _0x24ff } = await _0x1a07.rpc('guardar_horario', { p_inicio: _0x24fe.ini, p_fin: _0x24fe.fin });
-if (_0x24ff)
-throw /guardar_horario/.test(_0x24ff.message || '') ? new Error('Falta ejecutar el SQL de cambios 09 en Supabase.') : _0x24ff;
-await _0x2716();
-return () => alert('Horario actualizado: ' + _0x2715().replace('Horario de atención: ', '') + '.');
-}, { ini: _0x2703, fin: _0x2704 });
+const { error: _0x2515 } = await _0x1a07.rpc('guardar_horario', { p_inicio: _0x2514.ini, p_fin: _0x2514.fin });
+if (_0x2515)
+throw /guardar_horario/.test(_0x2515.message || '') ? new Error('Falta ejecutar el SQL de cambios 09 en Supabase.') : _0x2515;
+await _0x2765();
+return () => alert('Horario actualizado: ' + _0x2764().replace('Horario de atención: ', '') + '.');
+}, { ini: _0x2752, fin: _0x2753 });
 },
-'not-anteriores': async (_0x2500, _0x2501) => { if (_0x2501) {
-_0x2501.disabled = true;
-_0x2501.textContent = 'Cargando…';
+'not-anteriores': async (_0x2516, _0x2517) => { if (_0x2517) {
+_0x2517.disabled = true;
+_0x2517.textContent = 'Cargando…';
 } await _0x1a8f(); _0x1c8e(); },
-'ir-panel': _0x2502 => { _0x1a08.panelAbierto = true; if (_0x2502 === 'indexamenes') {
+'ir-panel': _0x2518 => { _0x1a08.panelAbierto = true; if (_0x2518 === 'indexamenes') {
 _0x1c91('indexamenes');
 return;
-} _0x1a08.panelSec = _0x2502; if (_0x1a08.vista === 'panel')
+} _0x1a08.panelSec = _0x2518; if (_0x1a08.vista === 'panel')
 _0x1c8e();
 else
 _0x1c91('panel'); },
 'panel-grupo': () => { _0x1a08.panelAbierto = !_0x1a08.panelAbierto; _0x1ad8(); },
-'ir-sec': _0x2503 => { const _0x2504 = _0x1a37('#sec-' + _0x2503); if (_0x2504)
-_0x2504.scrollIntoView({ behavior: 'smooth', block: 'start' }); },
+'ir-sec': _0x2519 => { const _0x251a = _0x1a37('#sec-' + _0x2519); if (_0x251a)
+_0x251a.scrollIntoView({ behavior: 'smooth', block: 'start' }); },
 'add-exam': () => _0x2102(null, []),
-'edit-exam': async (_0x2505) => {
-const _0x2506 = _0x1a08.examenes.find(_0x2507 => _0x2507.id == _0x2505);
-if (!_0x2506)
-return;
-const { data: _0x2508, error: _0x2509 } = await _0x1a07.from('examen_preguntas').select('*').eq('examen_id', _0x2506.id).order('orden');
-if (_0x2509)
-throw _0x2509;
-await _0x2102(_0x2506, _0x2508);
-},
-'pub-exam': async (_0x250a) => {
-const _0x250b = _0x1a08.examenes.find(_0x250c => _0x250c.id == _0x250a);
-if (!_0x250b)
-return;
-if (!_0x250b.publicado && !_0x250b.n_preguntas)
-throw new Error('Agrega al menos una pregunta antes de publicar el examen.');
-await _0x1a56(_0x1a07.from('examenes').update({ publicado: !_0x250b.publicado }).eq('id', _0x250a));
-await _0x1ab9();
-},
-'del-exam': async (_0x250d) => {
-const _0x250e = _0x1a08.examenes.find(_0x250f => _0x250f.id == _0x250d);
-if (!_0x250e)
-return;
-if (!confirm(`¿Quitar el examen "${_0x250e.titulo}" con sus preguntas y TODOS los resultados? Esto no se puede deshacer.`))
-return;
-await _0x1a56(_0x1a07.from('examenes').delete().eq('id', _0x250d));
-await _0x1ab9();
-},
-'res-exam': _0x2510 => _0x21ba(_0x2510),
-'reset-int': async (_0x2511, _0x2512) => {
-const _0x2513 = _0x1a08.examenes.find(_0x2514 => _0x2514.id == _0x2511), _0x2515 = _0x1ba0(_0x2512.dataset.uid);
-if (!confirm(`¿Reiniciar los intentos de ${_0x2515 ? _0x1a2f(_0x2515) : 'esta persona'} en "${_0x2513.titulo}"? Se borran sus notas de este examen y podrá rendirlo de nuevo.`))
-return;
-await _0x1a56(_0x1a07.from('examen_intentos').delete().eq('examen_id', _0x2511).eq('user_id', _0x2512.dataset.uid));
-await _0x1ab9();
-_0x21ba(_0x2511);
-},
-'ex-analisis': async (_0x2516) => { try {
-await _0x2128(_0x2516);
-_0x216c(_0x2516);
-}
-catch (_0x2517) {
-alert(/analisis_examen/.test(_0x2517.message || '') ? 'Falta ejecutar el SQL de cambios 26 en Supabase.' : _0x1a53(_0x2517));
-} },
-'ex-analisis-xls': async (_0x2518) => { try {
-await _0x2128(_0x2518);
-_0x2189(_0x2518);
-}
-catch (_0x2519) {
-alert(/analisis_examen/.test(_0x2519.message || '') ? 'Falta ejecutar el SQL de cambios 26 en Supabase.' : _0x1a53(_0x2519));
-} },
-'ex-volver-res': _0x251a => _0x21ba(_0x251a),
-'csv-examen': _0x251b => {
+'edit-exam': async (_0x251b) => {
 const _0x251c = _0x1a08.examenes.find(_0x251d => _0x251d.id == _0x251b);
 if (!_0x251c)
 return;
-_0x1c7a('examen-' + _0x1c83() + '.csv', [_0x21ca, ..._0x21ac(_0x251c).map(_0x251e => _0x21c7(_0x251c, _0x251e))]);
+const { data: _0x251e, error: _0x251f } = await _0x1a07.from('examen_preguntas').select('*').eq('examen_id', _0x251c.id).order('orden');
+if (_0x251f)
+throw _0x251f;
+await _0x2102(_0x251c, _0x251e);
+},
+'pub-exam': async (_0x2520) => {
+const _0x2521 = _0x1a08.examenes.find(_0x2522 => _0x2522.id == _0x2520);
+if (!_0x2521)
+return;
+if (!_0x2521.publicado && !_0x2521.n_preguntas)
+throw new Error('Agrega al menos una pregunta antes de publicar el examen.');
+await _0x1a56(_0x1a07.from('examenes').update({ publicado: !_0x2521.publicado }).eq('id', _0x2520));
+await _0x1ab9();
+},
+'del-exam': async (_0x2523) => {
+const _0x2524 = _0x1a08.examenes.find(_0x2525 => _0x2525.id == _0x2523);
+if (!_0x2524)
+return;
+if (!confirm(`¿Quitar el examen "${_0x2524.titulo}" con sus preguntas y TODOS los resultados? Esto no se puede deshacer.`))
+return;
+await _0x1a56(_0x1a07.from('examenes').delete().eq('id', _0x2523));
+await _0x1ab9();
+},
+'res-exam': _0x2526 => _0x21ba(_0x2526),
+'reset-int': async (_0x2527, _0x2528) => {
+const _0x2529 = _0x1a08.examenes.find(_0x252a => _0x252a.id == _0x2527), _0x252b = _0x1ba0(_0x2528.dataset.uid);
+if (!confirm(`¿Reiniciar los intentos de ${_0x252b ? _0x1a2f(_0x252b) : 'esta persona'} en "${_0x2529.titulo}"? Se borran sus notas de este examen y podrá rendirlo de nuevo.`))
+return;
+await _0x1a56(_0x1a07.from('examen_intentos').delete().eq('examen_id', _0x2527).eq('user_id', _0x2528.dataset.uid));
+await _0x1ab9();
+_0x21ba(_0x2527);
+},
+'ex-analisis': async (_0x252c) => { try {
+await _0x2128(_0x252c);
+_0x216c(_0x252c);
+}
+catch (_0x252d) {
+alert(/analisis_examen/.test(_0x252d.message || '') ? 'Falta ejecutar el SQL de cambios 26 en Supabase.' : _0x1a53(_0x252d));
+} },
+'ex-analisis-xls': async (_0x252e) => { try {
+await _0x2128(_0x252e);
+_0x2189(_0x252e);
+}
+catch (_0x252f) {
+alert(/analisis_examen/.test(_0x252f.message || '') ? 'Falta ejecutar el SQL de cambios 26 en Supabase.' : _0x1a53(_0x252f));
+} },
+'ex-volver-res': _0x2530 => _0x21ba(_0x2530),
+'csv-examen': _0x2531 => {
+const _0x2532 = _0x1a08.examenes.find(_0x2533 => _0x2533.id == _0x2531);
+if (!_0x2532)
+return;
+_0x1c7a('examen-' + _0x1c83() + '.csv', [_0x21ca, ..._0x21ac(_0x2532).map(_0x2534 => _0x21c7(_0x2532, _0x2534))]);
 },
 'csv-examenes': () => {
-const _0x251f = [_0x21ca];
-_0x1a08.examenes.filter(_0x2520 => _0x2520.publicado).forEach(_0x2521 => _0x21ac(_0x2521).forEach(_0x2522 => _0x251f.push(_0x21c7(_0x2521, _0x2522))));
-_0x1c7a('examenes-' + _0x1c83() + '.csv', _0x251f);
+const _0x2535 = [_0x21ca];
+_0x1a08.examenes.filter(_0x2536 => _0x2536.publicado).forEach(_0x2537 => _0x21ac(_0x2537).forEach(_0x2538 => _0x2535.push(_0x21c7(_0x2537, _0x2538))));
+_0x1c7a('examenes-' + _0x1c83() + '.csv', _0x2535);
 },
-rendir: _0x2523 => _0x2208(_0x2523),
+rendir: _0x2539 => _0x2208(_0x2539),
 'ex-enviar': () => _0x2213(false),
 'ex-salir': async () => { await _0x2203(); _0x1a08.enExamen = false; clearInterval(_0x21f7); _0x21f6 = null; _0x1c94.close(); },
 'ex-ag-preg': () => { _0x20d8.preguntas.push(_0x20d9()); _0x20f7(); _0x1c94.scrollTo({ top: _0x1c94.scrollHeight }); },
-'ex-del-preg': _0x2524 => {
+'ex-del-preg': _0x253a => {
 if (_0x20d8.preguntas.length <= 1) {
 alert('El examen necesita al menos una pregunta.');
 return;
 }
-_0x20d8.preguntas.splice(Number(_0x2524), 1);
+_0x20d8.preguntas.splice(Number(_0x253a), 1);
 _0x20f7();
 },
-'ex-ag-op': _0x2525 => { const _0x2526 = _0x20d8.preguntas[Number(_0x2525)]; if (_0x2526.opciones.length < 6) {
-_0x2526.opciones.push('');
-_0x2526.opImgs.push('');
+'ex-ag-op': _0x253b => { const _0x253c = _0x20d8.preguntas[Number(_0x253b)]; if (_0x253c.opciones.length < 6) {
+_0x253c.opciones.push('');
+_0x253c.opImgs.push('');
 _0x20f7();
 } },
-'ex-quitar-imgop': (_0x2527, _0x2528) => { const _0x2529 = _0x20d8.preguntas[Number(_0x2527)]; _0x2529.opImgs[Number(_0x2528.dataset.j)] = ''; _0x20f7(); },
-'ex-asig-todos': () => { _0x20d8.asignados = [...new Set([..._0x20d8.asignados, ..._0x20e1().map(_0x252a => _0x252a.id)])]; _0x20f7(); },
+'ex-quitar-imgop': (_0x253d, _0x253e) => { const _0x253f = _0x20d8.preguntas[Number(_0x253d)]; _0x253f.opImgs[Number(_0x253e.dataset.j)] = ''; _0x20f7(); },
+'ex-asig-todos': () => { _0x20d8.asignados = [...new Set([..._0x20d8.asignados, ..._0x20e1().map(_0x2540 => _0x2540.id)])]; _0x20f7(); },
 'ex-asig-ninguno': () => { _0x20d8.asignados = []; _0x20f7(); },
-'ex-del-op': (_0x252b, _0x252c) => {
-const _0x252d = _0x20d8.preguntas[Number(_0x252b)], _0x252e = Number(_0x252c.dataset.j);
-if (_0x252d.opciones.length <= 2)
+'ex-del-op': (_0x2541, _0x2542) => {
+const _0x2543 = _0x20d8.preguntas[Number(_0x2541)], _0x2544 = Number(_0x2542.dataset.j);
+if (_0x2543.opciones.length <= 2)
 return;
-_0x252d.opciones.splice(_0x252e, 1);
-_0x252d.opImgs.splice(_0x252e, 1);
-if (_0x252d.correcta === _0x252e)
-_0x252d.correcta = 0;
-else if (_0x252d.correcta > _0x252e)
-_0x252d.correcta--;
+_0x2543.opciones.splice(_0x2544, 1);
+_0x2543.opImgs.splice(_0x2544, 1);
+if (_0x2543.correcta === _0x2544)
+_0x2543.correcta = 0;
+else if (_0x2543.correcta > _0x2544)
+_0x2543.correcta--;
 _0x20f7();
 },
-'est-act': async (_0x252f, _0x2530) => { _0x2530.disabled = true; _0x2530.textContent = 'Actualizando…'; await _0x23bf(); },
-'al-validar': async (_0x2531, _0x2532) => {
-_0x2532.disabled = true;
-_0x2532.textContent = 'Validando…';
-const { error: _0x2533 } = await _0x1a07.rpc('validar_alerta_acceso', { p_id: Number(_0x2531) });
-if (_0x2533) {
-_0x2532.disabled = false;
-_0x2532.textContent = '✓ Validado';
-alert(/validar_alerta_acceso/.test(_0x2533.message || '') ? 'Falta ejecutar el SQL de cambios 05 en Supabase.' : _0x1a53(_0x2533));
+'est-act': async (_0x2545, _0x2546) => { _0x2546.disabled = true; _0x2546.textContent = 'Actualizando…'; await _0x23bf(); },
+'al-validar': async (_0x2547, _0x2548) => {
+_0x2548.disabled = true;
+_0x2548.textContent = 'Validando…';
+const { error: _0x2549 } = await _0x1a07.rpc('validar_alerta_acceso', { p_id: Number(_0x2547) });
+if (_0x2549) {
+_0x2548.disabled = false;
+_0x2548.textContent = '✓ Validado';
+alert(/validar_alerta_acceso/.test(_0x2549.message || '') ? 'Falta ejecutar el SQL de cambios 05 en Supabase.' : _0x1a53(_0x2549));
 return;
 }
 await _0x23d0();
 },
-'xls-est': async (_0x2534, _0x2535) => { _0x2535.disabled = true; _0x2535.textContent = 'Preparando…'; try {
+'xls-est': async (_0x254a, _0x254b) => { _0x254b.disabled = true; _0x254b.textContent = 'Preparando…'; try {
 await _0x23ec();
 }
 finally {
-_0x2535.disabled = false;
-_0x2535.textContent = 'Descargar Excel';
+_0x254b.disabled = false;
+_0x254b.textContent = 'Descargar Excel';
 } },
-'ex-quitar-img': _0x2536 => { const _0x2537 = _0x20d8 && _0x20d8.preguntas[Number(_0x2536)]; if (_0x2537) {
-_0x2537.imagen = '';
+'ex-quitar-img': _0x254c => { const _0x254d = _0x20d8 && _0x20d8.preguntas[Number(_0x254c)]; if (_0x254d) {
+_0x254d.imagen = '';
 _0x20f7();
 } },
 'ex-guardar': () => _0x2112()
 });
-let _0x2538, _0x2539 = false;
-const _0x253a = (_0x253b, _0x253c) => _0x1a07.from(_0x253b).select('*').order(_0x253c, { ascending: true });
-const _0x253d = (_0x253e, _0x253f) => _0x253e.map(_0x2540 => ({ ..._0x2540, subs: _0x253f.filter(_0x2541 => _0x2541.grupo_id === _0x2540.id).map(_0x2542 => ({ id: _0x2542.id, nombre: _0x2542.nombre, desc: _0x2542.descr || '', orden: _0x2542.orden })) }));
-const _0x2543 = {
-accesos: async () => { const _0x2544 = await _0x253a('accesos', 'orden'); if (!_0x2544.error)
-_0x1a08.accesos = _0x2544.data; },
-grupos: async () => { const [_0x2545, _0x2546] = await Promise.all([_0x253a('grupos', 'orden'), _0x253a('temas', 'orden')]); if (!_0x2545.error && !_0x2546.error)
-_0x1a08.menu = _0x253d(_0x2545.data, _0x2546.data); },
-noticias: async () => { const _0x2547 = await _0x1a7e(); if (!_0x2547.error) {
-_0x1a08.noticias = _0x2547.data;
+let _0x254e, _0x254f = false;
+const _0x2550 = (_0x2551, _0x2552) => _0x1a07.from(_0x2551).select('*').order(_0x2552, { ascending: true });
+const _0x2553 = (_0x2554, _0x2555) => _0x2554.map(_0x2556 => ({ ..._0x2556, subs: _0x2555.filter(_0x2557 => _0x2557.grupo_id === _0x2556.id).map(_0x2558 => ({ id: _0x2558.id, nombre: _0x2558.nombre, desc: _0x2558.descr || '', orden: _0x2558.orden })) }));
+const _0x2559 = {
+accesos: async () => { const _0x255a = await _0x2550('accesos', 'orden'); if (!_0x255a.error)
+_0x1a08.accesos = _0x255a.data; },
+grupos: async () => { const [_0x255b, _0x255c] = await Promise.all([_0x2550('grupos', 'orden'), _0x2550('temas', 'orden')]); if (!_0x255b.error && !_0x255c.error)
+_0x1a08.menu = _0x2553(_0x255b.data, _0x255c.data); },
+noticias: async () => { const _0x255d = await _0x1a7e(); if (!_0x255d.error) {
+_0x1a08.noticias = _0x255d.data;
 await _0x1a75();
 } },
-materiales: async () => { const _0x2548 = await _0x1a07.from('materiales').select('*').order('fecha', { ascending: false }).order('id', { ascending: false }); if (!_0x2548.error) {
-_0x1a08.materiales = _0x2548.data;
+materiales: async () => { const _0x255e = await _0x1a07.from('materiales').select('*').order('fecha', { ascending: false }).order('id', { ascending: false }); if (!_0x255e.error) {
+_0x1a08.materiales = _0x255e.data;
 await _0x1a75();
 } },
-bloques: async () => { const _0x2549 = await _0x253a('bloques', 'orden'); if (!_0x2549.error)
-_0x1a08.bloques = _0x2549.data; },
-categorias: async () => { const _0x254a = await _0x253a('categorias', 'orden'); if (!_0x254a.error)
-_0x1a08.cats = _0x254a.data; },
-estado_sitio: async () => { const _0x254b = await _0x1a07.from('estado_sitio').select('*').eq('id', 1).maybeSingle(); if (!_0x254b.error)
-_0x1a08.estado = _0x254b.data; },
+bloques: async () => { const _0x255f = await _0x2550('bloques', 'orden'); if (!_0x255f.error)
+_0x1a08.bloques = _0x255f.data; },
+categorias: async () => { const _0x2560 = await _0x2550('categorias', 'orden'); if (!_0x2560.error)
+_0x1a08.cats = _0x2560.data; },
+estado_sitio: async () => { const _0x2561 = await _0x1a07.from('estado_sitio').select('*').eq('id', 1).maybeSingle(); if (!_0x2561.error)
+_0x1a08.estado = _0x2561.data; },
 perfiles: async () => { if (!_0x1a19())
-return; const _0x254c = await _0x1a07.from('perfiles').select('*'); if (!_0x254c.error)
-_0x1a08.perfiles = _0x254c.data; },
-examenes: async () => { const _0x254d = await _0x1a07.from('examenes').select('*').order('creado', { ascending: false }); if (!_0x254d.error)
-_0x1a08.examenes = _0x254d.data; },
+return; const _0x2562 = await _0x1a07.from('perfiles').select('*'); if (!_0x2562.error)
+_0x1a08.perfiles = _0x2562.data; },
+examenes: async () => { const _0x2563 = await _0x1a07.from('examenes').select('*').order('creado', { ascending: false }); if (!_0x2563.error)
+_0x1a08.examenes = _0x2563.data; },
 examen_preguntas: async () => { },
-ajustes: async () => { await _0x2716(); }
+ajustes: async () => { await _0x2765(); }
 };
-_0x2543.temas = _0x2543.grupos;
-const _0x254e = { noticia_vistos: 'vistos', noticia_omisiones: 'omisiones', noticia_preguntas: 'preguntas', examen_intentos: 'intentos' };
-const _0x254f = _0x2550 => _0x2550.id != null ? 'i' + _0x2550.id : _0x2550.noticia_id + '|' + _0x2550.user_id;
-function _0x2551(_0x2552, _0x2553) {
-const _0x2554 = _0x1a08[_0x2552] || (_0x1a08[_0x2552] = []), _0x2555 = _0x254f(_0x2553), _0x2556 = _0x2554.findIndex(_0x2557 => _0x254f(_0x2557) === _0x2555);
-if (_0x2556 >= 0)
-_0x2554[_0x2556] = { ..._0x2554[_0x2556], ..._0x2553 };
+_0x2559.temas = _0x2559.grupos;
+const _0x2564 = { noticia_vistos: 'vistos', noticia_omisiones: 'omisiones', noticia_preguntas: 'preguntas', examen_intentos: 'intentos' };
+const _0x2565 = _0x2566 => _0x2566.id != null ? 'i' + _0x2566.id : _0x2566.noticia_id + '|' + _0x2566.user_id;
+function _0x2567(_0x2568, _0x2569) {
+const _0x256a = _0x1a08[_0x2568] || (_0x1a08[_0x2568] = []), _0x256b = _0x2565(_0x2569), _0x256c = _0x256a.findIndex(_0x256d => _0x2565(_0x256d) === _0x256b);
+if (_0x256c >= 0)
+_0x256a[_0x256c] = { ..._0x256a[_0x256c], ..._0x2569 };
 else
-_0x2554.push(_0x2553);
+_0x256a.push(_0x2569);
 }
-const _0x2558 = new Set();
-function _0x2559(_0x255a, _0x255b) {
-const _0x255c = _0x255a === 'noticias' ? 'noticias' : 'materiales', _0x255d = _0x1a08[_0x255c] || [];
-if (_0x255b.eventType === 'DELETE') {
-if (!_0x255b.old || _0x255b.old.id == null)
+const _0x256e = new Set();
+function _0x256f(_0x2570, _0x2571) {
+const _0x2572 = _0x2570 === 'noticias' ? 'noticias' : 'materiales', _0x2573 = _0x1a08[_0x2572] || [];
+if (_0x2571.eventType === 'DELETE') {
+if (!_0x2571.old || _0x2571.old.id == null)
 return false;
-_0x1a08[_0x255c] = _0x255d.filter(_0x255e => _0x255e.id !== _0x255b.old.id);
+_0x1a08[_0x2572] = _0x2573.filter(_0x2574 => _0x2574.id !== _0x2571.old.id);
 return true;
 }
-const _0x255f = _0x255b.new;
-if (!_0x255f || _0x255f.id == null)
+const _0x2575 = _0x2571.new;
+if (!_0x2575 || _0x2575.id == null)
 return false;
-const _0x2560 = _0x255d.findIndex(_0x2561 => _0x2561.id === _0x255f.id);
-if (_0x2560 >= 0) {
-const _0x2562 = { ..._0x255d[_0x2560] };
-Object.keys(_0x255f).forEach(_0x2563 => { if (_0x255f[_0x2563] !== undefined && !(_0x255f[_0x2563] === null && ['cuerpo', 'titulo', 'adjuntos'].includes(_0x2563)))
-_0x2562[_0x2563] = _0x255f[_0x2563]; });
-_0x255d[_0x2560] = _0x2562;
+const _0x2576 = _0x2573.findIndex(_0x2577 => _0x2577.id === _0x2575.id);
+if (_0x2576 >= 0) {
+const _0x2578 = { ..._0x2573[_0x2576] };
+Object.keys(_0x2575).forEach(_0x2579 => { if (_0x2575[_0x2579] !== undefined && !(_0x2575[_0x2579] === null && ['cuerpo', 'titulo', 'adjuntos'].includes(_0x2579)))
+_0x2578[_0x2579] = _0x2575[_0x2579]; });
+_0x2573[_0x2576] = _0x2578;
 }
 else {
-if (_0x255a === 'noticias' && !_0x1a08.notTodas && !(_0x255f.creado >= _0x1a08.notDesde || _0x255f.obligatoria || _0x255f.urgente))
+if (_0x2570 === 'noticias' && !_0x1a08.notTodas && !(_0x2575.creado >= _0x1a08.notDesde || _0x2575.obligatoria || _0x2575.urgente))
 return true;
-if (_0x255a === 'noticias' && _0x255f.cuerpo == null)
+if (_0x2570 === 'noticias' && _0x2575.cuerpo == null)
 return false;
-_0x255d.push(_0x255f);
+_0x2573.push(_0x2575);
 }
-_0x1a08[_0x255c] = _0x255a === 'noticias' ? _0x255d.sort((_0x2564, _0x2565) => new Date(_0x2565.creado) - new Date(_0x2564.creado) || _0x2565.id - _0x2564.id)
-: _0x255d.sort((_0x2566, _0x2567) => String(_0x2567.fecha || '').localeCompare(String(_0x2566.fecha || '')) || _0x2567.id - _0x2566.id);
+_0x1a08[_0x2572] = _0x2570 === 'noticias' ? _0x2573.sort((_0x257a, _0x257b) => new Date(_0x257b.creado) - new Date(_0x257a.creado) || _0x257b.id - _0x257a.id)
+: _0x2573.sort((_0x257c, _0x257d) => String(_0x257d.fecha || '').localeCompare(String(_0x257c.fecha || '')) || _0x257d.id - _0x257c.id);
 _0x1a75();
 return true;
 }
-function _0x2568(_0x2569) {
-const _0x256a = _0x2569.table;
-if (['asistencia', 'horario', 'feriados', 'personal_ficha', 'asesor_motivos'].includes(_0x256a))
+function _0x257e(_0x257f) {
+const _0x2580 = _0x257f.table;
+if (['asistencia', 'horario', 'feriados', 'personal_ficha', 'asesor_motivos'].includes(_0x2580))
 return;
-if (_0x256a === 'ajustes' && _0x2569.new && Object.keys(_0x2569.new).length) {
-_0x271c(_0x2569.new);
-return;
-}
-if (_0x254e[_0x256a] && _0x2569.eventType !== 'DELETE' && _0x2569.new && Object.keys(_0x2569.new).length) {
-_0x2551(_0x254e[_0x256a], _0x2569.new);
-_0x256e(null);
+if (_0x2580 === 'ajustes' && _0x257f.new && Object.keys(_0x257f.new).length) {
+_0x276b(_0x257f.new);
 return;
 }
-if (_0x254e[_0x256a] && _0x2569.eventType === 'DELETE' && _0x2569.old && (_0x2569.old.id != null || (_0x2569.old.noticia_id != null && _0x2569.old.user_id != null))) {
-const _0x256b = _0x254f(_0x2569.old), _0x256c = _0x1a08[_0x254e[_0x256a]] || [];
-_0x1a08[_0x254e[_0x256a]] = _0x256c.filter(_0x256d => _0x254f(_0x256d) !== _0x256b);
-_0x256e(null);
+if (_0x2564[_0x2580] && _0x257f.eventType !== 'DELETE' && _0x257f.new && Object.keys(_0x257f.new).length) {
+_0x2567(_0x2564[_0x2580], _0x257f.new);
+_0x2584(null);
 return;
 }
-if ((_0x256a === 'noticias' || _0x256a === 'materiales') && _0x2559(_0x256a, _0x2569)) {
-_0x256e(null);
+if (_0x2564[_0x2580] && _0x257f.eventType === 'DELETE' && _0x257f.old && (_0x257f.old.id != null || (_0x257f.old.noticia_id != null && _0x257f.old.user_id != null))) {
+const _0x2581 = _0x2565(_0x257f.old), _0x2582 = _0x1a08[_0x2564[_0x2580]] || [];
+_0x1a08[_0x2564[_0x2580]] = _0x2582.filter(_0x2583 => _0x2565(_0x2583) !== _0x2581);
+_0x2584(null);
 return;
 }
-_0x2558.add(_0x2543[_0x256a] || _0x254e[_0x256a] ? _0x256a : '*');
-_0x256e(null);
+if ((_0x2580 === 'noticias' || _0x2580 === 'materiales') && _0x256f(_0x2580, _0x257f)) {
+_0x2584(null);
+return;
 }
-function _0x256e(_0x256f) {
-if (_0x256f === undefined)
-_0x2558.add('*');
-clearTimeout(_0x2538);
-_0x2538 = setTimeout(async () => {
+_0x256e.add(_0x2559[_0x2580] || _0x2564[_0x2580] ? _0x2580 : '*');
+_0x2584(null);
+}
+function _0x2584(_0x2585) {
+if (_0x2585 === undefined)
+_0x256e.add('*');
+clearTimeout(_0x254e);
+_0x254e = setTimeout(async () => {
 if (!_0x1a08.uid)
 return;
 if (_0x1c93.open || _0x1c94.open || ['q', 'qn'].includes(document.activeElement?.id)) {
-_0x256e(null);
+_0x2584(null);
 return;
 }
-const _0x2570 = [..._0x2558];
-_0x2558.clear();
+const _0x2586 = [..._0x256e];
+_0x256e.clear();
 try {
-if (_0x2570.includes('*'))
+if (_0x2586.includes('*'))
 await _0x1a9e();
 else {
-const _0x2571 = new Set();
-await Promise.all(_0x2570.map(_0x2572 => {
-if (_0x254e[_0x2572]) {
-const _0x2573 = _0x2572 === 'examen_intentos' ? _0x209b() : _0x1a07.from(_0x2572).select('*');
-return _0x2573.then(_0x2574 => { if (!_0x2574.error)
-_0x1a08[_0x254e[_0x2572]] = _0x2574.data; });
+const _0x2587 = new Set();
+await Promise.all(_0x2586.map(_0x2588 => {
+if (_0x2564[_0x2588]) {
+const _0x2589 = _0x2588 === 'examen_intentos' ? _0x209b() : _0x1a07.from(_0x2588).select('*');
+return _0x2589.then(_0x258a => { if (!_0x258a.error)
+_0x1a08[_0x2564[_0x2588]] = _0x258a.data; });
 }
-const _0x2575 = _0x2543[_0x2572];
-if (!_0x2575 || _0x2571.has(_0x2575))
+const _0x258b = _0x2559[_0x2588];
+if (!_0x258b || _0x2587.has(_0x258b))
 return null;
-_0x2571.add(_0x2575);
-return _0x2575();
+_0x2587.add(_0x258b);
+return _0x258b();
 }));
 }
 _0x1c8e();
 }
-catch (_0x2576) { }
+catch (_0x258c) { }
 }, 800);
 }
-function _0x2577() {
-if (_0x2539)
+function _0x258d() {
+if (_0x254f)
 return;
-_0x2539 = true;
-_0x1a07.channel('cambios').on('postgres_changes', { event: '*', schema: 'public' }, _0x2578 => {
-if (_0x2578.table === 'callbacks') {
-_0x1e93(_0x2578);
+_0x254f = true;
+_0x1a07.channel('cambios').on('postgres_changes', { event: '*', schema: 'public' }, _0x258e => {
+if (_0x258e.table === 'callbacks') {
+_0x1e93(_0x258e);
 return;
 }
-if (_0x2578.table === 'estado_cambio') {
-if (_0x2578.new && _0x2578.new.user_id === _0x1a08.uid) {
-if (_0x2578.new.estado === 'desconectado' && _0x1a1c())
-_0x1e43().then(_0x2579 => { if (_0x2579)
-_0x2726(_0x1e3e); });
+if (_0x258e.table === 'estado_cambio') {
+if (_0x258e.new && _0x258e.new.user_id === _0x1a08.uid) {
+if (_0x258e.new.estado === 'desconectado' && _0x1a1c())
+_0x1e43().then(_0x258f => { if (_0x258f)
+_0x2775(_0x1e3e); });
 else
-_0x1e47(_0x2578.new.estado, _0x2578.new.desde);
+_0x1e47(_0x258e.new.estado, _0x258e.new.desde);
 }
-_0x246c(_0x2578.new);
-_0x23da(_0x2578.new);
+_0x2472(_0x258e.new);
+_0x23da(_0x258e.new);
 return;
 }
-if (_0x2578.table === 'estado_intervenciones') {
+if (_0x258e.table === 'estado_intervenciones') {
 if (_0x1a08.vista === 'panel' && _0x1a37('#est-interv'))
 _0x2361();
 return;
 }
-if (_0x2578.table === 'acceso_alertas') {
+if (_0x258e.table === 'acceso_alertas') {
 _0x23d4();
 return;
 }
-if (_0x2578.table === 'estado_actual' || _0x2578.table === 'estado_log')
+if (_0x258e.table === 'estado_actual' || _0x258e.table === 'estado_log')
 return;
-_0x2568(_0x2578);
+_0x257e(_0x258e);
 }).subscribe();
 }
-async function _0x257a(_0x257b) {
-_0x1a08.uid = _0x257b.user.id;
+async function _0x2590(_0x2591) {
+_0x1a08.uid = _0x2591.user.id;
 _0x1a08.cargando = true;
 _0x1a08.error = '';
 _0x1a08.entroEn = Date.now();
 if (_0x1dce) {
-let _0x257c = null;
+let _0x2592 = null;
 try {
-const { data: _0x257d } = await _0x1a07.from('perfiles').select('rol').eq('id', _0x257b.user.id).maybeSingle();
-_0x257c = _0x257d && _0x257d.rol;
+const { data: _0x2593 } = await _0x1a07.from('perfiles').select('rol').eq('id', _0x2591.user.id).maybeSingle();
+_0x2592 = _0x2593 && _0x2593.rol;
 }
-catch (_0x257e) { }
-if (_0x257c !== 'todopoderoso') {
+catch (_0x2594) { }
+if (_0x2592 !== 'todopoderoso') {
 try {
 await _0x1a07.rpc('registrar_alerta_acceso', { p_tipo: 'celular', p_detalle: _0x1dd1() });
 }
-catch (_0x257f) { }
+catch (_0x2595) { }
 _0x1a08.bloqueoCel = true;
 await _0x1a07.auth.signOut({ scope: 'local' });
 return;
 }
 }
-_0x1a08.ultIngreso = _0x257b.user && _0x257b.user.last_sign_in_at ? _0x22ef(_0x257b.user.last_sign_in_at) : null;
+_0x1a08.ultIngreso = _0x2591.user && _0x2591.user.last_sign_in_at ? _0x22ef(_0x2591.user.last_sign_in_at) : null;
 if (_0x1a08.ingresoIntento)
-_0x2734();
-else if (_0x2739()) {
-_0x272c = _0x2733;
+_0x2783();
+else if (_0x2788()) {
+_0x277b = _0x2782;
 try {
 await _0x1a07.rpc('registrar_cierre', { p_motivo: 'sesion_de_dia_anterior', p_detalle: _0x1dd1() });
 }
-catch (_0x2580) { }
+catch (_0x2596) { }
 await _0x1a07.auth.signOut({ scope: 'local' });
 return;
 }
@@ -6168,21 +6223,21 @@ _0x1c8e();
 try {
 await _0x1ab7();
 _0x1dd8();
-await _0x2716(true);
-if (_0x272b() && !_0x270f()) {
-_0x272c = `El portal está fuera de horario. ${_0x2715()}`;
+await _0x2765(true);
+if (_0x277a() && !_0x275e()) {
+_0x277b = `El portal está fuera de horario. ${_0x2764()}`;
 await _0x1a07.auth.signOut({ scope: 'local' });
 return;
 }
-const _0x2581 = await _0x1e5d();
-if (_0x2581) {
-_0x272c = _0x2581;
+const _0x2597 = await _0x1e5d();
+if (_0x2597) {
+_0x277b = _0x2597;
 await _0x1a07.auth.signOut({ scope: 'local' });
 return;
 }
 if (_0x1a08.debeCambiar && !(await _0x1e65(true))) {
 await _0x207c();
-_0x272c = 'Para usar el portal debes crear tu contraseña nueva.';
+_0x277b = 'Para usar el portal debes crear tu contraseña nueva.';
 await _0x1a07.auth.signOut({ scope: 'local' });
 return;
 }
@@ -6198,24 +6253,24 @@ _0x2464();
 if (!_0x1a3f())
 _0x1e8e();
 }
-catch (_0x2582) {
-_0x1a08.error = _0x1a53(_0x2582);
+catch (_0x2598) {
+_0x1a08.error = _0x1a53(_0x2598);
 }
 _0x1a08.cargando = false;
 if (!_0x1a1e() && _0x1a41(_0x1a08.vista))
 _0x1a08.vista = 'inicio';
 _0x1a45(_0x1a08.vista);
 _0x1c8e();
-_0x2577();
-_0x273b();
-_0x249a();
+_0x258d();
+_0x278a();
+_0x24b0();
 if (_0x1a1c()) {
 _0x2089();
 _0x208b();
 _0x207f();
 }
 }
-function _0x2583() {
+function _0x2599() {
 _0x1a08.uid = null;
 _0x1a08.rol = null;
 _0x1a08.codigo = '';
@@ -6247,8 +6302,8 @@ _0x1a08.ah.error = '';
 _0x1a08.ah.fichas = [];
 _0x1a08.ah.asis = new Map();
 _0x1a08.ah.hor = new Map();
-_0x1a08.ah.mes = _0x259c().slice(0, 7);
-_0x1a08.ah.semana = _0x25a7(_0x259c());
+_0x1a08.ah.mes = _0x25b8().slice(0, 7);
+_0x1a08.ah.semana = _0x25c3(_0x25b8());
 _0x1a08.examenes = [];
 _0x1a08.intentos = [];
 _0x1a08.estadoMio = null;
@@ -6265,8 +6320,8 @@ _0x1a08.est = { vivo: [], det: [], alertas: [], ok: false, hora: null };
 try {
 _0x1a07.removeAllChannels();
 }
-catch (_0x2584) { }
-_0x2539 = false;
+catch (_0x259a) { }
+_0x254f = false;
 _0x1a5b.clear();
 if (_0x1c93.open)
 _0x1c93.close();
@@ -6276,18 +6331,18 @@ history.replaceState(null, '', location.pathname + location.search);
 _0x1a37('#gform').reset();
 _0x1a37('#gform').clave.type = 'password';
 _0x1dea('');
-_0x272f(false);
+_0x277e(false);
 _0x208d();
 _0x1e2d = false;
-['aviso-red', 'aviso-internet', 'aviso-pausa'].forEach(_0x2585 => { const _0x2586 = document.getElementById(_0x2585); if (_0x2586)
-_0x2586.remove(); });
+['aviso-red', 'aviso-internet', 'aviso-pausa'].forEach(_0x259b => { const _0x259c = document.getElementById(_0x259b); if (_0x259c)
+_0x259c.remove(); });
 _0x1dd9();
 }
-function _0x2587() {
+function _0x259d() {
 if (_0x1dce) {
-const _0x2588 = _0x1a37('#gform');
-if (_0x2588 && !_0x1a37('#cel-aviso'))
-_0x2588.insertAdjacentHTML('afterbegin', '<p class="cel-aviso" id="cel-aviso">⛔ Estás en un celular. El portal solo funciona en una computadora de la empresa: si ingresas desde aquí, el intento quedará registrado a tu nombre y se informará a tu coordinador.</p>');
+const _0x259e = _0x1a37('#gform');
+if (_0x259e && !_0x1a37('#cel-aviso'))
+_0x259e.insertAdjacentHTML('afterbegin', '<p class="cel-aviso" id="cel-aviso">⛔ Estás en un celular. El portal solo funciona en una computadora de la empresa: si ingresas desde aquí, el intento quedará registrado a tu nombre y se informará a tu coordinador.</p>');
 }
 if (!_0x1a06) {
 _0x1dd9();
@@ -6295,27 +6350,31 @@ _0x1a37('#gform').querySelector('[type=submit]').disabled = true;
 _0x1dea('Falta conectar la base de datos: abre index.html y pega tu Project URL y tu clave pública de Supabase en la parte de CONFIGURACIÓN (al inicio del script).');
 return;
 }
-_0x2716();
-_0x1a07.auth.onAuthStateChange((_0x2589, _0x258a) => {
+_0x2765();
+_0x1a07.auth.onAuthStateChange((_0x259f, _0x25a0) => {
 setTimeout(async () => {
-if (_0x258a && (_0x2589 === 'SIGNED_IN' || _0x2589 === 'INITIAL_SESSION')) {
-if (_0x1a08.uid !== _0x258a.user.id) {
-await _0x257a(_0x258a);
+if (_0x25a0 && (_0x259f === 'SIGNED_IN' || _0x259f === 'INITIAL_SESSION')) {
+if (_0x1a08.uid !== _0x25a0.user.id) {
+await _0x2590(_0x25a0);
 }
 }
-else if (_0x2589 === 'SIGNED_OUT')
-_0x2583();
-else if (_0x2589 === 'INITIAL_SESSION')
+else if (_0x259f === 'SIGNED_OUT')
+_0x2599();
+else if (_0x259f === 'INITIAL_SESSION')
 _0x1dd9();
 }, 0);
 });
 }
 window.addEventListener('hashchange', () => { if (!_0x1a08.uid)
-return; const _0x258b = location.hash.slice(1) || 'inicio'; if (_0x258b !== _0x1a08.vista && (_0x258b === 'inicio' || _0x258b === 'examenes' || (['asistencia', 'horario'].includes(_0x258b) && _0x258d()) || (_0x258b === 'callbacks' && _0x1e7c()) || (_0x258b === 'indexamenes' && _0x1f44()) || _0x1a41(_0x258b) || (_0x258b === 'panel' && _0x1a19())))
-_0x1c91(_0x258b); });
-const _0x258c = ['formador', 'monitor', 'todopoderoso'];
-const _0x258d = () => _0x1a3d() || _0x1a3f();
-const _0x258e = [
+return; const _0x25a1 = location.hash.slice(1) || 'inicio'; if (_0x25a1 !== _0x1a08.vista && (_0x25a1 === 'inicio' || _0x25a1 === 'examenes' || _0x25a6(_0x25a1) || (_0x25a1 === 'callbacks' && _0x1e7c()) || (_0x25a1 === 'indexamenes' && _0x1f44()) || _0x1a41(_0x25a1) || (_0x25a1 === 'panel' && _0x1a19())))
+_0x1c91(_0x25a1); });
+const _0x25a2 = ['formador', 'monitor', 'todopoderoso'];
+const _0x25a3 = () => _0x1a3d() || _0x1a3f();
+const _0x25a4 = () => _0x25a3() || _0x1a17();
+const _0x25a5 = () => _0x1a3d() || _0x1a17();
+const _0x25a6 = _0x25a7 => (_0x25a7 === 'asistencia' && _0x25a3()) || (_0x25a7 === 'horario' && _0x25a4());
+const _0x25a8 = _0x25a9 => Number(_0x25e0(_0x25a9.id).horas_semana) || (_0x25a9 && _0x25a9.jornada === 'part' ? 24 : 48);
+const _0x25aa = [
 ['A', 'Asistencia', '#DCFCE7', '#166534'],
 ['F', 'Falta', '#FEE2E2', '#991B1B'],
 ['DM', 'Descanso médico', '#EDE9FE', '#5B21B6'],
@@ -6328,479 +6387,533 @@ const _0x258e = [
 ['LSGH', 'Licencia sin goce', '#FCE7F3', '#9D174D'],
 ['LCGH', 'Licencia con goce', '#CCFBF1', '#115E59']
 ];
-const _0x258f = Object.fromEntries(_0x258e.map(([_0x2590, _0x2591, _0x2592, _0x2593]) => [_0x2590, { n: _0x2591, bg: _0x2592, fg: _0x2593 }]));
-const _0x2594 = ['DESCANSO', 'FERIADO', 'COMPENSADO', 'VACACIONES', 'DM'];
-const _0x2595 = { DESCANSO: 'D', FERIADO: 'FR', COMPENSADO: 'DC', VACACIONES: 'VC', DM: 'DM' };
-const _0x2596 = 60;
-const _0x2597 = 6;
-const _0x2598 = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
-const _0x2599 = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
-const _0x259a = ['DOMINGO', 'LUNES', 'MARTES', 'MIERCOLES', 'JUEVES', 'VIERNES', 'SABADO'];
-const _0x259b = ['D', 'L', 'M', 'M', 'J', 'V', 'S'];
-const _0x259c = () => new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Lima' }).format(new Date());
-const _0x259d = (_0x259e, _0x259f, _0x25a0) => `${_0x259e}-${String(_0x259f).padStart(2, '0')}-${String(_0x25a0).padStart(2, '0')}`;
-const _0x25a1 = (_0x25a2, _0x25a3) => { const _0x25a4 = new Date(_0x25a2 + 'T12:00:00Z'); _0x25a4.setUTCDate(_0x25a4.getUTCDate() + _0x25a3); return _0x25a4.toISOString().slice(0, 10); };
-const _0x25a5 = _0x25a6 => new Date(_0x25a6 + 'T12:00:00Z').getUTCDay();
-const _0x25a7 = _0x25a8 => _0x25a1(_0x25a8, -((_0x25a5(_0x25a8) + 6) % 7));
-const _0x25a9 = _0x25aa => { const [_0x25ab, _0x25ac] = _0x25aa.split('-').map(Number); return Array.from({ length: new Date(Date.UTC(_0x25ab, _0x25ac, 0)).getUTCDate() }, (_0x25ad, _0x25ae) => _0x259d(_0x25ab, _0x25ac, _0x25ae + 1)); };
-const _0x25af = _0x25b0 => { const [_0x25b1, _0x25b2] = _0x25b0.split('-').map(Number); return `${_0x2599[_0x25b2 - 1]} ${_0x25b1}`; };
-_0x1a08.ah = { ok: false, cargando: false, error: '', fichas: [], asis: new Map(), feriados: new Map(), hor: new Map(), mes: _0x259c().slice(0, 7), semana: _0x25a7(_0x259c()), pincel: 'A' };
-const _0x25b3 = (_0x25b4, _0x25b5) => _0x25b4 + '|' + _0x25b5;
-const _0x25b6 = (_0x25b7, _0x25b8) => _0x25b7 + '|' + _0x25b8;
-function _0x25b9() {
-const _0x25ba = _0x1a08.perfiles.find(_0x25bb => _0x25bb.id === _0x1a08.uid) || { id: _0x1a08.uid, nombre: _0x1a08.nombre, codigo: _0x1a08.codigo, rol: _0x1a08.rol };
+const _0x25ab = Object.fromEntries(_0x25aa.map(([_0x25ac, _0x25ad, _0x25ae, _0x25af]) => [_0x25ac, { n: _0x25ad, bg: _0x25ae, fg: _0x25af }]));
+const _0x25b0 = ['DESCANSO', 'FERIADO', 'COMPENSADO', 'VACACIONES', 'DM'];
+const _0x25b1 = { DESCANSO: 'D', FERIADO: 'FR', COMPENSADO: 'DC', VACACIONES: 'VC', DM: 'DM' };
+const _0x25b2 = 60;
+const _0x25b3 = 6;
+const _0x25b4 = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+const _0x25b5 = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+const _0x25b6 = ['DOMINGO', 'LUNES', 'MARTES', 'MIERCOLES', 'JUEVES', 'VIERNES', 'SABADO'];
+const _0x25b7 = ['D', 'L', 'M', 'M', 'J', 'V', 'S'];
+const _0x25b8 = () => new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Lima' }).format(new Date());
+const _0x25b9 = (_0x25ba, _0x25bb, _0x25bc) => `${_0x25ba}-${String(_0x25bb).padStart(2, '0')}-${String(_0x25bc).padStart(2, '0')}`;
+const _0x25bd = (_0x25be, _0x25bf) => { const _0x25c0 = new Date(_0x25be + 'T12:00:00Z'); _0x25c0.setUTCDate(_0x25c0.getUTCDate() + _0x25bf); return _0x25c0.toISOString().slice(0, 10); };
+const _0x25c1 = _0x25c2 => new Date(_0x25c2 + 'T12:00:00Z').getUTCDay();
+const _0x25c3 = _0x25c4 => _0x25bd(_0x25c4, -((_0x25c1(_0x25c4) + 6) % 7));
+const _0x25c5 = _0x25c6 => { const [_0x25c7, _0x25c8] = _0x25c6.split('-').map(Number); return Array.from({ length: new Date(Date.UTC(_0x25c7, _0x25c8, 0)).getUTCDate() }, (_0x25c9, _0x25ca) => _0x25b9(_0x25c7, _0x25c8, _0x25ca + 1)); };
+const _0x25cb = _0x25cc => { const [_0x25cd, _0x25ce] = _0x25cc.split('-').map(Number); return `${_0x25b5[_0x25ce - 1]} ${_0x25cd}`; };
+_0x1a08.ah = { ok: false, cargando: false, error: '', fichas: [], asis: new Map(), feriados: new Map(), hor: new Map(), mes: _0x25b8().slice(0, 7), semana: _0x25c3(_0x25b8()), pincel: 'A' };
+const _0x25cf = (_0x25d0, _0x25d1) => _0x25d0 + '|' + _0x25d1;
+const _0x25d2 = (_0x25d3, _0x25d4) => _0x25d3 + '|' + _0x25d4;
+function _0x25d5() {
+const _0x25d6 = _0x1a08.perfiles.find(_0x25d7 => _0x25d7.id === _0x1a08.uid) || { id: _0x1a08.uid, nombre: _0x1a08.nombre, codigo: _0x1a08.codigo, rol: _0x1a08.rol };
+if (_0x1a17())
+return _0x1a08.perfiles.filter(_0x25d8 => _0x25d8.rol === 'asesor' && _0x25d8.coordinador_id === _0x1a08.uid)
+.sort((_0x25d9, _0x25da) => (_0x25d9.nombre || _0x25d9.codigo || '').localeCompare(_0x25da.nombre || _0x25da.codigo || ''));
 if (!_0x1a3d())
-return [_0x25ba];
-return _0x1a08.perfiles.filter(_0x25bc => _0x258c.includes(_0x25bc.rol))
-.sort((_0x25bd, _0x25be) => (_0x25bd.rol === 'todopoderoso') - (_0x25be.rol === 'todopoderoso') || (_0x25bd.nombre || _0x25bd.codigo || '').localeCompare(_0x25be.nombre || _0x25be.codigo || ''));
+return [_0x25d6];
+return _0x1a08.perfiles.filter(_0x25db => _0x25a2.includes(_0x25db.rol))
+.sort((_0x25dc, _0x25dd) => (_0x25dc.rol === 'todopoderoso') - (_0x25dd.rol === 'todopoderoso') || (_0x25dc.nombre || _0x25dc.codigo || '').localeCompare(_0x25dd.nombre || _0x25dd.codigo || ''));
 }
-async function _0x25bf() {
-const _0x25c0 = await _0x1a07.rpc('fichas_personal');
-return _0x25c0.error ? _0x1a07.from('personal_ficha').select('*') : _0x25c0;
+async function _0x25de() {
+const _0x25df = await _0x1a07.rpc('fichas_personal');
+return _0x25df.error ? _0x1a07.from('personal_ficha').select('*') : _0x25df;
 }
-const _0x25c1 = _0x25c2 => _0x1a08.ah.fichas.find(_0x25c3 => _0x25c3.user_id === _0x25c2) || {};
-async function _0x25c4() {
+const _0x25e0 = _0x25e1 => _0x1a08.ah.fichas.find(_0x25e2 => _0x25e2.user_id === _0x25e1) || {};
+async function _0x25e3() {
 if (_0x1a08.ah.cargando)
 return;
 _0x1a08.ah.cargando = true;
 _0x1a08.ah.error = '';
 try {
-const [_0x25c5, _0x25c6, _0x25c7, _0x25c8] = await Promise.all([
-_0x25bf(),
+const [_0x25e4, _0x25e5, _0x25e6, _0x25e7] = await Promise.all([
+_0x25de(),
 _0x1a07.from('feriados').select('*').order('dia'),
 _0x20a1('asistencia', 'user_id,dia,codigo', 'dia'),
 _0x20a1('horario', '*', 'semana')
 ]);
-const _0x25c9 = [_0x25c5, _0x25c6, _0x25c7, _0x25c8].find(_0x25ca => _0x25ca.error);
-if (_0x25c9)
-throw /relation|does not exist|schema cache/i.test(_0x25c9.error.message || '') ? new Error('Falta ejecutar el SQL de cambios 11 en Supabase.') : _0x25c9.error;
-_0x1a08.ah.fichas = _0x25c5.data;
-_0x1a08.ah.feriados = new Map(_0x25c6.data.map(_0x25cb => [_0x25cb.dia, _0x25cb]));
-_0x1a08.ah.asis = new Map(_0x25c7.data.map(_0x25cc => [_0x25b3(_0x25cc.user_id, _0x25cc.dia), _0x25cc.codigo]));
-_0x1a08.ah.hor = new Map(_0x25c8.data.map(_0x25cd => [_0x25b6(_0x25cd.user_id, _0x25cd.semana), _0x25cd]));
+const _0x25e8 = [_0x25e4, _0x25e5, _0x25e6, _0x25e7].find(_0x25e9 => _0x25e9.error);
+if (_0x25e8)
+throw /relation|does not exist|schema cache/i.test(_0x25e8.error.message || '') ? new Error('Falta ejecutar el SQL de cambios 11 en Supabase.') : _0x25e8.error;
+_0x1a08.ah.fichas = _0x25e4.data;
+_0x1a08.ah.feriados = new Map(_0x25e5.data.map(_0x25ea => [_0x25ea.dia, _0x25ea]));
+_0x1a08.ah.asis = new Map(_0x25e6.data.map(_0x25eb => [_0x25cf(_0x25eb.user_id, _0x25eb.dia), _0x25eb.codigo]));
+_0x1a08.ah.hor = new Map(_0x25e7.data.map(_0x25ec => [_0x25d2(_0x25ec.user_id, _0x25ec.semana), _0x25ec]));
 _0x1a08.ah.ok = true;
 }
-catch (_0x25ce) {
-_0x1a08.ah.error = _0x1a53(_0x25ce);
+catch (_0x25ed) {
+_0x1a08.ah.error = _0x1a53(_0x25ed);
 }
 _0x1a08.ah.cargando = false;
 if (['asistencia', 'horario'].includes(_0x1a08.vista))
 _0x1c8e();
 }
-function _0x25cf(_0x25d0, _0x25d1) {
-let _0x25d2 = 0, _0x25d3 = 0;
-_0x1a08.ah.asis.forEach((_0x25d4, _0x25d5) => {
-const [_0x25d6, _0x25d7] = _0x25d5.split('|');
-if (_0x25d6 !== _0x25d0 || (_0x25d1 && _0x25d7 > _0x25d1))
+function _0x25ee(_0x25ef, _0x25f0) {
+let _0x25f1 = 0, _0x25f2 = 0;
+_0x1a08.ah.asis.forEach((_0x25f3, _0x25f4) => {
+const [_0x25f5, _0x25f6] = _0x25f4.split('|');
+if (_0x25f5 !== _0x25ef || (_0x25f0 && _0x25f6 > _0x25f0))
 return;
-if (_0x25d4 === 'A' && _0x1a08.ah.feriados.has(_0x25d7))
-_0x25d2++;
-if (_0x25d4 === 'DC')
-_0x25d3++;
+if (_0x25f3 === 'A' && _0x1a08.ah.feriados.has(_0x25f6))
+_0x25f1++;
+if (_0x25f3 === 'DC')
+_0x25f2++;
 });
-_0x1a08.ah.hor.forEach(_0x25d8 => {
-if (_0x25d8.user_id !== _0x25d0)
+const _0x25f7 = _0x25b8();
+_0x1a08.ah.hor.forEach(_0x25f8 => {
+if (_0x25f8.user_id !== _0x25ef)
 return;
-for (let _0x25d9 = 0; _0x25d9 < 7; _0x25d9++) {
-const _0x25da = _0x25a1(_0x25d8.semana, _0x25d9);
-if ((!_0x25d1 || _0x25da <= _0x25d1) && !_0x1a08.ah.asis.has(_0x25b3(_0x25d0, _0x25da)) && _0x25ed(_0x25d0, _0x25da) === 'DC')
-_0x25d3++;
+for (let _0x25f9 = 0; _0x25f9 < 7; _0x25f9++) {
+const _0x25fa = _0x25bd(_0x25f8.semana, _0x25f9);
+if ((_0x25f0 && _0x25fa > _0x25f0) || _0x1a08.ah.asis.has(_0x25cf(_0x25ef, _0x25fa)))
+continue;
+if (_0x260d(_0x25ef, _0x25fa) === 'DC')
+_0x25f2++;
+else if (_0x1a08.ah.feriados.has(_0x25fa) && _0x25fa <= _0x25f7 && _0x25fb(_0x2609(_0x25ef, _0x25fa)) != null)
+_0x25f1++;
 }
 });
-return { gan: _0x25d2, tom: _0x25d3, saldo: (Number(_0x25c1(_0x25d0).comp_inicial) || 0) + _0x25d2 - _0x25d3 };
+return { gan: _0x25f1, tom: _0x25f2, saldo: (Number(_0x25e0(_0x25ef).comp_inicial) || 0) + _0x25f1 - _0x25f2 };
 }
-function _0x25db(_0x25dc) {
-const _0x25dd = /^(\d{2}):(\d{2}) - (\d{2}):(\d{2})( SB)?$/.exec(_0x25dc || '');
-if (!_0x25dd)
+function _0x25fb(_0x25fc) {
+const _0x25fd = /^(\d{2}):(\d{2}) - (\d{2}):(\d{2})( SB)?$/.exec(_0x25fc || '');
+if (!_0x25fd)
 return null;
-let _0x25de = (_0x25dd[3] * 60 + +_0x25dd[4]) - (_0x25dd[1] * 60 + +_0x25dd[2]);
-if (_0x25de <= 0)
-_0x25de += 1440;
-if (!_0x25dd[5] && _0x25de > _0x2597 * 60)
-_0x25de -= _0x2596;
-return _0x25de / 60;
+let _0x25fe = (_0x25fd[3] * 60 + +_0x25fd[4]) - (_0x25fd[1] * 60 + +_0x25fd[2]);
+if (_0x25fe <= 0)
+_0x25fe += 1440;
+if (!_0x25fd[5] && _0x25fe > _0x25b3 * 60)
+_0x25fe -= _0x25b2;
+return _0x25fe / 60;
 }
-function _0x25df(_0x25e0, _0x25e1) {
-const _0x25e2 = _0x25e1 / 6;
-let _0x25e3 = 0, _0x25e4 = 0, _0x25e5 = 0;
-for (let _0x25e6 = 1; _0x25e6 <= 7; _0x25e6++) {
-const _0x25e7 = _0x25e0 && _0x25e0['d' + _0x25e6];
-const _0x25e8 = _0x25db(_0x25e7);
-if (_0x25e8 != null)
-_0x25e3 += _0x25e8;
-else if (['FERIADO', 'COMPENSADO', 'VACACIONES', 'DM'].includes(_0x25e7))
-_0x25e4++;
-else if (_0x25e7 === 'DESCANSO')
-_0x25e5++;
+function _0x25ff(_0x2600, _0x2601) {
+const _0x2602 = _0x2601 / 6;
+let _0x2603 = 0, _0x2604 = 0, _0x2605 = 0;
+for (let _0x2606 = 1; _0x2606 <= 7; _0x2606++) {
+const _0x2607 = _0x2600 && _0x2600['d' + _0x2606];
+const _0x2608 = _0x25fb(_0x2607);
+if (_0x2608 != null)
+_0x2603 += _0x2608;
+else if (['FERIADO', 'COMPENSADO', 'VACACIONES', 'DM'].includes(_0x2607))
+_0x2604++;
+else if (_0x2607 === 'DESCANSO')
+_0x2605++;
 }
-return { trab: _0x25e3, just: _0x25e4, desc: _0x25e5, total: _0x25e3 + Math.min(_0x25e4 * _0x25e2, Math.max(0, _0x25e1 - _0x25e3)) };
+return { trab: _0x2603, just: _0x2604, desc: _0x2605, total: _0x2603 + Math.min(_0x2604 * _0x2602, Math.max(0, _0x2601 - _0x2603)) };
 }
-const _0x25e9 = (_0x25ea, _0x25eb) => { const _0x25ec = _0x1a08.ah.hor.get(_0x25b6(_0x25ea, _0x25a7(_0x25eb))); return _0x25ec ? _0x25ec['d' + ((_0x25a5(_0x25eb) + 6) % 7 + 1)] || '' : ''; };
-const _0x25ed = (_0x25ee, _0x25ef) => _0x2595[_0x25e9(_0x25ee, _0x25ef)] || '';
-const _0x25f0 = (_0x25f1, _0x25f2) => _0x1a08.ah.asis.get(_0x25b3(_0x25f1, _0x25f2)) || _0x25ed(_0x25f1, _0x25f2);
-function _0x25f3(_0x25f4, _0x25f5) {
-return _0x25db(_0x25e9(_0x25f4, _0x25f5)) != null && _0x25f5 <= _0x259c() ? 'A' : '';
+const _0x2609 = (_0x260a, _0x260b) => { const _0x260c = _0x1a08.ah.hor.get(_0x25d2(_0x260a, _0x25c3(_0x260b))); return _0x260c ? _0x260c['d' + ((_0x25c1(_0x260b) + 6) % 7 + 1)] || '' : ''; };
+const _0x260d = (_0x260e, _0x260f) => _0x25b1[_0x2609(_0x260e, _0x260f)] || '';
+const _0x2610 = (_0x2611, _0x2612) => _0x1a08.ah.asis.get(_0x25cf(_0x2611, _0x2612)) || _0x260d(_0x2611, _0x2612);
+function _0x2613(_0x2614, _0x2615) {
+return _0x25fb(_0x2609(_0x2614, _0x2615)) != null && _0x2615 <= _0x25b8() ? 'A' : '';
 }
-function _0x25f6(_0x25f7, _0x25f8 = '') {
-const _0x25f9 = _0x258f[_0x25f7];
-if (!_0x25f9)
+function _0x2616(_0x2617, _0x2618 = '') {
+const _0x2619 = _0x25ab[_0x2617];
+if (!_0x2619)
 return '';
-return `<span class="cod ${_0x25f8}" style="background:${_0x25f9.bg};color:${_0x25f9.fg}" title="${_0x1a39(_0x25f9.n)}">${_0x1a39(_0x25f7)}</span>`;
+return `<span class="cod ${_0x2618}" style="background:${_0x2619.bg};color:${_0x2619.fg}" title="${_0x1a39(_0x2619.n)}">${_0x1a39(_0x2617)}</span>`;
 }
-function _0x25fa(_0x25fb, _0x25fc) {
-const _0x25fd = _0x259c().slice(0, 7), [_0x25fe, _0x25ff] = _0x25fd.split('-').map(Number), _0x2600 = [];
-for (let _0x2601 = -12; _0x2601 <= 3; _0x2601++) {
-const _0x2602 = new Date(Date.UTC(_0x25fe, _0x25ff - 1 + _0x2601, 1));
-_0x2600.push(_0x2602.toISOString().slice(0, 7));
+function _0x261a(_0x261b, _0x261c) {
+const _0x261d = _0x25b8().slice(0, 7), [_0x261e, _0x261f] = _0x261d.split('-').map(Number), _0x2620 = [];
+for (let _0x2621 = -12; _0x2621 <= 3; _0x2621++) {
+const _0x2622 = new Date(Date.UTC(_0x261e, _0x261f - 1 + _0x2621, 1));
+_0x2620.push(_0x2622.toISOString().slice(0, 7));
 }
-if (!_0x2600.includes(_0x25fc))
-_0x2600.push(_0x25fc);
-return `<select id="${_0x25fb}" aria-label="Mes">${_0x2600.sort().map(_0x2603 => `<option value="${_0x2603}" ${_0x2603 === _0x25fc ? 'selected' : ''}>${_0x1a39(_0x25af(_0x2603).replace(/^./, _0x2604 => _0x2604.toUpperCase()))}</option>`).join('')}</select>`;
+if (!_0x2620.includes(_0x261c))
+_0x2620.push(_0x261c);
+return `<select id="${_0x261b}" aria-label="Mes">${_0x2620.sort().map(_0x2623 => `<option value="${_0x2623}" ${_0x2623 === _0x261c ? 'selected' : ''}>${_0x1a39(_0x25cb(_0x2623).replace(/^./, _0x2624 => _0x2624.toUpperCase()))}</option>`).join('')}</select>`;
 }
-function _0x2605() {
+function _0x2625() {
 if (!_0x1a08.ah.ok) {
 _0x1a37('#main').innerHTML = `<div class="head"><div><h1>Asistencia</h1></div></div>${_0x1a08.ah.error ? `<div class="aviso"><span>⚠️ ${_0x1a39(_0x1a08.ah.error)}</span></div>` : '<div class="empty"><b>Cargando…</b></div>'}`;
 if (!_0x1a08.ah.error)
-_0x25c4();
+_0x25e3();
 return;
 }
-const _0x2606 = _0x1a3d(), _0x2607 = _0x25b9(), _0x2608 = _0x25a9(_0x1a08.ah.mes), _0x2609 = _0x259c();
-const _0x260a = _0x260b => _0x2607.reduce((_0x260c, _0x260d) => _0x260c + _0x2608.filter(_0x260e => _0x25f0(_0x260d.id, _0x260e) === _0x260b).length, 0);
-const _0x260f = _0x2608.map(_0x2610 => {
-const _0x2611 = _0x1a08.ah.feriados.get(_0x2610), _0x2612 = _0x25a5(_0x2610);
-return `<th class="dd ${_0x2611 ? 'fer' : ''} ${_0x2612 === 0 ? 'dom' : ''} ${_0x2610 === _0x2609 ? 'hoy' : ''}" title="${_0x2611 ? _0x1a39(_0x2611.nombre) : ''}"><small>${_0x259b[_0x2612]}</small>${+_0x2610.slice(8)}${_0x2611 ? '<i>FR</i>' : ''}</th>`;
+const _0x2626 = _0x1a3d(), _0x2627 = _0x25d5(), _0x2628 = _0x25c5(_0x1a08.ah.mes), _0x2629 = _0x25b8();
+const _0x262a = _0x262b => _0x2627.reduce((_0x262c, _0x262d) => _0x262c + _0x2628.filter(_0x262e => _0x2610(_0x262d.id, _0x262e) === _0x262b).length, 0);
+const _0x262f = _0x2628.map(_0x2630 => {
+const _0x2631 = _0x1a08.ah.feriados.get(_0x2630), _0x2632 = _0x25c1(_0x2630);
+return `<th class="dd ${_0x2631 ? 'fer' : ''} ${_0x2632 === 0 ? 'dom' : ''} ${_0x2630 === _0x2629 ? 'hoy' : ''}" title="${_0x2631 ? _0x1a39(_0x2631.nombre) : ''}"><small>${_0x25b7[_0x2632]}</small>${+_0x2630.slice(8)}${_0x2631 ? '<i>FR</i>' : ''}</th>`;
 }).join('');
-const _0x2613 = _0x2607.map(_0x2614 => {
-const _0x2615 = _0x25c1(_0x2614.id), _0x2616 = _0x25cf(_0x2614.id, _0x2608[_0x2608.length - 1]);
-const _0x2617 = _0x2608.map(_0x2618 => {
-const _0x2619 = _0x1a08.ah.asis.get(_0x25b3(_0x2614.id, _0x2618)), _0x261a = !_0x2619 ? _0x25ed(_0x2614.id, _0x2618) : '', _0x261b = _0x2619 || _0x261a, _0x261c = !_0x261b ? _0x25f3(_0x2614.id, _0x2618) : '';
-const _0x261d = _0x261b === 'A' && _0x1a08.ah.feriados.has(_0x2618);
-return `<td class="ac ${_0x1a08.ah.feriados.has(_0x2618) ? 'fer' : ''} ${_0x2606 ? 'edit' : ''}" ${_0x2606 ? `data-act="asis-pintar" data-id="${_0x2614.id}" data-dia="${_0x2618}"` : ''} title="${_0x1a39(_0x1a2d(_0x2618))}${_0x261b ? ' · ' + _0x1a39(_0x258f[_0x261b].n) + (_0x261a ? ' (según el horario)' : '') : _0x261c ? ' · sugerido por el horario: ' + _0x1a39(_0x258f[_0x261c].n) : ''}${_0x261d ? ' · trabajó feriado: genera 1 compensado' : ''}">
-        ${_0x261b ? _0x25f6(_0x261b, (_0x261d ? 'gana ' : '') + (_0x261a ? 'auto' : '')) : _0x261c ? `<span class="cod sug">${_0x1a39(_0x261c)}</span>` : ''}</td>`;
+const _0x2633 = _0x2627.map(_0x2634 => {
+const _0x2635 = _0x25e0(_0x2634.id), _0x2636 = _0x25ee(_0x2634.id, _0x2628[_0x2628.length - 1]);
+const _0x2637 = _0x2628.map(_0x2638 => {
+const _0x2639 = _0x1a08.ah.asis.get(_0x25cf(_0x2634.id, _0x2638)), _0x263a = !_0x2639 ? _0x260d(_0x2634.id, _0x2638) : '', _0x263b = _0x2639 || _0x263a, _0x263c = !_0x263b ? _0x2613(_0x2634.id, _0x2638) : '';
+const _0x263d = _0x263b === 'A' && _0x1a08.ah.feriados.has(_0x2638);
+return `<td class="ac ${_0x1a08.ah.feriados.has(_0x2638) ? 'fer' : ''} ${_0x2626 ? 'edit' : ''}" ${_0x2626 ? `data-act="asis-pintar" data-id="${_0x2634.id}" data-dia="${_0x2638}"` : ''} title="${_0x1a39(_0x1a2d(_0x2638))}${_0x263b ? ' · ' + _0x1a39(_0x25ab[_0x263b].n) + (_0x263a ? ' (según el horario)' : '') : _0x263c ? ' · sugerido por el horario: ' + _0x1a39(_0x25ab[_0x263c].n) : ''}${_0x263d ? ' · trabajó feriado: genera 1 compensado' : ''}">
+        ${_0x263b ? _0x2616(_0x263b, (_0x263d ? 'gana ' : '') + (_0x263a ? 'auto' : '')) : _0x263c ? `<span class="cod sug">${_0x1a39(_0x263c)}</span>` : ''}</td>`;
 }).join('');
-const _0x261e = _0x261f => _0x2608.filter(_0x2620 => _0x25f0(_0x2614.id, _0x2620) === _0x261f).length;
-return `<tr><th class="ap"><b>${_0x1a39(_0x2614.nombre || _0x2614.codigo)}</b><small>${_0x1a39(_0x2615.cargo || _0x1a0b[_0x2614.rol] || '')}</small></th>${_0x2617}
-      <td class="num">${_0x261e('A')}</td><td class="num">${_0x261e('F')}</td><td class="num">${_0x261e('DM')}</td><td class="num">${_0x261e('VC')}</td><td class="num">${_0x261e('D')}</td><td class="num">${_0x261e('DC')}</td>
-      <td class="num"><b class="${_0x2616.saldo > 0 ? 'debe' : ''}">${_0x2616.saldo}</b></td></tr>`;
+const _0x263e = _0x263f => _0x2628.filter(_0x2640 => _0x2610(_0x2634.id, _0x2640) === _0x263f).length;
+return `<tr><th class="ap"><b>${_0x1a39(_0x2634.nombre || _0x2634.codigo)}</b><small>${_0x1a39(_0x2635.cargo || _0x1a0b[_0x2634.rol] || '')}</small></th>${_0x2637}
+      <td class="num">${_0x263e('A')}</td><td class="num">${_0x263e('F')}</td><td class="num">${_0x263e('DM')}</td><td class="num">${_0x263e('VC')}</td><td class="num">${_0x263e('D')}</td><td class="num">${_0x263e('DC')}</td>
+      <td class="num"><b class="${_0x2636.saldo > 0 ? 'debe' : ''}">${_0x2636.saldo}</b></td></tr>`;
 }).join('');
-const _0x2621 = _0x2607.map(_0x2622 => ({ p: _0x2622, cp: _0x25cf(_0x2622.id) })).filter(_0x2623 => _0x2623.cp.saldo > 0);
-_0x1a37('#main').innerHTML = `<div class="head"><div><h1>Asistencia</h1><p class="sub">${_0x2606 ? 'Marca la asistencia del personal de formación. Elige un código en la leyenda y haz clic en los días.' : 'Tu asistencia registrada por la jefatura. Si ves algo incorrecto, avísale.'}</p></div></div>
+const _0x2641 = _0x2627.map(_0x2642 => ({ p: _0x2642, cp: _0x25ee(_0x2642.id) })).filter(_0x2643 => _0x2643.cp.saldo > 0);
+_0x1a37('#main').innerHTML = `<div class="head"><div><h1>Asistencia</h1><p class="sub">${_0x2626 ? 'Marca la asistencia del personal de formación. Elige un código en la leyenda y haz clic en los días.' : 'Tu asistencia registrada por la jefatura. Si ves algo incorrecto, avísale.'}</p></div></div>
     <div class="ah-bar">
-      <button class="btn ghost sm" data-act="asis-mes" data-id="-1" aria-label="Mes anterior">◀</button>${_0x25fa('asmes', _0x1a08.ah.mes)}<button class="btn ghost sm" data-act="asis-mes" data-id="1" aria-label="Mes siguiente">▶</button>
-      ${_0x2606 ? `
+      <button class="btn ghost sm" data-act="asis-mes" data-id="-1" aria-label="Mes anterior">◀</button>${_0x261a('asmes', _0x1a08.ah.mes)}<button class="btn ghost sm" data-act="asis-mes" data-id="1" aria-label="Mes siguiente">▶</button>
+      ${_0x2626 ? `
         <button class="btn ghost sm" data-act="feriados">📅 Feriados</button>
         <button class="btn ghost sm" data-act="fichas">🗂 Fichas del personal</button>
         <button class="btn add sm" data-act="asis-xls">Descargar Excel</button>` : ''}
     </div>
-    ${_0x2606 && _0x2621.length ? `<div class="aviso comp-aviso"><span>💡 <b>Compensados pendientes:</b> ${_0x2621.map(_0x2624 => `${_0x1a39(_0x2624.p.nombre || _0x2624.p.codigo)} (${_0x2624.cp.saldo})`).join(' · ')}</span></div>` : ''}
-    ${!_0x2606 ? (() => { const _0x2625 = _0x25cf(_0x1a08.uid); return `<div class="kpis" style="margin-bottom:16px"><div class="kpi"><span>Compensados pendientes</span><b>${_0x2625.saldo}</b><small>días que la empresa te debe</small></div><div class="kpi"><span>Feriados trabajados</span><b>${_0x2625.gan}</b><small>en total</small></div><div class="kpi"><span>Compensados tomados (DC)</span><b>${_0x2625.tom}</b><small>en total</small></div></div>`; })() : ''}
+    ${_0x2626 && _0x2641.length ? `<div class="aviso comp-aviso"><span>💡 <b>Compensados pendientes:</b> ${_0x2641.map(_0x2644 => `${_0x1a39(_0x2644.p.nombre || _0x2644.p.codigo)} (${_0x2644.cp.saldo})`).join(' · ')}</span></div>` : ''}
+    ${!_0x2626 ? (() => { const _0x2645 = _0x25ee(_0x1a08.uid); return `<div class="kpis" style="margin-bottom:16px"><div class="kpi"><span>Compensados pendientes</span><b>${_0x2645.saldo}</b><small>días que la empresa te debe</small></div><div class="kpi"><span>Feriados trabajados</span><b>${_0x2645.gan}</b><small>en total</small></div><div class="kpi"><span>Compensados tomados (DC)</span><b>${_0x2645.tom}</b><small>en total</small></div></div>`; })() : ''}
     <div class="ah-wrap">
-      <div class="scroll ah-grid"><table class="tb asis"><thead><tr><th class="ap">Colaborador</th>${_0x260f}<th class="num">A</th><th class="num">F</th><th class="num">DM</th><th class="num">VC</th><th class="num">D</th><th class="num">DC</th><th class="num" title="Compensados pendientes al cierre del mes">Comp.</th></tr></thead>
-        <tbody>${_0x2613 || `<tr><td colspan="${_0x2608.length + 8}">No hay formadores registrados.</td></tr>`}</tbody></table></div>
+      <div class="scroll ah-grid"><table class="tb asis"><thead><tr><th class="ap">Colaborador</th>${_0x262f}<th class="num">A</th><th class="num">F</th><th class="num">DM</th><th class="num">VC</th><th class="num">D</th><th class="num">DC</th><th class="num" title="Compensados pendientes al cierre del mes">Comp.</th></tr></thead>
+        <tbody>${_0x2633 || `<tr><td colspan="${_0x2628.length + 8}">No hay formadores registrados.</td></tr>`}</tbody></table></div>
       <aside class="card ah-ley"><h3>Leyenda</h3>
-        ${_0x258e.map(([_0x2626, _0x2627]) => `<button type="button" class="ley ${_0x2606 && _0x1a08.ah.pincel === _0x2626 ? 'on' : ''}" ${_0x2606 ? `data-act="asis-pincel" data-id="${_0x2626}"` : 'disabled'}>${_0x25f6(_0x2626)}<span>${_0x1a39(_0x2627)}</span></button>`).join('')}
-        ${_0x2606 ? `<button type="button" class="ley ${_0x1a08.ah.pincel === '' ? 'on' : ''}" data-act="asis-pincel" data-id=""><span class="cod" style="background:#fff;border:1px dashed var(--line)">⌫</span><span>Borrar</span></button>` : ''}
-        <p class="meta">${_0x2606 ? `Código elegido: <b>${_0x1a08.ah.pincel || 'Borrar'}</b>.` : ''} Descanso, compensado, descanso médico, vacaciones y feriado se llenan <b>solos según el Horario</b> (borde punteado). La <b>A</b> se marca a mano: en gris, la sugerencia del Horario. ★ = trabajó un feriado (genera un compensado).</p>
-        <p class="meta">Totales del mes: ${['A', 'F', 'DM', 'VC'].map(_0x2628 => `${_0x2628} ${_0x260a(_0x2628)}`).join(' · ')}</p></aside>
+        ${_0x25aa.map(([_0x2646, _0x2647]) => `<button type="button" class="ley ${_0x2626 && _0x1a08.ah.pincel === _0x2646 ? 'on' : ''}" ${_0x2626 ? `data-act="asis-pincel" data-id="${_0x2646}"` : 'disabled'}>${_0x2616(_0x2646)}<span>${_0x1a39(_0x2647)}</span></button>`).join('')}
+        ${_0x2626 ? `<button type="button" class="ley ${_0x1a08.ah.pincel === '' ? 'on' : ''}" data-act="asis-pincel" data-id=""><span class="cod" style="background:#fff;border:1px dashed var(--line)">⌫</span><span>Borrar</span></button>` : ''}
+        <p class="meta">${_0x2626 ? `Código elegido: <b>${_0x1a08.ah.pincel || 'Borrar'}</b>.` : ''} Descanso, compensado, descanso médico, vacaciones y feriado se llenan <b>solos según el Horario</b> (borde punteado). La <b>A</b> se marca a mano: en gris, la sugerencia del Horario. ★ = trabajó un feriado (genera un compensado).</p>
+        <p class="meta">Totales del mes: ${['A', 'F', 'DM', 'VC'].map(_0x2648 => `${_0x2648} ${_0x262a(_0x2648)}`).join(' · ')}</p></aside>
     </div>`;
 }
-let _0x2629 = new Map(), _0x262a = null;
-function _0x262b(_0x262c, _0x262d, _0x262e) {
-if (_0x262e)
-_0x1a08.ah.asis.set(_0x25b3(_0x262c, _0x262d), _0x262e);
+let _0x2649 = new Map(), _0x264a = null;
+function _0x264b(_0x264c, _0x264d, _0x264e) {
+if (_0x264e)
+_0x1a08.ah.asis.set(_0x25cf(_0x264c, _0x264d), _0x264e);
 else
-_0x1a08.ah.asis.delete(_0x25b3(_0x262c, _0x262d));
-_0x2629.set(_0x25b3(_0x262c, _0x262d), { uid: _0x262c, dia: _0x262d, cod: _0x262e });
-clearTimeout(_0x262a);
-_0x262a = setTimeout(_0x262f, 500);
+_0x1a08.ah.asis.delete(_0x25cf(_0x264c, _0x264d));
+_0x2649.set(_0x25cf(_0x264c, _0x264d), { uid: _0x264c, dia: _0x264d, cod: _0x264e });
+clearTimeout(_0x264a);
+_0x264a = setTimeout(_0x264f, 500);
 }
-async function _0x262f() {
-const _0x2630 = [..._0x2629.values()];
-_0x2629.clear();
-if (!_0x2630.length)
+async function _0x264f() {
+const _0x2650 = [..._0x2649.values()];
+_0x2649.clear();
+if (!_0x2650.length)
 return;
 try {
-const _0x2631 = _0x2630.filter(_0x2632 => _0x2632.cod).map(_0x2633 => ({ user_id: _0x2633.uid, dia: _0x2633.dia, codigo: _0x2633.cod, marcado_por: _0x1a08.uid, actualizado: new Date().toISOString() }));
-if (_0x2631.length) {
-const { error: _0x2634 } = await _0x1a07.from('asistencia').upsert(_0x2631, { onConflict: 'user_id,dia' });
-if (_0x2634)
-throw _0x2634;
+const _0x2651 = _0x2650.filter(_0x2652 => _0x2652.cod).map(_0x2653 => ({ user_id: _0x2653.uid, dia: _0x2653.dia, codigo: _0x2653.cod, marcado_por: _0x1a08.uid, actualizado: new Date().toISOString() }));
+if (_0x2651.length) {
+const { error: _0x2654 } = await _0x1a07.from('asistencia').upsert(_0x2651, { onConflict: 'user_id,dia' });
+if (_0x2654)
+throw _0x2654;
 }
-const _0x2635 = _0x2630.filter(_0x2636 => !_0x2636.cod), _0x2637 = new Map();
-_0x2635.forEach(_0x2638 => { if (!_0x2637.has(_0x2638.uid))
-_0x2637.set(_0x2638.uid, []); _0x2637.get(_0x2638.uid).push(_0x2638.dia); });
-for (const [_0x2639, _0x263a] of _0x2637) {
-const { error: _0x263b } = await _0x1a07.from('asistencia').delete().eq('user_id', _0x2639).in('dia', _0x263a);
-if (_0x263b)
-throw _0x263b;
+const _0x2655 = _0x2650.filter(_0x2656 => !_0x2656.cod), _0x2657 = new Map();
+_0x2655.forEach(_0x2658 => { if (!_0x2657.has(_0x2658.uid))
+_0x2657.set(_0x2658.uid, []); _0x2657.get(_0x2658.uid).push(_0x2658.dia); });
+for (const [_0x2659, _0x265a] of _0x2657) {
+const { error: _0x265b } = await _0x1a07.from('asistencia').delete().eq('user_id', _0x2659).in('dia', _0x265a);
+if (_0x265b)
+throw _0x265b;
 }
 }
-catch (_0x263c) {
-alert('No se pudo guardar la asistencia: ' + _0x1a53(_0x263c));
+catch (_0x265c) {
+alert('No se pudo guardar la asistencia: ' + _0x1a53(_0x265c));
 _0x1a08.ah.ok = false;
-_0x25c4();
+_0x25e3();
 }
 }
-async function _0x263d() {
-const _0x263e = _0x25a9(_0x1a08.ah.mes), _0x263f = [];
-_0x25b9().forEach(_0x2640 => _0x263e.forEach(_0x2641 => { if (!_0x1a08.ah.asis.has(_0x25b3(_0x2640.id, _0x2641))) {
-const _0x2642 = _0x25f3(_0x2640.id, _0x2641);
-if (_0x2642)
-_0x263f.push([_0x2640.id, _0x2641, _0x2642]);
+async function _0x265d() {
+const _0x265e = _0x25c5(_0x1a08.ah.mes), _0x265f = [];
+_0x25d5().forEach(_0x2660 => _0x265e.forEach(_0x2661 => { if (!_0x1a08.ah.asis.has(_0x25cf(_0x2660.id, _0x2661))) {
+const _0x2662 = _0x2613(_0x2660.id, _0x2661);
+if (_0x2662)
+_0x265f.push([_0x2660.id, _0x2661, _0x2662]);
 } }));
-if (!_0x263f.length)
+if (!_0x265f.length)
 return alert('No hay días vacíos que se puedan completar con el horario en este mes.');
-if (!confirm(`Se completarán ${_0x263f.length} día(s) vacíos con lo que indica el horario (las asistencias "A" solo hasta hoy). Lo ya marcado no se toca. ¿Continuar?`))
+if (!confirm(`Se completarán ${_0x265f.length} día(s) vacíos con lo que indica el horario (las asistencias "A" solo hasta hoy). Lo ya marcado no se toca. ¿Continuar?`))
 return;
-_0x263f.forEach(([_0x2643, _0x2644, _0x2645]) => _0x262b(_0x2643, _0x2644, _0x2645));
-await _0x262f();
+_0x265f.forEach(([_0x2663, _0x2664, _0x2665]) => _0x264b(_0x2663, _0x2664, _0x2665));
+await _0x264f();
 _0x1c8e();
 }
-function _0x2646() {
+function _0x2666() {
 if (typeof XLSX === 'undefined')
 return alert('No se pudo cargar la librería de Excel. Recarga la página.');
-const _0x2647 = _0x25a9(_0x1a08.ah.mes), _0x2648 = 12, _0x2649 = XLSX.utils.encode_col(_0x2648), _0x264a = XLSX.utils.encode_col(_0x2648 + _0x2647.length - 1);
-const _0x264b = ['', 'ID SAP', 'Documento ', 'Usuario E', 'Nombres y Apellidos', 'Jefe Direto 1', 'Jefe Direto 2', 'Estatus', 'Fecha de Ingreso ', 'Tipo de Jornada ', 'Campaña', 'Tipo',
-..._0x2647.map(_0x264c => `${_0x264c.slice(8)}-${_0x2598[+_0x264c.slice(5, 7) - 1]}`), 'Asistencias', 'Faltas', 'DM', 'Vacaciones', 'Compensados ganados', 'Compensados tomados', 'Saldo compensados'];
-const _0x264d = [[], _0x264b];
-_0x25b9().forEach((_0x264e, _0x264f) => {
-const _0x2650 = _0x25c1(_0x264e.id), _0x2651 = _0x264f + 3, _0x2652 = _0x25cf(_0x264e.id, _0x2647[_0x2647.length - 1]);
-const _0x2653 = _0x2647.map(_0x2654 => _0x25f0(_0x264e.id, _0x2654));
-const _0x2655 = _0x2656 => ({ t: 'n', v: _0x2653.filter(_0x2657 => _0x2657 === _0x2656).length, f: `IFERROR((COUNTIF(${_0x2649}${_0x2651}:${_0x264a}${_0x2651},"${_0x2656}")),"")` });
-_0x264d.push(['', /^\d+$/.test(_0x2650.id_sap || '') ? Number(_0x2650.id_sap) : (_0x2650.id_sap || ''), /^\d+$/.test(_0x2650.documento || '') ? Number(_0x2650.documento) : (_0x2650.documento || ''),
-_0x2650.usuario_e || ('E' + (_0x264e.codigo || '')), _0x264e.nombre || '', _0x2650.jefe1 || '', _0x2650.jefe2 || '', _0x2650.estatus || 'Activo',
-_0x2650.fecha_ingreso ? new Date(_0x2650.fecha_ingreso + 'T12:00:00') : '', _0x2650.jornada || 'Full Time', _0x2650.campana || '', _0x2650.tipo || '',
-..._0x2653, _0x2655('A'), _0x2655('F'), _0x2655('DM'), _0x2655('VC'), _0x2652.gan, _0x2652.tom, _0x2652.saldo]);
+const _0x2667 = _0x25c5(_0x1a08.ah.mes), _0x2668 = 12, _0x2669 = XLSX.utils.encode_col(_0x2668), _0x266a = XLSX.utils.encode_col(_0x2668 + _0x2667.length - 1);
+const _0x266b = ['', 'ID SAP', 'Documento ', 'Usuario E', 'Nombres y Apellidos', 'Jefe Direto 1', 'Jefe Direto 2', 'Estatus', 'Fecha de Ingreso ', 'Tipo de Jornada ', 'Campaña', 'Tipo',
+..._0x2667.map(_0x266c => `${_0x266c.slice(8)}-${_0x25b4[+_0x266c.slice(5, 7) - 1]}`), 'Asistencias', 'Faltas', 'DM', 'Vacaciones', 'Compensados ganados', 'Compensados tomados', 'Saldo compensados'];
+const _0x266d = [[], _0x266b];
+_0x25d5().forEach((_0x266e, _0x266f) => {
+const _0x2670 = _0x25e0(_0x266e.id), _0x2671 = _0x266f + 3, _0x2672 = _0x25ee(_0x266e.id, _0x2667[_0x2667.length - 1]);
+const _0x2673 = _0x2667.map(_0x2674 => _0x2610(_0x266e.id, _0x2674));
+const _0x2675 = _0x2676 => ({ t: 'n', v: _0x2673.filter(_0x2677 => _0x2677 === _0x2676).length, f: `IFERROR((COUNTIF(${_0x2669}${_0x2671}:${_0x266a}${_0x2671},"${_0x2676}")),"")` });
+_0x266d.push(['', /^\d+$/.test(_0x2670.id_sap || '') ? Number(_0x2670.id_sap) : (_0x2670.id_sap || ''), /^\d+$/.test(_0x2670.documento || '') ? Number(_0x2670.documento) : (_0x2670.documento || ''),
+_0x2670.usuario_e || ('E' + (_0x266e.codigo || '')), _0x266e.nombre || '', _0x2670.jefe1 || '', _0x2670.jefe2 || '', _0x2670.estatus || 'Activo',
+_0x2670.fecha_ingreso ? new Date(_0x2670.fecha_ingreso + 'T12:00:00') : '', _0x2670.jornada || 'Full Time', _0x2670.campana || '', _0x2670.tipo || '',
+..._0x2673, _0x2675('A'), _0x2675('F'), _0x2675('DM'), _0x2675('VC'), _0x2672.gan, _0x2672.tom, _0x2672.saldo]);
 });
-const _0x2658 = XLSX.utils.aoa_to_sheet(_0x264d, { cellDates: true });
-for (let _0x2659 = 3; _0x2659 <= _0x264d.length; _0x2659++) {
-const _0x265a = _0x2658['I' + _0x2659];
-if (_0x265a && _0x265a.t === 'd')
-_0x265a.z = 'dd/mm/yyyy';
+const _0x2678 = XLSX.utils.aoa_to_sheet(_0x266d, { cellDates: true });
+for (let _0x2679 = 3; _0x2679 <= _0x266d.length; _0x2679++) {
+const _0x267a = _0x2678['I' + _0x2679];
+if (_0x267a && _0x267a.t === 'd')
+_0x267a.z = 'dd/mm/yyyy';
 }
-_0x2658['!cols'] = [{ wch: 3 }, { wch: 11 }, { wch: 11 }, { wch: 10 }, { wch: 34 }, { wch: 20 }, { wch: 16 }, { wch: 9 }, { wch: 12 }, { wch: 11 }, { wch: 30 }, { wch: 14 }, ..._0x2647.map(() => ({ wch: 6 })), { wch: 11 }, { wch: 7 }, { wch: 5 }, { wch: 10 }, { wch: 11 }, { wch: 11 }, { wch: 10 }];
-const _0x265b = XLSX.utils.aoa_to_sheet([[], ['', 'Detalle', 'Signo'], ..._0x258e.map(([_0x265c, _0x265d]) => ['', _0x265d, _0x265c])]);
-const _0x265e = XLSX.utils.aoa_to_sheet([['Fecha', 'Feriado', 'Tipo'], ...[..._0x1a08.ah.feriados.values()].filter(_0x265f => _0x265f.dia.startsWith(_0x1a08.ah.mes.slice(0, 4))).map(_0x2660 => [_0x2660.dia, _0x2660.nombre, _0x2660.tipo])]);
-const _0x2661 = XLSX.utils.book_new();
-XLSX.utils.book_append_sheet(_0x2661, _0x2658, 'Hoja1');
-XLSX.utils.book_append_sheet(_0x2661, _0x265b, 'Leyenda');
-XLSX.utils.book_append_sheet(_0x2661, _0x265e, 'Feriados');
-XLSX.writeFile(_0x2661, `Asistencia_Formacion_${_0x25af(_0x1a08.ah.mes).replace(' ', '_')}.xlsx`);
+_0x2678['!cols'] = [{ wch: 3 }, { wch: 11 }, { wch: 11 }, { wch: 10 }, { wch: 34 }, { wch: 20 }, { wch: 16 }, { wch: 9 }, { wch: 12 }, { wch: 11 }, { wch: 30 }, { wch: 14 }, ..._0x2667.map(() => ({ wch: 6 })), { wch: 11 }, { wch: 7 }, { wch: 5 }, { wch: 10 }, { wch: 11 }, { wch: 11 }, { wch: 10 }];
+const _0x267b = XLSX.utils.aoa_to_sheet([[], ['', 'Detalle', 'Signo'], ..._0x25aa.map(([_0x267c, _0x267d]) => ['', _0x267d, _0x267c])]);
+const _0x267e = XLSX.utils.aoa_to_sheet([['Fecha', 'Feriado', 'Tipo'], ...[..._0x1a08.ah.feriados.values()].filter(_0x267f => _0x267f.dia.startsWith(_0x1a08.ah.mes.slice(0, 4))).map(_0x2680 => [_0x2680.dia, _0x2680.nombre, _0x2680.tipo])]);
+const _0x2681 = XLSX.utils.book_new();
+XLSX.utils.book_append_sheet(_0x2681, _0x2678, 'Hoja1');
+XLSX.utils.book_append_sheet(_0x2681, _0x267b, 'Leyenda');
+XLSX.utils.book_append_sheet(_0x2681, _0x267e, 'Feriados');
+XLSX.writeFile(_0x2681, `Asistencia_Formacion_${_0x25cb(_0x1a08.ah.mes).replace(' ', '_')}.xlsx`);
 }
-function _0x2662() {
-const _0x2663 = _0x1a08.ah.mes.slice(0, 4), _0x2664 = [..._0x1a08.ah.feriados.values()].filter(_0x2665 => _0x2665.dia.startsWith(_0x2663));
-_0x1c93.innerHTML = `<div class="dlg"><h3>Feriados ${_0x2663}</h3>
+function _0x2682() {
+const _0x2683 = _0x1a08.ah.mes.slice(0, 4), _0x2684 = [..._0x1a08.ah.feriados.values()].filter(_0x2685 => _0x2685.dia.startsWith(_0x2683));
+_0x1c93.innerHTML = `<div class="dlg"><h3>Feriados ${_0x2683}</h3>
     <p class="note">Vienen precargados los feriados nacionales (públicos y privados). Agrega aquí los días no laborables que la empresa decida dar o los feriados de años siguientes.</p>
     <div class="scroll" style="max-height:320px"><table class="tb"><thead><tr><th>Fecha</th><th>Nombre</th><th>Tipo</th><th></th></tr></thead><tbody>
-    ${_0x2664.map(_0x2666 => `<tr><td>${_0x1a39(_0x1a2d(_0x2666.dia))}</td><td>${_0x1a39(_0x2666.nombre)}</td><td>${_0x2666.tipo === 'empresa' ? 'De la empresa' : 'Nacional'}</td><td><button class="btn danger sm" data-act="fer-del" data-id="${_0x2666.dia}">Quitar</button></td></tr>`).join('') || '<tr><td colspan="4">No hay feriados registrados para este año.</td></tr>'}
+    ${_0x2684.map(_0x2686 => `<tr><td>${_0x1a39(_0x1a2d(_0x2686.dia))}</td><td>${_0x1a39(_0x2686.nombre)}</td><td>${_0x2686.tipo === 'empresa' ? 'De la empresa' : 'Nacional'}</td><td><button class="btn danger sm" data-act="fer-del" data-id="${_0x2686.dia}">Quitar</button></td></tr>`).join('') || '<tr><td colspan="4">No hay feriados registrados para este año.</td></tr>'}
     </tbody></table></div>
     <div class="ah-bar"><input type="date" id="fer-dia" aria-label="Fecha"><input id="fer-nom" placeholder="Nombre (ej. Día no laborable)" style="flex:1"><select id="fer-tipo"><option value="empresa">De la empresa</option><option value="nacional">Nacional</option></select><button class="btn sm" data-act="fer-add">+ Agregar</button></div>
     <div class="row"><button class="btn ghost" data-close>Cerrar</button></div></div>`;
 if (!_0x1c93.open)
 _0x1c93.showModal();
 }
-function _0x2667() {
+function _0x2687() {
 _0x1c93.innerHTML = `<div class="dlg ancho"><h3>Fichas del personal</h3>
     <p class="note">Estos datos salen en las cabeceras del Excel de asistencia y en el horario (cargo y área). El saldo inicial de compensados es lo que cada persona tenía pendiente antes de usar el portal.</p>
-    <div class="ulist">${_0x25b9().map(_0x2668 => {
-const _0x2669 = _0x25c1(_0x2668.id);
-return `<div class="urow"><div><b>${_0x1a39(_0x2668.nombre || _0x2668.codigo)}</b><span>${_0x1a39(_0x2669.cargo || 'Sin cargo')} · ${_0x1a39(_0x2669.area_trabajo || 'Sin área')} · ${_0x1a39(_0x2669.jornada || 'Full Time')} ${_0x2669.horas_semana || 48} h · saldo inicial ${_0x2669.comp_inicial || 0}</span></div>
-        <button class="btn add sm" data-act="ficha-edit" data-id="${_0x2668.id}">Editar ficha</button></div>`;
+    <div class="ulist">${_0x25d5().map(_0x2688 => {
+const _0x2689 = _0x25e0(_0x2688.id);
+return `<div class="urow"><div><b>${_0x1a39(_0x2688.nombre || _0x2688.codigo)}</b><span>${_0x1a39(_0x2689.cargo || 'Sin cargo')} · ${_0x1a39(_0x2689.area_trabajo || 'Sin área')} · ${_0x1a39(_0x2689.jornada || 'Full Time')} ${_0x2689.horas_semana || 48} h · saldo inicial ${_0x2689.comp_inicial || 0}</span></div>
+        <button class="btn add sm" data-act="ficha-edit" data-id="${_0x2688.id}">Editar ficha</button></div>`;
 }).join('')}</div>
     <div class="row"><button class="btn ghost" data-close>Cerrar</button></div></div>`;
 if (!_0x1c93.open)
 _0x1c93.showModal();
 }
-function _0x266a(_0x266b, _0x266c) {
-const _0x266d = Math.round((_0x266b.total - _0x266c) * 100) / 100;
-if (Math.abs(_0x266d) < 0.01)
-return `<span class="hb ok">✔ ${_0x266e(_0x266b.total)}</span>`;
-return _0x266d < 0 ? `<span class="hb falta">${_0x266e(_0x266b.total)} · faltan ${_0x266e(-_0x266d)}</span>` : `<span class="hb exc">${_0x266e(_0x266b.total)} · excede ${_0x266e(_0x266d)}</span>`;
+function _0x268a(_0x268b, _0x268c) {
+const _0x268d = Math.round((_0x268b.total - _0x268c) * 100) / 100;
+if (Math.abs(_0x268d) < 0.01)
+return `<span class="hb ok">✔ ${_0x26ae(_0x268b.total)}</span>`;
+return _0x268d < 0 ? `<span class="hb falta">${_0x26ae(_0x268b.total)} · faltan ${_0x26ae(-_0x268d)}</span>` : `<span class="hb exc">${_0x26ae(_0x268b.total)} · excede ${_0x26ae(_0x268d)}</span>`;
 }
-const _0x266e = _0x266f => { const _0x2670 = Math.round(_0x266f * 60); return `${Math.floor(_0x2670 / 60)} h${_0x2670 % 60 ? ' ' + String(_0x2670 % 60).padStart(2, '0') + ' min' : ''}`; };
-function _0x2671(_0x2672) { const _0x2673 = _0x25a1(_0x2672, 6), _0x2674 = _0x2675 => `${+_0x2675.slice(8)} de ${_0x2599[+_0x2675.slice(5, 7) - 1]}`; return `del lunes ${_0x2674(_0x2672)} al domingo ${_0x2674(_0x2673)}${_0x2673.slice(0, 4) !== _0x259c().slice(0, 4) ? ' de ' + _0x2673.slice(0, 4) : ''}`; }
-function _0x2676(_0x2677, _0x2678) {
-if (!_0x2677)
+const _0x268e = _0x268f => !!_0x268f && [1, 2, 3, 4, 5, 6, 7].every(_0x2690 => _0x268f['d' + _0x2690]);
+function _0x2691(_0x2692, _0x2693, _0x2694) {
+let _0x2695 = 0;
+_0x1a08.ah.hor.forEach(_0x2696 => { if (_0x2696.user_id === _0x2692 && (!_0x2694 || _0x2696.semana <= _0x2694) && _0x268e(_0x2696))
+_0x2695 += _0x25ff(_0x2696, _0x2693).total - _0x2693; });
+return Math.round(_0x2695 * 100) / 100;
+}
+function _0x2697(_0x2698, _0x2699, _0x269a) {
+let _0x269b = _0x2691(_0x2698, _0x2699, _0x269a);
+const _0x269c = [..._0x1a08.ah.hor.values()].filter(_0x269d => _0x269d.user_id === _0x2698 && _0x269d.semana > _0x269a && _0x268e(_0x269d)).sort((_0x269e, _0x269f) => _0x269e.semana.localeCompare(_0x269f.semana));
+for (const _0x26a0 of _0x269c) {
+_0x269b += _0x25ff(_0x26a0, _0x2699).total - _0x2699;
+if (_0x269b > -0.01)
+return _0x26a0.semana;
+}
+return null;
+}
+function _0x26a1(_0x26a2, _0x26a3, _0x26a4) {
+const _0x26a5 = _0x26a4 / 6;
+let _0x26a6 = 0, _0x26a7 = 0, _0x26a8 = 0;
+_0x25c5(_0x26a3).forEach(_0x26a9 => {
+const _0x26aa = _0x2609(_0x26a2, _0x26a9);
+if (!_0x26aa)
+return;
+_0x26a8++;
+const _0x26ab = _0x25fb(_0x26aa);
+if (_0x26ab != null) {
+_0x26a6 += _0x26ab;
+_0x26a7 += _0x26a5;
+}
+else if (_0x26aa !== 'DESCANSO') {
+_0x26a6 += _0x26a5;
+_0x26a7 += _0x26a5;
+}
+});
+return { h: Math.round(_0x26a6 * 100) / 100, meta: Math.round(_0x26a7 * 100) / 100, dias: _0x26a8 };
+}
+const _0x26ac = _0x26ad => (_0x26ad > 0 ? '+' : _0x26ad < 0 ? '−' : '') + _0x26ae(Math.abs(_0x26ad));
+const _0x26ae = _0x26af => { const _0x26b0 = Math.round(_0x26af * 60); return `${Math.floor(_0x26b0 / 60)} h${_0x26b0 % 60 ? ' ' + String(_0x26b0 % 60).padStart(2, '0') + ' min' : ''}`; };
+function _0x26b1(_0x26b2) { const _0x26b3 = _0x25bd(_0x26b2, 6), _0x26b4 = _0x26b5 => `${+_0x26b5.slice(8)} de ${_0x25b5[+_0x26b5.slice(5, 7) - 1]}`; return `del lunes ${_0x26b4(_0x26b2)} al domingo ${_0x26b4(_0x26b3)}${_0x26b3.slice(0, 4) !== _0x25b8().slice(0, 4) ? ' de ' + _0x26b3.slice(0, 4) : ''}`; }
+function _0x26b6(_0x26b7, _0x26b8) {
+if (!_0x26b7)
 return '<span class="tv">—</span>';
-const _0x2679 = _0x2595[_0x2677], _0x267a = _0x25db(_0x2677), _0x267b = _0x1a08.ah.feriados.has(_0x2678);
-if (_0x2679)
-return `<span class="tu e-${_0x2679}">${_0x1a39(_0x2677)}</span>`;
-return `<span class="tu">${_0x1a39(_0x2677.replace(/ SB$/, ''))}</span>${/ SB$/.test(_0x2677) ? '<small class="sb" title="Este día no toma break: no se descuenta el refrigerio">sin break</small>' : ''}${_0x267b && _0x267a != null ? '<small class="gana" title="Trabaja en feriado: genera un compensado">★ feriado</small>' : ''}`;
+const _0x26b9 = _0x25b1[_0x26b7], _0x26ba = _0x25fb(_0x26b7), _0x26bb = _0x1a08.ah.feriados.has(_0x26b8);
+if (_0x26b9)
+return `<span class="tu e-${_0x26b9}">${_0x1a39(_0x26b7)}</span>`;
+return `<span class="tu">${_0x1a39(_0x26b7.replace(/ SB$/, ''))}</span>${/ SB$/.test(_0x26b7) ? '<small class="sb" title="Este día no toma break: no se descuenta el refrigerio">sin break</small>' : ''}${_0x26bb && _0x26ba != null ? '<small class="gana" title="Trabaja en feriado: genera un compensado">★ feriado</small>' : ''}`;
 }
-function _0x267c() {
+function _0x26bc() {
 if (!_0x1a08.ah.ok) {
 _0x1a37('#main').innerHTML = `<div class="head"><div><h1>Horario</h1></div></div>${_0x1a08.ah.error ? `<div class="aviso"><span>⚠️ ${_0x1a39(_0x1a08.ah.error)}</span></div>` : '<div class="empty"><b>Cargando…</b></div>'}`;
 if (!_0x1a08.ah.error)
-_0x25c4();
+_0x25e3();
 return;
 }
-const _0x267d = _0x1a3d(), _0x267e = _0x1a08.ah.semana, _0x267f = Array.from({ length: 7 }, (_0x2680, _0x2681) => _0x25a1(_0x267e, _0x2681)), _0x2682 = _0x25b9(), _0x2683 = _0x259c();
-const _0x2684 = _0x267f.map(_0x2685 => {
-const _0x2686 = _0x1a08.ah.feriados.get(_0x2685);
-return `<th class="hd ${_0x2686 ? 'fer' : ''} ${_0x2685 === _0x2683 ? 'hoy' : ''}" title="${_0x2686 ? _0x1a39(_0x2686.nombre) : ''}">${_0x259a[_0x25a5(_0x2685)]} ${_0x2685.slice(8)}${_0x2686 ? `<i>FERIADO</i>` : ''}</th>`;
+const _0x26bd = _0x1a3d(), _0x26be = _0x25a5(), _0x26bf = _0x1a17(), _0x26c0 = _0x1a08.ah.semana, _0x26c1 = Array.from({ length: 7 }, (_0x26c2, _0x26c3) => _0x25bd(_0x26c0, _0x26c3)), _0x26c4 = _0x25d5(), _0x26c5 = _0x25b8();
+const _0x26c6 = _0x26c1.map(_0x26c7 => {
+const _0x26c8 = _0x1a08.ah.feriados.get(_0x26c7);
+return `<th class="hd ${_0x26c8 ? 'fer' : ''} ${_0x26c7 === _0x26c5 ? 'hoy' : ''}" title="${_0x26c8 ? _0x1a39(_0x26c8.nombre) : ''}">${_0x25b6[_0x25c1(_0x26c7)]} ${_0x26c7.slice(8)}${_0x26c8 ? `<i>FERIADO</i>` : ''}</th>`;
 }).join('');
-const _0x2687 = _0x2682.map(_0x2688 => {
-const _0x2689 = _0x25c1(_0x2688.id), _0x268a = _0x1a08.ah.hor.get(_0x25b6(_0x2688.id, _0x267e)) || {}, _0x268b = Number(_0x2689.horas_semana) || 48;
-const _0x268c = _0x25df(_0x268a, _0x268b), _0x268d = _0x25cf(_0x2688.id, _0x25a1(_0x267e, -1)).saldo, _0x268e = _0x25cf(_0x2688.id, _0x25a1(_0x267e, 6)).saldo;
-const _0x268f = _0x268a.d1 !== undefined;
-return `<tr><th class="ap"><b>${_0x1a39(_0x2688.nombre || _0x2688.codigo)}</b><small>${_0x1a39([(_0x2689.cargo || _0x1a0b[_0x2688.rol] || '').toUpperCase(), (_0x2689.area_trabajo || '').toUpperCase()].filter(Boolean).join(' · '))}</small>
-        <div class="hcont">${_0x268f ? _0x266a(_0x268c, _0x268b) : '<span class="hb vacio">Sin horario</span>'}<small>meta ${_0x268b} h</small></div></th>
-      ${_0x267f.map((_0x2690, _0x2691) => `<td class="ht ${_0x1a08.ah.feriados.has(_0x2690) ? 'fer' : ''} ${_0x267d ? 'edit' : ''}" ${_0x267d ? `data-act="hor-celda" data-id="${_0x2688.id}" data-i="${_0x2691 + 1}"` : ''}>${_0x2676(_0x268a['d' + (_0x2691 + 1)], _0x2690)}</td>`).join('')}
-      <td class="ht ${_0x267d ? 'edit' : ''}" ${_0x267d ? `data-act="hor-break" data-id="${_0x2688.id}"` : ''}>${_0x268a.refrigerio ? _0x1a39(String(_0x268a.refrigerio).slice(0, 5)) : '—'}</td>
-      <td class="num">${_0x268d}</td><td class="num"><b class="${_0x268e > 0 ? 'debe' : ''}">${_0x268e}</b></td></tr>`;
+const _0x26c9 = _0x26c4.map(_0x26ca => {
+const _0x26cb = _0x25e0(_0x26ca.id), _0x26cc = _0x1a08.ah.hor.get(_0x25d2(_0x26ca.id, _0x26c0)) || {}, _0x26cd = _0x25a8(_0x26ca);
+const _0x26ce = _0x25ff(_0x26cc, _0x26cd), _0x26cf = [1, 2, 3, 4, 5, 6, 7].some(_0x26d0 => _0x26cc['d' + _0x26d0]);
+const _0x26d1 = _0x26bf ? null : { arr: _0x25ee(_0x26ca.id, _0x25bd(_0x26c0, -1)).saldo, cie: _0x25ee(_0x26ca.id, _0x25bd(_0x26c0, 6)).saldo };
+const _0x26d2 = _0x26d3 => _0x26d3 < 0 ? `<b class="adel" title="Se le adelantó ${-_0x26d3} compensado(s): los devuelve trabajando un feriado">${_0x26d3}</b><small class="adel-t">adelantado</small>` : _0x26d3 > 0 ? `<b class="debe">${_0x26d3}</b>` : '<b>0</b>';
+const _0x26d4 = _0x2691(_0x26ca.id, _0x26cd, _0x26c0), _0x26d5 = _0x26d4 < -0.01 ? _0x2697(_0x26ca.id, _0x26cd, _0x26c0) : null, _0x26d6 = _0x26a1(_0x26ca.id, _0x26c0.slice(0, 7), _0x26cd);
+const _0x26d7 = Math.abs(_0x26d4) < 0.01 ? '<span class="hb ok">✔ Al día</span>' : _0x26d4 < 0 ? `<span class="hb falta">Debe ${_0x26ae(-_0x26d4)}</span>` : `<span class="hb exc">A favor ${_0x26ae(_0x26d4)}</span>`;
+const _0x26d8 = _0x26d5 ? `<small class="rec-ok">✔ Recupera en la semana del ${_0x1a39(+_0x26d5.slice(8) + ' ' + _0x25b4[+_0x26d5.slice(5, 7) - 1])}</small>` : (_0x26d4 < -0.01 ? '<small class="rec-no">Sin recuperación programada</small>' : '');
+const _0x26d9 = _0x26cc.acuerdo ? `<small class="acu" title="${_0x1a39(_0x26cc.acuerdo)}">📝 ${_0x1a39(_0x26cc.acuerdo)}</small>` : '';
+return `<tr><th class="ap"><b>${_0x1a39(_0x26ca.nombre || _0x26ca.codigo)}</b><small>${_0x1a39([(_0x26cb.cargo || _0x1a0b[_0x26ca.rol] || '').toUpperCase(), (_0x26cb.area_trabajo || (_0x26ca.rol === 'asesor' ? _0x2266[_0x26ca.area] || '' : '')).toUpperCase()].filter(Boolean).join(' · '))}</small>
+        <div class="hcont">${_0x26cf ? _0x268a(_0x26ce, _0x26cd) : '<span class="hb vacio">Sin horario</span>'}<small>meta ${_0x26cd} h</small></div>
+        ${_0x26d6.dias ? `<small class="hmes" title="Horas programadas en el mes / horas que corresponden (${_0x26ae(_0x26cd / 6)} por día que no es descanso)">Mes: ${_0x26ae(_0x26d6.h)} de ${_0x26ae(_0x26d6.meta)}</small>` : ''}</th>
+      ${_0x26c1.map((_0x26da, _0x26db) => `<td class="ht ${_0x1a08.ah.feriados.has(_0x26da) ? 'fer' : ''} ${_0x26be ? 'edit' : ''}" ${_0x26be ? `data-act="hor-celda" data-id="${_0x26ca.id}" data-i="${_0x26db + 1}"` : ''}>${_0x26b6(_0x26cc['d' + (_0x26db + 1)], _0x26da)}</td>`).join('')}
+      <td class="ht ${_0x26be ? 'edit' : ''}" ${_0x26be ? `data-act="hor-break" data-id="${_0x26ca.id}"` : ''}>${_0x26cc.refrigerio ? _0x1a39(String(_0x26cc.refrigerio).slice(0, 5)) : '—'}</td>
+      <td class="ht saldo ${_0x26be ? 'edit' : ''}" ${_0x26be ? `data-act="hor-acuerdo" data-id="${_0x26ca.id}" title="Clic para anotar un acuerdo de recuperación"` : ''}>${_0x26d7}${_0x26d8}${_0x26d9}</td>
+      ${_0x26bf ? '' : `<td class="num">${_0x26d2(_0x26d1.arr)}</td><td class="num">${_0x26d2(_0x26d1.cie)}</td>`}</tr>`;
 }).join('');
-const _0x2692 = !_0x267d && _0x1a08.ah.hor.get(_0x25b6(_0x1a08.uid, _0x267e));
-const _0x2693 = _0x267d ? _0x2682.flatMap(_0x2694 => _0x267f.map(_0x2695 => ({ p: _0x2694, d: _0x2695, h: _0x25ed(_0x2694.id, _0x2695), m: _0x1a08.ah.asis.get(_0x25b3(_0x2694.id, _0x2695)) })).filter(_0x2696 => _0x2696.h && _0x2696.m && _0x2696.m !== _0x2696.h)) : [];
-_0x1a37('#main').innerHTML = `<div class="head"><div><h1>Horario</h1><p class="sub">${_0x267d ? 'Arma el horario semanal de cada formador. Haz clic en un día para editarlo. El contador de horas descuenta el refrigerio.' : 'Tu horario de la semana. Si necesitas un cambio, coordínalo con tu jefatura.'}</p></div></div>
+const _0x26dc = !_0x26bd && _0x1a08.ah.hor.get(_0x25d2(_0x1a08.uid, _0x26c0));
+const _0x26dd = _0x26bd ? _0x26c4.flatMap(_0x26de => _0x26c1.map(_0x26df => ({ p: _0x26de, d: _0x26df, h: _0x260d(_0x26de.id, _0x26df), m: _0x1a08.ah.asis.get(_0x25cf(_0x26de.id, _0x26df)) })).filter(_0x26e0 => _0x26e0.h && _0x26e0.m && _0x26e0.m !== _0x26e0.h)) : [];
+_0x1a37('#main').innerHTML = `<div class="head"><div><h1>Horario</h1><p class="sub">${_0x26bd ? 'Arma el horario semanal de cada formador. Haz clic en un día para editarlo. El contador de horas descuenta el refrigerio.' : _0x26bf ? 'Arma el horario semanal de tus asesores. Haz clic en un día para editarlo. Si alguno no se conecta a su hora de entrada, el portal te avisará.' : 'Tu horario de la semana. Si necesitas un cambio, coordínalo con tu jefatura.'}</p></div></div>
     <div class="ah-bar">
-      <button class="btn ghost sm" data-act="hor-sem" data-id="-7" aria-label="Semana anterior">◀</button><b class="sem-tx">Semana ${_0x1a39(_0x2671(_0x267e))}</b><button class="btn ghost sm" data-act="hor-sem" data-id="7" aria-label="Semana siguiente">▶</button>
+      <button class="btn ghost sm" data-act="hor-sem" data-id="-7" aria-label="Semana anterior">◀</button><b class="sem-tx">Semana ${_0x1a39(_0x26b1(_0x26c0))}</b><button class="btn ghost sm" data-act="hor-sem" data-id="7" aria-label="Semana siguiente">▶</button>
       <button class="btn ghost sm" data-act="hor-sem" data-id="0">Esta semana</button>
-      ${_0x267d ? `<button class="btn ghost sm" data-act="hor-copiar">⧉ Copiar semana anterior</button>
-        <button class="btn ghost sm" data-act="fichas">🗂 Fichas del personal</button>
-        ${_0x25fa('hormes', _0x267e.slice(0, 7))}<button class="btn add sm" data-act="hor-xls">Descargar Excel del mes</button>` : ''}
+      ${_0x26be ? `<button class="btn ghost sm" data-act="hor-copiar">⧉ Copiar semana anterior</button>` : ''}
+      ${_0x26bd ? `<button class="btn ghost sm" data-act="fichas">🗂 Fichas del personal</button>
+        ${_0x261a('hormes', _0x26c0.slice(0, 7))}<button class="btn add sm" data-act="hor-xls">Descargar Excel del mes</button>` : ''}
     </div>
-    ${_0x2693.length ? `<div class="aviso comp-aviso"><span>⚠️ <b>El horario y la asistencia no coinciden:</b> ${_0x2693.map(_0x2697 => `${_0x1a39(_0x2697.p.nombre || _0x2697.p.codigo)} · ${_0x259a[_0x25a5(_0x2697.d)]} ${_0x2697.d.slice(8)}: horario <b>${_0x1a39(_0x25e9(_0x2697.p.id, _0x2697.d))}</b>, asistencia marcada <b>${_0x1a39(_0x2697.m)}</b>`).join(' · ')}. Mientras tanto se usa lo marcado en Asistencia (por eso un compensado puede no descontarse).</span> <button class="btn sm" data-act="hor-choques">Usar el horario</button></div>` : ''}
-    ${_0x2692 ? `<div class="mi-hor">${_0x267f.map((_0x2698, _0x2699) => { const _0x269a = _0x2692['d' + (_0x2699 + 1)]; return `<div class="mh ${_0x2698 === _0x2683 ? 'hoy' : ''} ${_0x1a08.ah.feriados.has(_0x2698) ? 'fer' : ''}"><small>${_0x259a[_0x25a5(_0x2698)]} ${_0x2698.slice(8)}</small><b>${_0x1a39(_0x269a || '—')}</b>${_0x25db(_0x269a) != null ? `<span>${_0x266e(_0x25db(_0x269a))}</span>` : ''}</div>`; }).join('')}</div>` : (!_0x267d ? '<div class="empty"><b>Aún no tienes horario para esta semana</b>Tu jefatura lo publicará pronto.</div>' : '')}
-    ${_0x267d || _0x2692 ? `<div class="scroll ah-hor"><table class="tb hor"><thead><tr><th class="ap">Colaborador · horas de la semana</th>${_0x2684}<th>Break</th><th class="num" title="Compensados pendientes al empezar la semana">Arrastra comp.</th><th class="num" title="Compensados pendientes al terminar la semana">Cierre semana</th></tr></thead>
-      <tbody>${_0x2687}</tbody></table></div>
-    <p class="meta" style="margin-top:8px">Horas: se descuentan ${_0x2596} min de refrigerio en turnos de más de ${_0x2597} h. Feriado, compensado, vacaciones y descanso médico cuentan como un día de jornada (meta ÷ 6), sin pasar de la meta. Los compensados se calculan con la asistencia marcada.</p>` : ''}`;
+    ${_0x26dd.length ? `<div class="aviso comp-aviso"><span>⚠️ <b>El horario y la asistencia no coinciden:</b> ${_0x26dd.map(_0x26e1 => `${_0x1a39(_0x26e1.p.nombre || _0x26e1.p.codigo)} · ${_0x25b6[_0x25c1(_0x26e1.d)]} ${_0x26e1.d.slice(8)}: horario <b>${_0x1a39(_0x2609(_0x26e1.p.id, _0x26e1.d))}</b>, asistencia marcada <b>${_0x1a39(_0x26e1.m)}</b>`).join(' · ')}. Mientras tanto se usa lo marcado en Asistencia (por eso un compensado puede no descontarse).</span> <button class="btn sm" data-act="hor-choques">Usar el horario</button></div>` : ''}
+    ${_0x26dc ? `<div class="mi-hor">${_0x26c1.map((_0x26e2, _0x26e3) => { const _0x26e4 = _0x26dc['d' + (_0x26e3 + 1)]; return `<div class="mh ${_0x26e2 === _0x26c5 ? 'hoy' : ''} ${_0x1a08.ah.feriados.has(_0x26e2) ? 'fer' : ''}"><small>${_0x25b6[_0x25c1(_0x26e2)]} ${_0x26e2.slice(8)}</small><b>${_0x1a39(_0x26e4 || '—')}</b>${_0x25fb(_0x26e4) != null ? `<span>${_0x26ae(_0x25fb(_0x26e4))}</span>` : ''}</div>`; }).join('')}</div>` : (!_0x26bd ? '<div class="empty"><b>Aún no tienes horario para esta semana</b>Tu jefatura lo publicará pronto.</div>' : '')}
+    ${_0x26be || _0x26dc ? `<div class="scroll ah-hor"><table class="tb hor"><thead><tr><th class="ap">Colaborador · horas de la semana</th>${_0x26c6}<th>Break</th><th title="Horas acumuladas: lo que debe o tiene a favor sumando todas las semanas completas hasta esta">Saldo de horas</th>${_0x26bf ? '' : '<th class="num" title="Compensados pendientes al empezar la semana (negativo = adelantado)">Arrastra comp.</th><th class="num" title="Compensados pendientes al terminar la semana (negativo = adelantado)">Cierre semana</th>'}</tr></thead>
+      <tbody>${_0x26c9}</tbody></table></div>
+    <p class="meta" style="margin-top:8px">Horas: se descuentan ${_0x25b2} min de refrigerio en turnos de más de ${_0x25b3} h. Feriado, compensado, vacaciones y descanso médico cuentan como un día de jornada (meta ÷ 6), sin pasar de la meta. <b>Saldo de horas:</b> suma lo que falta o sobra en cada semana completa; si alguien debe horas y en una semana siguiente se le programan horas de más, el saldo vuelve a 0. ${_0x26bf ? '' : '<b>Compensados:</b> trabajar un feriado suma 1 (al pasar el día) y un COMPENSADO resta 1; un número negativo es un compensado adelantado que se paga con el siguiente feriado trabajado.'}</p>` : ''}`;
 }
-async function _0x269b(_0x269c, _0x269d) {
-const _0x269e = _0x1a08.ah.semana, _0x269f = _0x1a08.ah.hor.get(_0x25b6(_0x269c, _0x269e)) || { user_id: _0x269c, semana: _0x269e };
-const _0x26a0 = { ..._0x269f, ..._0x269d, user_id: _0x269c, semana: _0x269e, actualizado: new Date().toISOString() };
-_0x1a08.ah.hor.set(_0x25b6(_0x269c, _0x269e), _0x26a0);
-Object.keys(_0x269d).forEach(_0x26a1 => {
-const _0x26a2 = /^d([1-7])$/.exec(_0x26a1);
-if (!_0x26a2)
+async function _0x26e5(_0x26e6, _0x26e7) {
+const _0x26e8 = _0x1a08.ah.semana, _0x26e9 = _0x1a08.ah.hor.get(_0x25d2(_0x26e6, _0x26e8)) || { user_id: _0x26e6, semana: _0x26e8 };
+const _0x26ea = { ..._0x26e9, ..._0x26e7, user_id: _0x26e6, semana: _0x26e8, actualizado: new Date().toISOString() };
+_0x1a08.ah.hor.set(_0x25d2(_0x26e6, _0x26e8), _0x26ea);
+if (_0x1a3d())
+Object.keys(_0x26e7).forEach(_0x26eb => {
+const _0x26ec = /^d([1-7])$/.exec(_0x26eb);
+if (!_0x26ec)
 return;
-const _0x26a3 = _0x25a1(_0x269e, _0x26a2[1] - 1), _0x26a4 = _0x2595[_0x269d[_0x26a1]], _0x26a5 = _0x1a08.ah.asis.get(_0x25b3(_0x269c, _0x26a3));
-if (_0x26a4 && _0x26a5 && _0x26a5 !== _0x26a4)
-_0x262b(_0x269c, _0x26a3, '');
+const _0x26ed = _0x25bd(_0x26e8, _0x26ec[1] - 1), _0x26ee = _0x25b1[_0x26e7[_0x26eb]], _0x26ef = _0x1a08.ah.asis.get(_0x25cf(_0x26e6, _0x26ed));
+if (_0x26ee && _0x26ef && _0x26ef !== _0x26ee)
+_0x264b(_0x26e6, _0x26ed, '');
 });
 _0x1c8e();
-const { error: _0x26a6 } = await _0x1a07.from('horario').upsert({ user_id: _0x269c, semana: _0x269e, d1: _0x26a0.d1 || null, d2: _0x26a0.d2 || null, d3: _0x26a0.d3 || null, d4: _0x26a0.d4 || null, d5: _0x26a0.d5 || null, d6: _0x26a0.d6 || null, d7: _0x26a0.d7 || null, refrigerio: _0x26a0.refrigerio || null, actualizado: _0x26a0.actualizado }, { onConflict: 'user_id,semana' });
-if (_0x26a6) {
-alert('No se pudo guardar el horario: ' + _0x1a53(_0x26a6));
+const { error: _0x26f0 } = await _0x1a07.from('horario').upsert({ user_id: _0x26e6, semana: _0x26e8, d1: _0x26ea.d1 || null, d2: _0x26ea.d2 || null, d3: _0x26ea.d3 || null, d4: _0x26ea.d4 || null, d5: _0x26ea.d5 || null, d6: _0x26ea.d6 || null, d7: _0x26ea.d7 || null, refrigerio: _0x26ea.refrigerio || null, acuerdo: _0x26ea.acuerdo || null, actualizado: _0x26ea.actualizado }, { onConflict: 'user_id,semana' });
+if (_0x26f0) {
+alert('No se pudo guardar el horario: ' + _0x1a53(_0x26f0));
 _0x1a08.ah.ok = false;
-_0x25c4();
+_0x25e3();
 }
 }
-function _0x26a7(_0x26a8, _0x26a9) {
-const _0x26aa = _0x25b9().find(_0x26ab => _0x26ab.id === _0x26a8), _0x26ac = _0x25a1(_0x1a08.ah.semana, _0x26a9 - 1), _0x26ad = _0x1a08.ah.hor.get(_0x25b6(_0x26a8, _0x1a08.ah.semana)) || {}, _0x26ae = _0x26ad['d' + _0x26a9] || '';
-const _0x26af = /^(\d{2}:\d{2}) - (\d{2}:\d{2})( SB)?$/.exec(_0x26ae), _0x26b0 = _0x1a08.ah.feriados.get(_0x26ac);
-_0x1c93.innerHTML = `<form class="dlg" id="turno-f"><h3>${_0x1a39(_0x26aa ? (_0x26aa.nombre || _0x26aa.codigo) : '')}</h3><p class="meta">${_0x1a39(_0x1a2d(_0x26ac))}${_0x26b0 ? ' · <b>Feriado: ' + _0x1a39(_0x26b0.nombre) + '</b> (si trabaja, genera un compensado)' : ''}</p>
-    <div class="grid3"><label>Entrada<input type="time" name="ini" value="${_0x26af ? _0x26af[1] : ''}"></label><label>Salida<input type="time" name="fin" value="${_0x26af ? _0x26af[2] : ''}"></label></div>
-    <div class="tipo-sw esp">${_0x2594.map(_0x26b1 => `<button type="button" class="${_0x26ae === _0x26b1 ? 'on' : ''}" data-esp="${_0x26b1}">${_0x26b1}</button>`).join('')}<button type="button" data-esp="">Vaciar</button></div>
-    <label class="chk"><input type="checkbox" name="sb" ${_0x26af && _0x26af[3] ? 'checked' : ''}> Este día <b>no toma break</b> (no se le descuenta el refrigerio; por ejemplo, 8:00 a 16:00 cuenta 8 horas)</label>
+function _0x26f1(_0x26f2, _0x26f3) {
+const _0x26f4 = _0x25d5().find(_0x26f5 => _0x26f5.id === _0x26f2), _0x26f6 = _0x25bd(_0x1a08.ah.semana, _0x26f3 - 1), _0x26f7 = _0x1a08.ah.hor.get(_0x25d2(_0x26f2, _0x1a08.ah.semana)) || {}, _0x26f8 = _0x26f7['d' + _0x26f3] || '';
+const _0x26f9 = /^(\d{2}:\d{2}) - (\d{2}:\d{2})( SB)?$/.exec(_0x26f8), _0x26fa = _0x1a08.ah.feriados.get(_0x26f6);
+_0x1c93.innerHTML = `<form class="dlg" id="turno-f"><h3>${_0x1a39(_0x26f4 ? (_0x26f4.nombre || _0x26f4.codigo) : '')}</h3><p class="meta">${_0x1a39(_0x1a2d(_0x26f6))}${_0x26fa ? ' · <b>Feriado: ' + _0x1a39(_0x26fa.nombre) + '</b> (si trabaja, genera un compensado)' : ''}</p>
+    <div class="grid3"><label>Entrada<input type="time" name="ini" value="${_0x26f9 ? _0x26f9[1] : ''}"></label><label>Salida<input type="time" name="fin" value="${_0x26f9 ? _0x26f9[2] : ''}"></label></div>
+    <div class="tipo-sw esp">${_0x25b0.map(_0x26fb => `<button type="button" class="${_0x26f8 === _0x26fb ? 'on' : ''}" data-esp="${_0x26fb}">${_0x26fb}</button>`).join('')}<button type="button" data-esp="">Vaciar</button></div>
+    <label class="chk"><input type="checkbox" name="sb" ${_0x26f9 && _0x26f9[3] ? 'checked' : ''}> Este día <b>no toma break</b> (no se le descuenta el refrigerio; por ejemplo, 8:00 a 16:00 cuenta 8 horas)</label>
     <label class="chk"><input type="checkbox" name="todos"> Aplicar el mismo turno a los demás días laborables de la semana (no toca descansos, feriados ni vacaciones)</label>
     <p class="err" id="ferr" hidden></p>
     <div class="row"><button class="btn ghost" type="button" data-close>Cancelar</button><button class="btn" type="submit">Guardar</button></div></form>`;
-const _0x26b2 = _0x1a37('#turno-f');
-_0x26b2.querySelectorAll('[data-esp]').forEach(_0x26b3 => _0x26b3.onclick = () => { _0x1c93.close(); _0x269b(_0x26a8, { ['d' + _0x26a9]: _0x26b3.dataset.esp }); });
-_0x26b2.onsubmit = _0x26b4 => {
-_0x26b4.preventDefault();
-const _0x26b5 = _0x26b2.ini.value, _0x26b6 = _0x26b2.fin.value, _0x26b7 = _0x1a37('#ferr');
-if (!_0x26b5 || !_0x26b6) {
-_0x26b7.textContent = 'Pon la hora de entrada y de salida, o elige una opción como DESCANSO.';
-_0x26b7.hidden = false;
+const _0x26fc = _0x1a37('#turno-f');
+_0x26fc.querySelectorAll('[data-esp]').forEach(_0x26fd => _0x26fd.onclick = () => { _0x1c93.close(); _0x26e5(_0x26f2, { ['d' + _0x26f3]: _0x26fd.dataset.esp }); });
+_0x26fc.onsubmit = _0x26fe => {
+_0x26fe.preventDefault();
+const _0x26ff = _0x26fc.ini.value, _0x2700 = _0x26fc.fin.value, _0x2701 = _0x1a37('#ferr');
+if (!_0x26ff || !_0x2700) {
+_0x2701.textContent = 'Pon la hora de entrada y de salida, o elige una opción como DESCANSO.';
+_0x2701.hidden = false;
 return;
 }
-const _0x26b8 = `${_0x26b5} - ${_0x26b6}${_0x26b2.sb.checked ? ' SB' : ''}`, _0x26b9 = { ['d' + _0x26a9]: _0x26b8 };
-if (_0x26b2.todos.checked)
-for (let _0x26ba = 1; _0x26ba <= 7; _0x26ba++) {
-const _0x26bb = _0x26ad['d' + _0x26ba];
-if (_0x26ba !== _0x26a9 && (!_0x26bb || _0x25db(_0x26bb) != null))
-_0x26b9['d' + _0x26ba] = _0x26b8;
+const _0x2702 = `${_0x26ff} - ${_0x2700}${_0x26fc.sb.checked ? ' SB' : ''}`, _0x2703 = { ['d' + _0x26f3]: _0x2702 };
+if (_0x26fc.todos.checked)
+for (let _0x2704 = 1; _0x2704 <= 7; _0x2704++) {
+const _0x2705 = _0x26f7['d' + _0x2704];
+if (_0x2704 !== _0x26f3 && (!_0x2705 || _0x25fb(_0x2705) != null))
+_0x2703['d' + _0x2704] = _0x2702;
 }
 _0x1c93.close();
-_0x269b(_0x26a8, _0x26b9);
+_0x26e5(_0x26f2, _0x2703);
 };
 if (!_0x1c93.open)
 _0x1c93.showModal();
 }
-async function _0x26bc() {
-const _0x26bd = _0x25a1(_0x1a08.ah.semana, -7), _0x26be = _0x25b9().filter(_0x26bf => _0x1a08.ah.hor.has(_0x25b6(_0x26bf.id, _0x26bd)));
-if (!_0x26be.length)
+async function _0x2706() {
+const _0x2707 = _0x25bd(_0x1a08.ah.semana, -7), _0x2708 = _0x25d5().filter(_0x2709 => _0x1a08.ah.hor.has(_0x25d2(_0x2709.id, _0x2707)));
+if (!_0x2708.length)
 return alert('La semana anterior no tiene horarios para copiar.');
-const _0x26c0 = _0x26be.filter(_0x26c1 => _0x1a08.ah.hor.has(_0x25b6(_0x26c1.id, _0x1a08.ah.semana))).length;
-if (!confirm(`Se copiará el horario de la semana anterior a ${_0x26be.length} persona(s)${_0x26c0 ? `; ${_0x26c0} ya tienen horario esta semana y se reemplazará` : ''}. Los días feriados de esta semana quedarán como FERIADO (cámbialos si alguien trabaja). ¿Continuar?`))
+const _0x270a = _0x2708.filter(_0x270b => _0x1a08.ah.hor.has(_0x25d2(_0x270b.id, _0x1a08.ah.semana))).length;
+if (!confirm(`Se copiará el horario de la semana anterior a ${_0x2708.length} persona(s)${_0x270a ? `; ${_0x270a} ya tienen horario esta semana y se reemplazará` : ''}. Los días feriados de esta semana quedarán como FERIADO (cámbialos si alguien trabaja). ¿Continuar?`))
 return;
-for (const _0x26c2 of _0x26be) {
-const _0x26c3 = _0x1a08.ah.hor.get(_0x25b6(_0x26c2.id, _0x26bd)), _0x26c4 = { refrigerio: _0x26c3.refrigerio };
-for (let _0x26c5 = 1; _0x26c5 <= 7; _0x26c5++) {
-const _0x26c6 = _0x25a1(_0x1a08.ah.semana, _0x26c5 - 1);
-_0x26c4['d' + _0x26c5] = _0x1a08.ah.feriados.has(_0x26c6) && _0x25db(_0x26c3['d' + _0x26c5]) != null ? 'FERIADO' : (_0x26c3['d' + _0x26c5] || '');
+for (const _0x270c of _0x2708) {
+const _0x270d = _0x1a08.ah.hor.get(_0x25d2(_0x270c.id, _0x2707)), _0x270e = { refrigerio: _0x270d.refrigerio };
+for (let _0x270f = 1; _0x270f <= 7; _0x270f++) {
+const _0x2710 = _0x25bd(_0x1a08.ah.semana, _0x270f - 1);
+_0x270e['d' + _0x270f] = _0x1a08.ah.feriados.has(_0x2710) && _0x25fb(_0x270d['d' + _0x270f]) != null ? 'FERIADO' : (_0x270d['d' + _0x270f] || '');
 }
-await _0x269b(_0x26c2.id, _0x26c4);
+await _0x26e5(_0x270c.id, _0x270e);
 }
 }
-function _0x26c7(_0x26c8) {
+function _0x2711(_0x2712) {
 if (typeof XLSX === 'undefined')
 return alert('No se pudo cargar la librería de Excel. Recarga la página.');
-const _0x26c9 = _0x25a9(_0x26c8), _0x26ca = [...new Set(_0x26c9.map(_0x25a7))], _0x26cb = _0x25b9(), _0x26cc = [], _0x26cd = [];
-_0x26cc.push([]);
-_0x26cc.push(['', '', '', '', '', 'HORARIO CAPACITACION']);
-_0x26cd.push({ s: { r: 1, c: 5 }, e: { r: 1, c: 11 } });
-_0x26ca.forEach(_0x26ce => {
-_0x26cc.push([]);
-const _0x26cf = _0x26cc.length;
-_0x26cc.push(['', '', '', '', '', 'DIA']);
-_0x26cd.push({ s: { r: _0x26cf, c: 5 }, e: { r: _0x26cf, c: 11 } });
-_0x26cc.push(['', '', 'CARGO', 'AREA', 'COLABORADORES', ...Array.from({ length: 7 }, (_0x26d0, _0x26d1) => { const _0x26d2 = _0x25a1(_0x26ce, _0x26d1); return `${_0x259a[_0x25a5(_0x26d2)]} ${_0x26d2.slice(8)}`; }), 'BREAK', '', 'Arrastra compensados', 'Cierre de semana', 'Horas semana']);
-_0x26cb.forEach(_0x26d3 => {
-const _0x26d4 = _0x25c1(_0x26d3.id), _0x26d5 = _0x1a08.ah.hor.get(_0x25b6(_0x26d3.id, _0x26ce)) || {}, _0x26d6 = _0x25df(_0x26d5, Number(_0x26d4.horas_semana) || 48);
-const _0x26d7 = _0x26d5.refrigerio ? String(_0x26d5.refrigerio).slice(0, 5).split(':') : null;
-_0x26cc.push(['', '', (_0x26d4.cargo || _0x1a0b[_0x26d3.rol] || '').toUpperCase(), (_0x26d4.area_trabajo || '').toUpperCase(), _0x26d3.nombre || _0x26d3.codigo,
-...Array.from({ length: 7 }, (_0x26d8, _0x26d9) => _0x26d5['d' + (_0x26d9 + 1)] || ''),
-_0x26d7 ? { t: 'n', v: (+_0x26d7[0] * 60 + +_0x26d7[1]) / 1440, z: 'hh:mm' } : '', '',
-_0x25cf(_0x26d3.id, _0x25a1(_0x26ce, -1)).saldo, _0x25cf(_0x26d3.id, _0x25a1(_0x26ce, 6)).saldo, _0x26d5.d1 !== undefined ? Math.round(_0x26d6.total * 100) / 100 : '']);
+const _0x2713 = _0x25c5(_0x2712), _0x2714 = [...new Set(_0x2713.map(_0x25c3))], _0x2715 = _0x25d5(), _0x2716 = [], _0x2717 = [];
+_0x2716.push([]);
+_0x2716.push(['', '', '', '', '', 'HORARIO CAPACITACION']);
+_0x2717.push({ s: { r: 1, c: 5 }, e: { r: 1, c: 11 } });
+_0x2714.forEach(_0x2718 => {
+_0x2716.push([]);
+const _0x2719 = _0x2716.length;
+_0x2716.push(['', '', '', '', '', 'DIA']);
+_0x2717.push({ s: { r: _0x2719, c: 5 }, e: { r: _0x2719, c: 11 } });
+_0x2716.push(['', '', 'CARGO', 'AREA', 'COLABORADORES', ...Array.from({ length: 7 }, (_0x271a, _0x271b) => { const _0x271c = _0x25bd(_0x2718, _0x271b); return `${_0x25b6[_0x25c1(_0x271c)]} ${_0x271c.slice(8)}`; }), 'BREAK', '', 'Arrastra compensados', 'Cierre de semana', 'Horas semana']);
+_0x2715.forEach(_0x271d => {
+const _0x271e = _0x25e0(_0x271d.id), _0x271f = _0x1a08.ah.hor.get(_0x25d2(_0x271d.id, _0x2718)) || {}, _0x2720 = _0x25ff(_0x271f, Number(_0x271e.horas_semana) || 48);
+const _0x2721 = _0x271f.refrigerio ? String(_0x271f.refrigerio).slice(0, 5).split(':') : null;
+_0x2716.push(['', '', (_0x271e.cargo || _0x1a0b[_0x271d.rol] || '').toUpperCase(), (_0x271e.area_trabajo || '').toUpperCase(), _0x271d.nombre || _0x271d.codigo,
+...Array.from({ length: 7 }, (_0x2722, _0x2723) => _0x271f['d' + (_0x2723 + 1)] || ''),
+_0x2721 ? { t: 'n', v: (+_0x2721[0] * 60 + +_0x2721[1]) / 1440, z: 'hh:mm' } : '', '',
+_0x25ee(_0x271d.id, _0x25bd(_0x2718, -1)).saldo, _0x25ee(_0x271d.id, _0x25bd(_0x2718, 6)).saldo, _0x271f.d1 !== undefined ? Math.round(_0x2720.total * 100) / 100 : '']);
 });
 });
-const _0x26da = XLSX.utils.aoa_to_sheet(_0x26cc);
-_0x26da['!merges'] = _0x26cd;
-_0x26da['!cols'] = [{ wch: 2 }, { wch: 2 }, { wch: 20 }, { wch: 16 }, { wch: 34 }, ...Array(7).fill({ wch: 15 }), { wch: 8 }, { wch: 2 }, { wch: 12 }, { wch: 12 }, { wch: 12 }];
-const _0x26db = XLSX.utils.book_new();
-XLSX.utils.book_append_sheet(_0x26db, _0x26da, _0x25af(_0x26c8).toUpperCase().slice(0, 31));
-XLSX.writeFile(_0x26db, `Horario_Formacion_${_0x25af(_0x26c8).replace(' ', '_')}.xlsx`);
+const _0x2724 = XLSX.utils.aoa_to_sheet(_0x2716);
+_0x2724['!merges'] = _0x2717;
+_0x2724['!cols'] = [{ wch: 2 }, { wch: 2 }, { wch: 20 }, { wch: 16 }, { wch: 34 }, ...Array(7).fill({ wch: 15 }), { wch: 8 }, { wch: 2 }, { wch: 12 }, { wch: 12 }, { wch: 12 }];
+const _0x2725 = XLSX.utils.book_new();
+XLSX.utils.book_append_sheet(_0x2725, _0x2724, _0x25cb(_0x2712).toUpperCase().slice(0, 31));
+XLSX.writeFile(_0x2725, `Horario_Formacion_${_0x25cb(_0x2712).replace(' ', '_')}.xlsx`);
 }
 Object.assign(_0x1d10, {
-'asis-pincel': _0x26dc => { _0x1a08.ah.pincel = _0x26dc || ''; _0x1c8e(); },
-'asis-pintar': (_0x26dd, _0x26de) => {
+'asis-pincel': _0x2726 => { _0x1a08.ah.pincel = _0x2726 || ''; _0x1c8e(); },
+'asis-pintar': (_0x2727, _0x2728) => {
 if (!_0x1a3d())
 return;
-const _0x26df = _0x26de.dataset.dia, _0x26e0 = _0x1a08.ah.asis.get(_0x25b3(_0x26dd, _0x26df));
-_0x262b(_0x26dd, _0x26df, _0x26e0 === _0x1a08.ah.pincel ? '' : _0x1a08.ah.pincel);
+const _0x2729 = _0x2728.dataset.dia, _0x272a = _0x1a08.ah.asis.get(_0x25cf(_0x2727, _0x2729));
+_0x264b(_0x2727, _0x2729, _0x272a === _0x1a08.ah.pincel ? '' : _0x1a08.ah.pincel);
 _0x1c8e();
 },
-'asis-mes': _0x26e1 => { const [_0x26e2, _0x26e3] = _0x1a08.ah.mes.split('-').map(Number), _0x26e4 = new Date(Date.UTC(_0x26e2, _0x26e3 - 1 + Number(_0x26e1), 1)); _0x1a08.ah.mes = _0x26e4.toISOString().slice(0, 7); _0x1c8e(); },
-'asis-aplicar': () => _0x263d(),
-'asis-xls': () => _0x2646(),
-feriados: () => _0x2662(),
+'asis-mes': _0x272b => { const [_0x272c, _0x272d] = _0x1a08.ah.mes.split('-').map(Number), _0x272e = new Date(Date.UTC(_0x272c, _0x272d - 1 + Number(_0x272b), 1)); _0x1a08.ah.mes = _0x272e.toISOString().slice(0, 7); _0x1c8e(); },
+'asis-aplicar': () => _0x265d(),
+'asis-xls': () => _0x2666(),
+feriados: () => _0x2682(),
 'fer-add': async () => {
-const _0x26e5 = _0x1a37('#fer-dia').value, _0x26e6 = _0x1a37('#fer-nom').value.trim(), _0x26e7 = _0x1a37('#fer-tipo').value;
-if (!_0x26e5 || !_0x26e6)
+const _0x272f = _0x1a37('#fer-dia').value, _0x2730 = _0x1a37('#fer-nom').value.trim(), _0x2731 = _0x1a37('#fer-tipo').value;
+if (!_0x272f || !_0x2730)
 return alert('Pon la fecha y el nombre del feriado.');
-const { error: _0x26e8 } = await _0x1a07.from('feriados').upsert({ dia: _0x26e5, nombre: _0x26e6, tipo: _0x26e7 });
-if (_0x26e8)
-return alert(_0x1a53(_0x26e8));
-_0x1a08.ah.feriados.set(_0x26e5, { dia: _0x26e5, nombre: _0x26e6, tipo: _0x26e7 });
-_0x2662();
+const { error: _0x2732 } = await _0x1a07.from('feriados').upsert({ dia: _0x272f, nombre: _0x2730, tipo: _0x2731 });
+if (_0x2732)
+return alert(_0x1a53(_0x2732));
+_0x1a08.ah.feriados.set(_0x272f, { dia: _0x272f, nombre: _0x2730, tipo: _0x2731 });
+_0x2682();
 _0x1c8e();
 },
-'fer-del': async (_0x26e9) => {
+'fer-del': async (_0x2733) => {
 if (!confirm('¿Quitar este feriado?'))
 return;
-const { error: _0x26ea } = await _0x1a07.from('feriados').delete().eq('dia', _0x26e9);
-if (_0x26ea)
-return alert(_0x1a53(_0x26ea));
-_0x1a08.ah.feriados.delete(_0x26e9);
-_0x2662();
+const { error: _0x2734 } = await _0x1a07.from('feriados').delete().eq('dia', _0x2733);
+if (_0x2734)
+return alert(_0x1a53(_0x2734));
+_0x1a08.ah.feriados.delete(_0x2733);
+_0x2682();
 _0x1c8e();
 },
-fichas: () => _0x2667(),
-'ficha-edit': _0x26eb => {
-const _0x26ec = _0x25b9().find(_0x26ed => _0x26ed.id === _0x26eb), _0x26ee = _0x25c1(_0x26eb);
-_0x1c95('Ficha · ' + (_0x26ec ? (_0x26ec.nombre || _0x26ec.codigo) : ''), [
+fichas: () => _0x2687(),
+'ficha-edit': _0x2735 => {
+const _0x2736 = _0x25d5().find(_0x2737 => _0x2737.id === _0x2735), _0x2738 = _0x25e0(_0x2735);
+_0x1c95('Ficha · ' + (_0x2736 ? (_0x2736.nombre || _0x2736.codigo) : ''), [
 { k: 'cargo', l: 'Cargo (ej. FORMADOR, FORMADORA)' }, { k: 'area_trabajo', l: 'Área (ej. FIJA MASIVA, BO FIJA)' },
 { k: 'id_sap', l: 'ID SAP' }, { k: 'documento', l: 'Documento (DNI)' }, { k: 'usuario_e', l: 'Usuario E' },
 { k: 'jefe1', l: 'Jefe directo 1' }, { k: 'jefe2', l: 'Jefe directo 2' },
@@ -6808,199 +6921,205 @@ _0x1c95('Ficha · ' + (_0x26ec ? (_0x26ec.nombre || _0x26ec.codigo) : ''), [
 { k: 'jornada', l: 'Tipo de jornada', t: 'sel', o: ['Full Time', 'Part Time'] }, { k: 'horas_semana', l: 'Horas por semana (meta del horario)', t: 'number' },
 { k: 'campana', l: 'Campaña' }, { k: 'tipo', l: 'Tipo (ej. Administrativo)' },
 { k: 'comp_inicial', l: 'Compensados pendientes al empezar (saldo inicial)', t: 'number' }
-], async (_0x26ef) => {
-const _0x26f0 = { user_id: _0x26eb, ..._0x26ef, fecha_ingreso: _0x26ef.fecha_ingreso || null, horas_semana: Number(_0x26ef.horas_semana) || 48, comp_inicial: Number(_0x26ef.comp_inicial) || 0, actualizado: new Date().toISOString() };
-let { error: _0x26f1 } = await _0x1a07.rpc('guardar_ficha', { p: _0x26f0 });
-if (_0x26f1 && /guardar_ficha/.test(_0x26f1.message || ''))
-({ error: _0x26f1 } = await _0x1a07.from('personal_ficha').upsert(_0x26f0));
-if (_0x26f1)
-throw _0x26f1;
-_0x1a08.ah.fichas = _0x1a08.ah.fichas.filter(_0x26f2 => _0x26f2.user_id !== _0x26eb).concat(_0x26f0);
-return () => _0x2667();
-}, { ..._0x26ee, usuario_e: _0x26ee.usuario_e || ('E' + (_0x26ec ? _0x26ec.codigo || '' : '')), estatus: _0x26ee.estatus || 'Activo', jornada: _0x26ee.jornada || 'Full Time', horas_semana: _0x26ee.horas_semana || 48, comp_inicial: _0x26ee.comp_inicial || 0 });
+], async (_0x2739) => {
+const _0x273a = { user_id: _0x2735, ..._0x2739, fecha_ingreso: _0x2739.fecha_ingreso || null, horas_semana: Number(_0x2739.horas_semana) || 48, comp_inicial: Number(_0x2739.comp_inicial) || 0, actualizado: new Date().toISOString() };
+let { error: _0x273b } = await _0x1a07.rpc('guardar_ficha', { p: _0x273a });
+if (_0x273b && /guardar_ficha/.test(_0x273b.message || ''))
+({ error: _0x273b } = await _0x1a07.from('personal_ficha').upsert(_0x273a));
+if (_0x273b)
+throw _0x273b;
+_0x1a08.ah.fichas = _0x1a08.ah.fichas.filter(_0x273c => _0x273c.user_id !== _0x2735).concat(_0x273a);
+return () => _0x2687();
+}, { ..._0x2738, usuario_e: _0x2738.usuario_e || ('E' + (_0x2736 ? _0x2736.codigo || '' : '')), estatus: _0x2738.estatus || 'Activo', jornada: _0x2738.jornada || 'Full Time', horas_semana: _0x2738.horas_semana || 48, comp_inicial: _0x2738.comp_inicial || 0 });
 },
-'hor-sem': _0x26f3 => { _0x1a08.ah.semana = Number(_0x26f3) === 0 ? _0x25a7(_0x259c()) : _0x25a1(_0x1a08.ah.semana, Number(_0x26f3)); _0x1c8e(); },
-'avisos-bloq': () => _0x24a2(),
-'optimizar-img': () => _0x2475(),
+'hor-sem': _0x273d => { _0x1a08.ah.semana = Number(_0x273d) === 0 ? _0x25c3(_0x25b8()) : _0x25bd(_0x1a08.ah.semana, Number(_0x273d)); _0x1c8e(); },
+'avisos-bloq': () => _0x24b8(),
+'optimizar-img': () => _0x248b(),
 'hor-choques': () => {
-const _0x26f4 = Array.from({ length: 7 }, (_0x26f5, _0x26f6) => _0x25a1(_0x1a08.ah.semana, _0x26f6)), _0x26f7 = [];
-_0x25b9().forEach(_0x26f8 => _0x26f4.forEach(_0x26f9 => { const _0x26fa = _0x25ed(_0x26f8.id, _0x26f9), _0x26fb = _0x1a08.ah.asis.get(_0x25b3(_0x26f8.id, _0x26f9)); if (_0x26fa && _0x26fb && _0x26fb !== _0x26fa)
-_0x26f7.push([_0x26f8.id, _0x26f9]); }));
-if (!_0x26f7.length || !confirm(`Se quitarán ${_0x26f7.length} marca(s) de Asistencia que no coinciden con el Horario, y esos días tomarán lo que dice el Horario. ¿Continuar?`))
+const _0x273e = Array.from({ length: 7 }, (_0x273f, _0x2740) => _0x25bd(_0x1a08.ah.semana, _0x2740)), _0x2741 = [];
+_0x25d5().forEach(_0x2742 => _0x273e.forEach(_0x2743 => { const _0x2744 = _0x260d(_0x2742.id, _0x2743), _0x2745 = _0x1a08.ah.asis.get(_0x25cf(_0x2742.id, _0x2743)); if (_0x2744 && _0x2745 && _0x2745 !== _0x2744)
+_0x2741.push([_0x2742.id, _0x2743]); }));
+if (!_0x2741.length || !confirm(`Se quitarán ${_0x2741.length} marca(s) de Asistencia que no coinciden con el Horario, y esos días tomarán lo que dice el Horario. ¿Continuar?`))
 return;
-_0x26f7.forEach(([_0x26fc, _0x26fd]) => _0x262b(_0x26fc, _0x26fd, ''));
+_0x2741.forEach(([_0x2746, _0x2747]) => _0x264b(_0x2746, _0x2747, ''));
 _0x1c8e();
 },
-'hor-celda': (_0x26fe, _0x26ff) => { if (_0x1a3d())
-_0x26a7(_0x26fe, Number(_0x26ff.dataset.i)); },
-'hor-break': _0x2700 => {
-if (!_0x1a3d())
+'hor-celda': (_0x2748, _0x2749) => { if (_0x25a5())
+_0x26f1(_0x2748, Number(_0x2749.dataset.i)); },
+'hor-acuerdo': _0x274a => {
+if (!_0x25a5())
 return;
-const _0x2701 = _0x1a08.ah.hor.get(_0x25b6(_0x2700, _0x1a08.ah.semana)) || {};
-_0x1c95('Hora de break (refrigerio)', [{ k: 'br', l: 'Hora de inicio del break', t: 'time' }], async (_0x2702) => { await _0x269b(_0x2700, { refrigerio: _0x2702.br || null }); }, { br: _0x2701.refrigerio ? String(_0x2701.refrigerio).slice(0, 5) : '' });
+const _0x274b = _0x1a08.ah.hor.get(_0x25d2(_0x274a, _0x1a08.ah.semana)) || {}, _0x274c = _0x25d5().find(_0x274d => _0x274d.id === _0x274a);
+_0x1c95('Acuerdo de recuperación' + (_0x274c ? ' · ' + (_0x274c.nombre || _0x274c.codigo) : ''), [{ k: 'acuerdo', l: 'Qué se acordó esta semana (por ejemplo: "Debe 1 h; la recupera el miércoles 2/12 entrando 9:00")', t: 'area', p: 'Escribe el acuerdo…' }], async (_0x274e) => { await _0x26e5(_0x274a, { acuerdo: (_0x274e.acuerdo || '').trim().slice(0, 300) || null }); }, { acuerdo: _0x274b.acuerdo || '' });
 },
-'hor-copiar': () => _0x26bc(),
-'hor-xls': () => _0x26c7(_0x1a37('#hormes') ? _0x1a37('#hormes').value : _0x1a08.ah.semana.slice(0, 7))
+'hor-break': _0x274f => {
+if (!_0x25a5())
+return;
+const _0x2750 = _0x1a08.ah.hor.get(_0x25d2(_0x274f, _0x1a08.ah.semana)) || {};
+_0x1c95('Hora de break (refrigerio)', [{ k: 'br', l: 'Hora de inicio del break', t: 'time' }], async (_0x2751) => { await _0x26e5(_0x274f, { refrigerio: _0x2751.br || null }); }, { br: _0x2750.refrigerio ? String(_0x2750.refrigerio).slice(0, 5) : '' });
+},
+'hor-copiar': () => _0x2706(),
+'hor-xls': () => _0x2711(_0x1a37('#hormes') ? _0x1a37('#hormes').value : _0x1a08.ah.semana.slice(0, 7))
 });
-let _0x2703 = '05:55', _0x2704 = '22:20';
-const _0x2705 = ['formador', 'monitor', 'todopoderoso'];
-const _0x2706 = 5;
-const _0x2707 = _0x2708 => { const [_0x2709, _0x270a] = _0x2708.split(':').map(Number); return _0x2709 * 60 + _0x270a; };
-function _0x270b() {
-const _0x270c = new Intl.DateTimeFormat('en-GB', { timeZone: 'America/Lima', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).formatToParts(new Date());
-return Number(_0x270c.find(_0x270d => _0x270d.type === 'hour').value) * 60 + Number(_0x270c.find(_0x270e => _0x270e.type === 'minute').value);
+let _0x2752 = '05:55', _0x2753 = '22:20';
+const _0x2754 = ['formador', 'monitor', 'todopoderoso'];
+const _0x2755 = 5;
+const _0x2756 = _0x2757 => { const [_0x2758, _0x2759] = _0x2757.split(':').map(Number); return _0x2758 * 60 + _0x2759; };
+function _0x275a() {
+const _0x275b = new Intl.DateTimeFormat('en-GB', { timeZone: 'America/Lima', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).formatToParts(new Date());
+return Number(_0x275b.find(_0x275c => _0x275c.type === 'hour').value) * 60 + Number(_0x275b.find(_0x275d => _0x275d.type === 'minute').value);
 }
-const _0x270f = () => { const _0x2710 = _0x270b(); return _0x2710 >= _0x2707(_0x2703) && _0x2710 < _0x2707(_0x2704); };
-const _0x2711 = _0x2712 => { const [_0x2713, _0x2714] = _0x2712.split(':').map(Number); return `${(_0x2713 % 12) || 12}:${String(_0x2714).padStart(2, '0')} ${_0x2713 < 12 ? 'a. m.' : 'p. m.'}`; };
-const _0x2715 = () => `Horario de atención: de ${_0x2711(_0x2703)} a ${_0x2711(_0x2704)}`;
-async function _0x2716(_0x2717) {
+const _0x275e = () => { const _0x275f = _0x275a(); return _0x275f >= _0x2756(_0x2752) && _0x275f < _0x2756(_0x2753); };
+const _0x2760 = _0x2761 => { const [_0x2762, _0x2763] = _0x2761.split(':').map(Number); return `${(_0x2762 % 12) || 12}:${String(_0x2763).padStart(2, '0')} ${_0x2762 < 12 ? 'a. m.' : 'p. m.'}`; };
+const _0x2764 = () => `Horario de atención: de ${_0x2760(_0x2752)} a ${_0x2760(_0x2753)}`;
+async function _0x2765(_0x2766) {
 if (!_0x1a07)
 return;
 try {
-const { data: _0x2718, error: _0x2719 } = await _0x1a07.from('ajustes').select('*').eq('id', 1).maybeSingle();
-if (!_0x2719 && _0x2718)
-_0x271c(_0x2718, _0x2717);
+const { data: _0x2767, error: _0x2768 } = await _0x1a07.from('ajustes').select('*').eq('id', 1).maybeSingle();
+if (!_0x2768 && _0x2767)
+_0x276b(_0x2767, _0x2766);
 }
-catch (_0x271a) { }
-const _0x271b = _0x1a37('#ghorario');
-if (_0x271b)
-_0x271b.textContent = _0x2715();
+catch (_0x2769) { }
+const _0x276a = _0x1a37('#ghorario');
+if (_0x276a)
+_0x276a.textContent = _0x2764();
 }
-function _0x271c(_0x271d, _0x271e) {
-if (_0x271d.hora_inicio) {
-_0x2703 = String(_0x271d.hora_inicio).slice(0, 5);
-_0x2704 = String(_0x271d.hora_fin).slice(0, 5);
+function _0x276b(_0x276c, _0x276d) {
+if (_0x276c.hora_inicio) {
+_0x2752 = String(_0x276c.hora_inicio).slice(0, 5);
+_0x2753 = String(_0x276c.hora_fin).slice(0, 5);
 }
-_0x1a08.horarioInfo = _0x271d;
-const _0x271f = JSON.stringify(_0x271d.menu_orden || null);
-if (_0x271f !== _0x1a08.menuOrdenJ) {
-const _0x2720 = _0x1a08.menuOrdenJ;
-_0x1a08.menuOrdenJ = _0x271f;
-if (_0x2720 !== undefined && _0x1a08.uid && !_0x1a08.cargando)
+_0x1a08.horarioInfo = _0x276c;
+const _0x276e = JSON.stringify(_0x276c.menu_orden || null);
+if (_0x276e !== _0x1a08.menuOrdenJ) {
+const _0x276f = _0x1a08.menuOrdenJ;
+_0x1a08.menuOrdenJ = _0x276e;
+if (_0x276f !== undefined && _0x1a08.uid && !_0x1a08.cargando)
 _0x1ad8();
 }
-const _0x2721 = _0x1a37('#ghorario');
-if (_0x2721)
-_0x2721.textContent = _0x2715();
-const _0x2722 = _0x271d.salida_forzada && _0x271d.salida_forzada.en || null;
-if (_0x271e || !_0x1a08.uid) {
-_0x1a08.exCambio = _0x271d.examenes_cambio || null;
-_0x1a08.salidaVista = _0x2722;
-_0x1a08.cobCambio = _0x271d.cobertura_cambio || null;
+const _0x2770 = _0x1a37('#ghorario');
+if (_0x2770)
+_0x2770.textContent = _0x2764();
+const _0x2771 = _0x276c.salida_forzada && _0x276c.salida_forzada.en || null;
+if (_0x276d || !_0x1a08.uid) {
+_0x1a08.exCambio = _0x276c.examenes_cambio || null;
+_0x1a08.salidaVista = _0x2771;
+_0x1a08.cobCambio = _0x276c.cobertura_cambio || null;
 return;
 }
-if (_0x1a17() && (_0x271d.cobertura_cambio || null) !== _0x1a08.cobCambio) {
-_0x1a08.cobCambio = _0x271d.cobertura_cambio || null;
+if (_0x1a17() && (_0x276c.cobertura_cambio || null) !== _0x1a08.cobCambio) {
+_0x1a08.cobCambio = _0x276c.cobertura_cambio || null;
 _0x1a08.est.ok = false;
 _0x1ab9();
 }
-if ((_0x271d.examenes_cambio || null) !== _0x1a08.exCambio) {
-_0x1a08.exCambio = _0x271d.examenes_cambio || null;
-_0x2558.add('examenes');
-_0x256e(null);
+if ((_0x276c.examenes_cambio || null) !== _0x1a08.exCambio) {
+_0x1a08.exCambio = _0x276c.examenes_cambio || null;
+_0x256e.add('examenes');
+_0x2584(null);
 }
-if (_0x2722 && _0x1a08.salidaVista === undefined) {
-_0x1a08.salidaVista = _0x2722;
+if (_0x2771 && _0x1a08.salidaVista === undefined) {
+_0x1a08.salidaVista = _0x2771;
 }
-else if (_0x2722 && _0x2722 !== _0x1a08.salidaVista) {
-_0x1a08.salidaVista = _0x2722;
-const _0x2723 = Date.parse(_0x2722);
-if ((_0x271d.salida_forzada.roles || []).includes(_0x1a08.rol) && !_0x1a3d() && (!_0x1a08.entroEn || isNaN(_0x2723) || _0x2723 > _0x1a08.entroEn - 60000)) {
-const _0x2724 = _0x271d.salida_forzada.por ? ` (orden de ${_0x271d.salida_forzada.por}` : ' (orden', _0x2725 = isNaN(_0x2723) ? '' : ` a las ${new Date(_0x2723).toLocaleTimeString('es-PE', { hour: 'numeric', minute: '2-digit', timeZone: 'America/Lima' })}`;
-_0x2726(`La administración cerró tu sesión${_0x2724}${_0x2725}). Puedes volver a ingresar cuando te lo indiquen.`, 'orden_por_rol');
+else if (_0x2771 && _0x2771 !== _0x1a08.salidaVista) {
+_0x1a08.salidaVista = _0x2771;
+const _0x2772 = Date.parse(_0x2771);
+if ((_0x276c.salida_forzada.roles || []).includes(_0x1a08.rol) && !_0x1a3d() && (!_0x1a08.entroEn || isNaN(_0x2772) || _0x2772 > _0x1a08.entroEn - 60000)) {
+const _0x2773 = _0x276c.salida_forzada.por ? ` (orden de ${_0x276c.salida_forzada.por}` : ' (orden', _0x2774 = isNaN(_0x2772) ? '' : ` a las ${new Date(_0x2772).toLocaleTimeString('es-PE', { hour: 'numeric', minute: '2-digit', timeZone: 'America/Lima' })}`;
+_0x2775(`La administración cerró tu sesión${_0x2773}${_0x2774}). Puedes volver a ingresar cuando te lo indiquen.`, 'orden_por_rol');
 }
 }
-_0x273b();
+_0x278a();
 }
-async function _0x2726(_0x2727, _0x2728) {
+async function _0x2775(_0x2776, _0x2777) {
 if (_0x1a08.enExamen) {
-_0x1a08.salidaPendiente = { texto: _0x2727, codigo: _0x2728 };
+_0x1a08.salidaPendiente = { texto: _0x2776, codigo: _0x2777 };
 return;
 }
 _0x1a08.salidaPendiente = false;
-_0x272c = _0x2727 || 'La administración cerró tu sesión. Puedes volver a ingresar cuando te lo indiquen.';
-const _0x2729 = _0x2728 || (_0x2727 === _0x207e ? 'otra_sesion' : _0x2727 === _0x1e3e ? 'desconexion_por_coordinador_o_admin' : 'otro');
+_0x277b = _0x2776 || 'La administración cerró tu sesión. Puedes volver a ingresar cuando te lo indiquen.';
+const _0x2778 = _0x2777 || (_0x2776 === _0x207e ? 'otra_sesion' : _0x2776 === _0x1e3e ? 'desconexion_por_coordinador_o_admin' : 'otro');
 try {
-await _0x1a07.rpc('registrar_cierre', { p_motivo: _0x2729, p_detalle: _0x1dd1() });
+await _0x1a07.rpc('registrar_cierre', { p_motivo: _0x2778, p_detalle: _0x1dd1() });
 }
-catch (_0x272a) { }
-_0x272f(false);
+catch (_0x2779) { }
+_0x277e(false);
 await _0x207c();
 await _0x1a07.auth.signOut({ scope: 'local' });
 }
-const _0x272b = () => !!_0x1a08.rol && !_0x2705.includes(_0x1a08.rol);
-let _0x272c = '';
-async function _0x272d() {
-_0x272c = `El portal está fuera de horario. ${_0x2715()}`;
-_0x272f(false);
+const _0x277a = () => !!_0x1a08.rol && !_0x2754.includes(_0x1a08.rol);
+let _0x277b = '';
+async function _0x277c() {
+_0x277b = `El portal está fuera de horario. ${_0x2764()}`;
+_0x277e(false);
 try {
 await _0x1a07.rpc('registrar_cierre', { p_motivo: 'fuera_de_horario', p_detalle: _0x1dd1() });
 }
-catch (_0x272e) { }
+catch (_0x277d) { }
 await _0x1e4e();
 await _0x1a07.auth.signOut({ scope: 'local' });
 }
-function _0x272f(_0x2730) {
-let _0x2731 = _0x1a37('#aviso-cierre');
-if (!_0x2730) {
-if (_0x2731)
-_0x2731.remove();
+function _0x277e(_0x277f) {
+let _0x2780 = _0x1a37('#aviso-cierre');
+if (!_0x277f) {
+if (_0x2780)
+_0x2780.remove();
 return;
 }
-if (_0x2731)
+if (_0x2780)
 return;
-_0x2731 = document.createElement('div');
-_0x2731.id = 'aviso-cierre';
-_0x2731.setAttribute('role', 'alert');
-_0x2731.innerHTML = `⏰ El portal se cerrará a las <b>${_0x2711(_0x2704)}</b> Guarda lo que estés haciendo. <button type="button" aria-label="Cerrar aviso">×</button>`;
-_0x2731.querySelector('button').onclick = () => { _0x2731.hidden = true; };
-document.body.appendChild(_0x2731);
+_0x2780 = document.createElement('div');
+_0x2780.id = 'aviso-cierre';
+_0x2780.setAttribute('role', 'alert');
+_0x2780.innerHTML = `⏰ El portal se cerrará a las <b>${_0x2760(_0x2753)}</b> Guarda lo que estés haciendo. <button type="button" aria-label="Cerrar aviso">×</button>`;
+_0x2780.querySelector('button').onclick = () => { _0x2780.hidden = true; };
+document.body.appendChild(_0x2780);
 }
-let _0x2732 = null;
-const _0x2733 = 'Tu sesión era de un día anterior y se cerró automáticamente. Ingresa de nuevo con tu código y contraseña.';
-function _0x2734() { try {
+let _0x2781 = null;
+const _0x2782 = 'Tu sesión era de un día anterior y se cerró automáticamente. Ingresa de nuevo con tu código y contraseña.';
+function _0x2783() { try {
 localStorage.setItem('amx_dia_ingreso', _0x22ee());
 }
-catch (_0x2735) { } }
-function _0x2736() { let _0x2737 = null; try {
-_0x2737 = localStorage.getItem('amx_dia_ingreso');
+catch (_0x2784) { } }
+function _0x2785() { let _0x2786 = null; try {
+_0x2786 = localStorage.getItem('amx_dia_ingreso');
 }
-catch (_0x2738) { } return _0x2737 || _0x1a08.ultIngreso || null; }
-const _0x2739 = () => { const _0x273a = _0x2736(); return !!(_0x1a08.uid && _0x273a && _0x273a < _0x22ee()); };
-async function _0x273b() {
-if (_0x1a08.uid && !_0x1a08.cargando && !_0x1a08.enExamen && _0x2739()) {
+catch (_0x2787) { } return _0x2786 || _0x1a08.ultIngreso || null; }
+const _0x2788 = () => { const _0x2789 = _0x2785(); return !!(_0x1a08.uid && _0x2789 && _0x2789 < _0x22ee()); };
+async function _0x278a() {
+if (_0x1a08.uid && !_0x1a08.cargando && !_0x1a08.enExamen && _0x2788()) {
 await _0x1e4e();
-await _0x2726(_0x2733, 'sesion_de_dia_anterior');
+await _0x2775(_0x2782, 'sesion_de_dia_anterior');
 return;
 }
 if (_0x1a08.uid && _0x1a17()) {
-const _0x273c = _0x1e1e();
-if (_0x2732 !== null && _0x273c !== _0x2732) {
+const _0x278b = _0x1e1e();
+if (_0x2781 !== null && _0x278b !== _0x2781) {
 _0x1a08.est.ok = false;
 _0x1ab9();
 }
-_0x2732 = _0x273c;
+_0x2781 = _0x278b;
 }
 if (_0x1a08.uid && _0x1a08.salidaPendiente && !_0x1a08.enExamen) {
-const _0x273d = _0x1a08.salidaPendiente;
-_0x2726(_0x273d.texto, _0x273d.codigo);
+const _0x278c = _0x1a08.salidaPendiente;
+_0x2775(_0x278c.texto, _0x278c.codigo);
 return;
 }
-if (!_0x1a08.uid || !_0x272b())
+if (!_0x1a08.uid || !_0x277a())
 return;
-if (!_0x270f()) {
+if (!_0x275e()) {
 if (!_0x1a08.enExamen)
-await _0x272d();
+await _0x277c();
 return;
 }
-const _0x273e = _0x2707(_0x2704) - _0x270b();
-_0x272f(_0x273e <= _0x2706);
+const _0x278d = _0x2756(_0x2753) - _0x275a();
+_0x277e(_0x278d <= _0x2755);
 }
-setInterval(_0x273b, 30 * 1000);
+setInterval(_0x278a, 30 * 1000);
 document.addEventListener('visibilitychange', () => { if (!document.hidden)
-_0x273b(); });
-window.addEventListener('online', () => _0x273b());
-_0x2587();
+_0x278a(); });
+window.addEventListener('online', () => _0x278a());
+_0x259d();
 
 </script>
 </body>
